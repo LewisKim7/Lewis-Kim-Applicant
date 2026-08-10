@@ -1,0 +1,361 @@
+import { useDeferredValue, useMemo, useState } from 'react'
+import { ALL_PASSAGES, DOCUMENTS } from '../data/corpus'
+import { RISK_LABELS, RISK_TAXONOMY_BY_LABEL, type RiskLabel } from '../domain'
+import {
+  analyzePassages,
+  createTfidfIndex,
+  generateRiskMemo,
+  type AnalyzedPassage,
+  type RiskMemo,
+} from '../lib'
+import { SectionHeading } from './SectionHeading'
+
+const QUERY_SUGGESTIONS = [
+  'conversion price reset',
+  'refinancing pressure',
+  'working capital',
+  'use of proceeds',
+] as const
+
+const INITIAL_DOCUMENT = DOCUMENTS[0]
+if (!INITIAL_DOCUMENT) throw new Error('The demo requires at least one synthetic document')
+
+const RETRIEVAL_INDEX = createTfidfIndex(ALL_PASSAGES)
+
+function riskClass(label: RiskLabel): string {
+  return `risk-${RISK_TAXONOMY_BY_LABEL[label].id}`
+}
+
+function percent(value: number): string {
+  return `${(value * 100).toFixed(1)}%`
+}
+
+function EvidenceView({
+  analyses,
+  highlightedPassageId,
+}: {
+  analyses: readonly AnalyzedPassage[]
+  highlightedPassageId: string | null
+}) {
+  return (
+    <div className="evidence-table-wrap">
+      <table className="evidence-table">
+        <caption>
+          Predicted labels and evidence for the selected synthetic document. Signal scores are
+          rule-strength heuristics, not probabilities.
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Passage</th>
+            <th scope="col">Baseline result</th>
+            <th scope="col">Matched terms</th>
+            <th scope="col">Why it matters</th>
+          </tr>
+        </thead>
+        <tbody>
+          {analyses.map(({ passage, classification }) => (
+            <tr
+              className={passage.passageId === highlightedPassageId ? 'is-highlighted' : undefined}
+              id={`evidence-${passage.passageId}`}
+              key={passage.passageId}
+            >
+              <td data-label="Passage">
+                <span className="passage-id">{passage.passageId}</span>
+                <p>{passage.text}</p>
+              </td>
+              <td data-label="Baseline result">
+                <span className={`risk-pill ${riskClass(classification.predictedLabel)}`}>
+                  {classification.predictedLabel}
+                </span>
+                <div className="signal-meter">
+                  <meter min="0" max="1" value={classification.signalScore}>
+                    {percent(classification.signalScore)}
+                  </meter>
+                  <span>{percent(classification.signalScore)} heuristic</span>
+                </div>
+              </td>
+              <td data-label="Matched terms">
+                <div className="keyword-list">
+                  {classification.matchedKeywords.length ? (
+                    classification.matchedKeywords.slice(0, 4).map((keyword) => (
+                      <code key={keyword}>{keyword}</code>
+                    ))
+                  ) : (
+                    <span className="no-match">No configured risk phrase</span>
+                  )}
+                </div>
+              </td>
+              <td data-label="Why it matters">
+                <p className="rationale">{passage.annotationRationale}</p>
+                <details className="rule-trace">
+                  <summary>Inspect rule trace</summary>
+                  <p>{classification.explanation}</p>
+                </details>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+function MemoView({ memo }: { memo: RiskMemo }) {
+  return (
+    <article className="memo-view">
+      <header className="memo-view__header">
+        <div>
+          <span>Generated locally</span>
+          <h3>{memo.title}</h3>
+        </div>
+        <span>{memo.citedPassageIds.length} cited passage IDs</span>
+      </header>
+
+      <section>
+        <h4>Executive Summary</h4>
+        <p>{memo.executiveSummary}</p>
+      </section>
+
+      <section>
+        <h4>Key Risk Signals</h4>
+        <div className="memo-signals">
+          {memo.keyRiskSignals.length ? (
+            memo.keyRiskSignals.map((signal) => (
+              <article key={signal.label}>
+                <span className={`risk-pill ${riskClass(signal.label)}`}>{signal.label}</span>
+                <p>{signal.summary}</p>
+              </article>
+            ))
+          ) : (
+            <p>No configured risk signal was detected.</p>
+          )}
+        </div>
+      </section>
+
+      <div className="memo-columns">
+        <section>
+          <h4>Investment Implications</h4>
+          <ul>
+            {memo.investmentImplications.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </section>
+        <section>
+          <h4>Open Questions</h4>
+          <ul>
+            {memo.openQuestions.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </section>
+      </div>
+
+      <footer className="memo-view__footer">
+        <strong>Limitations carried into the memo</strong>
+        <p>{memo.limitations[0]}</p>
+      </footer>
+    </article>
+  )
+}
+
+export function DemoDashboard() {
+  const [selectedDocumentId, setSelectedDocumentId] = useState(INITIAL_DOCUMENT.documentId)
+  const [query, setQuery] = useState('conversion price reset')
+  const [activeView, setActiveView] = useState<'evidence' | 'memo'>('evidence')
+  const [highlightedPassageId, setHighlightedPassageId] = useState<string | null>(null)
+  const deferredQuery = useDeferredValue(query)
+
+  const selectedDocument =
+    DOCUMENTS.find((document) => document.documentId === selectedDocumentId) ??
+    INITIAL_DOCUMENT
+  const analyses = useMemo(
+    () => analyzePassages(selectedDocument.passages),
+    [selectedDocument],
+  )
+  const memo = useMemo(
+    () =>
+      generateRiskMemo(selectedDocument.passages, {
+        title: `${selectedDocument.companyName} — Evidence-Linked Risk Memo`,
+      }),
+    [selectedDocument],
+  )
+  const retrievalResults = useMemo(
+    () => RETRIEVAL_INDEX.search(deferredQuery, { topK: 5 }),
+    [deferredQuery],
+  )
+  const labelCounts = useMemo(
+    () =>
+      Object.fromEntries(
+        RISK_LABELS.map((label) => [
+          label,
+          analyses.filter(({ classification }) => classification.predictedLabel === label).length,
+        ]),
+      ) as Record<RiskLabel, number>,
+    [analyses],
+  )
+
+  function selectSearchResult(documentId: string, passageId: string) {
+    setSelectedDocumentId(documentId)
+    setHighlightedPassageId(passageId)
+    setActiveView('evidence')
+  }
+
+  return (
+    <section className="prototype-section page-shell section-pad" id="prototype">
+      <SectionHeading
+        eyebrow="03 / Interactive prototype"
+        title="Select a document. Follow every label back to evidence."
+        description="Five fictional documents and 30 original passages form a closed educational benchmark. Choose a source, search across the corpus, and inspect the deterministic result."
+      />
+
+      <div className="dataset-strip" role="group" aria-label="Synthetic document library">
+        {DOCUMENTS.map((document) => (
+          <button
+            className={document.documentId === selectedDocument.documentId ? 'is-selected' : undefined}
+            key={document.documentId}
+            onClick={() => {
+              setSelectedDocumentId(document.documentId)
+              setHighlightedPassageId(null)
+            }}
+            type="button"
+          >
+            <span>{document.documentId}</span>
+            <strong>{document.documentType}</strong>
+            <small>{document.companyName}</small>
+          </button>
+        ))}
+      </div>
+
+      <div className="demo-frame">
+        <header className="demo-frame__header">
+          <div>
+            <span className="status-dot">LOCAL BASELINE</span>
+            <span>SYNTHETIC DATA</span>
+          </div>
+          <span>NO NETWORK · NO API KEY</span>
+        </header>
+
+        <div className="demo-controls">
+          <div className="document-control">
+            <label htmlFor="document-select">Source document</label>
+            <select
+              id="document-select"
+              value={selectedDocument.documentId}
+              onChange={(event) => {
+                setSelectedDocumentId(event.currentTarget.value)
+                setHighlightedPassageId(null)
+              }}
+            >
+              {DOCUMENTS.map((document) => (
+                <option key={document.documentId} value={document.documentId}>
+                  {document.companyName} — {document.documentType}
+                </option>
+              ))}
+            </select>
+            <p>
+              {selectedDocument.documentId} · {selectedDocument.date} ·{' '}
+              {selectedDocument.passages.length} passages
+            </p>
+          </div>
+
+          <div className="search-control">
+            <label htmlFor="evidence-query">TF-IDF evidence retrieval</label>
+            <div className="search-input">
+              <input
+                id="evidence-query"
+                type="search"
+                value={query}
+                onChange={(event) => setQuery(event.currentTarget.value)}
+                aria-describedby="retrieval-note"
+              />
+              <span aria-hidden="true">⌕</span>
+            </div>
+            <p id="retrieval-note">Lexical cosine similarity across all 30 passages</p>
+          </div>
+        </div>
+
+        <div className="query-chips" role="group" aria-label="Suggested evidence queries">
+          {QUERY_SUGGESTIONS.map((suggestion) => (
+            <button key={suggestion} type="button" onClick={() => setQuery(suggestion)}>
+              {suggestion}
+            </button>
+          ))}
+        </div>
+
+        <div className="demo-overview">
+          <div className="document-summary">
+            <span className="demo-label">Selected document</span>
+            <h3>{selectedDocument.companyName}</h3>
+            <p>{selectedDocument.documentType}</p>
+            <div className="predicted-mix">
+              {RISK_LABELS.filter((label) => labelCounts[label] > 0).map((label) => (
+                <span className={`risk-pill ${riskClass(label)}`} key={label}>
+                  {label} <strong>{labelCounts[label]}</strong>
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="retrieval-panel">
+            <header>
+              <span className="demo-label">Top evidence across corpus</span>
+              <span>{retrievalResults.length} results</span>
+            </header>
+            <ol>
+              {retrievalResults.length ? (
+                retrievalResults.map((result) => (
+                  <li key={result.passage.passageId}>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        selectSearchResult(result.passage.documentId, result.passage.passageId)
+                      }
+                    >
+                      <span className="retrieval-rank">{String(result.rank).padStart(2, '0')}</span>
+                      <span>
+                        <strong>{result.passage.passageId}</strong>
+                        <small>{result.passage.text}</small>
+                      </span>
+                      <span className="similarity-score">{percent(result.score)}</span>
+                    </button>
+                  </li>
+                ))
+              ) : (
+                <li className="empty-result">No lexical match. Try a suggested query.</li>
+              )}
+            </ol>
+          </div>
+        </div>
+
+        <div className="analysis-tabs">
+          <div className="analysis-tablist" role="group" aria-label="Analysis view">
+            <button
+              aria-pressed={activeView === 'evidence'}
+              type="button"
+              onClick={() => setActiveView('evidence')}
+            >
+              Evidence table
+            </button>
+            <button
+              aria-pressed={activeView === 'memo'}
+              type="button"
+              onClick={() => setActiveView('memo')}
+            >
+              Generated memo
+            </button>
+          </div>
+          <span>AI-assisted reference rationales are shown for review.</span>
+        </div>
+
+        <div className="analysis-view" aria-live="polite">
+          {activeView === 'evidence' ? (
+            <EvidenceView analyses={analyses} highlightedPassageId={highlightedPassageId} />
+          ) : (
+            <MemoView memo={memo} />
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
