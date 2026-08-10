@@ -1,0 +1,347 @@
+[
+  {
+    "documentId": "DOC-CB-001",
+    "companyName": "Asterion Grid Systems Ltd.",
+    "documentType": "Convertible Bond Disclosure",
+    "date": "2025-09-18",
+    "synthetic": true,
+    "passages": [
+      {
+        "documentId": "DOC-CB-001",
+        "passageId": "DOC-CB-001-P01",
+        "companyName": "Asterion Grid Systems Ltd.",
+        "documentType": "Convertible Bond Disclosure",
+        "date": "2025-09-18",
+        "text": "Asterion will issue $48 million of unsecured convertible notes due 2028. At the initial conversion price of $7.50 per share, full conversion would create up to 6.4 million new ordinary shares, equal to approximately 18% of the enlarged share count.",
+        "referenceLabel": "Dilution Risk",
+        "annotationRationale": "Full conversion would materially increase shares outstanding and reduce existing ownership percentages."
+      },
+      {
+        "documentId": "DOC-CB-001",
+        "passageId": "DOC-CB-001-P02",
+        "companyName": "Asterion Grid Systems Ltd.",
+        "documentType": "Convertible Bond Disclosure",
+        "date": "2025-09-18",
+        "text": "Approximately $31 million of net proceeds will redeem notes maturing in four months and repay a short-term bridge facility. If the convertible note placement does not close, the company has no committed alternative financing for those obligations.",
+        "referenceLabel": "Refinancing Risk",
+        "annotationRationale": "Near-term debt repayment depends on successful completion of a new financing."
+      },
+      {
+        "documentId": "DOC-CB-001",
+        "passageId": "DOC-CB-001-P03",
+        "companyName": "Asterion Grid Systems Ltd.",
+        "documentType": "Convertible Bond Disclosure",
+        "date": "2025-09-18",
+        "text": "Unrestricted cash was $8.2 million at quarter-end, while average monthly operating cash use was approximately $0.9 million. A further $6 million remains available under a revolving facility, but any draw requires continued compliance with the minimum-revenue covenant.",
+        "referenceLabel": "Liquidity Risk",
+        "annotationRationale": "The cash runway is limited and access to supplemental liquidity is conditional."
+      },
+      {
+        "documentId": "DOC-CB-001",
+        "passageId": "DOC-CB-001-P04",
+        "companyName": "Asterion Grid Systems Ltd.",
+        "documentType": "Convertible Bond Disclosure",
+        "date": "2025-09-18",
+        "text": "The placement includes a $5 million subscription by a fund managed by the chief financial officer's sibling. The chief financial officer abstained from the board vote, although the company did not obtain an independent fairness opinion.",
+        "referenceLabel": "Governance Risk",
+        "annotationRationale": "A related-party transaction creates a conflict-of-interest concern despite the recusal."
+      },
+      {
+        "documentId": "DOC-CB-001",
+        "passageId": "DOC-CB-001-P05",
+        "companyName": "Asterion Grid Systems Ltd.",
+        "documentType": "Convertible Bond Disclosure",
+        "date": "2025-09-18",
+        "text": "The remaining proceeds are expected to retrofit the pilot manufacturing line with automated winding equipment. Commercial production cannot begin until the equipment is delivered, integrated, and qualified, and the principal supplier has not guaranteed the scheduled delivery date.",
+        "referenceLabel": "Execution Risk",
+        "annotationRationale": "The launch plan depends on successful equipment delivery, integration, and qualification."
+      },
+      {
+        "documentId": "DOC-CB-001",
+        "passageId": "DOC-CB-001-P06",
+        "companyName": "Asterion Grid Systems Ltd.",
+        "documentType": "Convertible Bond Disclosure",
+        "date": "2025-09-18",
+        "text": "Interest is payable semiannually at 6.25% per year. Holders may submit voluntary conversion notices on business days, and the company will publish the resulting share count in its next periodic filing.",
+        "referenceLabel": "Low Risk / Informational",
+        "annotationRationale": "This passage describes administrative note terms without identifying a distinct risk event."
+      }
+    ]
+  },
+  {
+    "documentId": "DOC-IPO-001",
+    "companyName": "NovaTrace Robotics, Inc.",
+    "documentType": "IPO Prospectus Excerpt",
+    "date": "2025-10-06",
+    "synthetic": true,
+    "passages": [
+      {
+        "documentId": "DOC-IPO-001",
+        "passageId": "DOC-IPO-001-P01",
+        "companyName": "NovaTrace Robotics, Inc.",
+        "documentType": "IPO Prospectus Excerpt",
+        "date": "2025-10-06",
+        "text": "The offering consists of 12 million newly issued common shares, with an option for the underwriters to purchase up to 1.8 million additional new shares. Existing shareholders will own approximately 61% of the company if the option is exercised in full.",
+        "referenceLabel": "Dilution Risk",
+        "annotationRationale": "The primary issuance and underwriter option reduce existing shareholders' proportional ownership."
+      },
+      {
+        "documentId": "DOC-IPO-001",
+        "passageId": "DOC-IPO-001-P02",
+        "companyName": "NovaTrace Robotics, Inc.",
+        "documentType": "IPO Prospectus Excerpt",
+        "date": "2025-10-06",
+        "text": "NovaTrace has generated negative operating cash flow in every year since formation. Based on the midpoint offering price and the current operating plan, available cash is expected to fund approximately fourteen months of operations.",
+        "referenceLabel": "Liquidity Risk",
+        "annotationRationale": "Persistent cash burn and a finite runway indicate a potential need for additional capital."
+      },
+      {
+        "documentId": "DOC-IPO-001",
+        "passageId": "DOC-IPO-001-P03",
+        "companyName": "NovaTrace Robotics, Inc.",
+        "documentType": "IPO Prospectus Excerpt",
+        "date": "2025-10-06",
+        "text": "Class B shares carry ten votes per share and may be converted into Class A shares at the holder's option. Following the offering, the founder is expected to control 62% of voting power while holding approximately 29% of the economic interest.",
+        "referenceLabel": "Governance Risk",
+        "annotationRationale": "The dual-class structure concentrates voting control beyond the founder's economic ownership."
+      },
+      {
+        "documentId": "DOC-IPO-001",
+        "passageId": "DOC-IPO-001-P04",
+        "companyName": "NovaTrace Robotics, Inc.",
+        "documentType": "IPO Prospectus Excerpt",
+        "date": "2025-10-06",
+        "text": "Each warehouse deployment requires customer-system integration, on-site safety certification, and acceptance testing. Reported backlog includes cancellable orders, and implementation delays may defer revenue recognition.",
+        "referenceLabel": "Execution Risk",
+        "annotationRationale": "Complex deployment requirements and cancellable backlog create delivery and revenue-timing risk."
+      },
+      {
+        "documentId": "DOC-IPO-001",
+        "passageId": "DOC-IPO-001-P05",
+        "companyName": "NovaTrace Robotics, Inc.",
+        "documentType": "IPO Prospectus Excerpt",
+        "date": "2025-10-06",
+        "text": "Industry demand forecasts rely on adoption assumptions that have not been tested through a full capital-spending cycle. Larger automation vendors may reduce prices or bundle competing systems with existing service contracts.",
+        "referenceLabel": "Market Risk",
+        "annotationRationale": "Uncertain demand and competitive pricing could weaken adoption and margins."
+      },
+      {
+        "documentId": "DOC-IPO-001",
+        "passageId": "DOC-IPO-001-P06",
+        "companyName": "NovaTrace Robotics, Inc.",
+        "documentType": "IPO Prospectus Excerpt",
+        "date": "2025-10-06",
+        "text": "Pending deployment, net proceeds will be held in cash, insured deposits, or short-duration government securities. The treasury policy prohibits cryptocurrency holdings and uncovered derivative positions.",
+        "referenceLabel": "Low Risk / Informational",
+        "annotationRationale": "The passage describes conservative temporary cash-management practices."
+      }
+    ]
+  },
+  {
+    "documentId": "DOC-FUND-001",
+    "companyName": "LumenForge BioCompute Ltd.",
+    "documentType": "Funding Announcement",
+    "date": "2025-11-12",
+    "synthetic": true,
+    "passages": [
+      {
+        "documentId": "DOC-FUND-001",
+        "passageId": "DOC-FUND-001-P01",
+        "companyName": "LumenForge BioCompute Ltd.",
+        "documentType": "Funding Announcement",
+        "date": "2025-11-12",
+        "text": "LumenForge closed a $35 million Series C financing through the issuance of 9 million preferred shares. The shares include broad-based weighted-average anti-dilution protection and will convert into ordinary shares upon a qualifying public offering.",
+        "referenceLabel": "Dilution Risk",
+        "annotationRationale": "The preferred issuance and future conversion reduce existing holders' proportional ownership."
+      },
+      {
+        "documentId": "DOC-FUND-001",
+        "passageId": "DOC-FUND-001-P02",
+        "companyName": "LumenForge BioCompute Ltd.",
+        "documentType": "Funding Announcement",
+        "date": "2025-11-12",
+        "text": "The company will use $11 million of the financing to repay venture debt due in June 2026. The lender agreed to waive the current leverage test only if repayment occurs within ten business days after the financing closes.",
+        "referenceLabel": "Refinancing Risk",
+        "annotationRationale": "Debt relief and the covenant waiver are conditional on timely completion and application of the new financing."
+      },
+      {
+        "documentId": "DOC-FUND-001",
+        "passageId": "DOC-FUND-001-P03",
+        "companyName": "LumenForge BioCompute Ltd.",
+        "documentType": "Funding Announcement",
+        "date": "2025-11-12",
+        "text": "The lead investor will appoint one director and may veto annual budgets, debt above $8 million, related-party transactions, and a sale of substantially all assets while it retains at least 15% of the preferred shares.",
+        "referenceLabel": "Governance Risk",
+        "annotationRationale": "Investor veto rights materially affect board and management decision-making authority."
+      },
+      {
+        "documentId": "DOC-FUND-001",
+        "passageId": "DOC-FUND-001-P04",
+        "companyName": "LumenForge BioCompute Ltd.",
+        "documentType": "Funding Announcement",
+        "date": "2025-11-12",
+        "text": "Proceeds will support validation of the company's third-generation bio-compute module and the hiring of process engineers. The module has completed laboratory testing but has not yet demonstrated target yield at commercial production volume.",
+        "referenceLabel": "Execution Risk",
+        "annotationRationale": "Commercial success depends on scaling laboratory performance to production volume."
+      },
+      {
+        "documentId": "DOC-FUND-001",
+        "passageId": "DOC-FUND-001-P05",
+        "companyName": "LumenForge BioCompute Ltd.",
+        "documentType": "Funding Announcement",
+        "date": "2025-11-12",
+        "text": "Management expects customer interest to depend partly on the price and availability of conventional cloud accelerators. Prospective customers may postpone trials when computing budgets contract or competing hardware prices decline.",
+        "referenceLabel": "Market Risk",
+        "annotationRationale": "Demand is exposed to customer budget cycles and substitute-product pricing."
+      },
+      {
+        "documentId": "DOC-FUND-001",
+        "passageId": "DOC-FUND-001-P06",
+        "companyName": "LumenForge BioCompute Ltd.",
+        "documentType": "Funding Announcement",
+        "date": "2025-11-12",
+        "text": "All financing conditions were satisfied, and the subscription proceeds were received on November 10, 2025. The transaction was privately negotiated and did not involve a public offer of securities.",
+        "referenceLabel": "Low Risk / Informational",
+        "annotationRationale": "This passage confirms transaction completion and provides factual closing information."
+      }
+    ]
+  },
+  {
+    "documentId": "DOC-UOP-001",
+    "companyName": "QuantaHarbor Energy Systems, Inc.",
+    "documentType": "Use of Proceeds Disclosure",
+    "date": "2025-12-02",
+    "synthetic": true,
+    "passages": [
+      {
+        "documentId": "DOC-UOP-001",
+        "passageId": "DOC-UOP-001-P01",
+        "companyName": "QuantaHarbor Energy Systems, Inc.",
+        "documentType": "Use of Proceeds Disclosure",
+        "date": "2025-12-02",
+        "text": "The company issued 7.5 million common shares through an at-the-market program, generating gross proceeds of $42 million. The issuance increased the common share count by approximately 13% compared with the preceding quarter.",
+        "referenceLabel": "Dilution Risk",
+        "annotationRationale": "The equity program materially increased shares outstanding."
+      },
+      {
+        "documentId": "DOC-UOP-001",
+        "passageId": "DOC-UOP-001-P02",
+        "companyName": "QuantaHarbor Energy Systems, Inc.",
+        "documentType": "Use of Proceeds Disclosure",
+        "date": "2025-12-02",
+        "text": "QuantaHarbor intends to apply $16 million to its revolving credit balance, which becomes due in eleven months. The lender has not committed to extend the maturity, and future pricing would depend on leverage at the renewal date.",
+        "referenceLabel": "Refinancing Risk",
+        "annotationRationale": "A near-term maturity remains subject to an uncommitted extension and potentially higher borrowing cost."
+      },
+      {
+        "documentId": "DOC-UOP-001",
+        "passageId": "DOC-UOP-001-P03",
+        "companyName": "QuantaHarbor Energy Systems, Inc.",
+        "documentType": "Use of Proceeds Disclosure",
+        "date": "2025-12-02",
+        "text": "Approximately $14 million is reserved for working capital because long-lead components require deposits six months before assembly. Customer invoices are generally collected after site acceptance, so delayed acceptance milestones could temporarily widen the cash conversion cycle.",
+        "referenceLabel": "Liquidity Risk",
+        "annotationRationale": "Upfront supplier payments and delayed customer collections can create a working-capital shortfall."
+      },
+      {
+        "documentId": "DOC-UOP-001",
+        "passageId": "DOC-UOP-001-P04",
+        "companyName": "QuantaHarbor Energy Systems, Inc.",
+        "documentType": "Use of Proceeds Disclosure",
+        "date": "2025-12-02",
+        "text": "Up to $9 million will fund a demonstration plant that remains subject to environmental permitting, contractor mobilization, and commissioning tests. Management's budget includes a 10% contingency but does not cover a delay longer than one quarter.",
+        "referenceLabel": "Execution Risk",
+        "annotationRationale": "Permitting, construction, and commissioning dependencies threaten schedule and budget delivery."
+      },
+      {
+        "documentId": "DOC-UOP-001",
+        "passageId": "DOC-UOP-001-P05",
+        "companyName": "QuantaHarbor Energy Systems, Inc.",
+        "documentType": "Use of Proceeds Disclosure",
+        "date": "2025-12-02",
+        "text": "The commercial rollout targets two coastal regions where project economics depend on industrial electricity tariffs and hydrogen feedstock prices. A sustained change in either input could reduce customer savings and slow signed-project conversion.",
+        "referenceLabel": "Market Risk",
+        "annotationRationale": "External input prices can reduce customer economics and market adoption."
+      },
+      {
+        "documentId": "DOC-UOP-001",
+        "passageId": "DOC-UOP-001-P06",
+        "companyName": "QuantaHarbor Energy Systems, Inc.",
+        "documentType": "Use of Proceeds Disclosure",
+        "date": "2025-12-02",
+        "text": "No offering proceeds were paid to directors, officers, or related parties. The audit committee will review actual allocations each quarter, and material changes will be described in the next shareholder report.",
+        "referenceLabel": "Low Risk / Informational",
+        "annotationRationale": "The passage describes allocation oversight and confirms the absence of related-party payments."
+      }
+    ]
+  },
+  {
+    "documentId": "DOC-RISK-001",
+    "companyName": "Meridian Orbital Networks plc",
+    "documentType": "Risk Factor Excerpt",
+    "date": "2026-01-14",
+    "synthetic": true,
+    "passages": [
+      {
+        "documentId": "DOC-RISK-001",
+        "passageId": "DOC-RISK-001-P01",
+        "companyName": "Meridian Orbital Networks plc",
+        "documentType": "Risk Factor Excerpt",
+        "date": "2026-01-14",
+        "text": "The current business plan may require capital beyond existing resources. Meridian could issue additional ordinary shares or convertible securities, and such transactions may substantially reduce the voting and economic interests of current shareholders.",
+        "referenceLabel": "Dilution Risk",
+        "annotationRationale": "Future equity or convertible issuance could dilute current ownership."
+      },
+      {
+        "documentId": "DOC-RISK-001",
+        "passageId": "DOC-RISK-001-P02",
+        "companyName": "Meridian Orbital Networks plc",
+        "documentType": "Risk Factor Excerpt",
+        "date": "2026-01-14",
+        "text": "A $22 million term loan requires a balloon payment in September 2027 and compliance with a minimum debt-service coverage ratio. Refinancing may be unavailable or more expensive if launch delays reduce contracted revenue before the maturity date.",
+        "referenceLabel": "Refinancing Risk",
+        "annotationRationale": "The balloon maturity and covenant exposure could make replacement financing difficult."
+      },
+      {
+        "documentId": "DOC-RISK-001",
+        "passageId": "DOC-RISK-001-P03",
+        "companyName": "Meridian Orbital Networks plc",
+        "documentType": "Risk Factor Excerpt",
+        "date": "2026-01-14",
+        "text": "Three customers represented 58% of year-end receivables, and contracts permit payment up to 90 days after service activation. At the same time, key component suppliers require advance payment, which may pressure working capital if collections are delayed.",
+        "referenceLabel": "Liquidity Risk",
+        "annotationRationale": "Receivable concentration and supplier prepayments can create a near-term cash mismatch."
+      },
+      {
+        "documentId": "DOC-RISK-001",
+        "passageId": "DOC-RISK-001-P04",
+        "companyName": "Meridian Orbital Networks plc",
+        "documentType": "Risk Factor Excerpt",
+        "date": "2026-01-14",
+        "text": "The founder serves as both chair and chief executive and controls a majority of voting rights through high-vote shares. The company also purchases antenna components from a supplier in which the founder holds a minority interest.",
+        "referenceLabel": "Governance Risk",
+        "annotationRationale": "Concentrated authority and a related-party supplier create oversight and conflict-of-interest concerns."
+      },
+      {
+        "documentId": "DOC-RISK-001",
+        "passageId": "DOC-RISK-001-P05",
+        "companyName": "Meridian Orbital Networks plc",
+        "documentType": "Risk Factor Excerpt",
+        "date": "2026-01-14",
+        "text": "The next two satellites are assigned to a single third-party launch window. A launch-provider delay, payload integration failure, or unsuccessful in-orbit test could postpone regional service availability by six months or more.",
+        "referenceLabel": "Execution Risk",
+        "annotationRationale": "Service timing depends on successful third-party launch, integration, and testing."
+      },
+      {
+        "documentId": "DOC-RISK-001",
+        "passageId": "DOC-RISK-001-P06",
+        "companyName": "Meridian Orbital Networks plc",
+        "documentType": "Risk Factor Excerpt",
+        "date": "2026-01-14",
+        "text": "Demand depends partly on government connectivity budgets and spectrum policy. Competing constellations with greater scale may offer lower prices, obtain priority distribution agreements, or reduce the addressable customer base.",
+        "referenceLabel": "Market Risk",
+        "annotationRationale": "Government spending, regulation, and larger competitors may constrain demand and pricing."
+      }
+    ]
+  }
+]
