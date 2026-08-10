@@ -5,16 +5,17 @@ export function ProblemSection() {
     <section className="problem-section page-shell section-pad" id="problem">
       <SectionHeading
         eyebrow="01 / Problem framing"
-        title="Risk signals are easy to miss—and easy to overstate."
-        description="Dense disclosures mix material risks with routine terms. The task is not to automate judgment, but to make first-pass triage more structured and traceable."
+        title="Korean deal terms are structured. Their implications are not."
+        description="A CB issuance decision or IPO prospectus can spread dilution, repayment, liquidity, control, and execution signals across tables and dense Korean text. The task is to structure first-pass review without automating investment judgment."
       />
 
       <div className="problem-grid">
         <blockquote className="research-question">
           <span>Research question</span>
           <p>
-            Can a transparent NLP workflow help an analyst identify relevant passages,
-            organize them by risk type, and trace every conclusion back to supporting text?
+            Can a transparent Korean-language NLP workflow connect structured IPO and CB
+            screening with passage-level risk triage while keeping every conclusion linked
+            to inspectable evidence?
           </p>
         </blockquote>
 
@@ -23,21 +24,21 @@ export function ProblemSection() {
             <span>01</span>
             <div>
               <h3>Inspect the path</h3>
-              <p>Show matched phrases and per-label rule scores, not only the final label.</p>
+              <p>Expose Korean matched phrases and per-label scores, not only the final label.</p>
             </div>
           </article>
           <article>
             <span>02</span>
             <div>
               <h3>Keep the evidence</h3>
-              <p>Attach supporting evidence and key memo findings to stable passage IDs.</p>
+              <p>Keep document, market, transaction type, and passage IDs attached to findings.</p>
             </div>
           </article>
           <article>
             <span>03</span>
             <div>
               <h3>Measure the misses</h3>
-              <p>Report errors and label-level behavior on the same visible benchmark.</p>
+              <p>Compare transparent rules with a document-held-out trained baseline.</p>
             </div>
           </article>
         </div>

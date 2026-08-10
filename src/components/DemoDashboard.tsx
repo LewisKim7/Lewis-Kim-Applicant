@@ -11,10 +11,11 @@ import {
 import { SectionHeading } from './SectionHeading'
 
 const QUERY_SUGGESTIONS = [
-  'conversion price reset',
-  'refinancing pressure',
-  'working capital',
-  'use of proceeds',
+  '전환가액 리픽싱',
+  '조기상환청구권 상환 재원',
+  '공모자금 사용',
+  '특수관계인 이해상충',
+  '운전자금 부족',
 ] as const
 
 const INITIAL_DOCUMENT = DOCUMENTS[0]
@@ -41,8 +42,8 @@ function EvidenceView({
     <div className="evidence-table-wrap">
       <table className="evidence-table">
         <caption>
-          Predicted labels and evidence for the selected synthetic document. Signal scores are
-          rule-strength heuristics, not probabilities.
+          Predicted labels and Korean evidence for the selected synthetic document. Signal
+          scores are rule-strength heuristics, not probabilities.
         </caption>
         <thead>
           <tr>
@@ -161,7 +162,7 @@ function MemoView({ memo }: { memo: RiskMemo }) {
 
 export function DemoDashboard() {
   const [selectedDocumentId, setSelectedDocumentId] = useState(INITIAL_DOCUMENT.documentId)
-  const [query, setQuery] = useState('conversion price reset')
+  const [query, setQuery] = useState('전환가액 리픽싱')
   const [activeView, setActiveView] = useState<'evidence' | 'memo'>('evidence')
   const [highlightedPassageId, setHighlightedPassageId] = useState<string | null>(null)
   const deferredQuery = useDeferredValue(query)
@@ -176,7 +177,7 @@ export function DemoDashboard() {
   const memo = useMemo(
     () =>
       generateRiskMemo(selectedDocument.passages, {
-        title: `${selectedDocument.companyName} — Evidence-Linked Risk Memo`,
+        title: `${selectedDocument.companyName} — Korean IPO/CB Evidence Memo`,
       }),
     [selectedDocument],
   )
@@ -204,9 +205,9 @@ export function DemoDashboard() {
   return (
     <section className="prototype-section page-shell section-pad" id="prototype">
       <SectionHeading
-        eyebrow="03 / Interactive prototype"
-        title="Select a document. Follow every label back to evidence."
-        description="Five fictional documents and 30 original passages form a closed educational benchmark. Choose a source, search across the corpus, and inspect the deterministic result."
+        eyebrow="04 / Interactive prototype"
+        title="Select a Korean filing scenario. Follow every label back to its sentence."
+        description="Five fictional KOSPI/KOSDAQ IPO and CB documents form a 30-passage educational corpus. Choose a source, search in Korean, and inspect the deterministic rule path."
       />
 
       <div className="dataset-strip" role="group" aria-label="Synthetic document library">
@@ -222,7 +223,7 @@ export function DemoDashboard() {
           >
             <span>{document.documentId}</span>
             <strong>{document.documentType}</strong>
-            <small>{document.companyName}</small>
+            <small>{document.market} · {document.companyName}</small>
           </button>
         ))}
       </div>
@@ -230,10 +231,10 @@ export function DemoDashboard() {
       <div className="demo-frame">
         <header className="demo-frame__header">
           <div>
-            <span className="status-dot">LOCAL BASELINE</span>
-            <span>SYNTHETIC DATA</span>
+            <span className="status-dot">LOCAL ANALYSIS</span>
+            <span>KOREAN SYNTHETIC DATA</span>
           </div>
-          <span>NO NETWORK · NO API KEY</span>
+          <span>NO LIVE DART CALL · NO API KEY</span>
         </header>
 
         <div className="demo-controls">
@@ -255,12 +256,12 @@ export function DemoDashboard() {
             </select>
             <p>
               {selectedDocument.documentId} · {selectedDocument.date} ·{' '}
-              {selectedDocument.passages.length} passages
+              {selectedDocument.market} · {selectedDocument.passages.length} passages
             </p>
           </div>
 
           <div className="search-control">
-            <label htmlFor="evidence-query">TF-IDF evidence retrieval</label>
+            <label htmlFor="evidence-query">Korean TF-IDF evidence retrieval</label>
             <div className="search-input">
               <input
                 id="evidence-query"
@@ -271,7 +272,7 @@ export function DemoDashboard() {
               />
               <span aria-hidden="true">⌕</span>
             </div>
-            <p id="retrieval-note">Lexical cosine similarity across all 30 passages</p>
+            <p id="retrieval-note">Korean lexical cosine similarity across all 30 passages</p>
           </div>
         </div>
 
@@ -287,7 +288,17 @@ export function DemoDashboard() {
           <div className="document-summary">
             <span className="demo-label">Selected document</span>
             <h3>{selectedDocument.companyName}</h3>
-            <p>{selectedDocument.documentType}</p>
+            <p>
+              {selectedDocument.market} · {selectedDocument.workflow}
+            </p>
+            <div className="document-keyfacts">
+              {selectedDocument.keyFacts.map((fact) => (
+                <div key={fact.label}>
+                  <span>{fact.label}</span>
+                  <strong>{fact.value}</strong>
+                </div>
+              ))}
+            </div>
             <div className="predicted-mix">
               {RISK_LABELS.filter((label) => labelCounts[label] > 0).map((label) => (
                 <span className={`risk-pill ${riskClass(label)}`} key={label}>
@@ -345,7 +356,7 @@ export function DemoDashboard() {
               Generated memo
             </button>
           </div>
-          <span>AI-assisted reference rationales are shown for review.</span>
+          <span>Korean passages and AI-assisted reference rationales remain visible.</span>
         </div>
 
         <div className="analysis-view" aria-live="polite">

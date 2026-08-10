@@ -5,8 +5,8 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="page-shell site-footer__inner">
         <div>
-          <p className="site-footer__title">AI Disclosure Risk Screener</p>
-          <p>Independent graduate-study preparation project · 2026</p>
+          <p className="site-footer__title">Korea IPO &amp; CB Risk Screener</p>
+          <p>Independent Korean capital-markets NLP project · 2026</p>
         </div>
         <div className="site-footer__links">
           <a href="#top">Back to top ↑</a>
@@ -15,7 +15,8 @@ export function SiteFooter() {
           </a>
         </div>
         <p className="site-footer__disclaimer">
-          Educational demonstration only. Not investment, legal, or regulatory advice.
+          Fictional Korean-language demonstration only. No live DART or KRX data. Not
+          investment, legal, or regulatory advice.
         </p>
       </div>
     </footer>

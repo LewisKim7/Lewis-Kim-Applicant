@@ -79,6 +79,12 @@ describe('text preprocessing', () => {
     expect(normalizeText('competing markets and resets')).toBe(
       'competition market and reset',
     )
+    expect(
+      normalizeText('공모가 공모가가 품목허가 품목허가가 인허가 인허가가'),
+    ).toBe('공모가 공모가 품목허가 품목허가 인허가 인허가')
+    expect(classifyRiskText('공모가가 하회.').predictedLabel).toBe(
+      'Market Risk',
+    )
   })
 
   it('splits deterministically without exceeding the configured target', () => {
@@ -213,6 +219,10 @@ describe('TF-IDF cosine retrieval', () => {
       'P-REFINANCE',
     )
     expect(index.search('photosynthesis')).toEqual([])
+
+    const base = index.search('conversion price')
+    const withOov = index.search('conversion price holdoutonlysentinel')
+    expect(withOov).toEqual(base)
   })
 
   it('breaks exact-score ties with stable source metadata', () => {

@@ -1,6 +1,8 @@
 import rawDocuments from './documents.json'
 import {
   DOCUMENT_TYPES,
+  ANALYSIS_WORKFLOWS,
+  KOREAN_MARKETS,
   RISK_LABELS,
   flattenPassages,
   isRiskLabel,
@@ -24,6 +26,21 @@ function readString(record: Record<string, unknown>, key: string, context: strin
     throw new TypeError(`${context}.${key} must be a non-empty string`)
   }
   return value
+}
+
+function parseKeyFacts(value: unknown, context: string) {
+  if (!Array.isArray(value) || value.length < 3 || value.length > 5) {
+    throw new TypeError(`${context}.keyFacts must contain three to five entries`)
+  }
+
+  return value.map((candidate, index) => {
+    const itemContext = `${context}.keyFacts[${index}]`
+    assertRecord(candidate, itemContext)
+    return {
+      label: readString(candidate, 'label', itemContext),
+      value: readString(candidate, 'value', itemContext),
+    }
+  })
 }
 
 function parsePassage(
@@ -87,25 +104,47 @@ export function parseCorpus(value: unknown): DisclosureDocument[] {
     }
     seenDocumentIds.add(documentId)
 
-    const parent = {
-      documentId,
-      companyName: readString(candidate, 'companyName', context),
-      documentType: readString(candidate, 'documentType', context),
-      date: readString(candidate, 'date', context),
-      synthetic: candidate.synthetic === true,
-    } satisfies Omit<DisclosureDocument, 'passages'>
+    const companyName = readString(candidate, 'companyName', context)
+    const documentType = readString(candidate, 'documentType', context)
+    const date = readString(candidate, 'date', context)
+    const synthetic = candidate.synthetic === true
+    const language = readString(candidate, 'language', context)
+    const market = readString(candidate, 'market', context)
+    const workflow = readString(candidate, 'workflow', context)
+    const keyFacts = parseKeyFacts(candidate.keyFacts, context)
 
-    if (!parent.synthetic) {
+    if (!synthetic) {
       throw new Error(`${documentId} must be explicitly marked synthetic`)
     }
-    if (!(DOCUMENT_TYPES as readonly string[]).includes(parent.documentType)) {
+    if (!(DOCUMENT_TYPES as readonly string[]).includes(documentType)) {
       throw new Error(`${documentId} uses an unexpected document type`)
     }
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(parent.date)) {
+    if (language !== 'ko') {
+      throw new Error(`${documentId}.language must be ko`)
+    }
+    if (!(KOREAN_MARKETS as readonly string[]).includes(market)) {
+      throw new Error(`${documentId}.market must be KOSPI or KOSDAQ`)
+    }
+    if (!(ANALYSIS_WORKFLOWS as readonly string[]).includes(workflow)) {
+      throw new Error(`${documentId}.workflow is unexpected`)
+    }
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
       throw new Error(`${documentId}.date must use YYYY-MM-DD`)
     }
     if (!Array.isArray(candidate.passages) || candidate.passages.length === 0) {
       throw new Error(`${documentId} must contain passages`)
+    }
+
+    const parent: Omit<DisclosureDocument, 'passages'> = {
+      documentId,
+      companyName,
+      documentType,
+      date,
+      synthetic,
+      language,
+      market: market as DisclosureDocument['market'],
+      workflow: workflow as DisclosureDocument['workflow'],
+      keyFacts,
     }
 
     return {
@@ -124,7 +163,7 @@ export const ALL_PASSAGES = flattenPassages(DOCUMENTS)
 
 if (DOCUMENTS.length !== EXPECTED_DOCUMENT_COUNT || ALL_PASSAGES.length !== EXPECTED_PASSAGE_COUNT) {
   throw new Error(
-    `Bundled benchmark must contain ${EXPECTED_DOCUMENT_COUNT} documents and ${EXPECTED_PASSAGE_COUNT} passages`,
+    `Bundled corpus must contain ${EXPECTED_DOCUMENT_COUNT} documents and ${EXPECTED_PASSAGE_COUNT} passages`,
   )
 }
 

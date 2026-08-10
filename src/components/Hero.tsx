@@ -4,16 +4,18 @@ import { classifyPassage } from '../lib'
 
 const SOURCE_URL = 'https://github.com/LewisKim7/AI-Disclosure-Risk-Screener'
 const TRACE_PASSAGE = (() => {
-  const passage = ALL_PASSAGES.find((item) => item.passageId === 'DOC-CB-001-P02')
+  const passage = ALL_PASSAGES.find(
+    (item) => item.passageId === 'DOC-KR-CB-RESET-001-P01',
+  )
   if (!passage) throw new Error('The hero trace passage is missing from the corpus')
   return passage
 })()
 
 const TRACE_RESULT = classifyPassage(TRACE_PASSAGE)
 const TRACE_SCORES = [
-  { label: 'refinancing', value: TRACE_RESULT.rawScores['Refinancing Risk'] },
-  { label: 'liquidity', value: TRACE_RESULT.rawScores['Liquidity Risk'] },
-  { label: 'execution', value: TRACE_RESULT.rawScores['Execution Risk'] },
+  { label: 'dilution', value: TRACE_RESULT.rawScores['Dilution Risk'] },
+  { label: 'market', value: TRACE_RESULT.rawScores['Market Risk'] },
+  { label: 'governance', value: TRACE_RESULT.rawScores['Governance Risk'] },
 ] as const
 const MAX_TRACE_SCORE = Math.max(...TRACE_SCORES.map(({ value }) => value), 1)
 
@@ -28,22 +30,23 @@ export function Hero() {
     <section className="hero page-shell" aria-labelledby="hero-title">
       <div className="hero__copy">
         <div className="hero__kicker">
-          <span>Independent NLP project</span>
+          <span>Korean capital markets</span>
           <span aria-hidden="true">/</span>
-          <span>2026</span>
+          <span>Graduate AI preparation · 2026</span>
         </div>
         <h1 id="hero-title">
-          AI Disclosure
+          Korea IPO &amp; CB
           <span>Risk Screener</span>
         </h1>
         <p className="hero__deck">
-          A transparent NLP prototype for identifying and organizing risk signals in
-          disclosure-style and IPO-style passages.
+          A transparent Korean-language NLP prototype for convertible-bond and IPO
+          disclosure analysis.
         </p>
         <p className="hero__body">
-          Directed by a finance and deep-tech investment professional preparing for graduate
-          study, with AI-assisted implementation. Every classification exposes its matched
-          terms, supporting passage, and limitations.
+          I framed the Korean-finance problem and product requirements. The prototype turns
+          them into an inspectable pipeline for passage classification, evidence retrieval,
+          model comparison, and deterministic memo generation. Corpus construction and
+          implementation were completed with AI assistance and are disclosed in the repository.
         </p>
         <div className="hero__actions">
           <a className="button button--primary" href="#prototype">
@@ -63,17 +66,17 @@ export function Hero() {
         aria-label="Illustrative classification trace"
       >
         <div className="signal-console__topbar">
-          <span>PASSAGE TRACE</span>
+          <span>KOREAN PASSAGE TRACE</span>
           <span className="status-dot">DETERMINISTIC</span>
         </div>
         <div className="signal-console__source">
           <span className="console-index">01</span>
           <div>
-            <p className="console-label">Synthetic source passage</p>
+            <p className="console-label">Synthetic DART-style passage</p>
             <p className="console-id">{TRACE_PASSAGE.passageId}</p>
             <blockquote>
-              “...redeem notes maturing in four months... no committed alternative
-              financing...”
+              “...전환가액은 12,000원에서 8,400원으로... 전환가능 주식수는
+              최초 조건보다 약 42.9% 증가...”
             </blockquote>
           </div>
         </div>
@@ -105,7 +108,7 @@ export function Hero() {
       <dl className="hero-metrics" aria-label="Project scope">
         <div>
           <dt>30</dt>
-          <dd>fixed reference annotations</dd>
+          <dd>synthetic Korean passages</dd>
         </div>
         <div>
           <dt>07</dt>
@@ -113,7 +116,7 @@ export function Hero() {
         </div>
         <div>
           <dt>05</dt>
-          <dd>synthetic document types</dd>
+          <dd>synthetic IPO / CB documents</dd>
         </div>
         <div>
           <dt>00</dt>

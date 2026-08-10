@@ -61,23 +61,23 @@ const INFORMATIONAL_LABEL: RiskLabel = 'Low Risk / Informational'
 
 const IMPLICATION_BY_LABEL: Readonly<Record<RiskLabel, string>> = {
   'Dilution Risk':
-    'Quantify the fully diluted share count under disclosed conversion, reset, warrant, and issuance terms before comparing per-share outcomes.',
+    'Quantify the fully diluted share count at the CB re-fixing floor and separate primary from secondary IPO shares before comparing per-share outcomes.',
   'Refinancing Risk':
-    'Compare obligation timing with committed funding sources and test the effect of less favorable refinancing terms.',
+    'Map CB early-redemption windows and maturity dates against committed funding sources, then test less favorable replacement terms.',
   'Liquidity Risk':
-    'Reconcile available cash, expected cash burn, covenant headroom, and near-term operating needs under a downside case.',
+    'Reconcile cash, burn, restricted IPO proceeds, debt payments, and near-term working-capital needs under a downside case.',
   'Governance Risk':
-    'Review the independence, controls, approvals, and incentives surrounding the disclosed governance issue.',
+    'Identify the ultimate CB allottee or call-option beneficiary and review board independence, approvals, and minority-shareholder protections.',
   'Execution Risk':
-    'Map the stated plan to measurable milestones, external dependencies, timing assumptions, and contingency actions.',
+    'Map the IPO use-of-proceeds plan to permits, construction, customer qualification, measurable milestones, and contingency actions.',
   'Market Risk':
-    'Stress-test demand, pricing, rate, currency, commodity, and competitive assumptions that affect the disclosed outlook.',
+    'Stress-test IPO demand, offer pricing, CB overhang, stock-price volatility, and competitive assumptions that affect the disclosed outcome.',
   'Low Risk / Informational':
     'Treat the passage as context only until a human reviewer confirms that no material risk term or omitted dependency changes the assessment.',
 }
 
 const LIMITATIONS = [
-  'The educational corpus is small and may use synthetic disclosure-style passages, so it is not representative of the full language or distribution of public filings.',
+  'The corpus contains only 30 synthetic Korean disclosure-style passages with AI-assisted reference labels, so it is not representative of actual DART filings or Korean market distributions.',
   'The baseline uses weighted phrase rules and light lexical normalization; it does not understand full context, negation, legal nuance, or causal relationships.',
   SIGNAL_SCORE_NOTE,
   'Keyword rules can produce both false positives and false negatives, especially when a risk is implied rather than stated with configured vocabulary.',

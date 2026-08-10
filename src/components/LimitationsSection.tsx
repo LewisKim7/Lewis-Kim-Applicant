@@ -1,20 +1,21 @@
 import { SectionHeading } from './SectionHeading'
 
 const limitations = [
-  'The corpus contains only 30 synthetic passages.',
-  'Rules are wording-sensitive and can miss implicit risks.',
+  'The corpus contains only 30 synthetic Korean passages.',
+  'Whitespace tokenization is not a Korean morphological analyzer.',
+  'Rules are wording-sensitive and can miss implicit or negated risks.',
   'One primary label cannot represent every overlapping signal.',
-  'TF-IDF has limited contextual and paraphrase understanding.',
+  'TF-IDF has limited Korean context and paraphrase understanding.',
   'Reference labels were drafted in the same AI-assisted build process.',
-  'False positives and false negatives are expected.',
+  'Structured CB and IPO rows are fictional workflow demonstrations.',
 ]
 
 const nextSteps = [
-  'Build a legally permitted public-document corpus.',
-  'Add independent annotators and agreement analysis.',
+  'Freeze the pipeline and build a permitted Korean disclosure holdout.',
+  'Add applicant-reviewed and independent annotations with agreement analysis.',
+  'Compare whitespace tokens with a Korean morphological baseline.',
   'Move from single-label to multi-label classification.',
-  'Compare rules with logistic regression and language models.',
-  'Separate retrieval and classification evaluation sets.',
+  'Evaluate Korean retrieval with relevance labels and ranking metrics.',
 ]
 
 export function LimitationsSection() {
@@ -22,9 +23,9 @@ export function LimitationsSection() {
     <section className="limitations-section" id="limitations">
       <div className="page-shell section-pad">
         <SectionHeading
-          eyebrow="06 / Responsible use"
+          eyebrow="07 / Responsible use"
           title="A prototype is useful only when its boundary is visible."
-          description="These results describe behavior on a small synthetic sample. They do not establish real-world performance, legal reliability, or investment usefulness."
+          description="These results describe behavior on a small synthetic Korean sample. They do not establish performance on DART filings, legal reliability, or investment usefulness."
           inverse
         />
 
@@ -53,9 +54,10 @@ export function LimitationsSection() {
         <div className="independent-note">
           <strong>Independent project note</strong>
           <p>
-            Created while preparing for graduate study in artificial intelligence. This
-            project is not affiliated with, sponsored by, or endorsed by UT Austin or any
-            admissions office. All entities and passages are fictional and synthetic.
+            Created while preparing for graduate study in artificial intelligence and informed
+            by prior Korean IPO and CB workflow concepts. This independent project is not
+            affiliated with UT Austin, DART, KRX, or any admissions office. All entities,
+            passages, and structured sample rows are fictional.
           </p>
         </div>
       </div>
