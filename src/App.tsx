@@ -7,6 +7,7 @@ import { ProblemSection } from './components/ProblemSection'
 import { RiskTaxonomySection } from './components/RiskTaxonomySection'
 import { SiteFooter } from './components/SiteFooter'
 import { SiteHeader } from './components/SiteHeader'
+import { WorkflowBridgeSection } from './components/WorkflowBridgeSection'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <main id="main-content">
         <Hero />
         <ProblemSection />
+        <WorkflowBridgeSection />
         <MethodologySection />
         <DemoDashboard />
         <RiskTaxonomySection />

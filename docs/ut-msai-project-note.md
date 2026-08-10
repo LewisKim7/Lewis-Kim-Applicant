@@ -2,77 +2,97 @@
 
 ## Purpose
 
-This project was built as part of my preparation for graduate study in Artificial Intelligence. As a finance and deep-tech investment professional, I wanted to explore how NLP, information retrieval, classification, model evaluation, and transparent interpretation can be applied to disclosure analysis.
+This independent project was built while preparing for graduate study in artificial intelligence. It connects the applicant's finance and deep-tech investment context with Korean-language preprocessing, classification, information retrieval, model evaluation, interpretation, and responsible-use boundaries.
 
-AI Disclosure Risk Screener is an educational exercise in developing foundational AI/NLP skills—not a claim of professional machine-learning engineering mastery. The work is intentionally small enough to inspect: five fictional synthetic documents, exactly 30 passages with fixed reference labels, seven risk labels, a transparent rule-based baseline, TF-IDF cosine lexical retrieval, a deterministic evidence-linked memo, and explicit limitations.
+Korea IPO & CB Risk Screener is an educational prototype, not a claim of professional machine-learning engineering mastery. The application is deliberately small and inspectable: five fictional Korean KOSPI/KOSDAQ documents, 30 Korean passages, seven primary labels, two classification baselines, lexical evidence retrieval, and deterministic memo generation. The interface is English so an international reviewer can follow the work; the source passages remain Korean because Korean text is the actual NLP subject.
 
 ## Why this problem
 
-My professional context involves turning dense technical and financial material into decision-useful analysis. Disclosure review is therefore a natural domain in which to practice translating an open-ended task into an AI/NLP system:
+Convertible-bond decisions and IPO prospectuses combine structured terms with dense narrative risk language. An analyst may need to connect `전환가액 조정`, put and call options, overhang, lockups, use of proceeds, related parties, and going-concern language to the passages supporting an interpretation.
 
-1. define the unit of analysis;
-2. design a risk taxonomy;
-3. build a reproducible baseline;
-4. preserve a source trail;
-5. measure the baseline against fixed reference labels; and
-6. explain the errors and responsible-use boundary.
+That workflow creates a useful learning sequence:
 
-This framing matters more to me than presenting a polished interface alone. The project page is the demonstration layer; the corpus, rules, retrieval method, evaluation, and documentation are the substantive work.
+1. define a passage as the unit of analysis;
+2. design a seven-label risk taxonomy;
+3. preserve metadata and evidence identifiers;
+4. implement an auditable rule baseline;
+5. train a simple text classifier with document-level holdout;
+6. distinguish classification from retrieval; and
+7. analyze errors and responsible-use limits.
 
-## Connection to graduate-study preparation
+The project page is only the demonstration layer. The substantive artifact is the checked-in corpus, structured samples, rules, trained baseline, evaluation protocols, error analysis, and documentation.
 
-The project creates a practical setting in which to study several topics that are relevant to advanced AI coursework:
+## Evidence of graduate-study preparation
 
-| Topic | Project evidence |
+| Topic | Checked-in evidence |
 | --- | --- |
-| NLP | Cleaning, tokenization, passage construction, and light lexical normalization |
-| Classification | A declared seven-label taxonomy and an auditable weighted-rule baseline |
-| Information retrieval | TF-IDF vectors and cosine ranking over citable passages |
-| Evaluation | Fixed reference labels, accuracy, per-label recall, macro recall, confusion matrix, and error inspection |
-| Interpretation | Matched phrases, rule contributions, passage identifiers, and explicit score semantics |
-| Transparency and ethics | Synthetic-data disclosure, non-use boundaries, and documented failure modes |
+| Domain-to-problem formulation | Korean IPO and CB workflows expressed as structured screening, passage classification, evidence retrieval, and memo assembly |
+| NLP | Unicode normalization, Korean tokenization, stop words, and limited particle stripping |
+| Classification | Seven primary labels, transparent weighted rules, and multinomial logistic regression |
+| Information retrieval | TF-IDF vectors and cosine lexical ranking over citable passages |
+| Evaluation | Accuracy, per-label recall, macro recall, confusion matrices, document-level folds, and exact error cases |
+| Interpretation | Matched phrases, rule contributions, leading ML terms, source passage IDs, and explicit score semantics |
+| Transparency and ethics | Synthetic-data disclosure, AI-assistance disclosure, non-use boundaries, and documented failure modes |
+| Reproducibility | Local TypeScript implementation, frozen tests, and no required API key |
 
-The rule-based classifier is a starting point rather than a final modeling choice. Building it first helped separate taxonomy errors, annotation ambiguity, retrieval behavior, and wording sensitivity before considering trained models.
+## What the experiments show
 
-## Official UT Austin context
+The transparent rule baseline produces 25 correct labels out of 30 on the same closed corpus used during development: 83.33% accuracy and 82.14% macro recall, with five errors. This is a deterministic sanity check, not a held-out estimate.
 
-The following official materials informed how I described the academic connection:
+The unigram TF-IDF multinomial logistic-regression baseline uses five leave-one-document-out folds. Each fold has 24 training passages and 6 test passages, with vocabulary and IDF fitted on training text only. Its combined out-of-fold result is 26 of 30, or 86.67% accuracy, with 85.71% macro recall and four errors.
 
-- [MSAI curriculum/program page](https://cdso.utexas.edu/msai)
-- [Graduate Catalog, Artificial Intelligence](https://catalog.utexas.edu/graduate/areas-of-study/natural-sciences/artificial-intelligence/)
-- [current linked MSAI Application Guide PDF](https://cdso.utexas.edu/sites/default/files/2025-01/MSAI_Application_Guide.pdf)
-- [CDSO FAQ](https://cdso.utexas.edu/faq)
+The percentages are not a controlled head-to-head ranking because the protocols differ. Both results are also limited by synthetic data, repeated wording, AI-assisted non-independent labels, and only five documents. Their value lies in making vocabulary gaps, negation failure, category overlap, and sparse-data behavior inspectable. In particular, the document-held-out ML recall for Liquidity Risk is only 25% (1 of 4).
 
-I use these sources only to understand the program and current application guidance. I do not treat this portfolio as a substitute for the program's prerequisites or required application materials. The current official application materials do not list a portfolio as a formal required item; this project is optional supporting evidence that may be linked where appropriate in a CV or statement of purpose.
-
-The program and catalog pages are most relevant to the project's broad fit with NLP, information retrieval, classification, evaluation, interpretation, transparency, and ethics. I avoid making a more precise course-distribution claim because current official pages can describe curricular structure differently. Applicants should verify the latest program, catalog, application-guide, and FAQ pages directly before submitting.
-
-## Learning questions exposed by the build
+## Learning reflected in the build
 
 ### Taxonomy precedes modeling
 
-A classifier can only be as coherent as its labels. A central challenge is defining categories that are distinct enough to evaluate while still recognizable in financing and operating disclosures. The resulting single-label scheme is easy to inspect, but it also shows why a future version should support overlapping labels.
+A classifier can only express the categories it is given. The single-label scheme keeps the confusion matrices readable, but passages about cash, repayment rights, and conversion terms can support more than one legitimate risk interpretation. A future version should test multi-label annotation.
 
-### Retrieval and classification answer different questions
+### Evaluation protocol changes the claim
 
-The classifier asks, “Which configured risk category best matches this passage?” The TF-IDF component asks, “Which passages share the strongest lexical relationship with this query?” Keeping those outputs separate prevents a ranked search result from being misrepresented as a risk prediction.
+The closed-corpus rule result answers an implementation question. Leave-one-document-out ML answers a narrower transfer question across five synthetic documents. Describing those protocols separately is more important than highlighting the small difference between their percentages.
 
-### Evaluation changes the project
+### Korean preprocessing is a modeling choice
 
-Writing reference labels and annotation rationales exposed ambiguous passages and wording gaps that a demo alone would hide. The resulting metrics remain limited to this fixed synthetic corpus, but the confusion matrix and error cases make the weaknesses concrete and create a basis for the next experiment.
+Unicode tokenization and light particle stripping make the local implementation transparent, but they are not morphological analysis. The weakest liquidity recall and several Korean wording errors show why tokenization and corpus design should be tested, not treated as neutral plumbing.
 
-### Transparent output needs careful language
+### Retrieval and classification are different tasks
 
-The classifier's signal score is a normalized rule-strength heuristic. It is not a probability, statistically calibrated value, severity estimate, or assurance that the passage is correctly labeled. Recording this distinction in the interface and documentation is part of the project, not a footnote.
+Classification selects a configured primary risk label. TF-IDF retrieval ranks passages by lexical overlap with a query. The latter is not semantic understanding, and neither output verifies the financial truth of a passage.
+
+## Conceptual lineage and independent implementation
+
+The structured demonstrations were conceptually informed by two workflows already present in the applicant's portfolio:
+
+- [CB Zero Finder](https://cb-zero-finder.vercel.app/), whose rate-and-size screening behavior is independently reimplemented in TypeScript on four fictional rows; and
+- [IPO Market Report](https://ipo-market-report.vercel.app/), which inspired analogous IPO calculations over six fictional observations using a common 2026-07-31 snapshot date.
+
+The relationship is conceptual only. Neither existing repository nor any production data was imported. No API response, API key, private workbook, or generated report was copied.
+
+## Official UT Austin context
+
+The following official sources informed the description of broad academic fit and current application context:
+
+1. [MSAI curriculum/program page](https://cdso.utexas.edu/msai)
+2. [Graduate Catalog, Artificial Intelligence](https://catalog.utexas.edu/graduate/areas-of-study/natural-sciences/artificial-intelligence/)
+3. [current linked MSAI Application Guide PDF](https://cdso.utexas.edu/sites/default/files/2025-01/MSAI_Application_Guide.pdf)
+4. [CDSO FAQ](https://cdso.utexas.edu/faq)
+
+The project broadly relates to NLP, information retrieval, classification, evaluation, interpretation, transparency, and ethics. It does not claim alignment with a precise required-course distribution because current official pages can describe curricular structure differently.
+
+The current linked application materials do not list a portfolio as a formal required item. This project is optional supporting evidence only. It cannot replace prerequisites, required application materials, or the applicant's responsibility to verify the latest instructions directly from UT Austin before submission.
 
 ## AI-assisted development disclosure
 
-The applicant selected the domain, objective, and project requirements. Codex assisted with synthetic-corpus drafting, implementation, documentation, and automated verification. The fixed reference labels were drafted within that same AI-assisted process and are not independent expert annotations. Before using this project in an application, the applicant should personally review the passages, rules, predictions, and error cases and follow any applicable application policy on disclosing AI assistance.
+The applicant selected the domain, project objective, feature requirements, and application purpose. Codex assisted with synthetic-corpus drafting, implementation, documentation, and automated verification. All reference labels and rationales were drafted within the same AI-assisted process and are not independent annotations.
+
+Before using the project in an application, the applicant should personally review every passage, label, rationale, rule, prediction, and error; be able to explain the implementation and limitations; and follow the current application policy for disclosing AI assistance.
 
 ## Independence and non-affiliation
 
-AI Disclosure Risk Screener is an independent personal project. It is not affiliated with, sponsored by, reviewed by, or endorsed by The University of Texas at Austin, the MSAI program, the College of Natural Sciences, CDSO, or any admissions office. The repository uses fictional entities and synthetic passages and does not contain university or admissions data.
+Korea IPO & CB Risk Screener is an independent personal project. It is not affiliated with, sponsored by, reviewed by, or endorsed by The University of Texas at Austin, the MSAI program, the College of Natural Sciences, CDSO, DART, KRX, or any admissions office. It contains no university, admissions, or production market data.
 
-## Application use
+## Appropriate application use
 
-If included in an application, I intend to link the live demonstration and repository as concise supporting evidence. I would describe which decisions I directed, what was implemented with AI assistance, what the fixed evaluation shows, which errors remain, and what I would test next. I would not present the project as a required submission, a production system, or proof that prerequisites have been satisfied.
+If linked in an application, the project should be described as evidence of problem framing, directed AI-assisted development, evaluation discipline, and willingness to document limitations. It should not be presented as a required submission, a production system, proof of professional ML mastery, or proof that prerequisites have been satisfied.

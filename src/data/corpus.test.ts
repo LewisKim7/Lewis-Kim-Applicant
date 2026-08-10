@@ -37,9 +37,17 @@ describe('bundled synthetic corpus', () => {
         {
           documentId: 'DOC-TEST',
           companyName: 'Test Co.',
-          documentType: 'Funding Announcement',
+          documentType: 'DART-style CB Issuance Decision',
           date: '2026-01-01',
           synthetic: false,
+          language: 'ko',
+          market: 'KOSDAQ',
+          workflow: 'OpenDART CB Review',
+          keyFacts: [
+            { label: 'One', value: '1' },
+            { label: 'Two', value: '2' },
+            { label: 'Three', value: '3' },
+          ],
           passages: [],
         },
       ]),
@@ -47,12 +55,14 @@ describe('bundled synthetic corpus', () => {
   })
 
   it('reproduces the documented closed-set baseline result', () => {
-    const evaluation = evaluateClassifier(ALL_PASSAGES, classifyPassage)
+    const evaluation = evaluateClassifier(ALL_PASSAGES, classifyPassage, {
+      maxExamplesPerGroup: 10,
+    })
 
     expect(evaluation.total).toBe(30)
-    expect(evaluation.correct).toBe(27)
-    expect(evaluation.accuracy).toBe(0.9)
-    expect(evaluation.macroRecall).toBe(0.8929)
-    expect(evaluation.errorExamples).toHaveLength(3)
+    expect(evaluation.correct).toBe(25)
+    expect(evaluation.accuracy).toBe(0.8333)
+    expect(evaluation.macroRecall).toBe(0.8214)
+    expect(evaluation.errorExamples).toHaveLength(5)
   })
 })

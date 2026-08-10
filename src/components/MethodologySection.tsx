@@ -3,27 +3,27 @@ import { SectionHeading } from './SectionHeading'
 const steps = [
   {
     number: '01',
-    title: 'Prepare passages',
-    copy: 'Clean synthetic disclosure-style text and preserve document, company, date, and passage metadata.',
-    output: '30 annotated passages',
+    title: 'Structure the event',
+    copy: 'Reimplement compact CB rate and issue-size filters plus IPO price-band and return calculations on fictional rows.',
+    output: 'CB screen + IPO context',
   },
   {
     number: '02',
-    title: 'Classify transparently',
-    copy: 'Apply documented, label-specific terms and deterministic weights to assign one primary risk label.',
-    output: 'Label + matched terms',
+    title: 'Prepare Korean passages',
+    copy: 'Normalize Korean disclosure-style text while preserving issuer, market, transaction, date, and passage metadata.',
+    output: '30 passages + AI-assisted labels',
   },
   {
     number: '03',
-    title: 'Retrieve evidence',
-    copy: 'Rank passages with TF-IDF and cosine similarity using lexical normalization, without external models.',
-    output: 'Top-k evidence list',
+    title: 'Classify and retrieve',
+    copy: 'Run inspectable weighted rules, a TF-IDF logistic-regression experiment, and lexical cosine retrieval.',
+    output: 'Labels + ranked evidence',
   },
   {
     number: '04',
     title: 'Evaluate and report',
-    copy: 'Compare predictions with fixed reference labels, inspect the confusion matrix, and assemble an evidence-linked memo.',
-    output: 'Metrics + error analysis',
+    copy: 'Hold out one entire document per ML fold, inspect both baselines, and assemble an evidence-linked memo.',
+    output: 'Metrics + memo + errors',
   },
 ]
 
@@ -32,9 +32,9 @@ export function MethodologySection() {
     <section className="method-section" id="method">
       <div className="page-shell section-pad">
         <SectionHeading
-          eyebrow="02 / Methodology"
-          title="A small pipeline designed to be audited."
-          description="No generative model, hidden prompt, remote inference, or API key. Memo text is assembled deterministically from fixed templates, and the same functions power the demo and evaluation."
+          eyebrow="03 / Methodology"
+          title="One workflow, from market screen to source-linked memo."
+          description="No generative model, hidden prompt, remote inference, or API key is required. Structured calculations, Korean text processing, both classifiers, retrieval, and memo generation are reproducible in the repository."
           inverse
         />
 
@@ -52,8 +52,9 @@ export function MethodologySection() {
         <div className="method-note">
           <span>Important distinction</span>
           <p>
-            TF-IDF is presented as a lexical evidence-retrieval baseline—not semantic
-            understanding. The classifier is a rule-based NLP baseline—not a trained ML model.
+            TF-IDF search is lexical retrieval, not semantic understanding. The rule engine
+            remains the interactive baseline; logistic regression is a separate trained
+            development experiment whose softmax score is not calibrated confidence.
           </p>
         </div>
       </div>

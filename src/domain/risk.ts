@@ -38,39 +38,39 @@ export const RISK_TAXONOMY: readonly RiskTaxonomyEntry[] = [
     id: 'dilution',
     label: 'Dilution Risk',
     description:
-      'Potential ownership dilution from share issuance, conversion features, warrants, or price-reset terms.',
+      'Potential ownership dilution from CB conversion, re-fixing terms, warrants, or primary-share issuance.',
     analystQuestion:
-      'How many additional shares could be issued, and under which conversion or reset conditions?',
+      'At the re-fixing floor, how many additional shares could be issued and how would ownership per share change?',
   },
   {
     id: 'refinancing',
     label: 'Refinancing Risk',
     description:
-      'Pressure to repay, roll over, or replace debt and other near-term financing obligations.',
+      'Pressure created by CB put windows, maturity schedules, debt repayment, or replacement financing.',
     analystQuestion:
-      'Which obligations mature next, and what funding sources are available to repay or refinance them?',
+      'When can holders exercise early-redemption rights, and which committed sources can fund that obligation?',
   },
   {
     id: 'liquidity',
     label: 'Liquidity Risk',
     description:
-      'Constraints on cash, working capital, covenant headroom, or the ability to continue operations.',
+      'Constraints on cash runway, working capital, IPO proceeds allocation, or continued operations.',
     analystQuestion:
-      'How long can current liquidity support operations under the disclosed assumptions?',
+      'After restricted uses of proceeds and near-term payments, how long can available liquidity support operations?',
   },
   {
     id: 'governance',
     label: 'Governance Risk',
     description:
-      'Board, control, related-party, audit, voting-right, or conflict-of-interest concerns.',
+      'Concerns around related-party CB allottees, call-option beneficiaries, board oversight, or control.',
     analystQuestion:
-      'What controls or independent oversight mitigate the disclosed governance concern?',
+      'Who ultimately benefits from the allotment or call option, and what independent review protects other shareholders?',
   },
   {
     id: 'execution',
     label: 'Execution Risk',
     description:
-      'Uncertainty around delivery, commercialization, approvals, construction, scale-up, or operating milestones.',
+      'Uncertainty around IPO use-of-proceeds plans, permits, construction, scale-up, approvals, or delivery milestones.',
     analystQuestion:
       'Which dependencies and milestones determine whether management can deliver the stated plan?',
   },
@@ -78,15 +78,15 @@ export const RISK_TAXONOMY: readonly RiskTaxonomyEntry[] = [
     id: 'market',
     label: 'Market Risk',
     description:
-      'Exposure to demand, competition, pricing, rates, currencies, commodities, or wider market conditions.',
+      'Exposure to IPO demand, offer pricing, CB overhang, stock-price volatility, competition, or wider market conditions.',
     analystQuestion:
-      'Which external market variables have the greatest effect on the disclosed outlook?',
+      'Which demand, pricing, volatility, or post-listing supply assumptions have the greatest effect on the outcome?',
   },
   {
     id: 'informational',
     label: 'Low Risk / Informational',
     description:
-      'Routine or contextual disclosure for which the baseline finds no configured risk signal.',
+      'Routine dates, terms, or context for which the baseline finds no configured primary risk signal.',
     analystQuestion:
       'Is this passage merely contextual, or does it omit detail needed to assess a risk?',
   },

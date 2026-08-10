@@ -14,7 +14,7 @@ export interface PreprocessedText {
   readonly passages: readonly string[]
 }
 
-const ENGLISH_STOP_WORDS = new Set([
+const STOP_WORDS = new Set([
   'a',
   'an',
   'and',
@@ -49,6 +49,68 @@ const ENGLISH_STOP_WORDS = new Set([
   'were',
   'will',
   'with',
+  '및',
+  '또는',
+  '등',
+  '관련',
+  '해당',
+  '통해',
+  '대한',
+  '위해',
+  '경우',
+  '현재',
+  '회사',
+  '당사',
+])
+
+const KOREAN_PARTICLES = [
+  '으로부터',
+  '에게서',
+  '에서는',
+  '으로는',
+  '까지는',
+  '부터는',
+  '에게',
+  '에서',
+  '으로',
+  '와는',
+  '과는',
+  '보다',
+  '까지',
+  '부터',
+  '은',
+  '는',
+  '이',
+  '가',
+  '을',
+  '를',
+  '의',
+  '에',
+  '로',
+  '와',
+  '과',
+  '도',
+  '만',
+] as const
+
+/**
+ * Domain nouns whose final syllable is also a one-syllable Korean particle.
+ * Keep the lexical form intact; an inflected form such as `공모가가` can still
+ * drop only its final grammatical particle and normalize to `공모가`.
+ */
+const KOREAN_PARTICLE_EXCEPTIONS = new Set([
+  '공모가',
+  '국가',
+  '결과',
+  '대가',
+  '원가',
+  '인허가',
+  '주가',
+  '추가',
+  '평가',
+  '품목허가',
+  '허가',
+  '효과',
 ])
 
 /**
@@ -123,7 +185,19 @@ export function cleanDisclosureText(text: string): string {
 }
 
 export function normalizeToken(token: string): string {
-  return LEXICAL_NORMALIZATION[token] ?? token
+  const lexicalMatch = LEXICAL_NORMALIZATION[token]
+  if (lexicalMatch) return lexicalMatch
+
+  if (/^[가-힣]+$/.test(token) && token.length >= 3) {
+    if (KOREAN_PARTICLE_EXCEPTIONS.has(token)) return token
+    const particle = KOREAN_PARTICLES.find(
+      (candidate) =>
+        token.endsWith(candidate) && token.length - candidate.length >= 2,
+    )
+    if (particle) return token.slice(0, -particle.length)
+  }
+
+  return token
 }
 
 /**
@@ -146,7 +220,7 @@ export function tokenize(
   return rawTokens
     .map(normalizeToken)
     .filter((token) => token.length >= minTokenLength)
-    .filter((token) => !removeStopWords || !ENGLISH_STOP_WORDS.has(token))
+    .filter((token) => !removeStopWords || !STOP_WORDS.has(token))
 }
 
 export function normalizeText(text: string): string {

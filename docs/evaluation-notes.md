@@ -1,18 +1,26 @@
 # Evaluation Notes
 
-## Evaluation question
+## Purpose
 
-The evaluation asks a narrow question:
+This document separates two different evaluation questions:
 
-> On the fixed 30-passage synthetic corpus, how often does the transparent rule-based baseline return the same primary label as the stored reference annotation?
+1. **Rule sanity check:** How does the transparent phrase baseline behave on the same 30-passage corpus used during development?
+2. **Trained-baseline diagnostic:** How does a TF-IDF multinomial logistic-regression model behave when one entire synthetic document is excluded from training?
 
-It does not ask whether the baseline is ready for public filings, whether the signal score is calibrated, or whether the system improves investment decisions.
+The protocols differ. Their accuracy percentages must not be presented as a controlled head-to-head comparison.
 
-## Evaluation set
+## Evaluation corpus
 
-The evaluation set contains exactly 30 passages with fixed reference labels from five fictional synthetic documents. Each document contributes six passages. The seven reference labels are distributed as follows:
+- 5 fictional Korean KOSPI/KOSDAQ documents
+- 30 Korean passages
+- 6 passages per document
+- 7 primary labels
+- 2 convertible-bond documents
+- 3 IPO documents
+- AI-assisted reference labels and rationales
+- no independent annotator, adjudication, or agreement statistic
 
-| Reference label | Passage count |
+| Reference label | Count |
 | --- | ---: |
 | Dilution Risk | 5 |
 | Refinancing Risk | 4 |
@@ -23,73 +31,153 @@ The evaluation set contains exactly 30 passages with fixed reference labels from
 | Low Risk / Informational | 4 |
 | **Total** | **30** |
 
-Each passage includes a brief annotation rationale. The annotation identifies one primary category even when the text could support a secondary risk.
+The labels identify one primary category even when a passage supports several interpretations.
 
-## Protocol
-
-1. Load the five bundled synthetic documents.
-2. Flatten them into 30 passage records while preserving metadata.
-3. Run the same deterministic classifier used by the interface on every passage.
-4. Compare each prediction with its stored reference label.
-5. Count correct and incorrect predictions.
-6. Build a seven-by-seven confusion matrix in the taxonomy's fixed order.
-7. Calculate recall for each reference label and the unweighted macro recall.
-8. retain passage-level correct and error examples for inspection.
-
-No sample is excluded after prediction. No external model, API call, random seed, or remote dataset is involved.
-
-## Metrics
+## Metric definitions
 
 ### Accuracy
 
-Accuracy is the number of exact label matches divided by 30:
-
 ```text
-accuracy = correct classifications / 30
+accuracy = exact primary-label matches / 30
 ```
-
-Because the task is single-label, a prediction counts as correct only when it exactly matches the stored primary reference label.
 
 ### Per-label recall
 
-For each label:
-
 ```text
-recall(label) = correct predictions for label / reference-labeled passages for label
+recall(label) = correct predictions for label / reference passages for label
 ```
-
-Recall answers: of the passages assigned this reference category, what share did the baseline recover?
 
 ### Macro recall
 
-Macro recall is the arithmetic mean of the seven per-label recall values. Each label receives equal weight regardless of whether it has four or five examples.
+Macro recall is the unweighted mean of recall across all seven represented labels. Each category therefore receives equal weight even though it has four or five examples.
 
-### Confusion matrix
+## 1. Closed-corpus rule sanity check
 
-Rows represent reference labels and columns represent predictions. The fixed row and column order is:
-
-1. Dilution Risk
-2. Refinancing Risk
-3. Liquidity Risk
-4. Governance Risk
-5. Execution Risk
-6. Market Risk
-7. Low Risk / Informational
-
-The matrix shows which categories are confused with one another. With only four or five examples per row, a single mistake can move a label's recall substantially.
-
-## Current result
+The weighted Korean/English phrase rules are rerun on all 30 passages. No document is held out. The same corpus was visible while the taxonomy and rules were developed, so this result verifies deterministic implementation behavior rather than unseen-document performance.
 
 | Metric | Result |
 | --- | ---: |
-| Accuracy | 90.0% |
-| Correct classifications | 27 of 30 |
-| Macro recall | 89.3% |
-| Error count | 3 |
+| Correct | 25 of 30 |
+| Accuracy | 83.33% |
+| Macro recall | 82.14% |
+| Errors | 5 |
 
-The interface is the canonical display for the per-label table, confusion matrix, and passage-level examples. These values are produced by the checked-in implementation and describe only this fixed synthetic corpus.
+### Rule per-label recall
 
-## How to reproduce
+| Label | Actual | Correct | Recall |
+| --- | ---: | ---: | ---: |
+| Dilution Risk | 5 | 5 | 100% |
+| Refinancing Risk | 4 | 4 | 100% |
+| Liquidity Risk | 4 | 2 | 50% |
+| Governance Risk | 4 | 3 | 75% |
+| Execution Risk | 5 | 5 | 100% |
+| Market Risk | 4 | 3 | 75% |
+| Low Risk / Informational | 4 | 3 | 75% |
+
+### Five rule errors
+
+| Passage | Reference → prediction | Error category | Interpretation |
+| --- | --- | --- | --- |
+| `DOC-KR-CB-ISSUE-001-P03` | Liquidity → Informational | Vocabulary coverage gap | The passage describes cash, spending, conditional borrowing, and a seven-month runway without matching a configured multi-token liquidity phrase. |
+| `DOC-KR-CB-ISSUE-001-P04` | Governance → Informational | Korean wording variation | A representative's sibling and absent external review imply a conflict, but the passage does not use the exact configured terms `특수관계인`, `이해상충`, or `공정성 의견`. |
+| `DOC-KR-CB-RESET-001-P02` | Liquidity → Refinancing | Label overlap | `조기상환청구권` and `풋옵션` receive refinancing weights even though the passage's central comparison is cash available versus cash required. |
+| `DOC-KR-CB-RESET-001-P05` | Market → Dilution | Label overlap | `리픽싱`, `전환가액 조정`, and `오버행` outweigh the passage's market-volatility and selling-pressure framing. |
+| `DOC-KR-IPO-PROSPECTUS-001-P06` | Informational → Governance | Negation failure | `특수관계인에게 지급되지 않으며` is a negative statement, but exact phrase matching treats `특수관계인` as positive governance evidence. |
+
+These errors should not be patched away one by one against the same evaluation set. Doing so would make the closed-corpus score less informative.
+
+## 2. Document-held-out trained baseline
+
+The trained baseline uses:
+
+- unigram TF-IDF;
+- training-fold vocabulary and IDF only;
+- L2-normalized sparse vectors;
+- full-batch multinomial logistic regression;
+- 400 epochs;
+- learning rate `0.4`;
+- L2 penalty `0.01`; and
+- deterministic label ordering and optimization.
+
+Five folds are defined by document ID. In every fold, four documents provide 24 training passages and the remaining unseen document provides 6 test passages. No passage from the held-out document contributes to that fold's vocabulary, IDF values, or learned parameters.
+
+| Metric | Result |
+| --- | ---: |
+| Out-of-fold correct | 26 of 30 |
+| Out-of-fold accuracy | 86.67% |
+| Macro recall | 85.71% |
+| Document folds | 5 |
+| Errors | 4 |
+
+### Fold results
+
+| Held-out document | Vocabulary | Correct | Accuracy |
+| --- | ---: | ---: | ---: |
+| `DOC-KR-CB-ISSUE-001` | 394 | 5 / 6 | 83.33% |
+| `DOC-KR-CB-RESET-001` | 393 | 4 / 6 | 66.67% |
+| `DOC-KR-IPO-PROCEEDS-001` | 394 | 6 / 6 | 100% |
+| `DOC-KR-IPO-PROSPECTUS-001` | 395 | 6 / 6 | 100% |
+| `DOC-KR-IPO-RISK-001` | 398 | 5 / 6 | 83.33% |
+
+### ML per-label recall
+
+| Label | Actual | Correct | Recall |
+| --- | ---: | ---: | ---: |
+| Dilution Risk | 5 | 5 | 100% |
+| Refinancing Risk | 4 | 4 | 100% |
+| Liquidity Risk | 4 | 1 | 25% |
+| Governance Risk | 4 | 4 | 100% |
+| Execution Risk | 5 | 5 | 100% |
+| Market Risk | 4 | 3 | 75% |
+| Low Risk / Informational | 4 | 4 | 100% |
+
+### Four out-of-fold ML errors
+
+| Passage | Reference → prediction | Leading observed terms | Interpretation |
+| --- | --- | --- | --- |
+| `DOC-KR-CB-ISSUE-001-P03` | Liquidity → Execution | `분기`, `매출` | Sparse vocabulary links generic operating terms to execution examples rather than to a cash-runway concept. |
+| `DOC-KR-CB-RESET-001-P02` | Liquidity → Dilution | `발행`, `행사할`, `전액` | The fold lacks enough stable Korean liquidity language, and generic CB terms dominate. |
+| `DOC-KR-CB-RESET-001-P05` | Market → Dilution | `오버행`, `물량`, `전환가액`, `전환` | Conversion vocabulary overwhelms the market-supply interpretation. |
+| `DOC-KR-IPO-RISK-001-P03` | Liquidity → Market | `고객`, `서비스`, `핵심` | Customer-related terms resemble market passages even though receivable timing and supplier prepayments create the cash mismatch. |
+
+The model's softmax score is an uncalibrated output from a tiny synthetic training fold. It is not a probability of financial risk, a severity score, or evidence of performance on DART filings.
+
+## Protocol interpretation
+
+The ML baseline's 86.67% is about 3.3 percentage points above the rule baseline's 83.33%, but that difference does not show that logistic regression is superior:
+
+- the rule score is closed-corpus while the ML score is out of fold;
+- all documents were drafted in the same AI-assisted project;
+- similar structure and wording recur across documents;
+- labels were not independently annotated;
+- model settings were explored during development; and
+- five documents are too few for a stable performance estimate.
+
+Both results are best treated as current development diagnostics, not as a frozen
+confirmatory evaluation.
+
+## Structured workflow checks
+
+Separate deterministic tests cover the fictional market samples:
+
+| Check | Frozen result |
+| --- | --- |
+| CB rows | 4 |
+| CB filter | Surface rate `0.0%`, minimum issue size 200억원 |
+| CB matches | 2 rows totaling 520억원 |
+| IPO observations | 6 |
+| Total offer market capitalization | 42,000억원 |
+| Median first-day return | 12.5% |
+| Median current return | 1.47% |
+| Below offer price | 3 of 6, or 50% |
+
+The IPO values use a common fictional snapshot date of **2026-07-31**. These checks validate local arithmetic and filtering only. They do not describe the current Korean market.
+
+## Retrieval evaluation is separate
+
+The classification metrics do not validate TF-IDF search. The retrieval component currently has deterministic functional tests but no independently labeled query-passage relevance set, Precision@k, mean reciprocal rank, or nDCG result.
+
+## Reproduction
 
 From the repository root:
 
@@ -99,63 +187,32 @@ npm run verify
 npm run dev
 ```
 
-`npm run verify` runs linting, automated tests, TypeScript checks, and the production build. The live evaluation uses the same corpus and deterministic classification functions, so repeated runs on the same revision should return the same result.
+`npm run verify` runs linting, tests, TypeScript checks, and a production build. The tests freeze the corpus dimensions, label coverage, rule metrics, ML fold structure, ML metrics, CB screen, and IPO summary.
 
-When reporting a result, record the repository revision and confirm that all 30 passages are present. Changes to text, reference labels, rules, weights, preprocessing, or tie-breaking can change the metrics.
+Changes to passages, labels, preprocessing, rules, optimization settings, fold construction, or structured rows can change the documented results.
 
-## Interpretation
+## What the evaluation supports
 
-### What the evaluation supports
+- Both pipelines are implemented and deterministic on the checked-in revision.
+- Vocabulary gaps, label overlap, negation failure, and sparse-data behavior are inspectable.
+- TF-IDF vocabulary and IDF are fitted only on training documents in the ML folds.
+- Every prediction can be traced back to a synthetic passage and reference label.
 
-- The evaluation verifies that the pipeline can compare predictions with stored reference labels.
-- It makes label-level successes and errors visible.
-- It provides a reproducible baseline for future changes on the same corpus.
-- It helps identify missing phrases, competing rules, and taxonomy ambiguity.
+## What the evaluation does not support
 
-### What the evaluation does not support
+- Performance on actual DART or KRX documents
+- Generalization to unseen issuers, time periods, or document templates
+- Independent validity of the reference labels
+- Investment, legal, compliance, or admissions usefulness
+- Calibrated risk probabilities or severity estimates
+- Superiority of one baseline over the other
 
-- It does not measure performance on unseen documents.
-- It does not establish behavior on actual filing language.
-- It does not validate the reference labels through independent agreement.
-- It does not show that the rule set is robust to paraphrase, negation, or context changes.
-- It does not measure ranking quality for TF-IDF retrieval.
-- It does not show investment, legal, or operational usefulness.
-
-## Error-analysis framework
-
-Every incorrect passage should be reviewed under at least one of these categories:
-
-| Error type | Diagnostic question | Possible next step |
-| --- | --- | --- |
-| Missing vocabulary | Was the intended risk expressed without any configured phrase? | Add a narrowly justified phrase using development data only |
-| Competing signals | Did phrases from several labels appear in one passage? | Consider multi-label annotation or refine primary-label guidance |
-| Weighting issue | Did a lower-value phrase outweigh the intended evidence? | Revisit weights and document the rationale |
-| Negation or context | Was a risk term negated, historical, conditional, or attributed to another party? | Add explicit context handling and adversarial tests |
-| Annotation ambiguity | Could two labels reasonably be primary? | Seek an independent annotation and refine the taxonomy |
-| Informational fallback | Did the baseline miss an implicit risk because no phrase matched? | Add paraphrase tests or compare a trained baseline |
-
-The purpose of error analysis is not to patch every one of the 30 passages until the score is perfect. Repeatedly tuning rules against the same evaluation set would make the displayed result less informative. A better next step is to freeze a development corpus, create a separate held-out set, and document rule changes before evaluating again.
-
-## Retrieval evaluation is separate
-
-The classifier evaluation does not validate TF-IDF search. A future retrieval study should create query-passage relevance judgments and report ranking metrics such as precision at k or reciprocal rank. A classification match is not evidence that a passage is relevant to every query about that label.
-
-## Annotation limitations
-
-The annotations were drafted within the same AI-assisted build process as the educational synthetic corpus. There is no independent annotator, adjudication protocol, or agreement statistic. The rationales improve traceability but do not remove subjective judgment or benchmark leakage.
-
-Future work should define label instructions before annotation, recruit an independent annotator with relevant domain knowledge, measure agreement, document disagreements, and keep the final evaluation set separate from rule development.
-
-## Reporting checklist
-
-Before citing the evaluation:
+## Before quoting a metric
 
 - [ ] Run `npm ci` and `npm run verify` on the cited revision.
-- [ ] Confirm there are 5 documents and exactly 30 passages.
-- [ ] Confirm all seven labels appear in the reference annotations.
-- [ ] Confirm the documented metrics match the checked-in implementation.
-- [ ] Inspect every error, not only the aggregate score.
-- [ ] State that the corpus is fictional and synthetic.
-- [ ] State that the evaluation is fixed-sample and not held out.
-- [ ] Avoid describing the signal score as a probability or statistically calibrated value.
-- [ ] Avoid making claims about public filings or external performance.
+- [ ] Confirm 5 documents, 30 passages, and all 7 labels.
+- [ ] Confirm 25/30 and 82.14% macro recall for the closed-corpus rules.
+- [ ] Confirm 26/30 and 85.71% macro recall for document-held-out ML.
+- [ ] State which evaluation protocol produced the number.
+- [ ] State that the corpus and labels are synthetic and AI-assisted.
+- [ ] State that there was no independent annotation or external evaluation.

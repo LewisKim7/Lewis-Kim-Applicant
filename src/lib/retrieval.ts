@@ -138,14 +138,14 @@ export function createTfidfIndex(
       const queryTokens = tokenize(query, {
         removeStopWords: true,
         minTokenLength: 2,
-      })
+      }).filter((term) => idf.has(term))
       if (queryTokens.length === 0 || corpus.length === 0) return []
 
       const queryFrequencies = termFrequency(queryTokens)
       const queryVector = new Map<string, number>()
       for (const [term, count] of queryFrequencies) {
-        const termIdf =
-          idf.get(term) ?? inverseDocumentFrequency(corpus.length, 0)
+        const termIdf = idf.get(term)
+        if (termIdf === undefined) continue
         queryVector.set(term, weightedTermFrequency(count) * termIdf)
       }
 

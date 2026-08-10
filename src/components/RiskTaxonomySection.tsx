@@ -1,13 +1,23 @@
 import { RISK_TAXONOMY } from '../domain'
 import { SectionHeading } from './SectionHeading'
 
+const KOREAN_LABELS: Readonly<Record<string, string>> = {
+  'Dilution Risk': '희석 위험',
+  'Refinancing Risk': '차환 위험',
+  'Liquidity Risk': '유동성 위험',
+  'Governance Risk': '지배구조 위험',
+  'Execution Risk': '실행 위험',
+  'Market Risk': '시장 위험',
+  'Low Risk / Informational': '낮은 위험 / 정보성',
+}
+
 export function RiskTaxonomySection() {
   return (
     <section className="taxonomy-section page-shell section-pad" id="taxonomy">
       <SectionHeading
-        eyebrow="04 / Risk taxonomy"
-        title="Seven labels, each tied to an analyst question."
-        description="The taxonomy is intentionally compact. It forces a primary-label decision while making overlapping risks visible through competing rule scores."
+        eyebrow="05 / Risk taxonomy"
+        title="Seven bilingual labels, each tied to an analyst question."
+        description="The compact taxonomy maps Korean CB and IPO language into one primary category while preserving overlapping rule scores for review."
       />
 
       <div className="taxonomy-grid">
@@ -17,7 +27,10 @@ export function RiskTaxonomySection() {
               <span>{String(index + 1).padStart(2, '0')}</span>
               <span className="taxonomy-card__marker" aria-hidden="true" />
             </header>
-            <h3>{entry.label}</h3>
+            <h3>
+              {entry.label}
+              <span>{KOREAN_LABELS[entry.label]}</span>
+            </h3>
             <p>{entry.description}</p>
             <details>
               <summary>Analyst question</summary>

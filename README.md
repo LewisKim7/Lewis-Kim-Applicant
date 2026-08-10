@@ -1,78 +1,74 @@
-# AI Disclosure Risk Screener
+# Korea IPO & CB Risk Screener
 
-> An NLP prototype that classifies disclosure-style passages into financial and operating risk categories, retrieves relevant evidence, and assembles an evidence-linked risk memo.
+> A transparent Korean-language NLP prototype for convertible-bond and IPO disclosure analysis.
 
 [Live demo](https://ai-disclosure-risk-screener.vercel.app/) · [Repository](https://github.com/LewisKim7/AI-Disclosure-Risk-Screener)
 
-AI Disclosure Risk Screener is a standalone educational project built while preparing for graduate study in artificial intelligence. It connects a finance and deep-tech investment background with a small, inspectable NLP pipeline: text preparation, rule-based classification, TF-IDF cosine lexical retrieval, closed-set evaluation, and deterministic memo generation.
+Korea IPO & CB Risk Screener is an independent educational project created while preparing for graduate study in artificial intelligence. It connects Korean capital-markets workflows with structured screening, Korean passage classification, lexical evidence retrieval, a trained text baseline, explicit evaluation, and deterministic memo generation.
 
-The project deliberately favors transparency over scale. It runs without an external model, remote inference service, or API key. Every entity and passage in the bundled corpus is fictional and synthetic.
+The interface is English so an international reviewer can follow the methodology. The disclosure-style source passages are Korean because Korean-language processing is the substantive problem being explored.
 
-> **AI-assisted development disclosure:** The applicant selected the domain, objective, and project requirements. Codex assisted with synthetic-corpus drafting, implementation, documentation, and automated verification. The checked-in reference labels are part of that same AI-assisted build process; they are not independent expert annotations. Anyone using this project in an application should first review the corpus, logic, and errors closely enough to explain and defend them.
+> **AI-assisted development disclosure:** The applicant selected the domain, project objective, feature requirements, and application purpose. Codex assisted with synthetic data drafting, implementation, documentation, and automated verification. All reference labels and rationales were drafted within the same AI-assisted project and have not been independently annotated or adjudicated. The reported results are development diagnostics, not independently validated performance.
 
 ## At a glance
 
 | Item | Implementation |
 | --- | --- |
 | Application | React, TypeScript, and Vite |
-| Corpus | 5 fictional synthetic documents |
-| Evaluation set | Exactly 30 passages with fixed reference labels |
-| Taxonomy | 7 single-label risk categories |
-| Classification | Transparent weighted phrase rules |
-| Evidence retrieval | TF-IDF vectors with cosine similarity |
-| Memo | Deterministic template linked to retrieved passages |
-| External services | None required |
+| Source language | Korean passages; English interface |
+| Corpus | 5 fictional KOSPI/KOSDAQ documents |
+| Evaluation set | 30 synthetic passages across 7 labels |
+| Transparent baseline | Korean/English weighted phrase rules |
+| Trained baseline | Unigram TF-IDF + multinomial logistic regression |
+| ML protocol | 5-fold leave-one-document-out; 24 train / 6 test per fold |
+| Retrieval | TF-IDF cosine lexical ranking |
+| Memo | Deterministic template with passage-ID citations |
+| External services | No API key, remote model, or backend required |
 
-## Problem
+## Research question
 
-Public disclosures often contain a mix of routine facts, financing terms, operating dependencies, and forward-looking risk language. An analyst must identify the passages that matter, distinguish among different kinds of risk, and retain a clear link from each conclusion back to the underlying text.
+Korean convertible-bond issuance decisions and IPO prospectuses contain structured terms, but their implications are distributed across tables and dense Korean text. A first-pass analyst must connect terms such as conversion-price resets, put and call options, use of proceeds, lockups, related-party relationships, cash runway, and execution milestones to the passages that support a risk assessment.
 
-This prototype turns that workflow into a bounded NLP problem:
+This project asks:
 
-1. represent documents as traceable passages with metadata;
-2. assign one primary label from a declared risk taxonomy;
-3. retrieve passages that are lexically relevant to an analyst's question;
-4. expose the phrases and scores behind each classification;
-5. compare baseline predictions with fixed reference labels; and
-6. assemble a repeatable memo that cites its evidence.
+> Can a transparent Korean-language NLP workflow connect structured IPO and CB screening with passage-level risk triage while keeping every conclusion linked to inspectable evidence?
 
-The goal is not automated investment judgment. The goal is to show how a domain problem can be translated into explicit data, classification, retrieval, evaluation, and responsible-use decisions.
+The objective is not automated investment judgment. It is to make the problem formulation, data, rules, learned baseline, evidence trail, errors, and limitations visible.
 
-## Motivation
+## Domain workflow lineage
 
-Financial analysis provides the project context, but the learning objective is broader. The application explores several foundational AI/NLP questions:
+The project was informed by two workflows already present in the applicant's portfolio:
 
-- How should unstructured text be split into units that remain citable?
-- How can a risk taxonomy be defined before selecting a model?
-- What does an interpretable baseline reveal about wording sensitivity?
-- How should retrieval and classification be kept conceptually separate?
-- What can a very small evaluation set establish—and what can it not establish?
-- How can generated output preserve an evidence trail?
+- [CB Zero Finder](https://cb-zero-finder.vercel.app/) — the new TypeScript module reproduces the same kind of rate-and-size screening behavior on four fictional CB rows.
+- [IPO Market Report](https://ipo-market-report.vercel.app/) — analogous IPO aggregation calculations were inspired by the report workflow and reimplemented over six fictional observations.
 
-## What the application does
+The relationship is conceptual only. Neither existing repository nor any production data was imported. This project also does **not** copy API responses, API keys, private workbooks, or generated reports from either tool.
 
-The interface supports a complete, local workflow:
+### Fictional structured demonstrations
 
-- browse five disclosure-style sample documents;
-- inspect document, company, date, and passage metadata;
-- view a predicted label, matched phrases, raw rule scores, and an explanation;
-- search the corpus with TF-IDF cosine lexical retrieval;
-- compare reference and predicted labels;
-- inspect summary metrics, label counts, a confusion matrix, and error cases; and
-- produce a deterministic memo whose evidence items point back to passage IDs.
+| Workflow | Bundled sample | Deterministic result |
+| --- | --- | --- |
+| CB screen | 4 fictional rows; surface rate `0.0%`; minimum issue size 200억원 | 2 matches totaling 520억원 |
+| IPO snapshot | 6 fictional observations as of 2026-07-31 | Total offer market capitalization 42,000억원 |
+| IPO returns | Same 2026-07-31 snapshot | Median first-day return 12.5%; median current return 1.47% |
+| IPO downside count | Same 6 observations | 3 of 6, or 50%, below offer price as of 2026-07-31 |
 
-## Dataset
+These values validate the local screening and aggregation functions. They are not market statistics.
 
-The bundled corpus contains five document types, one fictional company per document, and six passages per document.
+## Synthetic Korean corpus
 
-| Document type | Passages | Data status |
-| --- | ---: | --- |
-| Convertible Bond Disclosure | 6 | Fictional and synthetic |
-| IPO Prospectus Excerpt | 6 | Fictional and synthetic |
-| Funding Announcement | 6 | Fictional and synthetic |
-| Use of Proceeds Disclosure | 6 | Fictional and synthetic |
-| Risk Factor Excerpt | 6 | Fictional and synthetic |
-| **Total** | **30** | **Fixed reference labels** |
+The corpus contains two convertible-bond documents and three IPO documents. Every issuer, identifier, date, transaction, amount, and passage is fictional.
+
+| Document ID | Fictional issuer | Market | Document type | Passages |
+| --- | --- | --- | --- | ---: |
+| `DOC-KR-CB-ISSUE-001` | 한빛퀀텀모션 | KOSDAQ | DART-style CB Issuance Decision | 6 |
+| `DOC-KR-CB-RESET-001` | 세림뉴로칩 | KOSDAQ | DART-style CB Terms Amendment | 6 |
+| `DOC-KR-IPO-PROSPECTUS-001` | 가온바이오컴퓨트 | KOSDAQ | KOSDAQ IPO Prospectus Excerpt | 6 |
+| `DOC-KR-IPO-PROCEEDS-001` | 다온그린셀 | KOSPI | KOSPI IPO Use-of-Proceeds Excerpt | 6 |
+| `DOC-KR-IPO-RISK-001` | 미르오비탈링크 | KOSDAQ | KOSDAQ IPO Risk-Factor Excerpt | 6 |
+| **Total** | **5 fictional issuers** |  |  | **30** |
+
+The passages include Korean capital-markets signals such as `전환가액 조정`, `리픽싱`, `조기상환청구권`, `풋옵션`, `콜옵션`, `오버행`, `구주매출`, `보호예수`, `공모자금`, `수요예측`, `특수관계인`, and `계속기업`. They are newly written synthetic passages, not excerpts from copyrighted filings.
 
 Each passage stores:
 
@@ -87,100 +83,90 @@ referenceLabel
 annotationRationale
 ```
 
-The corpus was written for this project. It contains no copied prospectus, filing, or copyrighted full document. Synthetic data makes the demonstration safe to distribute, but it also sharply limits what the evaluation can establish.
-
 ## Risk taxonomy
 
-The task is single-label classification. Each passage stores one primary reference label and receives one baseline prediction.
+The task uses one primary label per passage.
 
-| Label | Reference count | Working definition |
+| Label | Count | Working definition |
 | --- | ---: | --- |
-| Dilution Risk | 5 | Potential ownership dilution from issuance, conversion, warrants, or reset terms |
-| Refinancing Risk | 4 | Pressure to repay, roll over, or replace financing obligations |
-| Liquidity Risk | 4 | Constraints on cash, working capital, covenants, or continuing operations |
-| Governance Risk | 4 | Board, control, audit, related-party, voting-right, or conflict concerns |
-| Execution Risk | 5 | Uncertainty around delivery, approval, construction, commercialization, or scale-up |
-| Market Risk | 4 | Exposure to demand, competition, pricing, rates, currencies, or commodities |
-| Low Risk / Informational | 4 | Routine or contextual text with no configured primary risk signal |
+| Dilution Risk | 5 | Ownership dilution from issuance, conversion, options, or reset terms |
+| Refinancing Risk | 4 | Pressure to repay, extend, replace, or roll over financing obligations |
+| Liquidity Risk | 4 | Constraints on cash, working capital, covenants, or continued operations |
+| Governance Risk | 4 | Board, control, related-party, voting-right, or conflict concerns |
+| Execution Risk | 5 | Uncertainty around approvals, delivery, construction, commercialization, or scale-up |
+| Market Risk | 4 | Exposure to demand, competition, pricing, rates, currencies, or market conditions |
+| Low Risk / Informational | 4 | Routine context with no configured primary risk signal |
 
-A single primary label keeps the baseline and confusion matrix easy to inspect. It also compresses passages that contain overlapping risks; this is a known design limitation, not an assertion that disclosures contain only one risk at a time.
+Single-label classification keeps the confusion matrices inspectable, but it compresses passages with overlapping risks. That is a limitation rather than a claim that one passage can contain only one risk.
 
-## Methodology
+## Pipeline
 
-### 1. Text preparation
+### 1. Structured screening
 
-The preprocessing layer normalizes Unicode and punctuation, cleans whitespace, tokenizes text, and applies a small declared lexical-normalization map. Passage records preserve source metadata throughout the pipeline.
+The CB functions normalize issue amounts and rates, filter by a declared rate condition, company or stock-code query, and minimum issue size, then aggregate matching issue value. The IPO functions calculate offer-band position, first-day and current returns, total offer market capitalization, medians, and below-offer frequency.
 
-The lexical map is intentionally narrow. It handles selected variants such as singular/plural and financing-related forms without presenting itself as a general-purpose stemmer.
+### 2. Korean text preparation
 
-### 2. Transparent rule-based baseline
+The preprocessing layer applies Unicode normalization, typography and whitespace cleanup, Unicode tokenization, a small Korean stop-word list, and limited particle stripping. It is intentionally lightweight and is not a Korean morphological analyzer.
 
-The classifier uses label-specific phrase dictionaries with fixed integer weights. For each passage it:
+### 3. Transparent rule baseline
 
-1. normalizes the text and configured phrases;
-2. counts exact token-sequence matches, with repeated contributions capped;
-3. adds the declared weights by label;
-4. selects the highest-scoring risk label in a deterministic order; and
-5. falls back to `Low Risk / Informational` when no configured risk phrase is present.
+The rule engine uses declared Korean and English phrases with fixed integer weights. It exposes every matched phrase, contribution, raw label score, selected label, and explanation. Its 0–1 signal score is a normalized rule-strength heuristic, not a probability, calibrated value, or measure of financial severity.
 
-The output includes the matched phrases, their contributions, raw label scores, the selected label, and a plain-language explanation. A displayed **signal score** summarizes deterministic rule strength. It is not a probability, a statistically calibrated value, or an estimate of severity.
+### 4. Trained baseline
 
-This is a baseline, not a trained machine-learning classifier. Its value is that every decision can be audited before more complex alternatives are considered.
-
-### 3. TF-IDF cosine lexical retrieval
-
-The retrieval layer builds TF-IDF representations for the query and passage corpus, then ranks passages with cosine similarity. The interface returns the highest-scoring passages with their source metadata.
-
-This is lexical retrieval. It can work well when queries and passages share normalized terms, but it has limited paraphrase and contextual understanding. Its score should be interpreted only as an overlap-based ranking value within the current query and corpus.
-
-### 4. Deterministic evidence-linked memo
-
-The memo generator uses fixed templates and analyzed passage data to assemble:
-
-- Executive Summary
-- Key Risk Signals
-- Evidence
-- Investment Implications
-- Open Questions
-- Limitations
-
-It does not call a language model or invent supporting text. Evidence items retain document and passage identifiers so the reader can return to the exact synthetic source passage.
-
-### 5. Closed-set evaluation
-
-The rule baseline is compared with the fixed reference label on all 30 passages. The application reports accuracy, label counts, a seven-by-seven confusion matrix, per-label recall, macro recall, correct examples, and error examples.
-
-| Metric | Current result |
-| --- | ---: |
-| Accuracy | 90.0% |
-| Correct classifications | 27 of 30 |
-| Macro recall | 89.3% |
-| Errors | 3 |
-
-These results describe this fixed synthetic corpus only. The passages are not a held-out sample, the rules are not evaluated on an external dataset, and the AI-assisted reference annotations have not been independently reviewed. See [Evaluation Notes](docs/evaluation-notes.md) for the protocol and interpretation boundary.
-
-## Technical design
+The trained experiment uses unigram TF-IDF, L2-normalized sparse vectors, and full-batch multinomial logistic regression. Evaluation holds out one entire document at a time:
 
 ```text
-Synthetic JSON documents
-        │
-        ▼
-Cleaning, tokenization, and light lexical normalization
-        │
-        ├──► Weighted phrase rules ──► label + matched evidence ──► deterministic memo
-        │
-        ├──► TF-IDF + cosine similarity ──► ranked passages
-        │
-        └──► Predictions + reference labels ──► metrics + confusion matrix + error cases
+5 folds
+each fold: 4 documents / 24 passages for training
+           1 unseen document / 6 passages for testing
+TF-IDF vocabulary and IDF: fitted on training passages only
 ```
 
-All analysis runs locally in the application. There is no backend dependency, external inference call, credential, or required environment variable.
+The softmax model score is uncalibrated and must not be treated as real-world risk probability.
+
+### 5. Lexical retrieval and memo
+
+TF-IDF cosine retrieval ranks passages by lexical overlap with a Korean or English query. It does not claim semantic understanding. The deterministic memo generator organizes rule outputs into an executive summary, risk signals, evidence, implications, questions, and limitations while retaining passage IDs.
+
+## Evaluation
+
+| Baseline | Protocol | Correct | Accuracy | Macro recall | Errors |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Weighted rules | Closed corpus; no holdout | 25 / 30 | 83.33% | 82.14% | 5 |
+| TF-IDF logistic regression | Leave one document out | 26 / 30 | 86.67% | 85.71% | 4 |
+
+These percentages are **not a head-to-head model ranking**. The rules were authored and checked on the same corpus used during project development. The logistic-regression predictions are out of fold, but all five documents share the same small, synthetic, AI-assisted data-generation process. Repeated wording and development choices can therefore make both results optimistic.
+
+The main value of the evaluation is diagnostic:
+
+- rules expose exact vocabulary gaps, negation failures, and label overlap;
+- document holdout prevents one document's passages from entering their own training fold;
+- the ML errors expose sparse Korean vocabulary and unstable learning from only 24 training examples per fold; and
+- both methods show that Liquidity Risk remains the weakest category; the document-held-out ML recall for that label is 25% (1 of 4).
+
+See [Evaluation Notes](docs/evaluation-notes.md) for fold results, per-label recall, exact errors, and metric definitions.
+
+## Interface
+
+The English interface includes:
+
+- structured CB and IPO workflow summaries;
+- a five-document Korean source library;
+- document-level key facts and transaction metadata;
+- Korean TF-IDF evidence search;
+- a passage-level rule trace and annotation rationale;
+- an evidence-linked deterministic memo;
+- a trained-baseline fold table and confusion matrix;
+- the closed-corpus rule confusion matrix and five visible rule errors; and
+- limitations, AI-assistance disclosure, and non-affiliation language.
 
 ## Run locally
 
 ### Requirements
 
-- Node.js 22 or later
+- Node.js 22
 - npm
 
 ### Install and verify
@@ -190,7 +176,7 @@ npm ci
 npm run verify
 ```
 
-`npm run verify` runs linting, tests, TypeScript checks, and a production build.
+`npm run verify` runs linting, tests, TypeScript checks, and a production build. Tests freeze the five-document corpus, both evaluation results, the CB screen, and the IPO summary.
 
 ### Start the development server
 
@@ -204,50 +190,52 @@ Open the local URL printed by Vite.
 
 ```text
 src/
-  components/   Interface sections and analysis views
-  data/         Five synthetic disclosure-style documents
-  domain/       Passage, document, and risk-taxonomy types
-  lib/          Preprocessing, classification, retrieval, evaluation, and memo logic
+  components/   English interface and evaluation views
+  data/         Korean corpus plus fictional CB and IPO rows
+  domain/       Document, passage, market, workflow, and taxonomy types
+  lib/          Screening, preprocessing, rules, retrieval, ML, evaluation, and memo logic
 docs/
   application-language.md
+  design-note.md
   evaluation-notes.md
   model-card.md
+  project-defense-guide.md
   ut-msai-project-note.md
 ```
 
 ## Limitations
 
-- The corpus contains only 30 synthetic English-language passages.
-- The reference labels were drafted within the same AI-assisted build process.
-- The fixed phrase rules are sensitive to wording and can miss implicit risks.
-- Exact-term matches can create both false positives and false negatives.
-- A single primary label cannot represent every overlapping signal.
-- TF-IDF has limited paraphrase and contextual understanding.
-- The evaluation is a demonstration on a fixed sample, not evidence of external performance.
-- The signal score is a rule-strength heuristic, not a statistically calibrated value.
-- The memo summarizes baseline outputs; it does not perform independent reasoning.
+- The corpus has only 30 synthetic Korean passages.
+- The reference labels and rationales are AI-assisted and not independently reviewed.
+- The rule result is a closed-corpus implementation check, not a held-out estimate.
+- Five document folds are still only five synthetic documents from one development process.
+- Lightweight particle stripping is not morphological analysis.
+- Exact phrase rules miss implicit, negated, or unfamiliar risk expressions.
+- One primary label suppresses secondary risks.
+- TF-IDF has limited Korean context and paraphrase understanding.
+- Logistic-regression hyperparameters were explored during development.
+- Retrieval has no independent query-relevance evaluation.
+- Structured CB and IPO rows are fictional demonstrations, not current market data.
 
-## Responsible use
+## Responsible use and independence
 
-This project is educational. It is not investment advice, legal analysis, due diligence, or a substitute for human analyst judgment. It should not be used to make financing, trading, compliance, or admissions decisions. A user should expect missed risks, spurious matches, and incomplete context.
+This project is educational. It is not investment advice, legal or regulatory analysis, issuer due diligence, or a substitute for human judgment. It does not establish performance on DART filings or other unseen text.
 
-## Future improvements
-
-1. Build a legally permitted corpus of public-document excerpts with a documented sampling policy.
-2. Add independent annotators and measure inter-annotator agreement.
-3. Support multi-label annotations for overlapping risk signals.
-4. Create separate development and held-out evaluation sets.
-5. Compare the rules with TF-IDF logistic regression and carefully selected language-model baselines.
-6. Evaluate retrieval separately with query-relevance judgments and ranking metrics.
-7. Add robustness checks for paraphrases, negation, and absent context.
+The project is not affiliated with or endorsed by UT Austin, DART, KRX, Apple, getdesign.md, or any admissions office. The visual direction was inspired by the independent [Design System Analysis: Apple](https://getdesign.md/apple/design-md), but no Apple assets, logos, trademarks, proprietary fonts, source code, or product identity are used. See [Design Note](docs/design-note.md).
 
 ## Documentation
 
-- [Graduate-study project note](docs/ut-msai-project-note.md)
-- [Model card](docs/model-card.md)
 - [Evaluation notes](docs/evaluation-notes.md)
+- [System and model card](docs/model-card.md)
+- [Graduate-study preparation note](docs/ut-msai-project-note.md)
+- [Project defense guide](docs/project-defense-guide.md)
+- [Design note](docs/design-note.md)
 - [CV and SOP language](docs/application-language.md)
 
-## Project status
+## Recommended next work
 
-This is an independent, standalone project and repository. It was informed by prior experience reviewing financing and IPO materials, but its corpus, taxonomy, preprocessing, classifier, retrieval, evaluation, and interface are organized here as a new implementation.
+1. Have the applicant personally review every passage, label, rationale, prediction, and error.
+2. Create a permitted Korean disclosure set that is independent of rule and model development.
+3. Add independent annotators, a labeling guide, adjudication, and agreement analysis.
+4. Compare the lightweight tokenizer with a Korean morphological baseline.
+5. Evaluate multi-label classification and Korean retrieval ranking separately.

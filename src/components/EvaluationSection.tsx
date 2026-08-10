@@ -1,11 +1,19 @@
 import { ALL_PASSAGES } from '../data/corpus'
 import { RISK_TAXONOMY_BY_LABEL, type RiskLabel } from '../domain'
-import { classifyPassage, evaluateClassifier } from '../lib'
+import {
+  classifyPassage,
+  evaluateClassifier,
+  evaluateDocumentHeldOutLogisticRegression,
+} from '../lib'
 import { SectionHeading } from './SectionHeading'
 
-const EVALUATION = evaluateClassifier(ALL_PASSAGES, classifyPassage, {
+const RULE_EVALUATION = evaluateClassifier(ALL_PASSAGES, classifyPassage, {
   maxExamplesPerGroup: 8,
 })
+const ML_EVALUATION = evaluateDocumentHeldOutLogisticRegression(ALL_PASSAGES)
+const PROTOCOL_GAP = Math.abs(
+  ML_EVALUATION.accuracy - RULE_EVALUATION.accuracy,
+)
 
 const SHORT_LABELS: Readonly<Record<RiskLabel, string>> = {
   'Dilution Risk': 'DIL',
@@ -21,177 +29,352 @@ function percent(value: number): string {
   return `${(value * 100).toFixed(1)}%`
 }
 
+function percentagePoints(value: number): string {
+  return `${(value * 100).toFixed(1)} percentage points`
+}
+
 function riskClass(label: RiskLabel): string {
   return `risk-${RISK_TAXONOMY_BY_LABEL[label].id}`
 }
 
-export function EvaluationSection() {
-  const errorCount = EVALUATION.total - EVALUATION.correct
+interface ConfusionMatrixProps {
+  readonly labels: readonly RiskLabel[]
+  readonly matrix: readonly (readonly number[])[]
+  readonly caption: string
+}
 
+function ConfusionMatrix({ labels, matrix, caption }: ConfusionMatrixProps) {
+  return (
+    <div
+      className="confusion-scroll"
+      role="region"
+      tabIndex={0}
+      aria-label={`Scrollable ${caption.toLocaleLowerCase('en-US')}`}
+    >
+      <table className="confusion-matrix">
+        <caption>{caption}</caption>
+        <thead>
+          <tr>
+            <th scope="col">Actual</th>
+            {labels.map((label) => (
+              <th scope="col" title={label} key={label}>
+                {SHORT_LABELS[label]}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {labels.map((actualLabel, rowIndex) => (
+            <tr key={actualLabel}>
+              <th scope="row" title={actualLabel}>
+                {SHORT_LABELS[actualLabel]}
+              </th>
+              {labels.map((predictedLabel, columnIndex) => {
+                const value = matrix[rowIndex]?.[columnIndex] ?? 0
+                return (
+                  <td
+                    className={
+                      rowIndex === columnIndex && value > 0
+                        ? 'is-correct'
+                        : value > 0
+                          ? 'is-error'
+                          : undefined
+                    }
+                    key={predictedLabel}
+                  >
+                    {value}
+                  </td>
+                )
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+export function EvaluationSection() {
   return (
     <section className="evaluation-section page-shell section-pad" id="evaluation">
       <SectionHeading
-        eyebrow="05 / Evaluation"
-        title="The errors are part of the result."
-        description="Predictions are recomputed from the visible rules and compared with 30 fixed reference labels. This is an illustrative closed-set evaluation, not evidence of generalization."
+        eyebrow="06 / Evaluation"
+        title="The split matters more than the score."
+        description="A trained Korean TF-IDF logistic-regression baseline is tested with one entire synthetic document held out at a time. The rules remain a closed-corpus sanity check. Because the protocols differ, their percentages are not a head-to-head model ranking."
       />
 
       <div className="evaluation-banner">
-        <span>Illustrative baseline only</span>
+        <span>Document-held-out development diagnostic</span>
         <p>
-          Synthetic data · AI-assisted reference labels · no train/test claim · no calibrated confidence
+          30 synthetic passages · AI-assisted labels · 5 document folds · no external-performance claim
         </p>
       </div>
 
       <dl className="evaluation-metrics">
         <div>
-          <dt>{percent(EVALUATION.accuracy)}</dt>
-          <dd>sample accuracy</dd>
+          <dt>{percent(ML_EVALUATION.accuracy)}</dt>
+          <dd>out-of-fold accuracy</dd>
         </div>
         <div>
           <dt>
-            {EVALUATION.correct}/{EVALUATION.total}
+            {ML_EVALUATION.correct}/{ML_EVALUATION.total}
           </dt>
-          <dd>correct passages</dd>
+          <dd>held-out predictions</dd>
         </div>
         <div>
-          <dt>{percent(EVALUATION.macroRecall)}</dt>
+          <dt>{percent(ML_EVALUATION.macroRecall)}</dt>
           <dd>macro recall · 7 labels</dd>
         </div>
         <div>
-          <dt>{String(errorCount).padStart(2, '0')}</dt>
-          <dd>errors inspected</dd>
+          <dt>05</dt>
+          <dd>document-level folds</dd>
         </div>
       </dl>
 
-      <div className="evaluation-grid">
-        <div className="label-performance">
+      <div
+        className="baseline-comparison"
+        role="group"
+        aria-label="Baseline protocol comparison"
+      >
+        <article className="baseline-card baseline-card--primary">
           <header>
-            <div>
-              <span className="demo-label">Per-label behavior</span>
-              <h3>Recall and sample count</h3>
-            </div>
-            <span>Actual labels</span>
+            <span>Trained baseline · primary diagnostic</span>
+            <strong>{percent(ML_EVALUATION.accuracy)}</strong>
           </header>
-          <div className="label-performance__rows">
-            {EVALUATION.labels.map((label) => {
-              const metric = EVALUATION.perLabel[label]
-              return (
-                <div key={label}>
-                  <span className={`risk-pill ${riskClass(label)}`}>{label}</span>
-                  <meter min="0" max="1" value={metric.recall}>
-                    {percent(metric.recall)}
-                  </meter>
-                  <strong>{percent(metric.recall)}</strong>
-                  <small>n={metric.actualCount}</small>
-                </div>
-              )
-            })}
-          </div>
-        </div>
+          <h3>Korean TF-IDF + multinomial logistic regression</h3>
+          <p>
+            Each fold trains on 24 passages from four documents and predicts six passages
+            from the remaining document. Vocabulary and IDF are fitted inside the training
+            fold only.
+          </p>
+          <dl>
+            <div>
+              <dt>Split</dt>
+              <dd>Leave one document out</dd>
+            </div>
+            <div>
+              <dt>Parameters</dt>
+              <dd>Learned in each fold</dd>
+            </div>
+          </dl>
+        </article>
 
-        <div className="confusion-panel">
+        <article className="baseline-card">
+          <header>
+            <span>Rule baseline · sanity check</span>
+            <strong>{percent(RULE_EVALUATION.accuracy)}</strong>
+          </header>
+          <h3>Transparent Korean / English weighted phrase rules</h3>
+          <p>
+            The authored rules are rerun on the same 30-passage corpus used during project
+            development. This result verifies implementation behavior; it is not a held-out
+            estimate.
+          </p>
+          <dl>
+            <div>
+              <dt>Split</dt>
+              <dd>None · closed corpus</dd>
+            </div>
+            <div>
+              <dt>Parameters</dt>
+              <dd>Human-readable fixed rules</dd>
+            </div>
+          </dl>
+        </article>
+      </div>
+
+      <p className="comparison-note">
+        A {percentagePoints(PROTOCOL_GAP)} gap is not evidence that either baseline is
+        superior. Repeated wording across the same AI-assisted synthetic build corpus can make
+        even a document-held-out score optimistic. Both results remain development diagnostics
+        until new Korean passages receive independent annotation and truly external evaluation.
+      </p>
+
+      <div className="evaluation-grid evaluation-grid--heldout">
+        <div className="fold-panel">
           <header>
             <div>
-              <span className="demo-label">Confusion matrix</span>
-              <h3>Reference label → prediction</h3>
+              <span className="demo-label">Cross-validation trace</span>
+              <h3>One unseen document per fold</h3>
             </div>
-            <span>Rows actual · columns predicted</span>
+            <span>24 train · 6 test</span>
           </header>
           <div
-            className="confusion-scroll"
+            className="fold-table-wrap"
             role="region"
+            aria-label="Scrollable document-level cross-validation results"
             tabIndex={0}
-            aria-label="Scrollable confusion matrix"
           >
-            <table className="confusion-matrix">
-              <caption>Counts by actual and predicted risk label</caption>
+            <table className="fold-table">
+              <caption>Leave-one-document-out fold results</caption>
               <thead>
                 <tr>
-                  <th scope="col">Actual</th>
-                  {EVALUATION.labels.map((label) => (
-                    <th scope="col" title={label} key={label}>
-                      {SHORT_LABELS[label]}
-                    </th>
-                  ))}
+                  <th scope="col">Held-out document</th>
+                  <th scope="col">Vocabulary</th>
+                  <th scope="col">Correct</th>
+                  <th scope="col">Accuracy</th>
                 </tr>
               </thead>
               <tbody>
-                {EVALUATION.labels.map((actualLabel, rowIndex) => (
-                  <tr key={actualLabel}>
-                    <th scope="row" title={actualLabel}>
-                      {SHORT_LABELS[actualLabel]}
-                    </th>
-                    {EVALUATION.labels.map((predictedLabel, columnIndex) => {
-                      const value = EVALUATION.confusionMatrix[rowIndex]?.[columnIndex] ?? 0
-                      return (
-                        <td
-                          className={
-                            rowIndex === columnIndex && value > 0
-                              ? 'is-correct'
-                              : value > 0
-                                ? 'is-error'
-                                : undefined
-                          }
-                          key={predictedLabel}
-                        >
-                          {value}
-                        </td>
-                      )
-                    })}
+                {ML_EVALUATION.folds.map((fold) => (
+                  <tr key={fold.holdoutDocumentId}>
+                    <th scope="row">{fold.holdoutDocumentId}</th>
+                    <td>{fold.vocabularySize}</td>
+                    <td>
+                      {fold.correct}/{fold.testCount}
+                    </td>
+                    <td>{percent(fold.accuracy)}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         </div>
-      </div>
 
-      <div className="error-analysis">
-        <header>
-          <span className="demo-label">Error analysis</span>
-          <h3>{EVALUATION.errorAnalysis}</h3>
-        </header>
-        <div className="error-examples">
-          {EVALUATION.errorExamples.length ? (
-            EVALUATION.errorExamples.map((example) => (
-              <article key={example.passageId}>
-                <div>
-                  <span>{example.passageId}</span>
-                  <span>{percent(example.signalScore)} heuristic</span>
-                </div>
-                <p>{example.text}</p>
-                <footer>
-                  <span>
-                    Reference: <strong>{example.actualLabel}</strong>
-                  </span>
-                  <span aria-hidden="true">→</span>
-                  <span>
-                    Baseline: <strong>{example.predictedLabel}</strong>
-                  </span>
-                </footer>
-              </article>
-            ))
-          ) : (
-            <article>
-              <p>
-                No errors were observed in this tiny sample. That result would still not
-                establish generalization and should trigger a harder benchmark.
-              </p>
-            </article>
-          )}
+        <div className="confusion-panel">
+          <header>
+            <div>
+              <span className="demo-label">Out-of-fold confusion matrix</span>
+              <h3>Reference label → ML prediction</h3>
+            </div>
+            <span>Rows actual · columns predicted</span>
+          </header>
+          <ConfusionMatrix
+            labels={ML_EVALUATION.labels}
+            matrix={ML_EVALUATION.confusionMatrix}
+            caption="Out-of-fold counts by actual and predicted risk label"
+          />
         </div>
       </div>
 
-      <details className="metric-notes">
-        <summary>Metric definitions and caveats</summary>
-        <ul>
-          {EVALUATION.metricNotes.map((note) => (
-            <li key={note}>{note}</li>
+      <div className="error-analysis error-analysis--ml">
+        <header>
+          <span className="demo-label">Held-out error inspection</span>
+          <h3>
+            {ML_EVALUATION.errorExamples.length} of {ML_EVALUATION.total} unseen-document
+            passages were misclassified.
+          </h3>
+          <p>
+            The examples below are not patched away. They expose sparse vocabulary, label
+            overlap, and the weakness of learning seven classes from only 24 passages per fold.
+            Liquidity Risk recall is only{' '}
+            {percent(ML_EVALUATION.perLabel['Liquidity Risk'].recall)} (
+            {ML_EVALUATION.perLabel['Liquidity Risk'].correctCount}/
+            {ML_EVALUATION.perLabel['Liquidity Risk'].actualCount}), a weakness hidden by the
+            headline accuracy.
+          </p>
+        </header>
+        <div className="error-examples">
+          {ML_EVALUATION.errorExamples.slice(0, 4).map((example) => (
+            <article key={example.passageId}>
+              <div>
+                <span>{example.passageId}</span>
+                <span>{percent(example.modelScore)} uncalibrated score</span>
+              </div>
+              <p>{example.text}</p>
+              {example.leadingFeatures.length ? (
+                <small>
+                  Leading terms: {example.leadingFeatures.map((item) => item.term).join(', ')}
+                </small>
+              ) : null}
+              <footer>
+                <span>
+                  Reference: <strong>{example.actualLabel}</strong>
+                </span>
+                <span aria-hidden="true">→</span>
+                <span>
+                  ML baseline: <strong>{example.predictedLabel}</strong>
+                </span>
+              </footer>
+            </article>
           ))}
+        </div>
+      </div>
+
+      <details className="closed-set-details">
+        <summary>
+          Inspect the {percent(RULE_EVALUATION.accuracy)} closed-corpus rule sanity check
+          <span>
+            {RULE_EVALUATION.correct}/{RULE_EVALUATION.total} correct ·{' '}
+            {percent(RULE_EVALUATION.macroRecall)} macro recall
+          </span>
+        </summary>
+        <div className="evaluation-grid">
+          <div className="label-performance">
+            <header>
+              <div>
+                <span className="demo-label">Rule behavior</span>
+                <h3>Recall and sample count</h3>
+              </div>
+              <span>Actual labels</span>
+            </header>
+            <div className="label-performance__rows">
+              {RULE_EVALUATION.labels.map((label) => {
+                const metric = RULE_EVALUATION.perLabel[label]
+                return (
+                  <div key={label}>
+                    <span className={`risk-pill ${riskClass(label)}`}>{label}</span>
+                    <meter min="0" max="1" value={metric.recall}>
+                      {percent(metric.recall)}
+                    </meter>
+                    <strong>{percent(metric.recall)}</strong>
+                    <small>n={metric.actualCount}</small>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+
+          <div className="confusion-panel">
+            <header>
+              <div>
+                <span className="demo-label">Closed-corpus confusion matrix</span>
+                <h3>Reference label → rule prediction</h3>
+              </div>
+              <span>Rows actual · columns predicted</span>
+            </header>
+            <ConfusionMatrix
+              labels={RULE_EVALUATION.labels}
+              matrix={RULE_EVALUATION.confusionMatrix}
+              caption="Closed-corpus counts by actual and predicted risk label"
+            />
+          </div>
+        </div>
+
+        <div className="rule-error-strip">
+          {RULE_EVALUATION.errorExamples.map((example) => (
+            <article key={example.passageId}>
+              <span>{example.passageId}</span>
+              <p>{example.text}</p>
+              <small>
+                {example.actualLabel} → {example.predictedLabel}
+              </small>
+            </article>
+          ))}
+        </div>
+      </details>
+
+      <details className="metric-notes">
+        <summary>Metric definitions, locked configuration, and caveats</summary>
+        <ul>
+          <li>{ML_EVALUATION.protocolNote}</li>
           <li>
-            Rules and sample language were developed in the same educational project, so
-            benchmark leakage is possible.
+            The trained baseline uses unigram TF-IDF, L2-normalized vectors, full-batch
+            multinomial logistic regression, {ML_EVALUATION.options.epochs} epochs, learning
+            rate {ML_EVALUATION.options.learningRate}, and L2 penalty{' '}
+            {ML_EVALUATION.options.l2Penalty}.
+          </li>
+          <li>{ML_EVALUATION.scoreNote}</li>
+          <li>
+            Macro recall is the unweighted mean of recall across the seven represented labels.
+          </li>
+          <li>
+            The 30 labels were drafted in the same AI-assisted project and were not
+            independently adjudicated.
+          </li>
+          <li>
+            Configuration choices were explored during development. New, independently
+            labeled data is required for a confirmatory result.
           </li>
         </ul>
       </details>
