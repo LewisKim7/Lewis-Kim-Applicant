@@ -201,6 +201,7 @@ button {
 }
 
 .brand {
+  min-width: 44px;
   min-height: 44px;
   display: inline-flex;
   gap: 12px;
