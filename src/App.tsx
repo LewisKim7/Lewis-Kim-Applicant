@@ -4,6 +4,7 @@ import { EvaluationSection } from './components/EvaluationSection'
 import { Hero } from './components/Hero'
 import { LimitationsSection } from './components/LimitationsSection'
 import { MethodologySection } from './components/MethodologySection'
+import { MotionEnhancer } from './components/MotionEnhancer'
 import { ProblemSection } from './components/ProblemSection'
 import { RiskTaxonomySection } from './components/RiskTaxonomySection'
 import { SiteFooter } from './components/SiteFooter'
@@ -13,6 +14,7 @@ import { WorkflowBridgeSection } from './components/WorkflowBridgeSection'
 function App() {
   return (
     <div id="top">
+      <MotionEnhancer />
       <a className="skip-link" href="#main-content">
         Skip to content
       </a>

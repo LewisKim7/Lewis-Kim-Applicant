@@ -207,6 +207,7 @@ The English interface includes:
 - an evidence-linked deterministic memo;
 - a seven-label recall chart that distinguishes document-held-out ML from closed-corpus rules;
 - progressively disclosed fold tables, confusion matrices, retrieval cases, and visible errors;
+- a restrained motion layer with scroll progress, staged data bars, section reveals, and a static reduced-motion mode;
 - the closed-corpus rule confusion matrix and five inspectable rule errors; and
 - limitations, AI-assistance disclosure, and non-affiliation language.
 
@@ -224,7 +225,7 @@ npm ci
 npm run verify
 ```
 
-`npm run verify` runs 62 deterministic tests, linting, TypeScript checks, and a production build. Tests freeze the five-document corpus, English-summary contract, classification and retrieval diagnostics, coded risk-matrix contract, plain-language annotations, matched-term glossary coverage, application-profile switching, frozen market-snapshot facts, market-share visual denominators, source-tool tab behavior, and applicant-profile evidence links.
+`npm run verify` runs 64 deterministic tests, linting, TypeScript checks, and a production build. Tests freeze the five-document corpus, English-summary contract, classification and retrieval diagnostics, coded risk-matrix contract, plain-language annotations, matched-term glossary coverage, application-profile switching, frozen market-snapshot facts, market-share visual denominators, source-tool tab behavior, applicant-profile evidence links, and the reduced-motion boundary.
 
 ### Start the development server
 

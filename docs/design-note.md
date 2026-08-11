@@ -31,6 +31,7 @@ The visual direction was inspired by the independent [Design System Analysis: Ap
 | Navigation and identity | One compact project header, a profile action, a separate applicant/program ribbon, and a full-width applicant biography beneath the aligned hero action/result row | Establish the applicant before the prototype without confining the biography to one hero column |
 | Fictional-document risk signals | Five synthetic documents, each with six transparent-rule predictions | Six coded passage cells per document, exact matched count, formal D/R/L/G/E/M labels, concise plain-English annotations, and High/Watch/Low reading priority |
 | Analytical figures | Semantic HTML/CSS bars with direct values, text labels, and one blue accent | Add visual comparison without a charting dependency or color-only meaning |
+| Motion | Two-pixel reading progress, once-only section reveals, staged chart fills, restrained hover depth, and a subtle pointer response on the synthetic trace | Make hierarchy and data flow easier to follow without changing claims or adding decorative video |
 
 The interface uses color and spacing to separate information roles, but methodology claims are carried by text, tables, IDs, and labels rather than visual polish alone.
 
@@ -71,7 +72,7 @@ The production default identifies only `Prepared for graduate applications to UT
 
 ## Accessibility and responsive intent
 
-The implementation includes semantic page regions and headings, a skip link, visible keyboard focus, labeled controls, and responsive grids. The desktop opening aligns the two hero columns at the action/result baseline, then gives the applicant profile the full content width. The risk matrix uses both color and direct letter codes, and the market-share bars use filled/open states plus exact counts. Detailed evaluation artifacts are collapsed behind labeled native disclosure controls. Mobile stacks the hero, enlarged profile, glossary, and five-document matrix without horizontal page overflow; primary controls preserve 44-pixel targets. Wide evaluation tables and confusion matrices remain inside intentional horizontal scrollers.
+The implementation includes semantic page regions and headings, a skip link, visible keyboard focus, labeled controls, and responsive grids. The desktop opening aligns the two hero columns at the action/result baseline, then gives the applicant profile the full content width. The risk matrix uses both color and direct letter codes, and the market-share bars use filled/open states plus exact counts. Detailed evaluation artifacts are collapsed behind labeled native disclosure controls. Mobile stacks the hero, enlarged profile, glossary, and five-document matrix without horizontal page overflow; primary controls preserve 44-pixel targets. Wide evaluation tables and confusion matrices remain inside intentional horizontal scrollers. Motion never wraps or transforms the cross-origin tool iframes, and `prefers-reduced-motion: reduce` removes entrance, scan, pulse, data-growth, tilt, and hover-transform effects while preserving every value and control.
 
 The CSS is designed down to a 320-pixel viewport, but this note does not claim complete WCAG conformance. A formal assistive-technology and cross-browser audit has not been performed.
 
