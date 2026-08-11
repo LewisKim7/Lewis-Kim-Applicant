@@ -173,9 +173,22 @@ Separate deterministic tests cover the fictional market samples:
 
 The IPO values use a common fictional snapshot date of **2026-07-31**. These checks validate local arithmetic and filtering only. They do not describe the current Korean market.
 
-## Retrieval evaluation is separate
+## 3. Closed-corpus retrieval diagnostic
 
-The classification metrics do not validate TF-IDF search. The retrieval component currently has deterministic functional tests but no independently labeled query-passage relevance set, Precision@k, mean reciprocal rank, or nDCG result.
+The classification metrics do not validate TF-IDF search, so retrieval is evaluated separately with 12 Korean queries and graded query-passage relevance judgments. Grades use `2` for directly relevant evidence and `1` for supporting evidence. The same 30-passage corpus was visible while the AI-assisted query set and judgments were drafted; this is not a held-out or independently judged benchmark.
+
+| Metric | Result |
+| --- | ---: |
+| Queries | 12 |
+| Cutoff | 3 results |
+| Mean Precision@3 | 69.45% |
+| Mean Recall@3 | 77.78% |
+| MRR@3 | 91.67% |
+| nDCG@3 | 85.51% |
+
+Eleven queries return a relevant passage at rank 1. Q12, `남은 청약대금 관리 보고`, is a deliberate paraphrase for unused-proceeds custody and reporting; it returns no lexical match even though two passages were judged relevant. That failure is retained as evidence of TF-IDF's synonym and context limitations rather than repaired by tuning the query set.
+
+See [Retrieval Evaluation](retrieval-evaluation.md) for metric definitions, the per-query trace, and the exact interpretation boundary.
 
 ## Reproduction
 
@@ -187,7 +200,7 @@ npm run verify
 npm run dev
 ```
 
-`npm run verify` runs linting, tests, TypeScript checks, and a production build. The tests freeze the corpus dimensions, label coverage, rule metrics, ML fold structure, ML metrics, CB screen, and IPO summary.
+`npm run verify` runs linting, 42 deterministic tests, TypeScript checks, and a production build. The tests freeze the corpus dimensions, label coverage, rule metrics, ML fold structure, ML metrics, retrieval judgments and ranking metrics, CB screen, and IPO summary.
 
 Changes to passages, labels, preprocessing, rules, optimization settings, fold construction, or structured rows can change the documented results.
 
@@ -197,6 +210,7 @@ Changes to passages, labels, preprocessing, rules, optimization settings, fold c
 - Vocabulary gaps, label overlap, negation failure, and sparse-data behavior are inspectable.
 - TF-IDF vocabulary and IDF are fitted only on training documents in the ML folds.
 - Every prediction can be traced back to a synthetic passage and reference label.
+- Retrieval rankings can be reproduced for the 12 checked-in query judgments.
 
 ## What the evaluation does not support
 
@@ -206,6 +220,7 @@ Changes to passages, labels, preprocessing, rules, optimization settings, fold c
 - Investment, legal, compliance, or admissions usefulness
 - Calibrated risk probabilities or severity estimates
 - Superiority of one baseline over the other
+- Independent validity or external generalization of the retrieval metrics
 
 ## Before quoting a metric
 
@@ -216,3 +231,4 @@ Changes to passages, labels, preprocessing, rules, optimization settings, fold c
 - [ ] State which evaluation protocol produced the number.
 - [ ] State that the corpus and labels are synthetic and AI-assisted.
 - [ ] State that there was no independent annotation or external evaluation.
+- [ ] If quoting retrieval, state 12 AI-assisted closed-corpus queries at `k=3`.

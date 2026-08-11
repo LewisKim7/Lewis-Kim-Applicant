@@ -29,8 +29,8 @@ The project page is only the demonstration layer. The substantive artifact is th
 | Domain-to-problem formulation | Korean IPO and CB workflows expressed as structured screening, passage classification, evidence retrieval, and memo assembly |
 | NLP | Unicode normalization, Korean tokenization, stop words, and limited particle stripping |
 | Classification | Seven primary labels, transparent weighted rules, and multinomial logistic regression |
-| Information retrieval | TF-IDF vectors and cosine lexical ranking over citable passages |
-| Evaluation | Accuracy, per-label recall, macro recall, confusion matrices, document-level folds, and exact error cases |
+| Information retrieval | TF-IDF cosine lexical ranking plus 12 graded Korean query judgments |
+| Evaluation | Classification accuracy and recall, document folds, exact errors, and retrieval Precision@3, Recall@3, MRR@3, and nDCG@3 |
 | Interpretation | Matched phrases, rule contributions, leading ML terms, source passage IDs, and explicit score semantics |
 | Transparency and ethics | Synthetic-data disclosure, AI-assistance disclosure, non-use boundaries, and documented failure modes |
 | Reproducibility | Local TypeScript implementation, frozen tests, and no required API key |
@@ -42,6 +42,8 @@ The transparent rule baseline produces 25 correct labels out of 30 on the same c
 The unigram TF-IDF multinomial logistic-regression baseline uses five leave-one-document-out folds. Each fold has 24 training passages and 6 test passages, with vocabulary and IDF fitted on training text only. Its combined out-of-fold result is 26 of 30, or 86.67% accuracy, with 85.71% macro recall and four errors.
 
 The percentages are not a controlled head-to-head ranking because the protocols differ. Both results are also limited by synthetic data, repeated wording, AI-assisted non-independent labels, and only five documents. Their value lies in making vocabulary gaps, negation failure, category overlap, and sparse-data behavior inspectable. In particular, the document-held-out ML recall for Liquidity Risk is only 25% (1 of 4).
+
+A separate 12-query, closed-corpus retrieval diagnostic reports mean Precision@3 of 69.45%, mean Recall@3 of 77.78%, MRR@3 of 91.67%, and nDCG@3 of 85.51%. Its queries and graded relevance judgments are also AI-assisted and non-independent. A deliberately paraphrased query returns no result, visibly demonstrating the limits of lexical overlap.
 
 ## Learning reflected in the build
 
@@ -59,7 +61,7 @@ Unicode tokenization and light particle stripping make the local implementation 
 
 ### Retrieval and classification are different tasks
 
-Classification selects a configured primary risk label. TF-IDF retrieval ranks passages by lexical overlap with a query. The latter is not semantic understanding, and neither output verifies the financial truth of a passage.
+Classification selects a configured primary risk label. TF-IDF retrieval ranks passages by lexical overlap with a query. The latter is not semantic understanding, and its closed-corpus ranking diagnostic is not independent validation. Neither output verifies the financial truth of a passage.
 
 ## Conceptual lineage and independent implementation
 

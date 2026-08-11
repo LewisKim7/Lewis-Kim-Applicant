@@ -2,7 +2,7 @@ import type { CSSProperties } from 'react'
 import { ALL_PASSAGES } from '../data/corpus'
 import { classifyPassage } from '../lib'
 
-const SOURCE_URL = 'https://github.com/LewisKim7/AI-Disclosure-Risk-Screener'
+const SOURCE_URL = 'https://github.com/LewisKim7/Korea-IPO-CB-Risk-Screener'
 const TRACE_PASSAGE = (() => {
   const passage = ALL_PASSAGES.find(
     (item) => item.passageId === 'DOC-KR-CB-RESET-001-P01',

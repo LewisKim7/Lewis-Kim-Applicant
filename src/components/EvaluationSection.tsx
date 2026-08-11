@@ -1,9 +1,12 @@
 import { ALL_PASSAGES } from '../data/corpus'
+import { RETRIEVAL_JUDGMENTS } from '../data/retrieval-judgments'
 import { RISK_TAXONOMY_BY_LABEL, type RiskLabel } from '../domain'
 import {
   classifyPassage,
+  createTfidfIndex,
   evaluateClassifier,
   evaluateDocumentHeldOutLogisticRegression,
+  evaluateRetrieval,
 } from '../lib'
 import { SectionHeading } from './SectionHeading'
 
@@ -11,6 +14,15 @@ const RULE_EVALUATION = evaluateClassifier(ALL_PASSAGES, classifyPassage, {
   maxExamplesPerGroup: 8,
 })
 const ML_EVALUATION = evaluateDocumentHeldOutLogisticRegression(ALL_PASSAGES)
+const RETRIEVAL_EVALUATION = evaluateRetrieval(
+  createTfidfIndex(ALL_PASSAGES),
+  RETRIEVAL_JUDGMENTS,
+  { k: 3 },
+)
+const RETRIEVAL_CASE_IDS = new Set(['Q03', 'Q06', 'Q12'])
+const RETRIEVAL_CASES = RETRIEVAL_EVALUATION.queries.filter(({ queryId }) =>
+  RETRIEVAL_CASE_IDS.has(queryId),
+)
 const PROTOCOL_GAP = Math.abs(
   ML_EVALUATION.accuracy - RULE_EVALUATION.accuracy,
 )
@@ -291,6 +303,69 @@ export function EvaluationSection() {
         </div>
       </div>
 
+      <section className="retrieval-evaluation" aria-labelledby="retrieval-evaluation-title">
+        <header className="retrieval-evaluation__header">
+          <div>
+            <span className="demo-label">Closed-corpus retrieval diagnostic</span>
+            <h3 id="retrieval-evaluation-title">Does lexical search return the intended evidence?</h3>
+          </div>
+          <p>
+            12 AI-assisted Korean queries · graded relevance 1–2 · same 30-passage corpus ·
+            not held out
+          </p>
+        </header>
+
+        <dl className="retrieval-evaluation__metrics">
+          <div>
+            <dt>{percent(RETRIEVAL_EVALUATION.meanPrecisionAtK)}</dt>
+            <dd>mean Precision@3</dd>
+          </div>
+          <div>
+            <dt>{percent(RETRIEVAL_EVALUATION.meanRecallAtK)}</dt>
+            <dd>mean Recall@3</dd>
+          </div>
+          <div>
+            <dt>{percent(RETRIEVAL_EVALUATION.meanReciprocalRankAtK)}</dt>
+            <dd>MRR@3</dd>
+          </div>
+          <div>
+            <dt>{percent(RETRIEVAL_EVALUATION.meanNdcgAtK)}</dt>
+            <dd>nDCG@3</dd>
+          </div>
+        </dl>
+
+        <div className="retrieval-cases">
+          {RETRIEVAL_CASES.map((item) => (
+            <article className={item.firstRelevantRank ? undefined : 'is-failure'} key={item.queryId}>
+              <div className="retrieval-case__meta">
+                <span>{item.queryId}</span>
+                <span>
+                  {item.relevantRetrieved}/{item.relevantCount} relevant returned
+                </span>
+              </div>
+              <h4 lang="ko">{item.query}</h4>
+              <p>{item.intent}</p>
+              <footer>
+                <strong>
+                  {item.firstRelevantRank
+                    ? `First relevant result at rank ${item.firstRelevantRank}`
+                    : 'No relevant result in the top three'}
+                </strong>
+                <span>
+                  {item.rankedPassages[0]?.passageId ?? 'No lexical match'}
+                </span>
+              </footer>
+            </article>
+          ))}
+        </div>
+
+        <p className="retrieval-evaluation__note">
+          Q12 deliberately paraphrases the corpus wording and returns no lexical match. The
+          visible failure illustrates TF-IDF's synonym and context limits; it was retained
+          instead of tuning the query set around the system.
+        </p>
+      </section>
+
       <details className="closed-set-details">
         <summary>
           Inspect the {percent(RULE_EVALUATION.accuracy)} closed-corpus rule sanity check
@@ -372,6 +447,7 @@ export function EvaluationSection() {
             The 30 labels were drafted in the same AI-assisted project and were not
             independently adjudicated.
           </li>
+          <li>{RETRIEVAL_EVALUATION.protocolNote}</li>
           <li>
             Configuration choices were explored during development. New, independently
             labeled data is required for a confirmatory result.

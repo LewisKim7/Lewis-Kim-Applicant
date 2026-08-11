@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
 
+Sitemap: https://ai-disclosure-risk-screener.vercel.app/sitemap.xml
+
 User-agent: GPTBot
 Disallow: /
 
@@ -8,4 +10,7 @@ User-agent: CCBot
 Disallow: /
 
 User-agent: Google-Extended
+Disallow: /
+
+User-agent: ClaudeBot
 Disallow: /

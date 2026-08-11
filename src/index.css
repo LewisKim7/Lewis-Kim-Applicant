@@ -3656,3 +3656,240 @@ button:active,
     padding: 18px;
   }
 }
+
+/* Admissions portfolio finish: retrieval diagnostics and resilient review UX. */
+body {
+  min-width: 0;
+}
+
+.evaluation-grid--heldout {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.fold-table {
+  min-width: 0;
+  table-layout: fixed;
+}
+
+.fold-table th,
+.fold-table td {
+  overflow-wrap: anywhere;
+}
+
+.fold-table th:first-child,
+.fold-table td:first-child {
+  width: 42%;
+}
+
+.rule-trace summary,
+.taxonomy-card summary,
+.metric-notes summary,
+.closed-set-details > summary {
+  min-height: 44px;
+  align-items: center;
+}
+
+.evidence-table tr.is-highlighted:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: -3px;
+}
+
+.retrieval-evaluation {
+  margin-top: 24px;
+  padding: 32px;
+  border: 1px solid var(--line-strong);
+  border-radius: 18px;
+  background: var(--white);
+}
+
+.retrieval-evaluation__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.7fr);
+  gap: 36px;
+  align-items: end;
+}
+
+.retrieval-evaluation__header h3 {
+  max-width: 680px;
+  margin-top: 8px;
+  font-size: clamp(1.5rem, 2.4vw, 2.15rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+}
+
+.retrieval-evaluation__header > p,
+.retrieval-evaluation__note {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.retrieval-evaluation__metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 28px;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  background: var(--line);
+}
+
+.retrieval-evaluation__metrics > div {
+  min-width: 0;
+  padding: 20px;
+  background: var(--paper-deep);
+}
+
+.retrieval-evaluation__metrics dt {
+  color: var(--ink);
+  font-size: clamp(1.45rem, 2.5vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.retrieval-evaluation__metrics dd {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.retrieval-cases {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.retrieval-cases article {
+  display: flex;
+  min-width: 0;
+  min-height: 250px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--white);
+  flex-direction: column;
+}
+
+.retrieval-cases article.is-failure {
+  border-color: #ffb7bd;
+  background: #fff7f8;
+}
+
+.retrieval-case__meta,
+.retrieval-cases footer {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.retrieval-case__meta {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.retrieval-case__meta span:first-child,
+.retrieval-cases footer span {
+  font-family: var(--mono);
+}
+
+.retrieval-cases h4 {
+  margin: 34px 0 0;
+  font-size: 1.15rem;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+}
+
+.retrieval-cases article > p {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.retrieval-cases footer {
+  margin-top: auto;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.retrieval-cases footer strong {
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+
+.retrieval-cases footer span {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.retrieval-evaluation__note {
+  max-width: 900px;
+  margin-top: 20px;
+  padding-left: 16px;
+  border-left: 3px solid var(--danger);
+}
+
+@media (max-width: 1050px) {
+  .evaluation-grid--heldout {
+    grid-template-columns: 1fr;
+  }
+
+  .retrieval-cases {
+    grid-template-columns: 1fr;
+  }
+
+  .retrieval-cases article {
+    min-height: 0;
+  }
+
+  .retrieval-cases h4 {
+    margin-top: 24px;
+  }
+}
+
+@media (max-width: 833px) {
+  .site-nav {
+    display: flex;
+  }
+
+  .retrieval-evaluation__header {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-nav .subnav-cta {
+    padding-inline: 13px;
+  }
+
+  .fold-table {
+    min-width: 500px;
+    table-layout: auto;
+  }
+
+  .fold-table th:first-child,
+  .fold-table td:first-child {
+    width: auto;
+  }
+
+  .retrieval-evaluation {
+    padding: 20px;
+  }
+
+  .retrieval-evaluation__metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .retrieval-evaluation__metrics > div {
+    padding: 16px;
+  }
+}

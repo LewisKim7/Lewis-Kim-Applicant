@@ -4,25 +4,34 @@
 
 ## Truthful two-minute walkthrough
 
-### 0:00–0:20 — Problem and scope
+### 0:00–0:25 — Problem and contribution
 
-“I directed the AI-assisted development of this project while preparing for graduate study in AI. I framed the Korean capital-markets problem and product requirements, while Codex assisted with corpus drafting, implementation, documentation, and verification. The project asks how a transparent Korean-language NLP workflow could support first-pass review of IPO and convertible-bond materials while keeping every conclusion connected to evidence. The interface is English for an international reviewer, but the 30 source passages are Korean.”
+“I directed the AI-assisted development of this project. I defined the Korean capital-markets problem, objective, and product requirements; Codex assisted with synthetic-data drafting, implementation, documentation, and verification. The project asks whether transparent Korean-language NLP can support first-pass IPO and CB review while keeping each conclusion tied to inspectable evidence.”
 
-### 0:20–0:40 — Domain lineage and independence
+### 0:25–0:55 — Corpus and pipeline
 
-“The new TypeScript CB module implements the same kind of rate-and-size screening behavior as an existing tool in my portfolio, but only on four fictional rows. The IPO module implements analogous calculations inspired by another portfolio report over six fictional observations as of 2026-07-31. Neither existing repository nor any production data was imported.”
+“The corpus contains five fictional documents, 30 Korean passages, and seven primary labels. The pipeline combines Korean preprocessing, an inspectable weighted-rule trace, unigram TF-IDF logistic regression, lexical cosine retrieval, and a deterministic memo with passage IDs. Separate modules reproduce CB and IPO calculations on fictional rows; neither existing repository nor production data was imported.”
 
-### 0:40–1:10 — Corpus and pipeline
+### 0:55–1:35 — Evaluation
 
-“The corpus has five fictional KOSPI/KOSDAQ documents, six passages per document, and seven primary labels. The pipeline applies lightweight Korean preprocessing, then exposes a weighted-rule classification trace. It also includes unigram TF-IDF logistic regression, TF-IDF cosine lexical retrieval, and a deterministic memo that retains document and passage IDs.”
+“The closed-corpus rules produced 25 of 30 correct labels. The trained baseline holds out one document per fold, fits vocabulary and IDF on 24 training passages, and produced 26 of 30 out-of-fold predictions. Because the protocols differ, this is not a controlled ranking. A separate 12-query retrieval diagnostic reports ranking metrics but remains AI-assisted and closed-corpus; its deliberate paraphrase query returns no match.”
 
-### 1:10–1:40 — Evaluation
+### 1:35–2:00 — Limits and learning
 
-“The rules produce 25 of 30 correct labels, or 83.33% accuracy with 82.14% macro recall, on the same closed corpus used during development. That is an implementation check, not a held-out estimate. The trained baseline holds out one entire document per fold, trains on 24 passages, fits vocabulary and IDF on training text only, and produces 26 of 30 out-of-fold predictions, or 86.67% accuracy with 85.71% macro recall.”
+“The important result is the failure pattern: vocabulary gaps, negation, overlapping labels, and only 25% held-out recall for Liquidity Risk. The passages and labels are synthetic, AI-assisted, and not independently annotated. Next I would conduct personal and independent annotation review, freeze a permitted external holdout, and compare Korean morphological processing. This exposed gaps in NLP, machine-learning evaluation, and responsible interpretation.”
 
-### 1:40–2:00 — Limits and learning
+## Ninety-second live click path
 
-“I do not treat the two percentages as a controlled model ranking because their protocols differ. The corpus and labels are synthetic, AI-assisted, and not independently annotated. The errors show vocabulary gaps, negation failure, overlapping labels, and sparse Korean training data. My next steps would be personal and independent annotation review, a permitted held-out corpus, and a Korean morphological baseline.”
+Use this path only after personally rehearsing the controls and verifying that the deployed revision matches the cited metrics.
+
+| Time | Action | Point to explain |
+| --- | --- | --- |
+| 0:00–0:12 | Start at the hero and point to the synthetic-corpus counts and AI-assistance sentence. | This is a transparent educational prototype, not a production DART system. |
+| 0:12–0:30 | Select `세림뉴로칩 — DART-style CB Terms Amendment` in the interactive prototype. | The document metadata, Korean passages, and fictional transaction context remain attached. |
+| 0:30–0:48 | Choose the suggested query `조기상환청구권 상환 재원`, open the top result, and inspect its rule trace. | Retrieval is lexical; the rule score exposes phrase contributions and is not probability. |
+| 0:48–1:02 | Open the generated memo and identify one cited passage ID. | The memo is deterministic and retains an evidence trail rather than generating external facts. |
+| 1:02–1:20 | Jump to Evaluation, show the two protocol cards, then point to Q12 in retrieval. | Classification protocols are not a controlled ranking; Q12 exposes a lexical paraphrase failure. |
+| 1:20–1:30 | End at Responsible Use. | Labels and retrieval judgments are synthetic, AI-assisted, and non-independent. |
 
 ## Module map
 
@@ -36,6 +45,8 @@
 | `src/lib/preprocessing.ts` | Normalizes and tokenizes Korean/English text | NFKC, stop words, limited particle stripping, and why this is not morphology |
 | `src/lib/classifier.ts` | Runs the transparent weighted-rule baseline | Phrase weights, tie order, informational fallback, and signal-score semantics |
 | `src/lib/retrieval.ts` | Ranks corpus passages using TF-IDF cosine similarity | Why this is lexical retrieval rather than semantic understanding |
+| `src/data/retrieval-judgments.ts` | Stores 12 AI-assisted graded Korean query judgments | Why closed-corpus relevance judgments are not an independent benchmark |
+| `src/lib/retrieval-evaluation.ts` | Computes Precision@k, Recall@k, MRR, and nDCG | Metric denominators, graded relevance, and the Q12 no-match case |
 | `src/lib/ml-classifier.ts` | Fits TF-IDF multinomial logistic regression by document fold | Training-only vocabulary/IDF, L2 normalization, and uncalibrated softmax |
 | `src/lib/evaluation.ts` | Produces metrics, confusion matrices, and error records | Accuracy versus recall and why protocols must remain separate |
 | `src/lib/memo.ts` | Builds a deterministic evidence-linked memo | Templates, passage citations, and absence of generated external facts |
@@ -77,7 +88,7 @@ Liquidity language in the corpus often relies on numerical relationships or indi
 
 ### Is the search semantic?
 
-No. It is unigram TF-IDF cosine lexical retrieval. A high score indicates relative token overlap within the current corpus and query, not semantic equivalence or relevance validation.
+No. It is unigram TF-IDF cosine lexical retrieval. A high score indicates relative token overlap, not semantic equivalence. The 12-query closed-corpus diagnostic reports Precision@3 69.45%, Recall@3 77.78%, MRR@3 91.67%, and nDCG@3 85.51%, but the judgments are AI-assisted and non-independent. Q12 returns no result for a useful paraphrase, exposing the exact limitation.
 
 ### What came from the existing CB and IPO tools?
 
@@ -85,7 +96,7 @@ The CB module implements the same kind of screening behavior in new TypeScript o
 
 ### What would you do next?
 
-First complete an applicant-led review, then create a labeling guide, obtain independent Korean annotations, freeze development choices, evaluate a legally permitted held-out corpus, compare Korean morphological processing, and test multi-label classification and retrieval separately.
+First complete an applicant-led review, then use the existing annotation guide with independent Korean reviewers, freeze development choices, evaluate a legally permitted external corpus, compare Korean morphological processing, and repeat multi-label classification and retrieval with independently judged examples.
 
 ## Five closed-corpus rule errors
 
@@ -118,6 +129,7 @@ Do not change an item to checked until the applicant has personally completed it
 - [ ] Trace one ML fold, including the 24/6 split and training-only vocabulary and IDF.
 - [ ] Explain unigram TF-IDF, multinomial logistic regression, L2 regularization, and uncalibrated softmax at an interview-appropriate level.
 - [ ] Reproduce both metric sets with `npm ci` and `npm run verify` on the submitted revision.
+- [ ] Explain Precision@3, Recall@3, MRR@3, nDCG@3, and why Q12 returns no lexical match.
 - [ ] Inspect the five rule errors and four ML errors in the application.
 - [ ] Verify the structured CB and IPO calculations by hand.
 - [ ] Confirm the CB/IPO lineage statement: neither existing repository nor production data, APIs, keys, workbooks, or reports were imported.

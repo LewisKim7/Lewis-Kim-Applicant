@@ -1,4 +1,4 @@
-const SOURCE_URL = 'https://github.com/LewisKim7/AI-Disclosure-Risk-Screener'
+const SOURCE_URL = 'https://github.com/LewisKim7/Korea-IPO-CB-Risk-Screener'
 
 export function SiteHeader() {
   return (
