@@ -2,7 +2,7 @@
 
 ## System summary
 
-Korea IPO & CB Risk Screener is an independent React/TypeScript/Vite prototype created by 김유찬 (Yoochan Kim · Lewis) for Korean convertible-bond and IPO analysis. The interface is English, while the source passages are Korean. It combines two fictional structured-market workflows with passage classification, TF-IDF cosine lexical retrieval, and a deterministic evidence-linked memo.
+Korea IPO & CB Risk Screener is an independent React/TypeScript/Vite prototype created by Yoochan Kim (Lewis Kim · 김유찬) for Korean convertible-bond and IPO analysis. The interface is English, while the source passages are Korean. It combines two fictional structured-market workflows with passage classification, TF-IDF cosine lexical retrieval, and a deterministic evidence-linked memo.
 
 | Field | Description |
 | --- | --- |

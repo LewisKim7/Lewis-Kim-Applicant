@@ -18,6 +18,10 @@ export function SiteHeader() {
         </nav>
 
         <div className="header-actions">
+          <a className="header-profile" href="#profile">
+            <span className="header-profile__long">Lewis Kim Profile</span>
+            <span className="header-profile__short">Profile</span>
+          </a>
           <a className="header-source" href={SOURCE_URL} target="_blank" rel="noreferrer">
             GitHub <span aria-hidden="true">↗</span>
           </a>

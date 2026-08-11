@@ -1,7 +1,7 @@
 {
   "name": "Korea IPO & CB Risk Screener",
   "short_name": "K-CAP NLP",
-  "description": "An applicant-directed Korean-language NLP portfolio by Yoochan Kim (김유찬 · Lewis).",
+  "description": "An applicant-directed Korean-language NLP portfolio by Yoochan Kim (Lewis Kim · 김유찬).",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

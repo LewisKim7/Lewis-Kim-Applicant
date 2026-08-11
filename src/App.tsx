@@ -5,6 +5,7 @@ import { Hero } from './components/Hero'
 import { LimitationsSection } from './components/LimitationsSection'
 import { MethodologySection } from './components/MethodologySection'
 import { ProblemSection } from './components/ProblemSection'
+import { ProfileSection } from './components/ProfileSection'
 import { RiskTaxonomySection } from './components/RiskTaxonomySection'
 import { SiteFooter } from './components/SiteFooter'
 import { SiteHeader } from './components/SiteHeader'
@@ -20,6 +21,7 @@ function App() {
       <main id="main-content">
         <ApplicantContext />
         <Hero />
+        <ProfileSection />
         <WorkflowBridgeSection />
         <ProblemSection />
         <MethodologySection />

@@ -56,7 +56,8 @@ export function LimitationsSection() {
         <div className="independent-note">
           <strong>Independent project note</strong>
           <p>
-            Created by 김유찬 (Yoochan Kim · Lewis) while preparing for{' '}
+            Directed by Yoochan Kim (Lewis Kim · 김유찬), with disclosed AI assistance, while
+            preparing for{' '}
             {APPLICATION_CONTEXT.applicationDescription} at{' '}
             {APPLICATION_CONTEXT.institutionName} and informed by prior Korean IPO and CB
             workflow concepts. This independent applicant project is not affiliated with or

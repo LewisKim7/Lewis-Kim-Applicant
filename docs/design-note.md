@@ -8,8 +8,9 @@ The visual direction was inspired by the independent [Design System Analysis: Ap
 
 ## Independence and asset provenance
 
-- The applicant identity uses an original `Evidence Signal` mark created for 김유찬 (Yoochan Kim · Lewis). Its paired brackets represent inspectable passages; the blue path represents a traceable risk signal.
-- The University and program names appear only as text identifying the intended application. No official UT Austin logo, wordmark, seal, supporting mark, font, or university visual identity is used.
+- The applicant identity uses an original `Evidence Signal` mark created for Yoochan Kim (Lewis Kim · 김유찬). Its paired brackets represent inspectable passages; the blue path represents a traceable risk signal.
+- The application ribbon uses an original `Application Check` badge: a document, check, and small destination point. The UT Austin profile uses a restrained burnt-orange accent so the application context is immediately legible; it does not reproduce a Longhorn, shield, tower, seal, wordmark, official lockup, or other protected university asset.
+- The University and program names appear only as text identifying the intended application. No official UT Austin logo, wordmark, seal, supporting mark, font, or copied university artwork is used.
 - No written permission to use a protected UT mark was assumed. The official [Permission to Use](https://trademarks.utexas.edu/permission-use) and [Outside Entities](https://trademarks.utexas.edu/outside-entities) guidance informed the text-only treatment.
 - No Apple logo, image, icon, trademark, product identity, source code, or proprietary font is used.
 - No asset was copied from Apple or getdesign.md.
@@ -27,7 +28,7 @@ The visual direction was inspired by the independent [Design System Analysis: Ap
 | Dark panels | Near-black surfaces with white text | Separate methodology and evidence-heavy moments |
 | Typography | Native system sans-serif stack; system monospace fallbacks for IDs and metrics | Fast loading and no external font asset |
 | Layout | Wide whitespace, constrained reading widths, responsive grids, and horizontal table containment | Preserve editorial hierarchy while supporting technical density |
-| Navigation and identity | One compact project header followed by a separate applicant/program ribbon | Keep the project name in navigation while consolidating top-of-page applicant context |
+| Navigation and identity | One compact project header, a profile action, and a separate applicant/program ribbon with the original Application Check badge | Keep the project name in navigation while consolidating applicant and school context |
 | Analytical figures | Semantic HTML/CSS bars with direct values, text labels, and one blue accent | Add visual comparison without a charting dependency or color-only meaning |
 
 The interface uses color and spacing to separate information roles, but methodology claims are carried by text, tables, IDs, and labels rather than visual polish alone.
@@ -50,17 +51,18 @@ Full Korean passages are not translated inside the evidence trail because a full
 
 ## Switchable application context
 
-The production default identifies only a `UT Austin graduate application`; it does not name MSAI or MSDS in the top ribbon. School, program-link, and non-affiliation copy are centralized in `src/config/application-profile.ts`. Setting `VITE_APPLICATION_PROFILE=georgia-tech-omsa` swaps the visible application context to the bundled Georgia Tech analytics profile while leaving all research and evaluation claims unchanged.
+The production default identifies only `Prepared for graduate applications to UT Austin`; it does not name MSAI or MSDS in the top ribbon. The original document-check badge uses a custom copper and project-blue palette rather than an official university logo or exact UT brand color. School, program-link, badge colors, and non-affiliation copy are centralized in `src/config/application-profile.ts`. Setting `VITE_APPLICATION_PROFILE=georgia-tech-omsa` swaps the visible application context to the bundled Georgia Tech analytics profile while leaving all research and evaluation claims unchanged.
 
 ## Interaction and information hierarchy
 
-1. **Header and applicant ribbon** keep the project navigation thin, place the applicant name once in the top identity block, and pair it with the intended program and non-affiliation boundary.
+1. **Header and applicant ribbon** keep the project navigation thin, provide a persistent Profile action, and pair the applicant with the intended school context and non-affiliation boundary.
 2. **Hero and signal trace** state the narrow objective and show an inspectable Korean rule trace immediately.
-3. **Market screen** visualizes the fictional CB principal and IPO return fixtures before handing a selected disclosure to the NLP workflow.
-4. **Problem and methodology** separate the research question from preprocessing, rules, trained classification, retrieval, and memo generation.
-5. **Dashboard and taxonomy** let the reviewer inspect Korean passages, rule traces, evidence ranking, memo citations, and label definitions.
-6. **Evaluation** leads with per-label recall, then preserves fold details, confusion matrices, errors, and retrieval diagnostics under their respective protocols.
-7. **Limitations** ends the page with annotation provenance, non-affiliation, and non-use claims.
+3. **Applicant profile** links Yoochan Kim's finance background to the research question, provides employer links, and anchors the dated DART manager-listing evidence without implying employer endorsement.
+4. **Market screen** visualizes the fictional CB principal and IPO return fixtures before handing a selected disclosure to the NLP workflow.
+5. **Problem and methodology** separate the research question from preprocessing, rules, trained classification, retrieval, and memo generation.
+6. **Dashboard and taxonomy** let the reviewer inspect Korean passages, rule traces, evidence ranking, memo citations, and label definitions.
+7. **Evaluation** leads with per-label recall, then preserves fold details, confusion matrices, errors, and retrieval diagnostics under their respective protocols.
+8. **Limitations** ends the page with annotation provenance, non-affiliation, and non-use claims.
 
 ## Accessibility and responsive intent
 

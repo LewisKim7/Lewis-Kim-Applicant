@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This independent project was created by 김유찬 (Yoochan Kim · Lewis) while preparing an application for graduate study in artificial intelligence. It connects his finance and deep-tech investment context with Korean-language preprocessing, classification, information retrieval, model evaluation, interpretation, and responsible-use boundaries.
+This independent project was created by Yoochan Kim (Lewis Kim · 김유찬) while preparing an application for graduate study in artificial intelligence. It connects his finance and deep-tech investment context with Korean-language preprocessing, classification, information retrieval, model evaluation, interpretation, and responsible-use boundaries.
 
 Korea IPO & CB Risk Screener is an educational prototype, not a claim of professional machine-learning engineering mastery. The application is deliberately small and inspectable: five fictional Korean KOSPI/KOSDAQ documents, 30 Korean passages, seven primary labels, two classification baselines, lexical evidence retrieval, and deterministic memo generation. The interface is English so an international reviewer can follow the work; the source passages remain Korean because Korean text is the actual NLP subject.
 

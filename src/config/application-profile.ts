@@ -11,6 +11,8 @@ export interface ApplicationProfile {
   readonly contextLabel: string
   readonly compactLabel: string
   readonly portfolioLabel: string
+  readonly badgeAccent: string
+  readonly badgeDetail: string
   readonly overviewUrl: string
   readonly applicationDescription: string
   readonly programs: readonly ApplicationProgram[]
@@ -21,9 +23,11 @@ export const APPLICATION_PROFILES = {
     id: 'ut-austin',
     institutionName: 'The University of Texas at Austin',
     institutionShort: 'UT Austin',
-    contextLabel: 'UT Austin graduate application',
-    compactLabel: 'UT Austin · Graduate application',
-    portfolioLabel: 'AI & Data Science portfolio',
+    contextLabel: 'Prepared for graduate applications to UT Austin',
+    compactLabel: 'UT Austin applicant portfolio',
+    portfolioLabel: 'Independent applicant portfolio',
+    badgeAccent: '#a84e32',
+    badgeDetail: '#1672b8',
     overviewUrl: 'https://cdso.utexas.edu/',
     applicationDescription: 'graduate study in artificial intelligence and data science',
     programs: [
@@ -43,9 +47,11 @@ export const APPLICATION_PROFILES = {
     id: 'georgia-tech-omsa',
     institutionName: 'Georgia Institute of Technology',
     institutionShort: 'Georgia Tech',
-    contextLabel: 'Georgia Tech graduate application',
-    compactLabel: 'Georgia Tech · Graduate application',
-    portfolioLabel: 'Analytics portfolio',
+    contextLabel: 'Prepared for a graduate application to Georgia Tech',
+    compactLabel: 'Georgia Tech applicant portfolio',
+    portfolioLabel: 'Independent analytics portfolio',
+    badgeAccent: '#b3a369',
+    badgeDetail: '#003057',
     overviewUrl: 'https://pe.gatech.edu/degrees/analytics',
     applicationDescription: 'graduate study in analytics',
     programs: [

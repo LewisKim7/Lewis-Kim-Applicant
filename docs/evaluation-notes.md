@@ -200,7 +200,7 @@ npm run verify
 npm run dev
 ```
 
-`npm run verify` runs linting, 42 deterministic tests, TypeScript checks, and a production build. The tests freeze the corpus dimensions, label coverage, rule metrics, ML fold structure, ML metrics, retrieval judgments and ranking metrics, CB screen, and IPO summary.
+`npm run verify` runs linting, 50 deterministic tests, TypeScript checks, and a production build. The tests freeze the corpus dimensions, label coverage, rule metrics, ML fold structure, ML metrics, retrieval judgments and ranking metrics, CB screen, IPO summary, application-profile switch, and applicant-profile evidence links.
 
 Changes to passages, labels, preprocessing, rules, optimization settings, fold construction, or structured rows can change the documented results.
 
