@@ -6,7 +6,7 @@ export function ProblemSection() {
       <SectionHeading
         eyebrow="02 / Problem framing"
         title="From deal terms to traceable evidence."
-        description="IPO and CB risks are scattered across structured terms and dense Korean text. This prototype organizes first-pass review without automating investment judgment."
+        description="In plain English: what happened, why might it matter, and which sentence supports that conclusion? The prototype organizes those questions without making an investment decision."
       />
 
       <div className="problem-grid">
@@ -23,21 +23,21 @@ export function ProblemSection() {
             <span>01</span>
             <div>
               <h3>Inspect the path</h3>
-              <p>Expose Korean matched phrases, English glosses, and per-label scores—not only the final label.</p>
+              <p>Display the Korean phrase, its English meaning, and the rule that matched it.</p>
             </div>
           </article>
           <article>
             <span>02</span>
             <div>
               <h3>Keep the evidence</h3>
-              <p>Keep document, market, transaction type, and passage IDs attached to findings.</p>
+              <p>Every finding links back to the document and exact passage that produced it.</p>
             </div>
           </article>
           <article>
             <span>03</span>
             <div>
               <h3>Measure the misses</h3>
-              <p>Compare transparent rules with a document-held-out trained baseline.</p>
+              <p>Keep wrong classifications visible instead of presenting one flattering score.</p>
             </div>
           </article>
         </div>

@@ -25,6 +25,8 @@ export type RiskLabelId = (typeof RISK_LABEL_IDS)[number]
 export interface RiskTaxonomyEntry {
   readonly id: RiskLabelId
   readonly label: RiskLabel
+  readonly readerLabel: string
+  readonly plainQuestion: string
   readonly description: string
   readonly analystQuestion: string
 }
@@ -37,6 +39,8 @@ export const RISK_TAXONOMY: readonly RiskTaxonomyEntry[] = [
   {
     id: 'dilution',
     label: 'Dilution Risk',
+    readerLabel: 'Existing ownership may shrink',
+    plainQuestion: 'Could new shares reduce each existing shareholder’s percentage ownership?',
     description:
       'Potential ownership dilution from CB conversion, re-fixing terms, warrants, or primary-share issuance.',
     analystQuestion:
@@ -45,6 +49,8 @@ export const RISK_TAXONOMY: readonly RiskTaxonomyEntry[] = [
   {
     id: 'refinancing',
     label: 'Refinancing Risk',
+    readerLabel: 'Debt may be hard to repay',
+    plainQuestion: 'Can the company repay upcoming debt or replace it with new financing?',
     description:
       'Pressure created by CB put windows, maturity schedules, debt repayment, or replacement financing.',
     analystQuestion:
@@ -53,6 +59,8 @@ export const RISK_TAXONOMY: readonly RiskTaxonomyEntry[] = [
   {
     id: 'liquidity',
     label: 'Liquidity Risk',
+    readerLabel: 'Cash may run short',
+    plainQuestion: 'Does the company have enough cash to operate and meet near-term payments?',
     description:
       'Constraints on cash runway, working capital, IPO proceeds allocation, or continued operations.',
     analystQuestion:
@@ -61,6 +69,8 @@ export const RISK_TAXONOMY: readonly RiskTaxonomyEntry[] = [
   {
     id: 'governance',
     label: 'Governance Risk',
+    readerLabel: 'Conflicts may affect fairness',
+    plainQuestion: 'Could insiders benefit while other shareholders have less protection?',
     description:
       'Concerns around related-party CB allottees, call-option beneficiaries, board oversight, or control.',
     analystQuestion:
@@ -69,6 +79,8 @@ export const RISK_TAXONOMY: readonly RiskTaxonomyEntry[] = [
   {
     id: 'execution',
     label: 'Execution Risk',
+    readerLabel: 'The plan may be delayed',
+    plainQuestion: 'What approvals, construction, customers, or other milestones must go right?',
     description:
       'Uncertainty around IPO use-of-proceeds plans, permits, construction, scale-up, approvals, or delivery milestones.',
     analystQuestion:
@@ -77,6 +89,8 @@ export const RISK_TAXONOMY: readonly RiskTaxonomyEntry[] = [
   {
     id: 'market',
     label: 'Market Risk',
+    readerLabel: 'Demand or prices may weaken',
+    plainQuestion: 'Could weaker demand, competition, or market prices hurt the outcome?',
     description:
       'Exposure to IPO demand, offer pricing, CB overhang, stock-price volatility, competition, or wider market conditions.',
     analystQuestion:
@@ -85,6 +99,8 @@ export const RISK_TAXONOMY: readonly RiskTaxonomyEntry[] = [
   {
     id: 'informational',
     label: 'Low Risk / Informational',
+    readerLabel: 'No main warning phrase found',
+    plainQuestion: 'Is this routine context, or does it leave an important question unanswered?',
     description:
       'Routine dates, terms, or context for which the baseline finds no configured primary risk signal.',
     analystQuestion:

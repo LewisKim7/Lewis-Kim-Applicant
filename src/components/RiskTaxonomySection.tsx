@@ -16,8 +16,8 @@ export function RiskTaxonomySection() {
     <section className="taxonomy-section page-shell section-pad" id="taxonomy">
       <SectionHeading
         eyebrow="05 / Risk taxonomy"
-        title="Seven labels for one review path."
-        description="Each bilingual category maps Korean IPO and CB language to a concrete analyst question while preserving overlapping rule scores."
+        title="Seven risk labels, each with a plain-English note."
+        description="The formal finance label remains primary; a short annotation explains what a non-specialist should ask."
       />
 
       <div className="taxonomy-grid">
@@ -31,10 +31,13 @@ export function RiskTaxonomySection() {
               {entry.label}
               <span>{KOREAN_LABELS[entry.label]}</span>
             </h3>
-            <p>{entry.description}</p>
+            <p className="taxonomy-card__plain">
+              <strong>Plain English</strong>
+              {entry.readerLabel} — {entry.plainQuestion}
+            </p>
             <details>
-              <summary>Analyst question</summary>
-              <p>{entry.analystQuestion}</p>
+              <summary>Technical definition</summary>
+              <p>{entry.description}</p>
             </details>
           </article>
         ))}

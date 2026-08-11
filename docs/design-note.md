@@ -28,8 +28,8 @@ The visual direction was inspired by the independent [Design System Analysis: Ap
 | Dark panels | Near-black surfaces with white text | Separate methodology and evidence-heavy moments |
 | Typography | Native system sans-serif stack; system monospace fallbacks for IDs and metrics | Fast loading and no external font asset |
 | Layout | Wide whitespace, constrained reading widths, responsive grids, and horizontal table containment | Preserve editorial hierarchy while supporting technical density |
-| Navigation and identity | One compact project header, a profile action, a separate applicant/program ribbon, and a concise applicant biography directly below the hero actions | Establish the applicant before the prototype while avoiding a second large profile section |
-| Fictional-document risk signals | Five synthetic documents, each with six transparent-rule predictions | Six equal passage blocks per document, exact flagged count, plain-language leading signals, and High/Watch/Low reading priority |
+| Navigation and identity | One compact project header, a profile action, a separate applicant/program ribbon, and a full-width applicant biography beneath the aligned hero action/result row | Establish the applicant before the prototype without confining the biography to one hero column |
+| Fictional-document risk signals | Five synthetic documents, each with six transparent-rule predictions | Six coded passage cells per document, exact matched count, formal D/R/L/G/E/M labels, concise plain-English annotations, and High/Watch/Low reading priority |
 | Analytical figures | Semantic HTML/CSS bars with direct values, text labels, and one blue accent | Add visual comparison without a charting dependency or color-only meaning |
 
 The interface uses color and spacing to separate information roles, but methodology claims are carried by text, tables, IDs, and labels rather than visual polish alone.
@@ -38,7 +38,9 @@ The interface uses color and spacing to separate information roles, but methodol
 
 | Figure | Bundled input and measure | Encoding | Interpretation boundary |
 | --- | --- | --- | --- |
-| Fictional-document flag overview | Transparent-rule predictions for 5 fictional documents × 6 passages | Filled versus open passage blocks, exact flagged count, and direct High/Watch/Low reading-priority labels | More flags raise reading priority only; they do not rate company quality, predict returns, or represent probability |
+| Fictional-document risk matrix | Transparent-rule predictions for 5 fictional documents × 6 passages | Direct D/R/L/G/E/M codes, category color, formal label key, plain-English note, exact matched count, and High/Watch/Low reading-priority labels | More matches raise reading priority only; they do not rate company quality, predict returns, or represent probability |
+| IPO below-offer share | 36 of 52 IPOs in the frozen report snapshot | One 100% stacked horizontal bar with 36/16 counts, 69.2% direct label, and filled/open distinction | Describes current position versus offer price in the dated snapshot; it is not a prediction |
+| CB strict-zero share | 41 of 118 filing rows in the frozen 90-day snapshot | One 100% stacked horizontal bar with 41/77 counts, 34.7% direct label, and filled/open distinction | A 0% coupon and 0% maturity yield screen does not establish free financing, low dilution, or low refinancing risk |
 | CB strict-zero principal | Public CB Zero Finder snapshot captured 11 Aug 2026: 41 qualifying filing rows, 40 issuers, and 17,898.6억원 | Horizontal bars for the five largest rows plus exact aggregate counts | Only numeric `0.0%` in both coupon and maturity-yield fields qualifies; `-` is missing and excluded; zero stated rates do not establish low effective financing cost or verified proceeds |
 | IPO current return vs offer | Public IPO Market Report PDF data through 7 Aug 2026, generated 8 Aug 2026: 52 firms | Signed bars around a symmetric `0%` offer-price baseline for selected positive and negative observations; summary metrics remain visible | The portfolio freezes the report values: 19.5 trillion KRW offer market cap, +111.4% average first day, −5.1% average current, and 36 of 52 below offer |
 | Recall by risk label | 30 synthetic passages across 7 labels | Solid bars for document-held-out TF-IDF logistic regression; outlined bars for closed-corpus weighted rules; exact percentages and label counts remain visible | Liquidity recall is 25% (1 of 4) for the held-out baseline; the protocols differ, so the chart is diagnostic rather than a model ranking |
@@ -58,17 +60,18 @@ The production default identifies only `Prepared for graduate applications to UT
 ## Interaction and information hierarchy
 
 1. **Header and applicant ribbon** keep the project navigation thin, provide a persistent Profile action, and pair the applicant with the intended school context and non-affiliation boundary.
-2. **Hero, signal trace, and compact applicant profile** state the objective, introduce Yoochan Kim directly below the primary actions, and show a bilingual Korean rule trace.
-3. **Risk-signal overview** compares five fictional documents through exact flagged-passage counts and explains that the output is only a reading priority.
-4. **Production-tool bridge** uses compact tabs to pair a frozen real-market summary with one lazy-loaded source application at a time, then explicitly separates that evidence from the synthetic NLP workflow.
-5. **Problem and methodology** separate the research question from preprocessing, rules, trained classification, retrieval, and memo generation.
-6. **Dashboard and taxonomy** let the reviewer inspect Korean passages, English summaries, rule traces, evidence ranking, memo citations, and label definitions.
-7. **Evaluation** leads with per-label recall, then preserves fold details, confusion matrices, errors, and retrieval diagnostics under their respective protocols.
-8. **Limitations** ends the page with annotation provenance, non-affiliation, and non-use claims.
+2. **Hero and signal trace** align the source actions with the `Dilution Risk` result, preserve the formal risk term, and add a one-line plain-English interpretation.
+3. **Full-width applicant profile** introduces Yoochan Kim beneath both hero columns with larger typography and direct evidence links.
+4. **Risk-signal matrix** compares five fictional documents through exact passage codes and matched counts, while the adjacent glossary annotates each formal label for a non-finance reviewer.
+5. **Production-tool bridge** uses compact tabs and direct-labeled IPO/CB share bars to pair a frozen real-market summary with one lazy-loaded source application at a time, then explicitly separates that evidence from the synthetic NLP workflow.
+6. **Problem and methodology** separate the research question from preprocessing, rules, trained classification, retrieval, and memo generation.
+7. **Dashboard and taxonomy** let the reviewer inspect Korean passages, English summaries, rule traces, evidence ranking, memo citations, and label definitions.
+8. **Evaluation** leads with per-label recall, then preserves fold details, confusion matrices, errors, and retrieval diagnostics under their respective protocols.
+9. **Limitations** ends the page with annotation provenance, non-affiliation, and non-use claims.
 
 ## Accessibility and responsive intent
 
-The implementation includes semantic page regions and headings, a skip link, visible keyboard focus, labeled controls, and responsive grids. The desktop opening uses a single-row header, editorial left-aligned section headings, a compact applicant profile, and direct-labeled risk rows. Detailed evaluation artifacts are collapsed behind labeled native disclosure controls. Mobile condenses the header, stacks the applicant material, keeps the five-document risk view in compact rows, preserves 44-pixel primary control targets, and converts dense repeated content into cards or intentional horizontal scrollers. Wide evaluation tables and confusion matrices are contained so they can scroll rather than force the page beyond the viewport.
+The implementation includes semantic page regions and headings, a skip link, visible keyboard focus, labeled controls, and responsive grids. The desktop opening aligns the two hero columns at the action/result baseline, then gives the applicant profile the full content width. The risk matrix uses both color and direct letter codes, and the market-share bars use filled/open states plus exact counts. Detailed evaluation artifacts are collapsed behind labeled native disclosure controls. Mobile stacks the hero, enlarged profile, glossary, and five-document matrix without horizontal page overflow; primary controls preserve 44-pixel targets. Wide evaluation tables and confusion matrices remain inside intentional horizontal scrollers.
 
 The CSS is designed down to a 320-pixel viewport, but this note does not claim complete WCAG conformance. A formal assistive-technology and cross-browser audit has not been performed.
 

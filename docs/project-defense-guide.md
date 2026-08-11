@@ -26,7 +26,7 @@ Use this path only after personally rehearsing the controls and verifying that t
 
 | Time | Action | Point to explain |
 | --- | --- | --- |
-| 0:00–0:12 | Start at the applicant profile and five-document risk-signal overview, then open the IPO or CB production-tool tab. | The profile establishes the domain connection; the flag view is a fictional-corpus reading priority, not a company rating. The embedded source may update, but the portfolio summary is a dated, reproducible snapshot. |
+| 0:00–0:12 | Start with the aligned hero trace, full-width applicant profile, and five-document D/R/L/G/E/M risk matrix, then open the IPO or CB production-tool tab. | The profile establishes the domain connection; the matrix keeps the technical risk labels while annotating them for a general reviewer. It is a fictional-corpus reading priority, not a company rating. |
 | 0:12–0:30 | Point out the real/synthetic boundary, then select `Serim Neurochip — DART-style CB Terms Amendment`. | Real issuer rows receive no risk label; only the fictional corpus enters the NLP workflow. |
 | 0:30–0:48 | Choose the suggested query `조기상환청구권 상환 재원`, open the top result, and inspect its rule trace. | Retrieval is lexical; the rule score exposes phrase contributions and is not probability. |
 | 0:48–1:02 | Open the generated memo and identify one cited passage ID. | The memo is deterministic and retains an evidence trail rather than generating external facts. |
@@ -54,7 +54,8 @@ Use this path only after personally rehearsing the controls and verifying that t
 | `src/lib/memo.ts` | Builds a deterministic evidence-linked memo | Templates, passage citations, and absence of generated external facts |
 | `src/components/ProfileSection.tsx` | Presents the compact hero biography, organization links, and dated DART evidence | Why a dated public filing supports only the role shown on that filing and does not imply employer endorsement |
 | `src/components/EnglishPassageSummary.tsx` | Places the existing English rationale below every displayed Korean passage | Why the text is a concise AI-assisted orientation, not a literal or independently verified translation |
-| `src/components/RiskOverview.tsx` | Visualizes flagged-passage counts for all five fictional documents | How direct counts, filled versus open blocks, and plain-language labels support a general reader without overstating severity |
+| `src/components/RiskOverview.tsx` | Visualizes six coded passage results for all five fictional documents | How formal D/R/L/G/E/M codes, direct counts, category color, and concise annotations support a general reader without overstating severity |
+| `src/components/WorkflowBridgeSection.tsx` | Visualizes IPO below-offer and CB strict-zero shares inside the frozen market layer | Why the 36/52 and 41/118 denominators make the market screens understandable without attaching a model label to a real issuer |
 | `src/config/application-profile.ts` | Centralizes school-level copy, links, and badge colors | How the same research artifact stays degree-neutral for UT Austin and can be retagged without changing project claims |
 | `src/components/*` | Presents the English project interface | How UI traces connect back to Korean data and deterministic modules |
 

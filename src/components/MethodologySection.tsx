@@ -4,26 +4,26 @@ const steps = [
   {
     number: '01',
     title: 'Structure the event',
-    copy: 'Reimplement compact CB rate and issue-size filters plus IPO price-band and return calculations on fictional rows.',
-    output: 'CB screen + IPO context',
+    copy: 'Use the IPO report and bond finder to identify cases that deserve a closer look.',
+    output: 'A focused review question',
   },
   {
     number: '02',
     title: 'Prepare Korean passages',
-    copy: 'Normalize Korean disclosure-style text while preserving issuer, market, transaction, date, and passage metadata.',
-    output: '30 passages + AI-assisted labels',
+    copy: 'Clean the text and divide each fictional filing into six short, source-labeled passages.',
+    output: '30 traceable passages',
   },
   {
     number: '03',
     title: 'Classify and retrieve',
-    copy: 'Run inspectable weighted rules, a TF-IDF logistic-regression experiment, and lexical cosine retrieval.',
-    output: 'Labels + ranked evidence',
+    copy: 'Match transparent phrases, retrieve related passages, and keep a plain-English reason beside the Korean source.',
+    output: 'Risk question + evidence',
   },
   {
     number: '04',
     title: 'Evaluate and report',
-    copy: 'Hold out one entire document per ML fold, inspect both baselines, and assemble an evidence-linked memo.',
-    output: 'Metrics + memo + errors',
+    copy: 'Hide one whole document from the learned baseline, inspect errors, and generate a memo with passage citations.',
+    output: 'Results + visible mistakes',
   },
 ]
 
@@ -33,8 +33,8 @@ export function MethodologySection() {
       <div className="page-shell section-pad">
         <SectionHeading
           eyebrow="03 / Methodology"
-          title="From market screen to source-linked memo."
-          description="Structured calculations, Korean text processing, both baselines, retrieval, and memo generation run locally without an API key."
+          title="From a market question to an evidence-linked answer."
+          description="The workflow turns numbers and Korean text into inspectable results. It runs locally and needs no API key."
           inverse
         />
 
@@ -52,9 +52,9 @@ export function MethodologySection() {
         <div className="method-note">
           <span>Important distinction</span>
           <p>
-            TF-IDF search is lexical retrieval, not semantic understanding. The rule engine
-            remains the interactive baseline; logistic regression is a separate trained
-            development experiment whose softmax score is not calibrated confidence.
+            The interactive tool uses transparent phrase rules. A separate basic machine-learning
+            experiment tests whether patterns learned from four documents work on a fifth.
+            Neither score is an investment probability.
           </p>
         </div>
       </div>

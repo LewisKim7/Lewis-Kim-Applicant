@@ -193,10 +193,11 @@ The relevance set uses grades 1–2 and was drafted with AI assistance over the 
 The English interface includes:
 
 - one compact project header and a separate applicant/program ribbon;
-- a compact Yoochan Kim profile directly below the primary source and prototype actions;
-- an at-a-glance five-document risk-signal view with visible flag counts and plain-language review-priority thresholds;
+- a full-width Yoochan Kim profile beneath the aligned source actions and `Dilution Risk` trace;
+- an at-a-glance five-document risk matrix whose D/R/L/G/E/M passage codes retain the formal labels and pair each with a concise plain-English annotation;
 - a tabbed, lazy-loaded view of the two linked production tools;
 - a frozen IPO snapshot covering 52 firms and a strict CB `0.0% / 0.0%` snapshot covering 118 filing rows;
+- direct-labeled composition bars for 36 of 52 IPOs below offer price and 41 of 118 CB filing rows matching the strict 0% / 0% screen;
 - English labels for selected real issuer observations, kept separate from the synthetic evidence trail;
 - a five-document Korean source library;
 - document-level key facts and transaction metadata;
@@ -223,7 +224,7 @@ npm ci
 npm run verify
 ```
 
-`npm run verify` runs 60 deterministic tests, linting, TypeScript checks, and a production build. Tests freeze the five-document corpus, English-summary contract, classification and retrieval diagnostics, plain-language review-priority thresholds, matched-term glossary coverage, application-profile switching, frozen market-snapshot facts, source-tool tab behavior, and applicant-profile evidence links.
+`npm run verify` runs 62 deterministic tests, linting, TypeScript checks, and a production build. Tests freeze the five-document corpus, English-summary contract, classification and retrieval diagnostics, coded risk-matrix contract, plain-language annotations, matched-term glossary coverage, application-profile switching, frozen market-snapshot facts, market-share visual denominators, source-tool tab behavior, and applicant-profile evidence links.
 
 ### Start the development server
 
