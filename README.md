@@ -21,7 +21,7 @@ The University of Texas at Austin.
 
 Korea IPO & CB Risk Screener is an independent educational project created by Yoochan Kim (Lewis Kim · 김유찬) while preparing applications for graduate study in artificial intelligence and data science. It connects Korean capital-markets workflows with structured screening, Korean passage classification, lexical evidence retrieval, a trained text baseline, explicit evaluation, and deterministic memo generation.
 
-The interface is English so an international reviewer can follow the methodology. The disclosure-style source passages are Korean because Korean-language processing is the substantive problem being explored.
+The interface is English so an international reviewer can follow the methodology. The disclosure-style source passages remain Korean because Korean-language processing is the substantive problem being explored; every displayed Korean passage is followed by its concise AI-assisted English rationale as a summary, not a literal or independently verified translation.
 
 The market overview uses a dated, read-only snapshot of real public results from the applicant's two deployed tools. The five-document NLP corpus remains wholly synthetic. Real issuers are never inserted into the corpus or assigned a risk label.
 
@@ -52,6 +52,7 @@ Yoochan Kim contributed the Korean capital-markets framing, product objective, r
 | Retrieval diagnostic | 12 AI-assisted Korean queries; graded relevance; Precision@3, Recall@3, MRR@3, nDCG@3 |
 | Memo | Deterministic template with passage-ID citations |
 | Visual diagnostics | Frozen real-market CB/IPO snapshots and per-label baseline recall |
+| Plain-language screening view | Rule-predicted flags by fictional document, expressed as reading priority rather than a risk probability |
 | Runtime boundary | Core NLP needs no API key, remote model, or backend; source-tool embeds are optional |
 
 ## Research question
@@ -192,7 +193,8 @@ The relevance set uses grades 1–2 and was drafted with AI assistance over the 
 The English interface includes:
 
 - one compact project header and a separate applicant/program ribbon;
-- one flat evidence band that visualizes the frozen IPO and CB screens beside the held-out NLP diagnostic;
+- a compact Yoochan Kim profile directly below the primary source and prototype actions;
+- an at-a-glance five-document risk-signal view with visible flag counts and plain-language review-priority thresholds;
 - a tabbed, lazy-loaded view of the two linked production tools;
 - a frozen IPO snapshot covering 52 firms and a strict CB `0.0% / 0.0%` snapshot covering 118 filing rows;
 - English labels for selected real issuer observations, kept separate from the synthetic evidence trail;
@@ -200,6 +202,7 @@ The English interface includes:
 - document-level key facts and transaction metadata;
 - Korean TF-IDF evidence search;
 - a passage-level rule trace with Korean matched phrases and concise English glosses;
+- a concise English summary directly below every Korean passage shown in the hero, retrieval results, evidence table, and error inspection;
 - an evidence-linked deterministic memo;
 - a seven-label recall chart that distinguishes document-held-out ML from closed-corpus rules;
 - progressively disclosed fold tables, confusion matrices, retrieval cases, and visible errors;
@@ -220,7 +223,7 @@ npm ci
 npm run verify
 ```
 
-`npm run verify` runs 56 deterministic tests, linting, TypeScript checks, and a production build. Tests freeze the five-document corpus, classification and retrieval diagnostics, matched-term glossary coverage, application-profile switching, frozen market-snapshot facts, source-tool tab behavior, and applicant-profile evidence links.
+`npm run verify` runs 60 deterministic tests, linting, TypeScript checks, and a production build. Tests freeze the five-document corpus, English-summary contract, classification and retrieval diagnostics, plain-language review-priority thresholds, matched-term glossary coverage, application-profile switching, frozen market-snapshot facts, source-tool tab behavior, and applicant-profile evidence links.
 
 ### Start the development server
 

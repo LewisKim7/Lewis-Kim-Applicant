@@ -3,14 +3,11 @@ import { ApplicationBadge } from './ApplicationBadge'
 
 export function ApplicantContext() {
   return (
-    <section className="applicant-context" aria-labelledby="applicant-name">
+    <section className="applicant-context" aria-labelledby="application-context-title">
       <div className="page-shell applicant-card">
         <div className="applicant-card__identity">
-          <h2 id="applicant-name">
-            <span>Yoochan Kim</span>
-            <small>Lewis Kim · <span lang="ko">김유찬</span></small>
-          </h2>
-          <span>Finance × Korean capital-markets NLP</span>
+          <h2 id="application-context-title">Independent applicant portfolio</h2>
+          <span>Korean finance × transparent NLP</span>
         </div>
 
         <a

@@ -7196,3 +7196,504 @@ a.frozen-chart__company:hover strong {
     margin-top: 18px;
   }
 }
+
+/* Applicant-first hero, plain-language risk overview, and bilingual evidence. */
+.hero {
+  align-items: start;
+}
+
+.hero-profile {
+  display: grid;
+  grid-template-columns: 68px minmax(0, 1fr);
+  gap: 14px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line-strong);
+  scroll-margin-top: 92px;
+}
+
+.hero-profile > img {
+  width: 68px;
+  height: 68px;
+  border: 1px solid var(--line-strong);
+  border-radius: 18px;
+  object-fit: cover;
+  background: var(--paper-deep);
+}
+
+.hero-profile__body {
+  min-width: 0;
+}
+
+.hero-profile__body header {
+  display: flex;
+  gap: 9px;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.hero-profile__body header > span {
+  width: 100%;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.hero-profile__body h2 {
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 680;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.hero-profile__body h2 small {
+  margin-left: 5px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.hero-profile__body > p {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.48;
+}
+
+.hero-profile__body > p a {
+  color: var(--ink);
+  font-weight: 650;
+  text-decoration: underline;
+  text-decoration-color: #b8cbe0;
+  text-underline-offset: 2px;
+}
+
+.hero-profile__links {
+  display: flex;
+  gap: 6px 14px;
+  flex-wrap: wrap;
+  margin-top: 9px;
+}
+
+.hero-profile__links a {
+  display: inline-flex;
+  min-height: 32px;
+  gap: 5px;
+  align-items: center;
+  color: var(--accent);
+  font-size: 10.5px;
+  font-weight: 650;
+}
+
+.hero-profile__links a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.hero-profile__disclosure {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.risk-overview {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.risk-overview__header {
+  display: flex;
+  gap: 24px;
+  align-items: end;
+  justify-content: space-between;
+  padding: 18px 0 14px;
+}
+
+.risk-overview__header > div:first-child > span {
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.risk-overview__header h2 {
+  margin-top: 5px;
+  color: var(--ink);
+  font-size: clamp(1.25rem, 1.8vw, 1.55rem);
+  font-weight: 650;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+}
+
+.risk-overview__legend {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  color: var(--muted);
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.risk-overview__legend span {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.risk-overview__legend i {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+.risk-overview__legend i.is-high {
+  color: #9b3f22;
+  background: #9b3f22;
+}
+
+.risk-overview__legend i.is-watch {
+  color: var(--accent);
+  background: var(--accent);
+}
+
+.risk-overview__legend i.is-low {
+  color: #8e8e93;
+  background: transparent;
+}
+
+.risk-overview__rows {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.risk-overview__rows > li {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.9fr) 100px minmax(150px, 0.7fr) minmax(250px, 1.25fr);
+  gap: 16px;
+  align-items: center;
+  min-height: 56px;
+  border-bottom: 1px solid var(--line);
+}
+
+.risk-overview__document,
+.risk-overview__reading {
+  min-width: 0;
+}
+
+.risk-overview__document strong,
+.risk-overview__document span,
+.risk-overview__reading strong,
+.risk-overview__reading span {
+  display: block;
+}
+
+.risk-overview__document strong {
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.risk-overview__document span,
+.risk-overview__reading span {
+  margin-top: 3px;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.review-priority {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 25px;
+  align-items: center;
+  padding: 4px 8px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.review-priority.is-high {
+  color: #84361f;
+  background: #fff3ed;
+}
+
+.review-priority.is-watch {
+  color: #0057b8;
+  background: var(--accent-soft);
+}
+
+.review-priority.is-low {
+  color: #6e6e73;
+  background: var(--paper-deep);
+}
+
+.risk-overview__segments {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(8px, 1fr));
+  gap: 3px;
+}
+
+.risk-overview__segments i {
+  display: block;
+  height: 12px;
+  border: 1px solid #c7c7cc;
+  background: transparent;
+}
+
+.risk-overview__segments i.is-flagged {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.risk-overview__reading strong {
+  color: var(--ink);
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+.risk-overview__note {
+  padding: 11px 0 13px;
+  color: var(--muted);
+  font-size: 9.5px;
+  line-height: 1.45;
+}
+
+.risk-overview__note strong {
+  color: var(--ink);
+}
+
+.english-passage-summary {
+  display: block;
+  margin-top: 9px;
+  padding-left: 9px;
+  border-left: 2px solid #b8cbe0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.english-passage-summary > strong {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.english-passage-summary.is-compact {
+  margin-top: 6px;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.signal-console .english-passage-summary,
+.retrieval-panel .english-passage-summary {
+  border-left-color: #536c80;
+  color: #aebdc6;
+}
+
+.signal-console .english-passage-summary > strong,
+.retrieval-panel .english-passage-summary > strong {
+  color: var(--accent-bright);
+}
+
+.retrieval-panel .english-passage-summary {
+  padding-right: 6px;
+}
+
+.error-examples .english-passage-summary,
+.rule-error-strip .english-passage-summary {
+  margin-bottom: 10px;
+}
+
+.evidence-table th:nth-child(1) {
+  width: 40%;
+}
+
+.evidence-table th:nth-child(2) {
+  width: 16%;
+}
+
+.evidence-table th:nth-child(3) {
+  width: 25%;
+}
+
+.evidence-table th:nth-child(4) {
+  width: 19%;
+}
+
+@media (max-width: 900px) {
+  .risk-overview__rows > li {
+    grid-template-columns: minmax(170px, 1fr) 100px minmax(140px, 0.8fr);
+    padding-block: 10px;
+  }
+
+  .risk-overview__reading {
+    grid-column: 1 / -1;
+    padding-top: 7px;
+    border-top: 1px dashed var(--line);
+  }
+
+  .risk-overview__reading span {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 640px) {
+  .applicant-card {
+    grid-template-columns: minmax(0, 1fr) 142px;
+  }
+
+  .applicant-card__identity h2 {
+    font-size: 14px;
+  }
+
+  .applicant-card__identity > span {
+    font-size: 9.5px;
+  }
+
+  .applicant-card__disclaimer {
+    display: none;
+  }
+
+  .hero-profile {
+    grid-template-columns: 58px minmax(0, 1fr);
+    gap: 11px;
+    margin-top: 18px;
+    padding-top: 15px;
+  }
+
+  .hero-profile > img {
+    width: 58px;
+    height: 58px;
+    border-radius: 15px;
+  }
+
+  .hero-profile__body h2 {
+    font-size: 16px;
+  }
+
+  .hero-profile__body > p {
+    font-size: 10.5px;
+  }
+
+  .hero-profile__links {
+    grid-column: 1 / -1;
+  }
+
+  .hero-profile__links a {
+    min-height: 44px;
+  }
+
+  .signal-console__scores {
+    display: none;
+  }
+
+  .risk-overview__header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    padding-block: 16px 12px;
+  }
+
+  .risk-overview__header h2 {
+    font-size: 1.25rem;
+  }
+
+  .risk-overview__legend {
+    gap: 8px 11px;
+    justify-content: flex-start;
+    white-space: normal;
+  }
+
+  .risk-overview__rows > li {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px 12px;
+    min-height: 0;
+    padding-block: 10px;
+  }
+
+  .risk-overview__document strong,
+  .risk-overview__document span {
+    white-space: normal;
+  }
+
+  .risk-overview__segments {
+    grid-column: 1;
+  }
+
+  .risk-overview__reading {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 6px;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-top: 6px;
+  }
+
+  .risk-overview__reading span {
+    margin-top: 0;
+    text-align: right;
+  }
+
+  .risk-overview__note {
+    font-size: 9px;
+  }
+
+  .english-passage-summary {
+    font-size: 10.5px;
+  }
+}
+
+@media (max-width: 380px) {
+  .applicant-card {
+    grid-template-columns: 1fr;
+  }
+
+  .applicant-card__program {
+    grid-column: 1;
+    min-height: 44px;
+    padding: 8px 0 0;
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+  .hero-profile__body > p {
+    grid-column: 1 / -1;
+  }
+
+  .risk-overview__reading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .risk-overview__reading span {
+    text-align: left;
+  }
+}
