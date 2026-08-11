@@ -8,7 +8,7 @@
 | --- | --- |
 | Created and directed by | **김유찬 (Yoochan Kim · Lewis)** |
 | Professional context | Finance and deep-tech investment professional |
-| Program of interest | [Master of Science in Artificial Intelligence](https://cdso.utexas.edu/msai), The University of Texas at Austin |
+| Application context | Graduate study in artificial intelligence and data science at The University of Texas at Austin |
 | Applicant direction | Korean capital-markets problem framing, risk taxonomy, product requirements, and evaluation questions |
 
 This is optional supporting evidence for an application, not an official UT Austin
@@ -17,7 +17,7 @@ The University of Texas at Austin.
 
 ![Korea IPO and CB Risk Screener interface](docs/assets/portfolio-preview.png)
 
-Korea IPO & CB Risk Screener is an independent educational project created by 김유찬 (Yoochan Kim · Lewis) while preparing an application for graduate study in artificial intelligence. It connects Korean capital-markets workflows with structured screening, Korean passage classification, lexical evidence retrieval, a trained text baseline, explicit evaluation, and deterministic memo generation.
+Korea IPO & CB Risk Screener is an independent educational project created by 김유찬 (Yoochan Kim · Lewis) while preparing applications for graduate study in artificial intelligence and data science. It connects Korean capital-markets workflows with structured screening, Korean passage classification, lexical evidence retrieval, a trained text baseline, explicit evaluation, and deterministic memo generation.
 
 The interface is English so an international reviewer can follow the methodology. The disclosure-style source passages are Korean because Korean-language processing is the substantive problem being explored.
 
@@ -192,7 +192,7 @@ The English interface includes:
 - a five-document Korean source library;
 - document-level key facts and transaction metadata;
 - Korean TF-IDF evidence search;
-- a passage-level rule trace and annotation rationale;
+- a passage-level rule trace with Korean matched phrases and concise English glosses;
 - an evidence-linked deterministic memo;
 - a seven-label recall chart that distinguishes document-held-out ML from closed-corpus rules;
 - a trained-baseline fold table and confusion matrix;
@@ -213,7 +213,7 @@ npm ci
 npm run verify
 ```
 
-`npm run verify` runs linting, 43 deterministic tests, TypeScript checks, and a production build. Tests freeze the five-document corpus, classification and retrieval diagnostics, the CB screen and visualization summary, and the IPO summary.
+`npm run verify` runs the deterministic test suite, linting, TypeScript checks, and a production build. Tests freeze the five-document corpus, classification and retrieval diagnostics, matched-term glossary coverage, application-profile switching, the CB screen and visualization summary, and the IPO summary.
 
 ### Start the development server
 
@@ -223,10 +223,23 @@ npm run dev
 
 Open the local URL printed by Vite.
 
+### Application-profile switch
+
+The live default uses a school-level `UT Austin graduate application` label and does not name a specific degree in the top ribbon. Program copy and official links are centralized in [`src/config/application-profile.ts`](src/config/application-profile.ts).
+
+To preview the same portfolio with the bundled Georgia Tech OMSA profile:
+
+```bash
+VITE_APPLICATION_PROFILE=georgia-tech-omsa npm run dev
+```
+
+The switch changes applicant-context copy, institution links, and non-affiliation language without changing the project, evidence, or evaluation claims. The UT profile remains the production default.
+
 ## Repository guide
 
 ```text
 src/
+  config/       Switchable graduate-application profile and official program links
   components/   English interface and evaluation views
   data/         Korean corpus plus fictional CB and IPO rows
   domain/       Document, passage, market, workflow, and taxonomy types

@@ -5,6 +5,7 @@ import {
   analyzePassages,
   createTfidfIndex,
   generateRiskMemo,
+  matchedTermEnglishGloss,
   type AnalyzedPassage,
   type RiskMemo,
 } from '../lib'
@@ -49,7 +50,7 @@ function EvidenceView({
           <tr>
             <th scope="col">Passage</th>
             <th scope="col">Baseline result</th>
-            <th scope="col">Matched terms</th>
+            <th scope="col">Matched terms · English gloss</th>
             <th scope="col">Why it matters</th>
           </tr>
         </thead>
@@ -79,9 +80,18 @@ function EvidenceView({
               <td data-label="Matched terms">
                 <div className="keyword-list">
                   {classification.matchedKeywords.length ? (
-                    classification.matchedKeywords.slice(0, 4).map((keyword) => (
-                      <code key={keyword}>{keyword}</code>
-                    ))
+                    classification.matchedKeywords.slice(0, 4).map((keyword) => {
+                      const englishGloss = matchedTermEnglishGloss(keyword)
+                      return (
+                        <code
+                          aria-label={englishGloss ? `${keyword}: ${englishGloss}` : keyword}
+                          key={keyword}
+                        >
+                          <span lang="ko">{keyword}</span>
+                          {englishGloss ? <small lang="en">{englishGloss}</small> : null}
+                        </code>
+                      )
+                    })
                   ) : (
                     <span className="no-match">No configured risk phrase</span>
                   )}

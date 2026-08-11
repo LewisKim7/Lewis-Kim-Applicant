@@ -1,4 +1,4 @@
-const PROGRAM_URL = 'https://cdso.utexas.edu/msai'
+import { APPLICATION_CONTEXT } from '../config/application-profile'
 
 export function ApplicantContext() {
   return (
@@ -14,17 +14,23 @@ export function ApplicantContext() {
 
         <a
           className="applicant-card__program"
-          href={PROGRAM_URL}
+          href={APPLICATION_CONTEXT.overviewUrl}
           target="_blank"
           rel="noreferrer"
         >
-          <span>UT Austin MSAI application</span>
-          <strong>Master of Science in Artificial Intelligence</strong>
-          <small>Official program page ↗</small>
+          <span className="applicant-card__program-label--long">
+            {APPLICATION_CONTEXT.contextLabel}
+          </span>
+          <span className="applicant-card__program-label--compact">
+            {APPLICATION_CONTEXT.compactLabel}
+          </span>
+          <strong>{APPLICATION_CONTEXT.portfolioLabel}</strong>
+          <small>Official graduate-program page ↗</small>
         </a>
 
         <p className="applicant-card__disclaimer">
-          Independent applicant portfolio · not affiliated with or endorsed by UT Austin.
+          Independent applicant portfolio · not affiliated with or endorsed by{' '}
+          {APPLICATION_CONTEXT.institutionShort}.
         </p>
       </div>
     </section>

@@ -44,9 +44,13 @@ The CB figure deliberately distinguishes the all-row principal view from the sep
 
 ## Language architecture
 
-Navigation, headings, explanations, controls, evaluation notes, and limitations are in English. The synthetic source passages remain Korean. This deliberately lets an international admissions reviewer understand the project structure while seeing that the preprocessing and evidence task operate on Korean-language inputs.
+Navigation, headings, explanations, controls, evaluation notes, and limitations are in English. The synthetic source passages remain Korean. Each Korean rule phrase shown under `Matched terms` carries a concise English finance-context gloss so an international reviewer can understand the signal without losing the original text.
 
-Korean passages are not translated inside the evidence trail because a translation could become a second, unverified source. English metadata and explanations provide orientation without replacing the original synthetic text.
+Full Korean passages are not translated inside the evidence trail because a full translation could become a second, unverified source. English term glosses, metadata, and explanations provide orientation without replacing the original synthetic text.
+
+## Switchable application context
+
+The production default identifies only a `UT Austin graduate application`; it does not name MSAI or MSDS in the top ribbon. School, program-link, and non-affiliation copy are centralized in `src/config/application-profile.ts`. Setting `VITE_APPLICATION_PROFILE=georgia-tech-omsa` swaps the visible application context to the bundled Georgia Tech analytics profile while leaving all research and evaluation claims unchanged.
 
 ## Interaction and information hierarchy
 

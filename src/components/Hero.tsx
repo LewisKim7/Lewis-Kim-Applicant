@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
 import { ALL_PASSAGES } from '../data/corpus'
-import { classifyPassage } from '../lib'
+import { classifyPassage, matchedTermEnglishGloss } from '../lib'
 
 const SOURCE_URL = 'https://github.com/LewisKim7/Korea-IPO-CB-Risk-Screener'
 const TRACE_PASSAGE = (() => {
@@ -18,6 +18,9 @@ const TRACE_SCORES = [
   { label: 'governance', value: TRACE_RESULT.rawScores['Governance Risk'] },
 ] as const
 const MAX_TRACE_SCORE = Math.max(...TRACE_SCORES.map(({ value }) => value), 1)
+const TRACE_ENGLISH_GLOSSES = TRACE_RESULT.matchedKeywords.map(
+  (keyword) => matchedTermEnglishGloss(keyword) ?? keyword,
+)
 
 function traceBarStyle(value: number): CSSProperties {
   return {
@@ -91,9 +94,12 @@ export function Hero() {
           <div>
             <p className="console-label">Primary label</p>
             <strong>{TRACE_RESULT.predictedLabel}</strong>
-            <p>
-              Matched: {TRACE_RESULT.matchedKeywords.join(', ')} ·{' '}
-              {(TRACE_RESULT.signalScore * 100).toFixed(1)}% heuristic, not a probability
+            <p className="signal-console__match">
+              <span>Matched (KO): {TRACE_RESULT.matchedKeywords.join(', ')}</span>
+              <span>English: {TRACE_ENGLISH_GLOSSES.join(', ')}</span>
+              <small>
+                {(TRACE_RESULT.signalScore * 100).toFixed(1)}% heuristic, not a probability
+              </small>
             </p>
           </div>
         </div>

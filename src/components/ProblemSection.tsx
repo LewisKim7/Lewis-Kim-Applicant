@@ -24,7 +24,7 @@ export function ProblemSection() {
             <span>01</span>
             <div>
               <h3>Inspect the path</h3>
-              <p>Expose Korean matched phrases and per-label scores, not only the final label.</p>
+              <p>Expose Korean matched phrases, English glosses, and per-label scores—not only the final label.</p>
             </div>
           </article>
           <article>

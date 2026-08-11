@@ -1403,16 +1403,26 @@ meter::-moz-meter-bar {
 .keyword-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 6px;
 }
 
 .keyword-list code {
-  padding: 4px 6px;
+  display: inline-grid;
+  gap: 2px;
+  padding: 5px 7px;
   border-radius: 3px;
   color: var(--accent);
   background: var(--accent-soft);
   font-family: var(--mono);
-  font-size: 0.58rem;
+  font-size: 0.64rem;
+  line-height: 1.2;
+}
+
+.keyword-list code small {
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  font-size: 0.61rem;
+  line-height: 1.25;
 }
 
 .no-match {
@@ -4234,6 +4244,10 @@ html {
   font-size: 10px;
 }
 
+.applicant-card__program-label--compact {
+  display: none;
+}
+
 .applicant-card__program strong {
   margin-top: 3px;
   font-size: 13px;
@@ -4938,6 +4952,14 @@ html {
     text-transform: none;
   }
 
+  .applicant-card__program-label--long {
+    display: none;
+  }
+
+  .applicant-card__program-label--compact {
+    display: block;
+  }
+
   .applicant-card__program strong,
   .applicant-card__program small {
     display: none;
@@ -5020,7 +5042,7 @@ html {
     -webkit-line-clamp: 2;
   }
 
-  .signal-console__result p:last-child {
+.signal-console__result p:last-child {
     display: -webkit-box;
     overflow: hidden;
     -webkit-box-orient: vertical;
@@ -5210,6 +5232,30 @@ html {
   .method-grid p,
   .method-grid__output {
     grid-column: 2;
+  }
+}
+
+.signal-console__match > span,
+.signal-console__match > small {
+  display: block;
+}
+
+.signal-console__match > span + span {
+  margin-top: 4px;
+  color: #e5f1ed;
+}
+
+.signal-console__match > small {
+  margin-top: 5px;
+  color: #8da198;
+  font-size: 0.62rem;
+}
+
+@media (max-width: 640px) {
+  .signal-console__result .signal-console__match {
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: unset;
   }
 }
 
