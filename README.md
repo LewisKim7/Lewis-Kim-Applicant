@@ -2,7 +2,7 @@
 
 > A transparent Korean-language NLP prototype for convertible-bond and IPO disclosure analysis.
 
-[Live demo](https://lewis-kim-applicant.vercel.app/) · [Public source snapshot](https://github.com/LewisKim7/Korea-IPO-CB-Risk-Screener)
+[Live demo](https://lewis-kim-applicant.vercel.app/) · [Public source snapshot](https://github.com/LewisKim7/lewis-kim-applicant)
 
 | Applicant context | Detail |
 | --- | --- |
@@ -60,7 +60,7 @@ Korean convertible-bond issuance decisions and IPO prospectuses contain structur
 
 This project asks:
 
-> Can a transparent Korean-language NLP workflow connect structured IPO and CB screening with passage-level risk triage while keeping every conclusion linked to inspectable evidence?
+> Can transparent Korean NLP connect IPO and CB screens to inspectable passage-level evidence?
 
 The objective is not automated investment judgment. It is to make the problem formulation, data, rules, learned baseline, evidence trail, errors, and limitations visible.
 
@@ -192,6 +192,7 @@ The relevance set uses grades 1–2 and was drafted with AI assistance over the 
 The English interface includes:
 
 - one compact project header and a separate applicant/program ribbon;
+- one flat evidence band that visualizes the frozen IPO and CB screens beside the held-out NLP diagnostic;
 - a tabbed, lazy-loaded view of the two linked production tools;
 - a frozen IPO snapshot covering 52 firms and a strict CB `0.0% / 0.0%` snapshot covering 118 filing rows;
 - English labels for selected real issuer observations, kept separate from the synthetic evidence trail;
@@ -201,8 +202,8 @@ The English interface includes:
 - a passage-level rule trace with Korean matched phrases and concise English glosses;
 - an evidence-linked deterministic memo;
 - a seven-label recall chart that distinguishes document-held-out ML from closed-corpus rules;
-- a trained-baseline fold table and confusion matrix;
-- the closed-corpus rule confusion matrix and five visible rule errors; and
+- progressively disclosed fold tables, confusion matrices, retrieval cases, and visible errors;
+- the closed-corpus rule confusion matrix and five inspectable rule errors; and
 - limitations, AI-assistance disclosure, and non-affiliation language.
 
 ## Run locally

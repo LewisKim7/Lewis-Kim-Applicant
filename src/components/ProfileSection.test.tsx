@@ -11,7 +11,7 @@ describe('applicant profile section', () => {
     const { container } = render(<ProfileSection />)
 
     expect(screen.getByRole('heading', {
-      name: 'Korean capital-markets experience, translated into a testable NLP project.',
+      name: 'Finance experience, translated into a testable NLP project.',
     })).toBeTruthy()
     expect(
       screen.getByRole('link', { name: 'Hanyang University' }).getAttribute('href'),

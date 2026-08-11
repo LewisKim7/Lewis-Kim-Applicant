@@ -5,17 +5,16 @@ export function ProblemSection() {
     <section className="problem-section page-shell section-pad" id="problem">
       <SectionHeading
         eyebrow="02 / Problem framing"
-        title="Korean deal terms are structured. Their implications are not."
-        description="A CB issuance decision or IPO prospectus can spread dilution, repayment, liquidity, control, and execution signals across tables and dense Korean text. The task is to structure first-pass review without automating investment judgment."
+        title="From deal terms to traceable evidence."
+        description="IPO and CB risks are scattered across structured terms and dense Korean text. This prototype organizes first-pass review without automating investment judgment."
       />
 
       <div className="problem-grid">
         <blockquote className="research-question">
           <span>Research question</span>
           <p>
-            Can a transparent Korean-language NLP workflow connect structured IPO and CB
-            screening with passage-level risk triage while keeping every conclusion linked
-            to inspectable evidence?
+            Can transparent Korean NLP connect IPO and CB screens to inspectable passage-level
+            evidence?
           </p>
         </blockquote>
 

@@ -217,8 +217,8 @@ export function WorkflowBridgeSection() {
       <div className="page-shell section-pad">
         <SectionHeading
           eyebrow="01 / Production tools"
-          title="Two finance tools. One AI question."
-          description="Real, dated Korean market evidence—translated into English and linked to the NLP questions I want to study further."
+          title="Two live tools. One NLP study."
+          description="Frozen Korean market evidence is translated and visualized separately from the synthetic NLP evaluation."
         />
 
         <div className="tool-tabs" role="tablist" aria-label="Applicant finance tools">

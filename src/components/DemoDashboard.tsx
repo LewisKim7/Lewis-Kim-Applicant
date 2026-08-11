@@ -235,8 +235,8 @@ export function DemoDashboard() {
     <section className="prototype-section page-shell section-pad" id="prototype">
       <SectionHeading
         eyebrow="04 / Interactive prototype"
-        title="Select a Korean filing scenario. Follow every label back to its sentence."
-        description="Five fictional KOSPI/KOSDAQ IPO and CB documents form a 30-passage educational corpus. Choose a source, search in Korean, and inspect the deterministic rule path."
+        title="Search, classify, and trace every result."
+        description="Choose one of five synthetic Korean filing scenarios, search the 30-passage corpus, and inspect the deterministic rule path."
       />
 
       <div className="dataset-strip" role="group" aria-label="Synthetic document library">
