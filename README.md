@@ -27,7 +27,7 @@ The interface is English so an international reviewer can follow the methodology
 
 | Time | Suggested path |
 | --- | --- |
-| 90 seconds | Open the [live demo](https://ai-disclosure-risk-screener.vercel.app/), select a document, run a Korean query, open one rule trace, and inspect the visible Q12 retrieval failure in Evaluation. |
+| 90 seconds | Open the [live demo](https://ai-disclosure-risk-screener.vercel.app/), inspect the fictional CB/IPO market screen, select a document, run a Korean query, and compare the per-label recall traces in Evaluation. |
 | 5 minutes | Read the research question, document-held-out protocol, exact ML errors, retrieval diagnostic, and limitations on this page. |
 | Reproduce | Run `npm ci && npm run verify`; no API key, backend, network model, or private dataset is required. |
 
@@ -47,6 +47,7 @@ The interface is English so an international reviewer can follow the methodology
 | Retrieval | TF-IDF cosine lexical ranking |
 | Retrieval diagnostic | 12 AI-assisted Korean queries; graded relevance; Precision@3, Recall@3, MRR@3, nDCG@3 |
 | Memo | Deterministic template with passage-ID citations |
+| Visual diagnostics | CB proposed-principal ranking, IPO return-to-offer chart, and per-label baseline recall |
 | External services | No API key, remote model, or backend required |
 
 ## Research question
@@ -72,9 +73,10 @@ The relationship is conceptual only. Neither existing repository nor any product
 
 | Workflow | Bundled sample | Deterministic result |
 | --- | --- | --- |
-| CB screen | 4 fictional rows; surface rate `0.0%`; minimum issue size 200억원 | 2 matches totaling 520억원 |
+| CB principal view | All 4 fictional rows; 790억원 total proposed principal | 1 explicit coupon `0.0%` + maturity yield `0.0%` match: 220억원, or 27.8% of the sample |
+| CB filter check | Surface rate `0.0%`; minimum issue size 200억원 | 2 matches totaling 520억원 |
 | IPO snapshot | 6 fictional observations as of 2026-07-31 | Total offer market capitalization 42,000억원 |
-| IPO returns | Same 2026-07-31 snapshot | Median first-day return 12.5%; median current return 1.47% |
+| IPO return view | Same 2026-07-31 snapshot; signed current return against a symmetric offer-price baseline | Median first-day return 12.5%; median current return 1.47% |
 | IPO downside count | Same 6 observations | 3 of 6, or 50%, below offer price as of 2026-07-31 |
 
 These values validate the local screening and aggregation functions. They are not market statistics.
@@ -184,12 +186,15 @@ The relevance set uses grades 1–2 and was drafted with AI assistance over the 
 
 The English interface includes:
 
-- structured CB and IPO workflow summaries;
+- one compact project header and a separate applicant/program ribbon;
+- a proposed-principal CB ranking across all four fictional rows, with the single explicit `0.0% / 0.0%` match directly labeled;
+- a signed current-return chart for the six fictional IPO observations;
 - a five-document Korean source library;
 - document-level key facts and transaction metadata;
 - Korean TF-IDF evidence search;
 - a passage-level rule trace and annotation rationale;
 - an evidence-linked deterministic memo;
+- a seven-label recall chart that distinguishes document-held-out ML from closed-corpus rules;
 - a trained-baseline fold table and confusion matrix;
 - the closed-corpus rule confusion matrix and five visible rule errors; and
 - limitations, AI-assistance disclosure, and non-affiliation language.
@@ -208,7 +213,7 @@ npm ci
 npm run verify
 ```
 
-`npm run verify` runs linting, 42 deterministic tests, TypeScript checks, and a production build. Tests freeze the five-document corpus, classification and retrieval diagnostics, the CB screen, and the IPO summary.
+`npm run verify` runs linting, 43 deterministic tests, TypeScript checks, and a production build. Tests freeze the five-document corpus, classification and retrieval diagnostics, the CB screen and visualization summary, and the IPO summary.
 
 ### Start the development server
 

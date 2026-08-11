@@ -4,7 +4,7 @@ export function ProblemSection() {
   return (
     <section className="problem-section page-shell section-pad" id="problem">
       <SectionHeading
-        eyebrow="01 / Problem framing"
+        eyebrow="02 / Problem framing"
         title="Korean deal terms are structured. Their implications are not."
         description="A CB issuance decision or IPO prospectus can spread dilution, repayment, liquidity, control, and execution signals across tables and dense Korean text. The task is to structure first-pass review without automating investment judgment."
       />

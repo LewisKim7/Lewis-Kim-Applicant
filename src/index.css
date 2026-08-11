@@ -4091,3 +4091,1163 @@ body {
     padding-top: 44px;
   }
 }
+
+/* Visual story pass: one compact header, one applicant ribbon, and data-first panels. */
+html {
+  scroll-padding-top: 76px;
+}
+
+.site-header {
+  min-height: 64px;
+  border-bottom: 1px solid #272729;
+  background: rgba(0, 0, 0, 0.94);
+  backdrop-filter: saturate(160%) blur(18px);
+}
+
+.site-header__bar {
+  display: grid;
+  grid-template-columns: minmax(250px, auto) minmax(0, 1fr) auto;
+  gap: 28px;
+  align-items: center;
+  min-height: 64px;
+}
+
+.header-brand,
+.header-actions,
+.header-nav {
+  display: flex;
+  align-items: center;
+}
+
+.header-brand {
+  min-width: 0;
+  min-height: 44px;
+  gap: 10px;
+  color: #f5f5f7;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.header-brand img {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  flex: 0 0 auto;
+}
+
+.header-brand__short {
+  display: none;
+}
+
+.header-nav {
+  gap: 24px;
+  justify-content: center;
+  color: #a1a1a6;
+  font-size: 12px;
+}
+
+.header-nav a,
+.header-source,
+.header-explore {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+}
+
+.header-nav a:hover,
+.header-source:hover {
+  color: #ffffff;
+}
+
+.header-actions {
+  gap: 14px;
+  justify-self: end;
+}
+
+.header-source {
+  color: #d2d2d7;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+.header-explore {
+  min-width: 82px;
+  justify-content: center;
+  padding-inline: 18px;
+  border-radius: 999px;
+  color: #ffffff;
+  background: var(--accent);
+  font-size: 13px;
+}
+
+.header-explore:hover {
+  background: #0071e3;
+}
+
+.analysis-tablist button {
+  min-height: 44px;
+}
+
+.applicant-card {
+  grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1fr) minmax(230px, 0.72fr);
+  gap: 0;
+  min-height: 84px;
+  padding-block: 12px;
+}
+
+.applicant-card__identity,
+.applicant-card__program,
+.applicant-card__disclaimer {
+  display: flex;
+  min-width: 0;
+  min-height: 58px;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.applicant-card__identity {
+  padding-right: 24px;
+}
+
+.applicant-card__identity h2 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.applicant-card__identity > span {
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.applicant-card__program {
+  grid-column: auto;
+  padding: 0 24px;
+  border-top: 0;
+  border-left: 1px solid var(--line-strong);
+}
+
+.applicant-card__program > span {
+  font-size: 10px;
+}
+
+.applicant-card__program strong {
+  margin-top: 3px;
+  font-size: 13px;
+}
+
+.applicant-card__program small {
+  margin-top: 2px;
+  font-size: 10px;
+}
+
+.applicant-card__disclaimer {
+  grid-column: auto;
+  padding: 0 0 0 24px;
+  border-top: 0;
+  border-left: 1px solid var(--line-strong);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.hero {
+  min-height: 0;
+  gap: 56px 72px;
+  padding-top: 64px;
+  padding-bottom: 56px;
+}
+
+.hero h1 {
+  font-size: clamp(4rem, 6vw, 5.5rem);
+}
+
+.hero__contribution {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.hero__contribution strong {
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.hero__contribution p {
+  max-width: 850px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.hero-metrics {
+  margin-top: 0;
+}
+
+.market-visual-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.14fr) minmax(380px, 0.86fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.market-chart {
+  min-width: 0;
+  margin: 0;
+  padding: 30px;
+  border: 1px solid var(--line-strong);
+  border-radius: 18px;
+  background: var(--white);
+}
+
+.market-chart figcaption {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.market-chart__eyebrow {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.market-chart figcaption h3 {
+  margin-top: 7px;
+  color: var(--ink);
+  font-size: 28px;
+  font-weight: 650;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.market-chart figcaption p {
+  max-width: 560px;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.market-chart figcaption > a {
+  display: inline-flex;
+  min-width: max-content;
+  min-height: 44px;
+  align-items: center;
+  padding-inline: 15px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 12px;
+}
+
+.market-chart figcaption > a:hover {
+  border-color: var(--accent);
+}
+
+.market-chart__kpis {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 28px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.market-chart__kpis > div {
+  min-width: 0;
+  padding: 16px;
+  border-right: 1px solid var(--line);
+}
+
+.market-chart__kpis > div:first-child {
+  padding-left: 0;
+}
+
+.market-chart__kpis > div:last-child {
+  border-right: 0;
+}
+
+.market-chart__kpis dt {
+  color: var(--ink);
+  font-size: 22px;
+  font-weight: 650;
+  letter-spacing: -0.035em;
+}
+
+.market-chart__kpis dd {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.cb-funding-bars,
+.ipo-return-bars {
+  display: grid;
+  gap: 16px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cb-funding-bars > li {
+  display: grid;
+  grid-template-columns: 148px minmax(0, 1fr);
+  gap: 8px 18px;
+  align-items: center;
+  min-width: 0;
+  padding-left: 10px;
+  border-left: 3px solid transparent;
+}
+
+.cb-funding-bars > li.is-both-zero {
+  border-left-color: var(--accent);
+}
+
+.cb-funding-bars__label {
+  display: flex;
+  grid-row: 1 / 3;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.cb-funding-bars__label strong {
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cb-funding-bars__label span {
+  margin-top: 3px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.cb-funding-bars__terms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.cb-funding-bars__terms span,
+.cb-funding-bars__terms em {
+  padding: 3px 7px;
+  border-radius: 999px;
+  color: var(--muted);
+  background: var(--paper-deep);
+  font-size: 9px;
+  font-style: normal;
+  line-height: 1.3;
+}
+
+.cb-funding-bars__terms em {
+  color: var(--accent);
+  background: var(--accent-soft);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.cb-funding-bars__track {
+  display: block;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--line);
+}
+
+.cb-funding-bars__track > span {
+  display: block;
+  width: var(--bar-size);
+  height: 100%;
+  border-radius: inherit;
+  background: #a1a1a6;
+}
+
+.is-both-zero .cb-funding-bars__track > span {
+  background: var(--accent);
+}
+
+.market-chart__note {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.ipo-return-axis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 26px 48px 0 112px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 9px;
+}
+
+.ipo-return-axis span:nth-child(2) {
+  text-align: center;
+}
+
+.ipo-return-axis span:last-child {
+  text-align: right;
+}
+
+.ipo-return-bars > li {
+  display: grid;
+  grid-template-columns: 98px minmax(0, 1fr) 48px;
+  gap: 10px;
+  align-items: center;
+}
+
+.ipo-return-bars > li > span:first-child {
+  overflow: hidden;
+  color: var(--ink-soft);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ipo-return-bars > li > strong {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-align: right;
+}
+
+.ipo-return-bars__track {
+  position: relative;
+  display: block;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--paper-deep);
+}
+
+.ipo-return-bars__track::before {
+  position: absolute;
+  z-index: 2;
+  top: -3px;
+  bottom: -3px;
+  left: 50%;
+  width: 1px;
+  background: var(--ink-soft);
+  content: "";
+}
+
+.ipo-return-bars__track > span {
+  position: absolute;
+  top: 1px;
+  width: var(--return-size);
+  height: 8px;
+}
+
+.ipo-return-bars .is-positive .ipo-return-bars__track > span {
+  left: 50%;
+  background: var(--accent);
+}
+
+.ipo-return-bars .is-negative .ipo-return-bars__track > span {
+  right: 50%;
+  border: 1px solid var(--muted);
+  background: var(--white);
+}
+
+.ipo-return-bars .is-positive > strong {
+  color: var(--accent);
+}
+
+.ipo-return-bars .is-negative > strong {
+  color: var(--ink-soft);
+}
+
+.market-chart__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.market-chart__legend span {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.market-chart__legend i {
+  width: 14px;
+  height: 7px;
+  background: var(--accent);
+}
+
+.market-chart__legend i.is-negative {
+  border: 1px solid var(--muted);
+  background: var(--white);
+}
+
+.evaluation-visual-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.55fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.recall-comparison,
+.evaluation-protocols {
+  min-width: 0;
+  padding: 28px;
+  border: 1px solid var(--line-strong);
+  border-radius: 18px;
+  background: var(--white);
+}
+
+.recall-comparison {
+  margin: 0;
+}
+
+.workflow-section .section-pad {
+  padding-block: 72px;
+}
+
+.workflow-section .section-heading {
+  max-width: 780px;
+  margin-bottom: 44px;
+}
+
+.workflow-section .section-heading h2 {
+  font-size: clamp(2.8rem, 4.5vw, 3.8rem);
+}
+
+.workflow-section .section-heading__description {
+  margin-top: 18px;
+}
+
+.evaluation-section.section-pad {
+  padding-block: 72px;
+}
+
+.evaluation-section .section-heading {
+  max-width: 820px;
+  margin-bottom: 44px;
+}
+
+.evaluation-section .section-heading h2 {
+  font-size: clamp(2.8rem, 4.5vw, 3.8rem);
+}
+
+.evaluation-section .section-heading__description {
+  margin-top: 18px;
+}
+
+.recall-comparison figcaption {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.recall-comparison figcaption h3 {
+  margin-top: 6px;
+  font-size: 24px;
+  letter-spacing: -0.035em;
+}
+
+.recall-comparison figcaption > p {
+  max-width: 280px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.4;
+  text-align: right;
+}
+
+.recall-comparison ul {
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recall-comparison li {
+  display: grid;
+  grid-template-columns: 154px minmax(0, 1fr) minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  padding: 11px 0;
+  border-top: 1px solid var(--line);
+}
+
+.recall-comparison li.is-weakest {
+  margin-inline: -10px;
+  padding-inline: 10px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+}
+
+.recall-comparison__label {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.recall-comparison__label span {
+  overflow: hidden;
+  font-size: 11px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recall-comparison__label small {
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.recall-comparison__lane {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 38px;
+  gap: 7px;
+  align-items: center;
+}
+
+.recall-comparison__lane > span,
+.recall-comparison__lane > strong {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 9px;
+}
+
+.recall-comparison__lane > strong {
+  color: var(--ink-soft);
+  text-align: right;
+}
+
+.recall-comparison__lane > i {
+  display: block;
+  height: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--line);
+}
+
+.recall-comparison__lane > i > i {
+  display: block;
+  width: var(--recall-size);
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+}
+
+.recall-comparison__lane--rule > i > i {
+  border: 1px solid var(--muted);
+  background: var(--white);
+}
+
+.recall-comparison__note {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.evaluation-protocols {
+  display: grid;
+  gap: 12px;
+  background: var(--paper-deep);
+}
+
+.evaluation-protocols article {
+  padding: 18px;
+  border-radius: 12px;
+  background: var(--white);
+}
+
+.evaluation-protocols article > span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 650;
+  text-transform: uppercase;
+}
+
+.evaluation-protocols article > strong {
+  display: block;
+  margin-top: 7px;
+  color: var(--ink);
+  font-size: 34px;
+  letter-spacing: -0.04em;
+}
+
+.evaluation-protocols__primary {
+  border-top: 3px solid var(--accent);
+}
+
+.evaluation-protocols h3 {
+  margin-top: 5px;
+  font-size: 15px;
+}
+
+.evaluation-protocols article p,
+.evaluation-protocols > p {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.evaluation-protocols > p {
+  margin: 0;
+  padding: 4px 6px 0;
+}
+
+@media (max-width: 1050px) {
+  .site-header__bar {
+    grid-template-columns: minmax(220px, auto) 1fr auto;
+    gap: 20px;
+  }
+
+  .header-nav {
+    gap: 16px;
+  }
+
+  .header-nav a:nth-child(2) {
+    display: none;
+  }
+
+  .applicant-card {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 1fr);
+  }
+
+  .applicant-card__disclaimer {
+    grid-column: 1 / -1;
+    min-height: 0;
+    margin-top: 8px;
+    padding: 8px 0 0;
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+  .market-visual-grid,
+  .evaluation-visual-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  html {
+    scroll-padding-top: 64px;
+  }
+
+  .site-header {
+    min-height: 56px;
+  }
+
+  .site-header__bar {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+    min-height: 56px;
+  }
+
+  .header-brand {
+    gap: 8px;
+    font-size: 13px;
+  }
+
+  .header-brand img {
+    width: 26px;
+    height: 26px;
+  }
+
+  .header-brand__long,
+  .header-nav,
+  .header-source {
+    display: none;
+  }
+
+  .header-brand__short {
+    display: inline;
+  }
+
+  .header-actions {
+    gap: 0;
+  }
+
+  .header-explore {
+    min-width: 76px;
+    min-height: 44px;
+    padding-inline: 14px;
+  }
+
+  .applicant-card {
+    grid-template-columns: minmax(0, 1fr) 124px;
+    gap: 6px 12px;
+    min-height: 0;
+    padding-block: 10px 8px;
+  }
+
+  .applicant-card__identity {
+    min-height: 52px;
+    padding-right: 0;
+  }
+
+  .applicant-card__identity h2 {
+    gap: 6px;
+    font-size: 18px;
+  }
+
+  .applicant-card__identity h2 small {
+    font-size: 12px;
+  }
+
+  .applicant-card__identity > span {
+    margin-top: 3px;
+    font-size: 11px;
+    line-height: 1.25;
+  }
+
+  .applicant-card__program {
+    grid-column: 2;
+    min-height: 44px;
+    padding: 0 0 0 12px;
+    border-top: 0;
+    border-left: 1px solid var(--line-strong);
+  }
+
+  .applicant-card__program > span {
+    font-size: 12px;
+    font-weight: 650;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    text-transform: none;
+  }
+
+  .applicant-card__program strong,
+  .applicant-card__program small {
+    display: none;
+  }
+
+  .applicant-card__disclaimer {
+    grid-column: 1 / -1;
+    min-height: 0;
+    margin-top: 0;
+    padding: 6px 0 0;
+    border-top: 1px solid var(--line);
+    border-left: 0;
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .hero {
+    gap: 30px;
+    padding-top: 28px;
+    padding-bottom: 44px;
+  }
+
+  .hero__kicker {
+    flex-wrap: nowrap;
+    gap: 7px;
+    margin-bottom: 15px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.75rem, 13.5vw, 3.55rem);
+    line-height: 0.96;
+  }
+
+  .hero__deck {
+    margin-top: 20px;
+    font-size: 1.18rem;
+    line-height: 1.27;
+  }
+
+  .hero__actions {
+    gap: 8px;
+    margin-top: 22px;
+  }
+
+  .button {
+    min-height: 44px;
+    font-size: 15px;
+  }
+
+  .button--secondary {
+    justify-content: flex-start;
+    padding-inline: 3px;
+    border-color: transparent;
+    background: transparent;
+  }
+
+  .signal-console__topbar {
+    min-height: 38px;
+    padding-inline: 12px;
+    font-size: 0.56rem;
+  }
+
+  .signal-console__source,
+  .signal-console__scores,
+  .signal-console__result {
+    grid-template-columns: 22px minmax(0, 1fr);
+    gap: 9px;
+    padding: 13px 12px;
+  }
+
+  .signal-console blockquote {
+    display: -webkit-box;
+    overflow: hidden;
+    margin-top: 10px;
+    font-size: 0.86rem;
+    line-height: 1.4;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .signal-console__result p:last-child {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .hero__contribution {
+    grid-template-columns: 1fr;
+    gap: 5px;
+    padding: 13px 0;
+  }
+
+  .hero__contribution strong,
+  .hero__contribution p {
+    font-size: 12px;
+  }
+
+  .hero-metrics {
+    margin-top: 0;
+  }
+
+  .hero-metrics > div {
+    min-height: 76px;
+    padding: 12px;
+  }
+
+  .hero-metrics dt {
+    font-size: 1.65rem;
+  }
+
+  .hero-metrics dd {
+    margin-top: 4px;
+    font-size: 10px;
+  }
+
+  .section-pad {
+    padding-block: 56px;
+  }
+
+  .section-heading {
+    margin-bottom: 34px;
+  }
+
+  .section-heading h2 {
+    font-size: clamp(1.95rem, 9.5vw, 2.65rem);
+  }
+
+  .section-heading__description {
+    margin-top: 16px;
+    font-size: 15px;
+  }
+
+  .workflow-section .section-pad {
+    padding-block: 48px;
+  }
+
+  .workflow-section .section-heading {
+    margin-bottom: 28px;
+  }
+
+  .evaluation-section.section-pad {
+    padding-block: 48px;
+  }
+
+  .evaluation-section .section-heading {
+    margin-bottom: 28px;
+  }
+
+  .market-chart {
+    padding: 18px;
+  }
+
+  .market-chart figcaption {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .market-chart figcaption h3 {
+    font-size: 24px;
+  }
+
+  .market-chart__kpis {
+    margin-top: 20px;
+  }
+
+  .market-chart__kpis > div {
+    padding: 12px 8px;
+  }
+
+  .market-chart__kpis > div:first-child {
+    padding-left: 0;
+  }
+
+  .market-chart__kpis dt {
+    font-size: 17px;
+  }
+
+  .market-chart__kpis dd {
+    font-size: 9px;
+  }
+
+  .cb-funding-bars > li {
+    grid-template-columns: 1fr;
+    gap: 7px;
+    padding-left: 8px;
+  }
+
+  .cb-funding-bars__label {
+    grid-row: auto;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  .cb-funding-bars__terms {
+    gap: 4px;
+  }
+
+  .ipo-return-axis {
+    display: none;
+  }
+
+  .ipo-return-bars > li {
+    grid-template-columns: minmax(0, 1fr) 52px;
+    gap: 6px 10px;
+  }
+
+  .ipo-return-bars > li > span:first-child {
+    font-size: 12px;
+  }
+
+  .ipo-return-bars__track {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .recall-comparison,
+  .evaluation-protocols {
+    padding: 18px;
+  }
+
+  .recall-comparison figcaption {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .recall-comparison figcaption > p {
+    text-align: left;
+  }
+
+  .recall-comparison li {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .recall-comparison__label span {
+    font-size: 12px;
+  }
+
+  .taxonomy-grid {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scroll-snap-type: x mandatory;
+  }
+
+  .taxonomy-card,
+  .taxonomy-card--informational {
+    min-width: 84%;
+    scroll-snap-align: start;
+  }
+
+  .method-grid li {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 6px 12px;
+    min-height: 0;
+    padding: 22px;
+  }
+
+  .method-grid__number {
+    grid-row: 1 / 4;
+  }
+
+  .method-grid h3,
+  .method-grid p,
+  .method-grid__output {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 360px) {
+  .applicant-card {
+    grid-template-columns: minmax(0, 1fr) 110px;
+    gap: 4px 10px;
+    padding-block: 8px 7px;
+  }
+
+  .applicant-card__identity {
+    min-height: 42px;
+  }
+
+  .applicant-card__program {
+    min-height: 44px;
+  }
+
+  .applicant-card__identity h2 > span[lang="ko"],
+  .applicant-card__identity > span {
+    display: none;
+  }
+
+  .applicant-card__identity h2 small {
+    font-size: 14px;
+    font-weight: 650;
+  }
+
+  .applicant-card__program {
+    padding-left: 10px;
+  }
+
+  .applicant-card__program > span {
+    font-size: 11px;
+  }
+
+  .applicant-card__disclaimer {
+    padding-top: 5px;
+    font-size: 11px;
+  }
+}

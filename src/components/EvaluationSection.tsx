@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { ALL_PASSAGES } from '../data/corpus'
 import { RETRIEVAL_JUDGMENTS } from '../data/retrieval-judgments'
 import { RISK_TAXONOMY_BY_LABEL, type RiskLabel } from '../domain'
@@ -47,6 +48,10 @@ function percentagePoints(value: number): string {
 
 function riskClass(label: RiskLabel): string {
   return `risk-${RISK_TAXONOMY_BY_LABEL[label].id}`
+}
+
+function recallBarStyle(value: number): CSSProperties {
+  return { '--recall-size': `${value * 100}%` } as CSSProperties
 }
 
 interface ConfusionMatrixProps {
@@ -106,6 +111,50 @@ function ConfusionMatrix({ labels, matrix, caption }: ConfusionMatrixProps) {
   )
 }
 
+function RecallComparisonChart() {
+  return (
+    <figure className="recall-comparison">
+      <figcaption>
+        <div>
+          <span className="demo-label">Per-label diagnostic</span>
+          <h3>Recall by risk label</h3>
+        </div>
+        <p>Solid · document-held-out ML &nbsp; Outline · closed-corpus rules</p>
+      </figcaption>
+
+      <ul>
+        {ML_EVALUATION.labels.map((label) => {
+          const mlMetric = ML_EVALUATION.perLabel[label]
+          const ruleMetric = RULE_EVALUATION.perLabel[label]
+          return (
+            <li className={label === 'Liquidity Risk' ? 'is-weakest' : undefined} key={label}>
+              <div className="recall-comparison__label">
+                <span>{label}</span>
+                <small>n={mlMetric.actualCount}</small>
+              </div>
+              <div className="recall-comparison__lane">
+                <span>ML</span>
+                <i aria-hidden="true"><i style={recallBarStyle(mlMetric.recall)} /></i>
+                <strong>{percent(mlMetric.recall)}</strong>
+              </div>
+              <div className="recall-comparison__lane recall-comparison__lane--rule">
+                <span>Rules</span>
+                <i aria-hidden="true"><i style={recallBarStyle(ruleMetric.recall)} /></i>
+                <strong>{percent(ruleMetric.recall)}</strong>
+              </div>
+            </li>
+          )
+        })}
+      </ul>
+
+      <p className="recall-comparison__note">
+        Liquidity is the visible failure: the held-out model recovers only 1 of 4 reference
+        passages. Protocols differ, so bar shape is diagnostic—not a model ranking.
+      </p>
+    </figure>
+  )
+}
+
 export function EvaluationSection() {
   return (
     <section className="evaluation-section page-shell section-pad" id="evaluation">
@@ -143,64 +192,28 @@ export function EvaluationSection() {
         </div>
       </dl>
 
-      <div
-        className="baseline-comparison"
-        role="group"
-        aria-label="Baseline protocol comparison"
-      >
-        <article className="baseline-card baseline-card--primary">
-          <header>
-            <span>Trained baseline · primary diagnostic</span>
+      <div className="evaluation-visual-grid">
+        <RecallComparisonChart />
+
+        <aside className="evaluation-protocols" aria-label="Evaluation protocol boundaries">
+          <article className="evaluation-protocols__primary">
+            <span>Primary diagnostic</span>
             <strong>{percent(ML_EVALUATION.accuracy)}</strong>
-          </header>
-          <h3>Korean TF-IDF + multinomial logistic regression</h3>
-          <p>
-            Each fold trains on 24 passages from four documents and predicts six passages
-            from the remaining document. Vocabulary and IDF are fitted inside the training
-            fold only.
-          </p>
-          <dl>
-            <div>
-              <dt>Split</dt>
-              <dd>Leave one document out</dd>
-            </div>
-            <div>
-              <dt>Parameters</dt>
-              <dd>Learned in each fold</dd>
-            </div>
-          </dl>
-        </article>
-
-        <article className="baseline-card">
-          <header>
-            <span>Rule baseline · sanity check</span>
+            <h3>TF-IDF + logistic regression</h3>
+            <p>5 document folds · 24 train / 6 test · train-only vocabulary and IDF</p>
+          </article>
+          <article>
+            <span>Sanity check</span>
             <strong>{percent(RULE_EVALUATION.accuracy)}</strong>
-          </header>
-          <h3>Transparent Korean / English weighted phrase rules</h3>
+            <h3>Weighted phrase rules</h3>
+            <p>No split · fixed inspectable rules · same development corpus</p>
+          </article>
           <p>
-            The authored rules are rerun on the same 30-passage corpus used during project
-            development. This result verifies implementation behavior; it is not a held-out
-            estimate.
+            The {percentagePoints(PROTOCOL_GAP)} gap is not evidence that either baseline is
+            superior. Both remain synthetic development diagnostics, not external validation.
           </p>
-          <dl>
-            <div>
-              <dt>Split</dt>
-              <dd>None · closed corpus</dd>
-            </div>
-            <div>
-              <dt>Parameters</dt>
-              <dd>Human-readable fixed rules</dd>
-            </div>
-          </dl>
-        </article>
+        </aside>
       </div>
-
-      <p className="comparison-note">
-        A {percentagePoints(PROTOCOL_GAP)} gap is not evidence that either baseline is
-        superior. Repeated wording across the same AI-assisted synthetic build corpus can make
-        even a document-held-out score optimistic. Both results remain development diagnostics
-        until new Korean passages receive independent annotation and truly external evaluation.
-      </p>
 
       <div className="evaluation-grid evaluation-grid--heldout">
         <div className="fold-panel">

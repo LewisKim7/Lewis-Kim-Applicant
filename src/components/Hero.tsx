@@ -32,22 +32,15 @@ export function Hero() {
         <div className="hero__kicker">
           <span>Korean capital markets</span>
           <span aria-hidden="true">/</span>
-          <span>Applicant-directed · AI-assisted implementation</span>
+          <span>Traceable NLP prototype</span>
         </div>
         <h1 id="hero-title">
           Korea IPO &amp; CB
           <span>Risk Screener</span>
         </h1>
         <p className="hero__deck">
-          An application portfolio connecting Korean capital-markets judgment with
-          transparent NLP classification, retrieval, and evaluation.
-        </p>
-        <p className="hero__body">
-          Drawing on my work in Korean finance and deep-tech investing, I defined the problem,
-          risk taxonomy, product requirements, evaluation questions, and interpretation. Codex
-          assisted with synthetic-data drafting, implementation, documentation, and automated
-          verification. The result is a reproducible educational prototype—not a production
-          investment model.
+          Screen Korean IPO and CB disclosures, classify risk signals, and trace each finding
+          to its source passage.
         </p>
         <div className="hero__actions">
           <a className="button button--primary" href="#prototype">
@@ -105,6 +98,15 @@ export function Hero() {
           </div>
         </div>
       </div>
+
+      <aside className="hero__contribution" aria-label="Applicant and AI contribution disclosure">
+        <strong>Applicant-led · AI-assisted</strong>
+        <p>
+          I framed the Korean-finance problem, taxonomy, requirements, evaluation questions,
+          and interpretation. Codex assisted with synthetic-data drafting, implementation,
+          documentation, and verification. This is an educational prototype, not an investment model.
+        </p>
+      </aside>
 
       <dl className="hero-metrics" aria-label="Project scope">
         <div>
