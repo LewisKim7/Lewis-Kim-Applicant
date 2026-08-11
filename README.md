@@ -2,14 +2,16 @@
 
 > A transparent Korean-language NLP prototype for convertible-bond and IPO disclosure analysis.
 
-[Live demo](https://ai-disclosure-risk-screener.vercel.app/) · [Public source snapshot](https://github.com/LewisKim7/Korea-IPO-CB-Risk-Screener)
+[Live demo](https://lewis-kim-applicant.vercel.app/) · [Public source snapshot](https://github.com/LewisKim7/Korea-IPO-CB-Risk-Screener)
 
 | Applicant context | Detail |
 | --- | --- |
-| Created and directed by | **김유찬 (Yoochan Kim · Lewis)** |
+| Created and directed by | **Yoochan Kim (Lewis Kim · 김유찬)** |
 | Professional context | Finance and deep-tech investment professional |
 | Application context | Graduate study in artificial intelligence and data science at The University of Texas at Austin |
 | Applicant direction | Korean capital-markets problem framing, risk taxonomy, product requirements, and evaluation questions |
+| Applicant profile | [Background and selected work](https://personal-sns-beta.vercel.app/) |
+| Public role evidence | [FSS DART filing: fund manager for the Hanwha IPO Plus fund, 26 Aug 2025](https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250826000004&dcmNo=10784143&keyword=%EA%B9%80%EC%9C%A0%EC%B0%AC) (Korean) |
 
 This is optional supporting evidence for an application, not an official UT Austin
 submission or a required application item. It is not affiliated with or endorsed by
@@ -17,21 +19,21 @@ The University of Texas at Austin.
 
 ![Korea IPO and CB Risk Screener interface](docs/assets/portfolio-preview.png)
 
-Korea IPO & CB Risk Screener is an independent educational project created by 김유찬 (Yoochan Kim · Lewis) while preparing applications for graduate study in artificial intelligence and data science. It connects Korean capital-markets workflows with structured screening, Korean passage classification, lexical evidence retrieval, a trained text baseline, explicit evaluation, and deterministic memo generation.
+Korea IPO & CB Risk Screener is an independent educational project created by Yoochan Kim (Lewis Kim · 김유찬) while preparing applications for graduate study in artificial intelligence and data science. It connects Korean capital-markets workflows with structured screening, Korean passage classification, lexical evidence retrieval, a trained text baseline, explicit evaluation, and deterministic memo generation.
 
 The interface is English so an international reviewer can follow the methodology. The disclosure-style source passages are Korean because Korean-language processing is the substantive problem being explored.
 
-> **AI-assisted development disclosure:** 김유찬 defined the domain problem, project objective, risk taxonomy, feature requirements, evaluation questions, and application purpose. Codex assisted with synthetic-data drafting, implementation, documentation, and automated verification. All reference labels and rationales were drafted within the same AI-assisted project and have not been independently annotated or adjudicated. The reported results are development diagnostics, not independently validated performance.
+> **AI-assisted development disclosure:** Yoochan Kim defined the domain problem, project objective, risk taxonomy, feature requirements, evaluation questions, and application purpose. Codex assisted with synthetic-data drafting, implementation, documentation, and automated verification. All reference labels and rationales were drafted within the same AI-assisted project and have not been independently annotated or adjudicated. The reported results are development diagnostics, not independently validated performance.
 
 ## Reviewer fast path
 
 | Time | Suggested path |
 | --- | --- |
-| 90 seconds | Open the [live demo](https://ai-disclosure-risk-screener.vercel.app/), inspect the fictional CB/IPO market screen, select a document, run a Korean query, and compare the per-label recall traces in Evaluation. |
+| 90 seconds | Open the [live demo](https://lewis-kim-applicant.vercel.app/), inspect the fictional CB/IPO market screen, select a document, run a Korean query, and compare the per-label recall traces in Evaluation. |
 | 5 minutes | Read the research question, document-held-out protocol, exact ML errors, retrieval diagnostic, and limitations on this page. |
 | Reproduce | Run `npm ci && npm run verify`; no API key, backend, network model, or private dataset is required. |
 
-김유찬 contributed the Korean capital-markets framing, product objective, risk taxonomy, feature requirements, evaluation questions, interpretation, and intended graduate-study narrative. AI assistance in corpus drafting, implementation, documentation, and QA is disclosed rather than presented as solo engineering work.
+Yoochan Kim contributed the Korean capital-markets framing, product objective, risk taxonomy, feature requirements, evaluation questions, interpretation, and intended graduate-study narrative. AI assistance in corpus drafting, implementation, documentation, and QA is disclosed rather than presented as solo engineering work.
 
 ## At a glance
 
@@ -225,7 +227,7 @@ Open the local URL printed by Vite.
 
 ### Application-profile switch
 
-The live default uses a school-level `UT Austin graduate application` label and does not name a specific degree in the top ribbon. Program copy and official links are centralized in [`src/config/application-profile.ts`](src/config/application-profile.ts).
+The live default uses a school-level `Prepared for graduate applications to UT Austin` label and does not name a specific degree in the top ribbon. Program copy and official links are centralized in [`src/config/application-profile.ts`](src/config/application-profile.ts).
 
 To preview the same portfolio with the bundled Georgia Tech OMSA profile:
 
@@ -294,5 +296,5 @@ This completed prototype includes structured IPO/CB calculations, a transparent 
 
 ## Rights
 
-Copyright (c) 2026 김유찬 (Yoochan Kim · Lewis). All rights reserved. This review snapshot is
+Copyright (c) 2026 Yoochan Kim (Lewis Kim · 김유찬). All rights reserved. This review snapshot is
 `UNLICENSED`; see [NOTICE.md](NOTICE.md) for the permitted review boundary.

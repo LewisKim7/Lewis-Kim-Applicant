@@ -3,8 +3,8 @@
   "private": true,
   "version": "1.0.0",
   "description": "A transparent Korean-language NLP prototype for IPO and convertible-bond disclosure analysis.",
-  "author": "Yoochan Kim (김유찬 · Lewis)",
-  "homepage": "https://ai-disclosure-risk-screener.vercel.app/",
+  "author": "Yoochan Kim (Lewis Kim · 김유찬)",
+  "homepage": "https://lewis-kim-applicant.vercel.app/",
   "repository": {
     "type": "git",
     "url": "https://github.com/LewisKim7/Korea-IPO-CB-Risk-Screener.git"

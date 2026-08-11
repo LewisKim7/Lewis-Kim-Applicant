@@ -50,6 +50,8 @@ Use this path only after personally rehearsing the controls and verifying that t
 | `src/lib/ml-classifier.ts` | Fits TF-IDF multinomial logistic regression by document fold | Training-only vocabulary/IDF, L2 normalization, and uncalibrated softmax |
 | `src/lib/evaluation.ts` | Produces metrics, confusion matrices, and error records | Accuracy versus recall and why protocols must remain separate |
 | `src/lib/memo.ts` | Builds a deterministic evidence-linked memo | Templates, passage citations, and absence of generated external facts |
+| `src/components/ProfileSection.tsx` | Presents the applicant biography, official organization links, and dated DART evidence | Why a dated public filing supports only the role shown on that filing and does not imply employer endorsement |
+| `src/config/application-profile.ts` | Centralizes school-level copy, links, and badge colors | How the same research artifact stays degree-neutral for UT Austin and can be retagged without changing project claims |
 | `src/components/*` | Presents the English project interface | How UI traces connect back to Korean data and deterministic modules |
 
 ## Likely reviewer questions
