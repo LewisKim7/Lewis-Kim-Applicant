@@ -1,4 +1,4 @@
-const SOURCE_URL = 'https://github.com/LewisKim7/AI-Disclosure-Risk-Screener'
+const SOURCE_URL = 'https://github.com/LewisKim7/Korea-IPO-CB-Risk-Screener'
 
 export function SiteFooter() {
   return (
@@ -6,7 +6,7 @@ export function SiteFooter() {
       <div className="page-shell site-footer__inner">
         <div>
           <p className="site-footer__title">Korea IPO &amp; CB Risk Screener</p>
-          <p>Independent Korean capital-markets NLP project · 2026</p>
+          <p>Lewis · finance and deep-tech investment professional · 2026</p>
         </div>
         <div className="site-footer__links">
           <a href="#top">Back to top ↑</a>

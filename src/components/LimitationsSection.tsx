@@ -2,20 +2,21 @@ import { SectionHeading } from './SectionHeading'
 
 const limitations = [
   'The corpus contains only 30 synthetic Korean passages.',
-  'Whitespace tokenization is not a Korean morphological analyzer.',
+  'Unicode tokenization with limited Korean particle stripping is not a morphological analyzer.',
   'Rules are wording-sensitive and can miss implicit or negated risks.',
   'One primary label cannot represent every overlapping signal.',
   'TF-IDF has limited Korean context and paraphrase understanding.',
   'Reference labels were drafted in the same AI-assisted build process.',
+  'The 12-query retrieval diagnostic is closed-corpus and AI-assisted.',
   'Structured CB and IPO rows are fictional workflow demonstrations.',
 ]
 
 const nextSteps = [
   'Freeze the pipeline and build a permitted Korean disclosure holdout.',
   'Add applicant-reviewed and independent annotations with agreement analysis.',
-  'Compare whitespace tokens with a Korean morphological baseline.',
+  'Compare the Unicode token baseline with a Korean morphological analyzer.',
   'Move from single-label to multi-label classification.',
-  'Evaluate Korean retrieval with relevance labels and ranking metrics.',
+  'Repeat retrieval evaluation with independently judged external queries.',
 ]
 
 export function LimitationsSection() {

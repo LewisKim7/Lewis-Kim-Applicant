@@ -2,13 +2,25 @@
 
 > A transparent Korean-language NLP prototype for convertible-bond and IPO disclosure analysis.
 
-[Live demo](https://ai-disclosure-risk-screener.vercel.app/) · [Repository](https://github.com/LewisKim7/AI-Disclosure-Risk-Screener)
+[Live demo](https://ai-disclosure-risk-screener.vercel.app/) · [Public source snapshot](https://github.com/LewisKim7/Korea-IPO-CB-Risk-Screener)
+
+![Korea IPO and CB Risk Screener interface](docs/assets/portfolio-preview.png)
 
 Korea IPO & CB Risk Screener is an independent educational project created while preparing for graduate study in artificial intelligence. It connects Korean capital-markets workflows with structured screening, Korean passage classification, lexical evidence retrieval, a trained text baseline, explicit evaluation, and deterministic memo generation.
 
 The interface is English so an international reviewer can follow the methodology. The disclosure-style source passages are Korean because Korean-language processing is the substantive problem being explored.
 
 > **AI-assisted development disclosure:** The applicant selected the domain, project objective, feature requirements, and application purpose. Codex assisted with synthetic data drafting, implementation, documentation, and automated verification. All reference labels and rationales were drafted within the same AI-assisted project and have not been independently annotated or adjudicated. The reported results are development diagnostics, not independently validated performance.
+
+## Reviewer fast path
+
+| Time | Suggested path |
+| --- | --- |
+| 90 seconds | Open the [live demo](https://ai-disclosure-risk-screener.vercel.app/), select a document, run a Korean query, open one rule trace, and inspect the visible Q12 retrieval failure in Evaluation. |
+| 5 minutes | Read the research question, document-held-out protocol, exact ML errors, retrieval diagnostic, and limitations on this page. |
+| Reproduce | Run `npm ci && npm run verify`; no API key, backend, network model, or private dataset is required. |
+
+The applicant contributed the Korean capital-markets framing, product objective, feature requirements, evaluation questions, and intended graduate-study narrative. AI assistance in corpus drafting, implementation, documentation, and QA is disclosed rather than presented as solo engineering work.
 
 ## At a glance
 
@@ -22,6 +34,7 @@ The interface is English so an international reviewer can follow the methodology
 | Trained baseline | Unigram TF-IDF + multinomial logistic regression |
 | ML protocol | 5-fold leave-one-document-out; 24 train / 6 test per fold |
 | Retrieval | TF-IDF cosine lexical ranking |
+| Retrieval diagnostic | 12 AI-assisted Korean queries; graded relevance; Precision@3, Recall@3, MRR@3, nDCG@3 |
 | Memo | Deterministic template with passage-ID citations |
 | External services | No API key, remote model, or backend required |
 
@@ -148,6 +161,14 @@ The main value of the evaluation is diagnostic:
 
 See [Evaluation Notes](docs/evaluation-notes.md) for fold results, per-label recall, exact errors, and metric definitions.
 
+### Closed-corpus retrieval diagnostic
+
+| Queries | Precision@3 | Recall@3 | MRR@3 | nDCG@3 |
+| ---: | ---: | ---: | ---: | ---: |
+| 12 | 69.45% | 77.78% | 91.67% | 85.51% |
+
+The relevance set uses grades 1–2 and was drafted with AI assistance over the same 30-passage corpus. It is therefore an inspectable development diagnostic, not an independent retrieval benchmark. Q12 deliberately uses the paraphrase `남은 청약대금 관리 보고`; TF-IDF returns no lexical match even though two unused-proceeds passages were judged relevant. The failure is retained to show the baseline's synonym and context limits. See [Retrieval Evaluation](docs/retrieval-evaluation.md) for the query set, definitions, and per-query results.
+
 ## Interface
 
 The English interface includes:
@@ -176,7 +197,7 @@ npm ci
 npm run verify
 ```
 
-`npm run verify` runs linting, tests, TypeScript checks, and a production build. Tests freeze the five-document corpus, both evaluation results, the CB screen, and the IPO summary.
+`npm run verify` runs linting, 42 deterministic tests, TypeScript checks, and a production build. Tests freeze the five-document corpus, classification and retrieval diagnostics, the CB screen, and the IPO summary.
 
 ### Start the development server
 
@@ -195,12 +216,12 @@ src/
   domain/       Document, passage, market, workflow, and taxonomy types
   lib/          Screening, preprocessing, rules, retrieval, ML, evaluation, and memo logic
 docs/
-  application-language.md
+  annotation-guide.md
+  data-card.md
   design-note.md
   evaluation-notes.md
   model-card.md
-  project-defense-guide.md
-  ut-msai-project-note.md
+  retrieval-evaluation.md
 ```
 
 ## Limitations
@@ -214,7 +235,7 @@ docs/
 - One primary label suppresses secondary risks.
 - TF-IDF has limited Korean context and paraphrase understanding.
 - Logistic-regression hyperparameters were explored during development.
-- Retrieval has no independent query-relevance evaluation.
+- The 12-query retrieval relevance set is closed-corpus, AI-assisted, and not independently judged.
 - Structured CB and IPO rows are fictional demonstrations, not current market data.
 
 ## Responsible use and independence
@@ -226,16 +247,23 @@ The project is not affiliated with or endorsed by UT Austin, DART, KRX, Apple, g
 ## Documentation
 
 - [Evaluation notes](docs/evaluation-notes.md)
+- [Retrieval evaluation](docs/retrieval-evaluation.md)
 - [System and model card](docs/model-card.md)
-- [Graduate-study preparation note](docs/ut-msai-project-note.md)
-- [Project defense guide](docs/project-defense-guide.md)
+- [Synthetic corpus data card](docs/data-card.md)
+- [Annotation guide](docs/annotation-guide.md)
 - [Design note](docs/design-note.md)
-- [CV and SOP language](docs/application-language.md)
 
-## Recommended next work
+## Completed scope and next research phase
 
-1. Have the applicant personally review every passage, label, rationale, prediction, and error.
-2. Create a permitted Korean disclosure set that is independent of rule and model development.
-3. Add independent annotators, a labeling guide, adjudication, and agreement analysis.
-4. Compare the lightweight tokenizer with a Korean morphological baseline.
-5. Evaluate multi-label classification and Korean retrieval ranking separately.
+The submitted prototype includes structured IPO/CB calculations, a transparent rule baseline, a document-held-out trained baseline, lexical retrieval, a deterministic evidence memo, classification error analysis, and a closed-corpus retrieval diagnostic. The next research phase would:
+
+1. complete the applicant's personal review of every passage, label, rationale, prediction, and error;
+2. create a permitted Korean disclosure set independent of rule and model development;
+3. obtain independent annotations, adjudication, and agreement analysis;
+4. compare the Unicode token baseline with a Korean morphological analyzer; and
+5. repeat classification and retrieval evaluation on independently judged external examples.
+
+## Rights
+
+Copyright (c) 2026 Lewis Kim. All rights reserved. This review snapshot is
+`UNLICENSED`; see [NOTICE.md](NOTICE.md) for the permitted review boundary.

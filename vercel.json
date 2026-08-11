@@ -1,10 +1,11 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . ':(exclude)**/*.md' ':(exclude)docs/**'",
   "git": {
     "deploymentEnabled": {
       "main": true,
-      "*": false
+      "**": false
     }
   },
   "rewrites": [

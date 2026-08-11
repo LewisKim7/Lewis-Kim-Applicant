@@ -143,6 +143,8 @@ The roughly 3.3-percentage-point difference between the two accuracy figures is 
 
 The retrieval component builds TF-IDF vectors and ranks passages by cosine similarity to a Korean or English query. It is lexical search, not semantic understanding. Similarity is a query-relative ranking value and not a classification score.
 
+A separate closed-corpus diagnostic uses 12 AI-assisted Korean queries with graded relevance judgments and reports mean Precision@3 of 69.45%, mean Recall@3 of 77.78%, MRR@3 of 91.67%, and nDCG@3 of 85.51%. The query and relevance set was drafted against the same 30 passages, so the result is inspectable and reproducible but not independent. One deliberate paraphrase query returns no match and remains visible as a lexical-search failure.
+
 The memo generator deterministically organizes analyzed passages into an executive summary, key signals, evidence, implications, open questions, and limitations. It retains source document and passage IDs. It does not generate new facts, verify external information, or make an independent model prediction.
 
 ## Conceptual workflow lineage
@@ -171,8 +173,9 @@ The new CB module implements the same kind of rate-and-size screening behavior a
 
 ### Retrieval and presentation
 
-- Retrieval has no independently labeled relevance set or ranking metric.
+- The 12-query relevance set is AI-assisted, closed-corpus, and not independently judged.
 - Lexical overlap can rank an irrelevant passage highly.
+- Paraphrases with no shared vocabulary can return no result.
 - A concise memo can create a false impression of completeness unless the evidence and limitations are read.
 
 ## Transparency and reproducibility
@@ -195,4 +198,4 @@ Changes to data, labels, rules, preprocessing, fold construction, training setti
 4. Evaluate on a separate, legally permitted Korean disclosure corpus.
 5. Compare the lightweight tokenizer with a Korean morphological baseline.
 6. Add multi-label evaluation for overlapping risks.
-7. Create independent retrieval relevance judgments and report ranking metrics.
+7. Repeat retrieval evaluation with independently judged external queries.

@@ -1,4 +1,4 @@
-import { useDeferredValue, useMemo, useState } from 'react'
+import { useDeferredValue, useEffect, useMemo, useState } from 'react'
 import { ALL_PASSAGES, DOCUMENTS } from '../data/corpus'
 import { RISK_LABELS, RISK_TAXONOMY_BY_LABEL, type RiskLabel } from '../domain'
 import {
@@ -59,6 +59,7 @@ function EvidenceView({
               className={passage.passageId === highlightedPassageId ? 'is-highlighted' : undefined}
               id={`evidence-${passage.passageId}`}
               key={passage.passageId}
+              tabIndex={passage.passageId === highlightedPassageId ? -1 : undefined}
             >
               <td data-label="Passage">
                 <span className="passage-id">{passage.passageId}</span>
@@ -195,6 +196,24 @@ export function DemoDashboard() {
       ) as Record<RiskLabel, number>,
     [analyses],
   )
+
+  useEffect(() => {
+    if (!highlightedPassageId || activeView !== 'evidence') return
+
+    const frameId = requestAnimationFrame(() => {
+      const target = document.getElementById(`evidence-${highlightedPassageId}`)
+      if (!target) return
+
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      target.focus({ preventScroll: true })
+      target.scrollIntoView({
+        behavior: reducedMotion ? 'auto' : 'smooth',
+        block: 'center',
+      })
+    })
+
+    return () => cancelAnimationFrame(frameId)
+  }, [activeView, highlightedPassageId, selectedDocumentId])
 
   function selectSearchResult(documentId: string, passageId: string) {
     setSelectedDocumentId(documentId)
