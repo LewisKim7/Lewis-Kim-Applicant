@@ -1,5 +1,6 @@
+import { APPLICATION_CONTEXT } from '../config/application-profile'
+
 const SOURCE_URL = 'https://github.com/LewisKim7/Korea-IPO-CB-Risk-Screener'
-const PROGRAM_URL = 'https://cdso.utexas.edu/msai'
 
 export function SiteFooter() {
   return (
@@ -14,13 +15,13 @@ export function SiteFooter() {
           <a href={SOURCE_URL} target="_blank" rel="noreferrer">
             GitHub ↗
           </a>
-          <a href={PROGRAM_URL} target="_blank" rel="noreferrer">
-            MSAI program ↗
+          <a href={APPLICATION_CONTEXT.overviewUrl} target="_blank" rel="noreferrer">
+            Graduate programs ↗
           </a>
         </div>
         <p className="site-footer__disclaimer">
           Independent applicant portfolio. Not affiliated with, endorsed by, or an official
-          publication of The University of Texas at Austin. Fictional Korean-language
+          publication of {APPLICATION_CONTEXT.institutionName}. Fictional Korean-language
           demonstration only; not investment, legal, or regulatory advice.
         </p>
       </div>

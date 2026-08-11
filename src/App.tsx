@@ -20,8 +20,8 @@ function App() {
       <main id="main-content">
         <ApplicantContext />
         <Hero />
-        <ProblemSection />
         <WorkflowBridgeSection />
+        <ProblemSection />
         <MethodologySection />
         <DemoDashboard />
         <RiskTaxonomySection />

@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
 import { ALL_PASSAGES } from '../data/corpus'
-import { classifyPassage } from '../lib'
+import { classifyPassage, matchedTermEnglishGloss } from '../lib'
 
 const SOURCE_URL = 'https://github.com/LewisKim7/Korea-IPO-CB-Risk-Screener'
 const TRACE_PASSAGE = (() => {
@@ -18,6 +18,9 @@ const TRACE_SCORES = [
   { label: 'governance', value: TRACE_RESULT.rawScores['Governance Risk'] },
 ] as const
 const MAX_TRACE_SCORE = Math.max(...TRACE_SCORES.map(({ value }) => value), 1)
+const TRACE_ENGLISH_GLOSSES = TRACE_RESULT.matchedKeywords.map(
+  (keyword) => matchedTermEnglishGloss(keyword) ?? keyword,
+)
 
 function traceBarStyle(value: number): CSSProperties {
   return {
@@ -32,22 +35,15 @@ export function Hero() {
         <div className="hero__kicker">
           <span>Korean capital markets</span>
           <span aria-hidden="true">/</span>
-          <span>Applicant-directed · AI-assisted implementation</span>
+          <span>Traceable NLP prototype</span>
         </div>
         <h1 id="hero-title">
           Korea IPO &amp; CB
           <span>Risk Screener</span>
         </h1>
         <p className="hero__deck">
-          An application portfolio connecting Korean capital-markets judgment with
-          transparent NLP classification, retrieval, and evaluation.
-        </p>
-        <p className="hero__body">
-          Drawing on my work in Korean finance and deep-tech investing, I defined the problem,
-          risk taxonomy, product requirements, evaluation questions, and interpretation. Codex
-          assisted with synthetic-data drafting, implementation, documentation, and automated
-          verification. The result is a reproducible educational prototype—not a production
-          investment model.
+          Screen Korean IPO and CB disclosures, classify risk signals, and trace each finding
+          to its source passage.
         </p>
         <div className="hero__actions">
           <a className="button button--primary" href="#prototype">
@@ -98,13 +94,25 @@ export function Hero() {
           <div>
             <p className="console-label">Primary label</p>
             <strong>{TRACE_RESULT.predictedLabel}</strong>
-            <p>
-              Matched: {TRACE_RESULT.matchedKeywords.join(', ')} ·{' '}
-              {(TRACE_RESULT.signalScore * 100).toFixed(1)}% heuristic, not a probability
+            <p className="signal-console__match">
+              <span>Matched (KO): {TRACE_RESULT.matchedKeywords.join(', ')}</span>
+              <span>English: {TRACE_ENGLISH_GLOSSES.join(', ')}</span>
+              <small>
+                {(TRACE_RESULT.signalScore * 100).toFixed(1)}% heuristic, not a probability
+              </small>
             </p>
           </div>
         </div>
       </div>
+
+      <aside className="hero__contribution" aria-label="Applicant and AI contribution disclosure">
+        <strong>Applicant-led · AI-assisted</strong>
+        <p>
+          I framed the Korean-finance problem, taxonomy, requirements, evaluation questions,
+          and interpretation. Codex assisted with synthetic-data drafting, implementation,
+          documentation, and verification. This is an educational prototype, not an investment model.
+        </p>
+      </aside>
 
       <dl className="hero-metrics" aria-label="Project scope">
         <div>

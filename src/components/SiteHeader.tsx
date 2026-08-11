@@ -3,41 +3,27 @@ const SOURCE_URL = 'https://github.com/LewisKim7/Korea-IPO-CB-Risk-Screener'
 export function SiteHeader() {
   return (
     <header className="site-header">
-      <div className="site-header__global">
-        <div className="page-shell site-header__global-inner">
-          <a className="brand" href="#top" aria-label="Korea IPO and CB Risk Screener home">
-            <img className="brand__mark" src="/favicon.svg" alt="" aria-hidden="true" />
-            <span>Yoochan Kim / NLP</span>
-          </a>
+      <div className="page-shell site-header__bar">
+        <a className="header-brand" href="#top" aria-label="Korea IPO and CB Risk Screener home">
+          <img src="/favicon.svg" alt="" aria-hidden="true" />
+          <span className="header-brand__long">Korea IPO &amp; CB Risk Screener</span>
+          <span className="header-brand__short">IPO &amp; CB NLP</span>
+        </a>
 
-          <nav className="global-nav-links" aria-label="Project context">
-            <a href="#problem">Problem</a>
-            <a href="#lineage">Domain lineage</a>
-            <a href="#method">Method</a>
-          </nav>
+        <nav className="header-nav" aria-label="Primary navigation">
+          <a href="#lineage">Market screen</a>
+          <a href="#problem">Problem</a>
+          <a href="#method">Method</a>
+          <a href="#evaluation">Evaluation</a>
+        </nav>
 
+        <div className="header-actions">
           <a className="header-source" href={SOURCE_URL} target="_blank" rel="noreferrer">
             GitHub <span aria-hidden="true">↗</span>
           </a>
-        </div>
-      </div>
-
-      <div className="site-header__subnav">
-        <div className="page-shell site-header__subnav-inner">
-          <a href="#top" className="subnav-title">
-            Korea IPO &amp; CB Risk Screener
+          <a className="header-explore" href="#prototype">
+            Explore
           </a>
-          <nav className="site-nav" aria-label="Primary navigation">
-            <a href="#prototype">Prototype</a>
-            <a href="#taxonomy">Taxonomy</a>
-            <a href="#evaluation">Evaluation</a>
-            <a className="site-nav__optional" href="#limitations">
-              Limits
-            </a>
-            <a className="subnav-cta" href="#prototype">
-              Explore
-            </a>
-          </nav>
         </div>
       </div>
     </header>

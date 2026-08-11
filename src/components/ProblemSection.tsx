@@ -4,7 +4,7 @@ export function ProblemSection() {
   return (
     <section className="problem-section page-shell section-pad" id="problem">
       <SectionHeading
-        eyebrow="01 / Problem framing"
+        eyebrow="02 / Problem framing"
         title="Korean deal terms are structured. Their implications are not."
         description="A CB issuance decision or IPO prospectus can spread dilution, repayment, liquidity, control, and execution signals across tables and dense Korean text. The task is to structure first-pass review without automating investment judgment."
       />
@@ -24,7 +24,7 @@ export function ProblemSection() {
             <span>01</span>
             <div>
               <h3>Inspect the path</h3>
-              <p>Expose Korean matched phrases and per-label scores, not only the final label.</p>
+              <p>Expose Korean matched phrases, English glosses, and per-label scores—not only the final label.</p>
             </div>
           </article>
           <article>

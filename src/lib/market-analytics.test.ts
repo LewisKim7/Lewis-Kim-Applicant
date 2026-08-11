@@ -44,6 +44,32 @@ describe('Korean CB screening calculations', () => {
     ).toBe('세림뉴로칩')
   })
 
+  it('keeps the CB visualization summary tied to the declared rate filter', () => {
+    expect(screenConvertibleBonds(SYNTHETIC_CB_ROWS)).toMatchObject({
+      totalRows: 4,
+      matchedRows: 4,
+      matchedAmountEok: 790,
+    })
+    expect(
+      screenConvertibleBonds(SYNTHETIC_CB_ROWS, { rateFilter: 'surface0' }),
+    ).toMatchObject({
+      matchedRows: 3,
+      matchedAmountEok: 610,
+    })
+
+    const bothZero = screenConvertibleBonds(SYNTHETIC_CB_ROWS, {
+      rateFilter: 'both0',
+    })
+    expect(bothZero).toMatchObject({
+      totalRows: 4,
+      matchedRows: 1,
+      matchedAmountEok: 220,
+    })
+    expect(bothZero.rows.map(({ receiptNo }) => receiptNo)).toEqual([
+      'SYNTH-CB-004',
+    ])
+  })
+
   it('rejects invalid filter inputs', () => {
     expect(() =>
       screenConvertibleBonds(SYNTHETIC_CB_ROWS, { minAmountEok: -1 }),

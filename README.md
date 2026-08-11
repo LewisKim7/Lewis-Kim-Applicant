@@ -8,7 +8,7 @@
 | --- | --- |
 | Created and directed by | **김유찬 (Yoochan Kim · Lewis)** |
 | Professional context | Finance and deep-tech investment professional |
-| Program of interest | [Master of Science in Artificial Intelligence](https://cdso.utexas.edu/msai), The University of Texas at Austin |
+| Application context | Graduate study in artificial intelligence and data science at The University of Texas at Austin |
 | Applicant direction | Korean capital-markets problem framing, risk taxonomy, product requirements, and evaluation questions |
 
 This is optional supporting evidence for an application, not an official UT Austin
@@ -17,7 +17,7 @@ The University of Texas at Austin.
 
 ![Korea IPO and CB Risk Screener interface](docs/assets/portfolio-preview.png)
 
-Korea IPO & CB Risk Screener is an independent educational project created by 김유찬 (Yoochan Kim · Lewis) while preparing an application for graduate study in artificial intelligence. It connects Korean capital-markets workflows with structured screening, Korean passage classification, lexical evidence retrieval, a trained text baseline, explicit evaluation, and deterministic memo generation.
+Korea IPO & CB Risk Screener is an independent educational project created by 김유찬 (Yoochan Kim · Lewis) while preparing applications for graduate study in artificial intelligence and data science. It connects Korean capital-markets workflows with structured screening, Korean passage classification, lexical evidence retrieval, a trained text baseline, explicit evaluation, and deterministic memo generation.
 
 The interface is English so an international reviewer can follow the methodology. The disclosure-style source passages are Korean because Korean-language processing is the substantive problem being explored.
 
@@ -27,7 +27,7 @@ The interface is English so an international reviewer can follow the methodology
 
 | Time | Suggested path |
 | --- | --- |
-| 90 seconds | Open the [live demo](https://ai-disclosure-risk-screener.vercel.app/), select a document, run a Korean query, open one rule trace, and inspect the visible Q12 retrieval failure in Evaluation. |
+| 90 seconds | Open the [live demo](https://ai-disclosure-risk-screener.vercel.app/), inspect the fictional CB/IPO market screen, select a document, run a Korean query, and compare the per-label recall traces in Evaluation. |
 | 5 minutes | Read the research question, document-held-out protocol, exact ML errors, retrieval diagnostic, and limitations on this page. |
 | Reproduce | Run `npm ci && npm run verify`; no API key, backend, network model, or private dataset is required. |
 
@@ -47,6 +47,7 @@ The interface is English so an international reviewer can follow the methodology
 | Retrieval | TF-IDF cosine lexical ranking |
 | Retrieval diagnostic | 12 AI-assisted Korean queries; graded relevance; Precision@3, Recall@3, MRR@3, nDCG@3 |
 | Memo | Deterministic template with passage-ID citations |
+| Visual diagnostics | CB proposed-principal ranking, IPO return-to-offer chart, and per-label baseline recall |
 | External services | No API key, remote model, or backend required |
 
 ## Research question
@@ -72,9 +73,10 @@ The relationship is conceptual only. Neither existing repository nor any product
 
 | Workflow | Bundled sample | Deterministic result |
 | --- | --- | --- |
-| CB screen | 4 fictional rows; surface rate `0.0%`; minimum issue size 200억원 | 2 matches totaling 520억원 |
+| CB principal view | All 4 fictional rows; 790억원 total proposed principal | 1 explicit coupon `0.0%` + maturity yield `0.0%` match: 220억원, or 27.8% of the sample |
+| CB filter check | Surface rate `0.0%`; minimum issue size 200억원 | 2 matches totaling 520억원 |
 | IPO snapshot | 6 fictional observations as of 2026-07-31 | Total offer market capitalization 42,000억원 |
-| IPO returns | Same 2026-07-31 snapshot | Median first-day return 12.5%; median current return 1.47% |
+| IPO return view | Same 2026-07-31 snapshot; signed current return against a symmetric offer-price baseline | Median first-day return 12.5%; median current return 1.47% |
 | IPO downside count | Same 6 observations | 3 of 6, or 50%, below offer price as of 2026-07-31 |
 
 These values validate the local screening and aggregation functions. They are not market statistics.
@@ -184,12 +186,15 @@ The relevance set uses grades 1–2 and was drafted with AI assistance over the 
 
 The English interface includes:
 
-- structured CB and IPO workflow summaries;
+- one compact project header and a separate applicant/program ribbon;
+- a proposed-principal CB ranking across all four fictional rows, with the single explicit `0.0% / 0.0%` match directly labeled;
+- a signed current-return chart for the six fictional IPO observations;
 - a five-document Korean source library;
 - document-level key facts and transaction metadata;
 - Korean TF-IDF evidence search;
-- a passage-level rule trace and annotation rationale;
+- a passage-level rule trace with Korean matched phrases and concise English glosses;
 - an evidence-linked deterministic memo;
+- a seven-label recall chart that distinguishes document-held-out ML from closed-corpus rules;
 - a trained-baseline fold table and confusion matrix;
 - the closed-corpus rule confusion matrix and five visible rule errors; and
 - limitations, AI-assistance disclosure, and non-affiliation language.
@@ -208,7 +213,7 @@ npm ci
 npm run verify
 ```
 
-`npm run verify` runs linting, 42 deterministic tests, TypeScript checks, and a production build. Tests freeze the five-document corpus, classification and retrieval diagnostics, the CB screen, and the IPO summary.
+`npm run verify` runs the deterministic test suite, linting, TypeScript checks, and a production build. Tests freeze the five-document corpus, classification and retrieval diagnostics, matched-term glossary coverage, application-profile switching, the CB screen and visualization summary, and the IPO summary.
 
 ### Start the development server
 
@@ -218,10 +223,23 @@ npm run dev
 
 Open the local URL printed by Vite.
 
+### Application-profile switch
+
+The live default uses a school-level `UT Austin graduate application` label and does not name a specific degree in the top ribbon. Program copy and official links are centralized in [`src/config/application-profile.ts`](src/config/application-profile.ts).
+
+To preview the same portfolio with the bundled Georgia Tech OMSA profile:
+
+```bash
+VITE_APPLICATION_PROFILE=georgia-tech-omsa npm run dev
+```
+
+The switch changes applicant-context copy, institution links, and non-affiliation language without changing the project, evidence, or evaluation claims. The UT profile remains the production default.
+
 ## Repository guide
 
 ```text
 src/
+  config/       Switchable graduate-application profile and official program links
   components/   English interface and evaluation views
   data/         Korean corpus plus fictional CB and IPO rows
   domain/       Document, passage, market, workflow, and taxonomy types
