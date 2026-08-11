@@ -6,12 +6,8 @@ export function SiteHeader() {
       <div className="site-header__global">
         <div className="page-shell site-header__global-inner">
           <a className="brand" href="#top" aria-label="Korea IPO and CB Risk Screener home">
-            <span className="brand__mark" aria-hidden="true">
-              <span />
-              <span />
-              <span />
-            </span>
-            <span>K-CAP / NLP</span>
+            <img className="brand__mark" src="/favicon.svg" alt="" aria-hidden="true" />
+            <span>Yoochan Kim / NLP</span>
           </a>
 
           <nav className="global-nav-links" aria-label="Project context">

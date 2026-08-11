@@ -8,6 +8,9 @@ The visual direction was inspired by the independent [Design System Analysis: Ap
 
 ## Independence and asset provenance
 
+- The applicant identity uses an original `Evidence Signal` mark created for 김유찬 (Yoochan Kim · Lewis). Its paired brackets represent inspectable passages; the blue path represents a traceable risk signal.
+- The University and program names appear only as text identifying the intended application. No official UT Austin logo, wordmark, seal, supporting mark, font, or university visual identity is used.
+- No written permission to use a protected UT mark was assumed. The official [Permission to Use](https://trademarks.utexas.edu/permission-use) and [Outside Entities](https://trademarks.utexas.edu/outside-entities) guidance informed the text-only treatment.
 - No Apple logo, image, icon, trademark, product identity, source code, or proprietary font is used.
 - No asset was copied from Apple or getdesign.md.
 - System font fallbacks are used rather than bundled Apple font files.
@@ -35,12 +38,13 @@ Korean passages are not translated inside the evidence trail because a translati
 
 ## Interaction and information hierarchy
 
-1. **Hero and problem framing** establish the narrow research question and responsible-use boundary.
-2. **Workflow bridge** connects structured CB/IPO calculations to the text corpus while stating that the behavior was newly implemented on fictional rows without importing an existing repository or production data.
-3. **Methodology** separates preprocessing, rules, trained classification, retrieval, and memo generation.
-4. **Dashboard** lets the reviewer inspect Korean passages, rule traces, evidence ranking, and memo citations.
-5. **Evaluation** presents the trained document-held-out experiment separately from the closed-corpus rule check.
-6. **Limitations** ends the page with annotation provenance, non-affiliation, and non-use claims.
+1. **Applicant context** identifies 김유찬, his professional background, the intended program, and the non-affiliation boundary before the project claim.
+2. **Hero and problem framing** establish the narrow research question and responsible-use boundary.
+3. **Workflow bridge** connects structured CB/IPO calculations to the text corpus while stating that the behavior was newly implemented on fictional rows without importing an existing repository or production data.
+4. **Methodology** separates preprocessing, rules, trained classification, retrieval, and memo generation.
+5. **Dashboard** lets the reviewer inspect Korean passages, rule traces, evidence ranking, and memo citations.
+6. **Evaluation** presents the trained document-held-out experiment separately from the closed-corpus rule check.
+7. **Limitations** ends the page with annotation provenance, non-affiliation, and non-use claims.
 
 ## Accessibility and responsive intent
 

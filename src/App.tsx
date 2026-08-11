@@ -1,3 +1,4 @@
+import { ApplicantContext } from './components/ApplicantContext'
 import { DemoDashboard } from './components/DemoDashboard'
 import { EvaluationSection } from './components/EvaluationSection'
 import { Hero } from './components/Hero'
@@ -17,6 +18,7 @@ function App() {
       </a>
       <SiteHeader />
       <main id="main-content">
+        <ApplicantContext />
         <Hero />
         <ProblemSection />
         <WorkflowBridgeSection />

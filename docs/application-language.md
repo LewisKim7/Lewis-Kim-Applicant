@@ -1,5 +1,9 @@
 # Application Language
 
+**Applicant:** 김유찬 (Yoochan Kim · Lewis)
+
+**Application context:** Independent, optional supporting evidence for an application to the Master of Science in Artificial Intelligence program at The University of Texas at Austin.
+
 Use these drafts only after personally reviewing the corpus, labels, rules, model, predictions, and error cases. Confirm that the wording matches the applicant's actual contribution and follow the current application instructions and any applicant-facing AI-use attestation.
 
 ## Placement and prerequisite boundary

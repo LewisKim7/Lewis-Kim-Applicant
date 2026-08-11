@@ -1,7 +1,7 @@
 {
   "name": "Korea IPO & CB Risk Screener",
   "short_name": "K-CAP NLP",
-  "description": "A transparent Korean-language NLP prototype for IPO and convertible-bond disclosure analysis.",
+  "description": "An applicant-directed Korean-language NLP portfolio by Yoochan Kim (김유찬 · Lewis).",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

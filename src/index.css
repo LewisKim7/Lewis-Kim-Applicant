@@ -3516,7 +3516,10 @@ button:active,
   }
 
   .subnav-title {
+    width: 100%;
+    min-width: 0;
     overflow: hidden;
+    padding-right: 12px;
     font-size: 17px;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -3868,6 +3871,7 @@ body {
 
 @media (max-width: 640px) {
   .site-nav .subnav-cta {
+    min-height: 44px;
     padding-inline: 13px;
   }
 
@@ -3891,5 +3895,199 @@ body {
 
   .retrieval-evaluation__metrics > div {
     padding: 16px;
+  }
+}
+
+/* Applicant identity and graduate-program context. */
+.brand__mark {
+  display: block;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border-radius: 6px;
+  flex: 0 0 auto;
+}
+
+.applicant-context {
+  border-bottom: 1px solid var(--line-strong);
+  background: var(--paper-deep);
+}
+
+.applicant-card {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) minmax(320px, 0.82fr);
+  gap: 14px 22px;
+  align-items: center;
+  padding-block: 20px 14px;
+}
+
+.applicant-mark {
+  display: block;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.applicant-card__identity {
+  min-width: 0;
+}
+
+.applicant-card__identity p,
+.applicant-card__program > span {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.045em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.applicant-card__identity h2 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
+  margin-top: 5px;
+  color: var(--ink);
+  font-size: 22px;
+  font-weight: 650;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+}
+
+.applicant-card__identity h2 small {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.applicant-card__identity > span {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.applicant-card__program {
+  display: flex;
+  min-width: 0;
+  min-height: 58px;
+  padding-left: 22px;
+  border-left: 1px solid var(--line-strong);
+  color: var(--accent);
+  flex-direction: column;
+  justify-content: center;
+}
+
+.applicant-card__program strong {
+  display: block;
+  margin-top: 5px;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 650;
+  letter-spacing: -0.018em;
+  line-height: 1.3;
+}
+
+.applicant-card__program small {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.applicant-card__program:hover strong {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.applicant-card__disclaimer {
+  grid-column: 2 / 4;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.hero {
+  min-height: calc(100vh - 220px);
+  padding-top: 72px;
+}
+
+@media (max-width: 1050px) {
+  .applicant-card {
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 12px 18px;
+  }
+
+  .applicant-card__program {
+    grid-column: 2;
+    min-height: 0;
+    padding-top: 12px;
+    padding-left: 0;
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+  .applicant-card__disclaimer {
+    grid-column: 2;
+  }
+
+  .hero {
+    min-height: 0;
+    padding-top: 60px;
+  }
+}
+
+@media (max-width: 640px) {
+  .applicant-card {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 12px 14px;
+    padding-block: 16px 12px;
+  }
+
+  .applicant-mark {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+  }
+
+  .applicant-card__identity p {
+    font-size: 9.5px;
+    letter-spacing: 0.035em;
+  }
+
+  .applicant-card__identity h2 {
+    font-size: 20px;
+  }
+
+  .applicant-card__identity h2 small {
+    font-size: 13px;
+  }
+
+  .applicant-card__identity > span {
+    font-size: 11px;
+  }
+
+  .applicant-card__program,
+  .applicant-card__disclaimer {
+    grid-column: 1 / -1;
+  }
+
+  .applicant-card__program {
+    padding-top: 10px;
+  }
+
+  .applicant-card__disclaimer {
+    padding-top: 9px;
+    font-size: 10px;
+  }
+
+  .hero {
+    padding-top: 44px;
   }
 }
