@@ -55,10 +55,11 @@ export function LimitationsSection() {
         <div className="independent-note">
           <strong>Independent project note</strong>
           <p>
-            Created while preparing for graduate study in artificial intelligence and informed
-            by prior Korean IPO and CB workflow concepts. This independent project is not
-            affiliated with UT Austin, DART, KRX, or any admissions office. All entities,
-            passages, and structured sample rows are fictional.
+            Created by 김유찬 (Yoochan Kim · Lewis) while preparing an application to the Master of
+            Science in Artificial Intelligence program at The University of Texas at Austin and
+            informed by prior Korean IPO and CB workflow concepts. This independent applicant
+            project is not affiliated with or endorsed by UT Austin, DART, KRX, or any admissions
+            office. All entities, passages, and structured sample rows are fictional.
           </p>
         </div>
       </div>

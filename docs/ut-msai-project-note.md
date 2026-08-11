@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This independent project was built while preparing for graduate study in artificial intelligence. It connects the applicant's finance and deep-tech investment context with Korean-language preprocessing, classification, information retrieval, model evaluation, interpretation, and responsible-use boundaries.
+This independent project was created by 김유찬 (Yoochan Kim · Lewis) while preparing an application for graduate study in artificial intelligence. It connects his finance and deep-tech investment context with Korean-language preprocessing, classification, information retrieval, model evaluation, interpretation, and responsible-use boundaries.
 
 Korea IPO & CB Risk Screener is an educational prototype, not a claim of professional machine-learning engineering mastery. The application is deliberately small and inspectable: five fictional Korean KOSPI/KOSDAQ documents, 30 Korean passages, seven primary labels, two classification baselines, lexical evidence retrieval, and deterministic memo generation. The interface is English so an international reviewer can follow the work; the source passages remain Korean because Korean text is the actual NLP subject.
 
@@ -93,7 +93,7 @@ Before using the project in an application, the applicant should personally revi
 
 ## Independence and non-affiliation
 
-Korea IPO & CB Risk Screener is an independent personal project. It is not affiliated with, sponsored by, reviewed by, or endorsed by The University of Texas at Austin, the MSAI program, the College of Natural Sciences, CDSO, DART, KRX, or any admissions office. It contains no university, admissions, or production market data.
+Korea IPO & CB Risk Screener is an independent personal project. The University and program names are used only to identify the intended application. The project uses an original `Evidence Signal` mark and no official UT Austin logo, wordmark, seal, supporting mark, or university visual identity. It is not affiliated with, sponsored by, reviewed by, or endorsed by The University of Texas at Austin, the MSAI program, the College of Natural Sciences, CDSO, DART, KRX, or any admissions office. It contains no university, admissions, or production market data.
 
 ## Appropriate application use
 

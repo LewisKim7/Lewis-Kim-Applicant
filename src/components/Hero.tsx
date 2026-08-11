@@ -32,21 +32,22 @@ export function Hero() {
         <div className="hero__kicker">
           <span>Korean capital markets</span>
           <span aria-hidden="true">/</span>
-          <span>Graduate AI preparation · 2026</span>
+          <span>Applicant-directed · AI-assisted implementation</span>
         </div>
         <h1 id="hero-title">
           Korea IPO &amp; CB
           <span>Risk Screener</span>
         </h1>
         <p className="hero__deck">
-          A transparent Korean-language NLP prototype for convertible-bond and IPO
-          disclosure analysis.
+          An application portfolio connecting Korean capital-markets judgment with
+          transparent NLP classification, retrieval, and evaluation.
         </p>
         <p className="hero__body">
-          I framed the Korean-finance problem and product requirements. The prototype turns
-          them into an inspectable pipeline for passage classification, evidence retrieval,
-          model comparison, and deterministic memo generation. Corpus construction and
-          implementation were completed with AI assistance and are disclosed in the repository.
+          Drawing on my work in Korean finance and deep-tech investing, I defined the problem,
+          risk taxonomy, product requirements, evaluation questions, and interpretation. Codex
+          assisted with synthetic-data drafting, implementation, documentation, and automated
+          verification. The result is a reproducible educational prototype—not a production
+          investment model.
         </p>
         <div className="hero__actions">
           <a className="button button--primary" href="#prototype">

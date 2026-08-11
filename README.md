@@ -4,13 +4,24 @@
 
 [Live demo](https://ai-disclosure-risk-screener.vercel.app/) · [Public source snapshot](https://github.com/LewisKim7/Korea-IPO-CB-Risk-Screener)
 
+| Applicant context | Detail |
+| --- | --- |
+| Created and directed by | **김유찬 (Yoochan Kim · Lewis)** |
+| Professional context | Finance and deep-tech investment professional |
+| Program of interest | [Master of Science in Artificial Intelligence](https://cdso.utexas.edu/msai), The University of Texas at Austin |
+| Applicant direction | Korean capital-markets problem framing, risk taxonomy, product requirements, and evaluation questions |
+
+This is optional supporting evidence for an application, not an official UT Austin
+submission or a required application item. It is not affiliated with or endorsed by
+The University of Texas at Austin.
+
 ![Korea IPO and CB Risk Screener interface](docs/assets/portfolio-preview.png)
 
-Korea IPO & CB Risk Screener is an independent educational project created while preparing for graduate study in artificial intelligence. It connects Korean capital-markets workflows with structured screening, Korean passage classification, lexical evidence retrieval, a trained text baseline, explicit evaluation, and deterministic memo generation.
+Korea IPO & CB Risk Screener is an independent educational project created by 김유찬 (Yoochan Kim · Lewis) while preparing an application for graduate study in artificial intelligence. It connects Korean capital-markets workflows with structured screening, Korean passage classification, lexical evidence retrieval, a trained text baseline, explicit evaluation, and deterministic memo generation.
 
 The interface is English so an international reviewer can follow the methodology. The disclosure-style source passages are Korean because Korean-language processing is the substantive problem being explored.
 
-> **AI-assisted development disclosure:** The applicant selected the domain, project objective, feature requirements, and application purpose. Codex assisted with synthetic data drafting, implementation, documentation, and automated verification. All reference labels and rationales were drafted within the same AI-assisted project and have not been independently annotated or adjudicated. The reported results are development diagnostics, not independently validated performance.
+> **AI-assisted development disclosure:** 김유찬 defined the domain problem, project objective, risk taxonomy, feature requirements, evaluation questions, and application purpose. Codex assisted with synthetic-data drafting, implementation, documentation, and automated verification. All reference labels and rationales were drafted within the same AI-assisted project and have not been independently annotated or adjudicated. The reported results are development diagnostics, not independently validated performance.
 
 ## Reviewer fast path
 
@@ -20,7 +31,7 @@ The interface is English so an international reviewer can follow the methodology
 | 5 minutes | Read the research question, document-held-out protocol, exact ML errors, retrieval diagnostic, and limitations on this page. |
 | Reproduce | Run `npm ci && npm run verify`; no API key, backend, network model, or private dataset is required. |
 
-The applicant contributed the Korean capital-markets framing, product objective, feature requirements, evaluation questions, and intended graduate-study narrative. AI assistance in corpus drafting, implementation, documentation, and QA is disclosed rather than presented as solo engineering work.
+김유찬 contributed the Korean capital-markets framing, product objective, risk taxonomy, feature requirements, evaluation questions, interpretation, and intended graduate-study narrative. AI assistance in corpus drafting, implementation, documentation, and QA is disclosed rather than presented as solo engineering work.
 
 ## At a glance
 
@@ -242,7 +253,7 @@ docs/
 
 This project is educational. It is not investment advice, legal or regulatory analysis, issuer due diligence, or a substitute for human judgment. It does not establish performance on DART filings or other unseen text.
 
-The project is not affiliated with or endorsed by UT Austin, DART, KRX, Apple, getdesign.md, or any admissions office. The visual direction was inspired by the independent [Design System Analysis: Apple](https://getdesign.md/apple/design-md), but no Apple assets, logos, trademarks, proprietary fonts, source code, or product identity are used. See [Design Note](docs/design-note.md).
+The project is not affiliated with or endorsed by The University of Texas at Austin, DART, KRX, Apple, getdesign.md, or any admissions office. The University and program names are used only to identify the intended application. The interface uses an original `Evidence Signal` mark and contains no official UT Austin logo, wordmark, seal, supporting mark, or university visual identity. The visual direction was inspired by the independent [Design System Analysis: Apple](https://getdesign.md/apple/design-md), but no Apple assets, logos, trademarks, proprietary fonts, source code, or product identity are used. See [Design Note](docs/design-note.md).
 
 ## Documentation
 
@@ -255,7 +266,7 @@ The project is not affiliated with or endorsed by UT Austin, DART, KRX, Apple, g
 
 ## Completed scope and next research phase
 
-The submitted prototype includes structured IPO/CB calculations, a transparent rule baseline, a document-held-out trained baseline, lexical retrieval, a deterministic evidence memo, classification error analysis, and a closed-corpus retrieval diagnostic. The next research phase would:
+This completed prototype includes structured IPO/CB calculations, a transparent rule baseline, a document-held-out trained baseline, lexical retrieval, a deterministic evidence memo, classification error analysis, and a closed-corpus retrieval diagnostic. The next research phase would:
 
 1. complete the applicant's personal review of every passage, label, rationale, prediction, and error;
 2. create a permitted Korean disclosure set independent of rule and model development;
@@ -265,5 +276,5 @@ The submitted prototype includes structured IPO/CB calculations, a transparent r
 
 ## Rights
 
-Copyright (c) 2026 Lewis Kim. All rights reserved. This review snapshot is
+Copyright (c) 2026 김유찬 (Yoochan Kim · Lewis). All rights reserved. This review snapshot is
 `UNLICENSED`; see [NOTICE.md](NOTICE.md) for the permitted review boundary.
