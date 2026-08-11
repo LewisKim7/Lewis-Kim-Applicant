@@ -29,6 +29,7 @@ The visual direction was inspired by the independent [Design System Analysis: Ap
 | Typography | Native system sans-serif stack; system monospace fallbacks for IDs and metrics | Fast loading and no external font asset |
 | Layout | Wide whitespace, constrained reading widths, responsive grids, and horizontal table containment | Preserve editorial hierarchy while supporting technical density |
 | Navigation and identity | One compact project header, a profile action, and a separate applicant/program ribbon with the original Application Check badge | Keep the project name in navigation while consolidating applicant and school context |
+| Evidence summary | One flat three-part band for IPO, CB, and held-out NLP measures | Put market proportions and the weakest model label above the fold without adding dashboard-card chrome |
 | Analytical figures | Semantic HTML/CSS bars with direct values, text labels, and one blue accent | Add visual comparison without a charting dependency or color-only meaning |
 
 The interface uses color and spacing to separate information roles, but methodology claims are carried by text, tables, IDs, and labels rather than visual polish alone.
@@ -56,9 +57,9 @@ The production default identifies only `Prepared for graduate applications to UT
 ## Interaction and information hierarchy
 
 1. **Header and applicant ribbon** keep the project navigation thin, provide a persistent Profile action, and pair the applicant with the intended school context and non-affiliation boundary.
-2. **Hero and signal trace** state the narrow objective and show an inspectable Korean rule trace immediately.
-3. **Applicant profile** links Yoochan Kim's finance background to the research question, provides employer links, and anchors the dated DART manager-listing evidence without implying employer endorsement.
-4. **Production-tool bridge** uses compact tabs to pair a frozen real-market summary with one lazy-loaded source application at a time, then explicitly separates that evidence from the synthetic NLP workflow.
+2. **Hero, signal trace, and evidence band** state the narrow objective, show an inspectable Korean rule trace, and visualize the frozen-market and held-out-development boundaries immediately.
+3. **Production-tool bridge** uses compact tabs to pair a frozen real-market summary with one lazy-loaded source application at a time, then explicitly separates that evidence from the synthetic NLP workflow.
+4. **Applicant profile** links Yoochan Kim's finance background to the research question, provides employer links, and anchors the dated DART manager-listing evidence without implying employer endorsement.
 5. **Problem and methodology** separate the research question from preprocessing, rules, trained classification, retrieval, and memo generation.
 6. **Dashboard and taxonomy** let the reviewer inspect Korean passages, rule traces, evidence ranking, memo citations, and label definitions.
 7. **Evaluation** leads with per-label recall, then preserves fold details, confusion matrices, errors, and retrieval diagnostics under their respective protocols.
@@ -66,7 +67,7 @@ The production default identifies only `Prepared for graduate applications to UT
 
 ## Accessibility and responsive intent
 
-The implementation includes semantic page regions and headings, a skip link, visible keyboard focus, labeled controls, and responsive grids. The desktop opening uses a single-row header and side-by-side figures; mobile condenses the header, stacks the market figures, preserves 44-pixel control targets, and converts dense repeated content into compact cards or intentional horizontal scrollers. Wide evaluation tables and confusion matrices are contained so they can scroll rather than force the page beyond the viewport.
+The implementation includes semantic page regions and headings, a skip link, visible keyboard focus, labeled controls, and responsive grids. The desktop opening uses a single-row header, editorial left-aligned section headings, flat evidence bands, and side-by-side figures. Detailed evaluation artifacts are collapsed behind labeled native disclosure controls. Mobile condenses the header, rearranges the evidence band into two market cells plus one full-width NLP diagnostic, preserves 44-pixel primary control targets, and converts dense repeated content into compact cards or intentional horizontal scrollers. Wide evaluation tables and confusion matrices are contained so they can scroll rather than force the page beyond the viewport.
 
 The CSS is designed down to a 320-pixel viewport, but this note does not claim complete WCAG conformance. A formal assistive-technology and cross-browser audit has not been performed.
 

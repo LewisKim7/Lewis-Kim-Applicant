@@ -9,7 +9,7 @@ const limitations = [
   'TF-IDF has limited Korean context and paraphrase understanding.',
   'Reference labels were drafted in the same AI-assisted build process.',
   'The 12-query retrieval diagnostic is closed-corpus and AI-assisted.',
-  'Structured CB and IPO rows are fictional workflow demonstrations.',
+  'The NLP corpus and development fixtures are synthetic; the market snapshot is dated public evidence.',
 ]
 
 const nextSteps = [
@@ -26,7 +26,7 @@ export function LimitationsSection() {
       <div className="page-shell section-pad">
         <SectionHeading
           eyebrow="07 / Responsible use"
-          title="A prototype is useful only when its boundary is visible."
+          title="What this prototype cannot claim."
           description="These results describe behavior on a small synthetic Korean sample. They do not establish performance on DART filings, legal reliability, or investment usefulness."
           inverse
         />
@@ -62,7 +62,8 @@ export function LimitationsSection() {
             {APPLICATION_CONTEXT.institutionName} and informed by prior Korean IPO and CB
             workflow concepts. This independent applicant project is not affiliated with or
             endorsed by {APPLICATION_CONTEXT.institutionShort}, DART, KRX, or any admissions
-            office. All entities, passages, and structured sample rows are fictional.
+            office. The NLP corpus and development fixtures are synthetic; the separately labeled
+            market snapshot contains dated public observations and receives no model risk label.
           </p>
         </div>
       </div>

@@ -215,106 +215,113 @@ export function EvaluationSection() {
         </aside>
       </div>
 
-      <div className="evaluation-grid evaluation-grid--heldout">
-        <div className="fold-panel">
-          <header>
-            <div>
-              <span className="demo-label">Cross-validation trace</span>
-              <h3>One unseen document per fold</h3>
-            </div>
-            <span>24 train · 6 test</span>
-          </header>
-          <div
-            className="fold-table-wrap"
-            role="region"
-            aria-label="Scrollable document-level cross-validation results"
-            tabIndex={0}
-          >
-            <table className="fold-table">
-              <caption>Leave-one-document-out fold results</caption>
-              <thead>
-                <tr>
-                  <th scope="col">Held-out document</th>
-                  <th scope="col">Vocabulary</th>
-                  <th scope="col">Correct</th>
-                  <th scope="col">Accuracy</th>
-                </tr>
-              </thead>
-              <tbody>
-                {ML_EVALUATION.folds.map((fold) => (
-                  <tr key={fold.holdoutDocumentId}>
-                    <th scope="row">{fold.holdoutDocumentId}</th>
-                    <td>{fold.vocabularySize}</td>
-                    <td>
-                      {fold.correct}/{fold.testCount}
-                    </td>
-                    <td>{percent(fold.accuracy)}</td>
+      <details className="evaluation-deep-dive">
+        <summary>
+          <span>Inspect document folds, confusion matrix, and held-out errors</span>
+          <small>5 folds · {ML_EVALUATION.errorExamples.length} visible errors</small>
+        </summary>
+
+        <div className="evaluation-grid evaluation-grid--heldout">
+          <div className="fold-panel">
+            <header>
+              <div>
+                <span className="demo-label">Cross-validation trace</span>
+                <h3>One unseen document per fold</h3>
+              </div>
+              <span>24 train · 6 test</span>
+            </header>
+            <div
+              className="fold-table-wrap"
+              role="region"
+              aria-label="Scrollable document-level cross-validation results"
+              tabIndex={0}
+            >
+              <table className="fold-table">
+                <caption>Leave-one-document-out fold results</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Held-out document</th>
+                    <th scope="col">Vocabulary</th>
+                    <th scope="col">Correct</th>
+                    <th scope="col">Accuracy</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {ML_EVALUATION.folds.map((fold) => (
+                    <tr key={fold.holdoutDocumentId}>
+                      <th scope="row">{fold.holdoutDocumentId}</th>
+                      <td>{fold.vocabularySize}</td>
+                      <td>
+                        {fold.correct}/{fold.testCount}
+                      </td>
+                      <td>{percent(fold.accuracy)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="confusion-panel">
+            <header>
+              <div>
+                <span className="demo-label">Out-of-fold confusion matrix</span>
+                <h3>Reference label → ML prediction</h3>
+              </div>
+              <span>Rows actual · columns predicted</span>
+            </header>
+            <ConfusionMatrix
+              labels={ML_EVALUATION.labels}
+              matrix={ML_EVALUATION.confusionMatrix}
+              caption="Out-of-fold counts by actual and predicted risk label"
+            />
           </div>
         </div>
 
-        <div className="confusion-panel">
+        <div className="error-analysis error-analysis--ml">
           <header>
-            <div>
-              <span className="demo-label">Out-of-fold confusion matrix</span>
-              <h3>Reference label → ML prediction</h3>
-            </div>
-            <span>Rows actual · columns predicted</span>
+            <span className="demo-label">Held-out error inspection</span>
+            <h3>
+              {ML_EVALUATION.errorExamples.length} of {ML_EVALUATION.total} unseen-document
+              passages were misclassified.
+            </h3>
+            <p>
+              The examples below are not patched away. They expose sparse vocabulary, label
+              overlap, and the weakness of learning seven classes from only 24 passages per fold.
+              Liquidity Risk recall is only{' '}
+              {percent(ML_EVALUATION.perLabel['Liquidity Risk'].recall)} (
+              {ML_EVALUATION.perLabel['Liquidity Risk'].correctCount}/
+              {ML_EVALUATION.perLabel['Liquidity Risk'].actualCount}), a weakness hidden by the
+              headline accuracy.
+            </p>
           </header>
-          <ConfusionMatrix
-            labels={ML_EVALUATION.labels}
-            matrix={ML_EVALUATION.confusionMatrix}
-            caption="Out-of-fold counts by actual and predicted risk label"
-          />
+          <div className="error-examples">
+            {ML_EVALUATION.errorExamples.slice(0, 4).map((example) => (
+              <article key={example.passageId}>
+                <div>
+                  <span>{example.passageId}</span>
+                  <span>{percent(example.modelScore)} uncalibrated score</span>
+                </div>
+                <p>{example.text}</p>
+                {example.leadingFeatures.length ? (
+                  <small>
+                    Leading terms: {example.leadingFeatures.map((item) => item.term).join(', ')}
+                  </small>
+                ) : null}
+                <footer>
+                  <span>
+                    Reference: <strong>{example.actualLabel}</strong>
+                  </span>
+                  <span aria-hidden="true">→</span>
+                  <span>
+                    ML baseline: <strong>{example.predictedLabel}</strong>
+                  </span>
+                </footer>
+              </article>
+            ))}
+          </div>
         </div>
-      </div>
-
-      <div className="error-analysis error-analysis--ml">
-        <header>
-          <span className="demo-label">Held-out error inspection</span>
-          <h3>
-            {ML_EVALUATION.errorExamples.length} of {ML_EVALUATION.total} unseen-document
-            passages were misclassified.
-          </h3>
-          <p>
-            The examples below are not patched away. They expose sparse vocabulary, label
-            overlap, and the weakness of learning seven classes from only 24 passages per fold.
-            Liquidity Risk recall is only{' '}
-            {percent(ML_EVALUATION.perLabel['Liquidity Risk'].recall)} (
-            {ML_EVALUATION.perLabel['Liquidity Risk'].correctCount}/
-            {ML_EVALUATION.perLabel['Liquidity Risk'].actualCount}), a weakness hidden by the
-            headline accuracy.
-          </p>
-        </header>
-        <div className="error-examples">
-          {ML_EVALUATION.errorExamples.slice(0, 4).map((example) => (
-            <article key={example.passageId}>
-              <div>
-                <span>{example.passageId}</span>
-                <span>{percent(example.modelScore)} uncalibrated score</span>
-              </div>
-              <p>{example.text}</p>
-              {example.leadingFeatures.length ? (
-                <small>
-                  Leading terms: {example.leadingFeatures.map((item) => item.term).join(', ')}
-                </small>
-              ) : null}
-              <footer>
-                <span>
-                  Reference: <strong>{example.actualLabel}</strong>
-                </span>
-                <span aria-hidden="true">→</span>
-                <span>
-                  ML baseline: <strong>{example.predictedLabel}</strong>
-                </span>
-              </footer>
-            </article>
-          ))}
-        </div>
-      </div>
+      </details>
 
       <section className="retrieval-evaluation" aria-labelledby="retrieval-evaluation-title">
         <header className="retrieval-evaluation__header">
@@ -347,36 +354,42 @@ export function EvaluationSection() {
           </div>
         </dl>
 
-        <div className="retrieval-cases">
-          {RETRIEVAL_CASES.map((item) => (
-            <article className={item.firstRelevantRank ? undefined : 'is-failure'} key={item.queryId}>
-              <div className="retrieval-case__meta">
-                <span>{item.queryId}</span>
-                <span>
-                  {item.relevantRetrieved}/{item.relevantCount} relevant returned
-                </span>
-              </div>
-              <h4 lang="ko">{item.query}</h4>
-              <p>{item.intent}</p>
-              <footer>
-                <strong>
-                  {item.firstRelevantRank
-                    ? `First relevant result at rank ${item.firstRelevantRank}`
-                    : 'No relevant result in the top three'}
-                </strong>
-                <span>
-                  {item.rankedPassages[0]?.passageId ?? 'No lexical match'}
-                </span>
-              </footer>
-            </article>
-          ))}
-        </div>
+        <details className="retrieval-case-details">
+          <summary>
+            <span>Inspect three representative retrieval queries</span>
+            <small>2 matches · 1 deliberate lexical failure</small>
+          </summary>
+          <div className="retrieval-cases">
+            {RETRIEVAL_CASES.map((item) => (
+              <article className={item.firstRelevantRank ? undefined : 'is-failure'} key={item.queryId}>
+                <div className="retrieval-case__meta">
+                  <span>{item.queryId}</span>
+                  <span>
+                    {item.relevantRetrieved}/{item.relevantCount} relevant returned
+                  </span>
+                </div>
+                <h4 lang="ko">{item.query}</h4>
+                <p>{item.intent}</p>
+                <footer>
+                  <strong>
+                    {item.firstRelevantRank
+                      ? `First relevant result at rank ${item.firstRelevantRank}`
+                      : 'No relevant result in the top three'}
+                  </strong>
+                  <span>
+                    {item.rankedPassages[0]?.passageId ?? 'No lexical match'}
+                  </span>
+                </footer>
+              </article>
+            ))}
+          </div>
 
-        <p className="retrieval-evaluation__note">
-          Q12 deliberately paraphrases the corpus wording and returns no lexical match. The
-          visible failure illustrates TF-IDF's synonym and context limits; it was retained
-          instead of tuning the query set around the system.
-        </p>
+          <p className="retrieval-evaluation__note">
+            Q12 deliberately paraphrases the corpus wording and returns no lexical match. The
+            visible failure illustrates TF-IDF's synonym and context limits; it was retained
+            instead of tuning the query set around the system.
+          </p>
+        </details>
       </section>
 
       <details className="closed-set-details">

@@ -1,6 +1,6 @@
 import { APPLICATION_CONTEXT } from '../config/application-profile'
 
-const SOURCE_URL = 'https://github.com/LewisKim7/Korea-IPO-CB-Risk-Screener'
+const SOURCE_URL = 'https://github.com/LewisKim7/lewis-kim-applicant'
 
 export function SiteFooter() {
   return (

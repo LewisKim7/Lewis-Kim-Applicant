@@ -16,8 +16,8 @@ export function RiskTaxonomySection() {
     <section className="taxonomy-section page-shell section-pad" id="taxonomy">
       <SectionHeading
         eyebrow="05 / Risk taxonomy"
-        title="Seven bilingual labels, each tied to an analyst question."
-        description="The compact taxonomy maps Korean CB and IPO language into one primary category while preserving overlapping rule scores for review."
+        title="Seven labels for one review path."
+        description="Each bilingual category maps Korean IPO and CB language to a concrete analyst question while preserving overlapping rule scores."
       />
 
       <div className="taxonomy-grid">

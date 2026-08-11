@@ -1,8 +1,13 @@
 import type { CSSProperties } from 'react'
 import { ALL_PASSAGES } from '../data/corpus'
-import { classifyPassage, matchedTermEnglishGloss } from '../lib'
+import { FROZEN_MARKET_SNAPSHOT } from '../data/market-snapshot'
+import {
+  classifyPassage,
+  evaluateDocumentHeldOutLogisticRegression,
+  matchedTermEnglishGloss,
+} from '../lib'
 
-const SOURCE_URL = 'https://github.com/LewisKim7/Korea-IPO-CB-Risk-Screener'
+const SOURCE_URL = 'https://github.com/LewisKim7/lewis-kim-applicant'
 const TRACE_PASSAGE = (() => {
   const passage = ALL_PASSAGES.find(
     (item) => item.passageId === 'DOC-KR-CB-RESET-001-P01',
@@ -21,11 +26,29 @@ const MAX_TRACE_SCORE = Math.max(...TRACE_SCORES.map(({ value }) => value), 1)
 const TRACE_ENGLISH_GLOSSES = TRACE_RESULT.matchedKeywords.map(
   (keyword) => matchedTermEnglishGloss(keyword) ?? keyword,
 )
+const TRACE_MOBILE_KEYWORDS = TRACE_RESULT.matchedKeywords.slice(0, 2)
+const TRACE_MOBILE_ENGLISH_GLOSSES = TRACE_MOBILE_KEYWORDS.map(
+  (keyword) => matchedTermEnglishGloss(keyword) ?? keyword,
+)
+const HERO_EVALUATION = evaluateDocumentHeldOutLogisticRegression(ALL_PASSAGES)
+const LIQUIDITY_RECALL = HERO_EVALUATION.perLabel['Liquidity Risk']
+const IPO_SNAPSHOT = FROZEN_MARKET_SNAPSHOT.ipo
+const CB_SNAPSHOT = FROZEN_MARKET_SNAPSHOT.cb
 
 function traceBarStyle(value: number): CSSProperties {
   return {
     '--score-width': `${(value / MAX_TRACE_SCORE) * 84}%`,
   } as CSSProperties
+}
+
+function evidenceBarStyle(value: number, total: number): CSSProperties {
+  return {
+    '--evidence-width': `${(value / total) * 100}%`,
+  } as CSSProperties
+}
+
+function oneDecimalPercent(value: number, total: number): string {
+  return `${((value / total) * 100).toFixed(1)}%`
 }
 
 export function Hero() {
@@ -95,10 +118,24 @@ export function Hero() {
             <p className="console-label">Primary label</p>
             <strong>{TRACE_RESULT.predictedLabel}</strong>
             <p className="signal-console__match">
-              <span>Matched (KO): {TRACE_RESULT.matchedKeywords.join(', ')}</span>
-              <span>English: {TRACE_ENGLISH_GLOSSES.join(', ')}</span>
-              <small>
+              <span className="signal-console__match-full">
+                Matched (KO): {TRACE_RESULT.matchedKeywords.join(', ')}
+              </span>
+              <span className="signal-console__match-full">
+                English: {TRACE_ENGLISH_GLOSSES.join(', ')}
+              </span>
+              <span className="signal-console__match-compact">
+                Matched (KO): {TRACE_MOBILE_KEYWORDS.join(', ')}
+              </span>
+              <span className="signal-console__match-compact">
+                English: {TRACE_MOBILE_ENGLISH_GLOSSES.join(', ')}
+              </span>
+              <small className="signal-console__match-full">
                 {(TRACE_RESULT.signalScore * 100).toFixed(1)}% heuristic, not a probability
+              </small>
+              <small className="signal-console__match-compact">
+                2 of {TRACE_RESULT.matchedKeywords.length} terms previewed · full bilingual trace
+                below · {(TRACE_RESULT.signalScore * 100).toFixed(1)}% heuristic, not a probability
               </small>
             </p>
           </div>
@@ -108,30 +145,96 @@ export function Hero() {
       <aside className="hero__contribution" aria-label="Applicant and AI contribution disclosure">
         <strong>Applicant-led · AI-assisted</strong>
         <p>
-          I framed the Korean-finance problem, taxonomy, requirements, evaluation questions,
-          and interpretation. Codex assisted with synthetic-data drafting, implementation,
-          documentation, and verification. This is an educational prototype, not an investment model.
+          I framed the finance problem and evaluation; Codex assisted implementation.
+          Educational prototype—not an investment model.
         </p>
       </aside>
 
-      <dl className="hero-metrics" aria-label="Project scope">
-        <div>
-          <dt>30</dt>
-          <dd>synthetic Korean passages</dd>
-        </div>
-        <div>
-          <dt>07</dt>
-          <dd>risk taxonomy labels</dd>
-        </div>
-        <div>
-          <dt>05</dt>
-          <dd>synthetic IPO / CB documents</dd>
-        </div>
-        <div>
-          <dt>00</dt>
-          <dd>external API keys</dd>
-        </div>
-      </dl>
+      <div className="hero-evidence" role="region" aria-label="Visual evidence at a glance">
+        <figure className="hero-evidence__item">
+          <figcaption>
+            <span>Frozen market · IPO</span>
+            <strong>
+              {IPO_SNAPSHOT.belowOfferCount}/{IPO_SNAPSHOT.companyCount} below offer
+            </strong>
+          </figcaption>
+          <div
+            className="hero-evidence__bar"
+            style={evidenceBarStyle(IPO_SNAPSHOT.belowOfferCount, IPO_SNAPSHOT.companyCount)}
+            aria-hidden="true"
+          >
+            <i />
+          </div>
+          <p>
+            <b>{oneDecimalPercent(IPO_SNAPSHOT.belowOfferCount, IPO_SNAPSHOT.companyCount)}</b>
+            <span>
+              +{IPO_SNAPSHOT.averageFirstDayReturnPct}% first day →{' '}
+              {IPO_SNAPSHOT.averageCurrentReturnPct}% current
+            </span>
+          </p>
+        </figure>
+
+        <figure className="hero-evidence__item">
+          <figcaption>
+            <span>Frozen market · CB</span>
+            <strong>
+              {CB_SNAPSHOT.bothZeroRowCount}/{CB_SNAPSHOT.filingRowCount} strict 0% / 0%
+            </strong>
+          </figcaption>
+          <div
+            className="hero-evidence__bar hero-evidence__bar--cb"
+            style={evidenceBarStyle(CB_SNAPSHOT.bothZeroRowCount, CB_SNAPSHOT.filingRowCount)}
+            aria-hidden="true"
+          >
+            <i />
+          </div>
+          <p>
+            <b>{oneDecimalPercent(CB_SNAPSHOT.bothZeroRowCount, CB_SNAPSHOT.filingRowCount)}</b>
+            <span>
+              {CB_SNAPSHOT.bothZeroIssuerCount} issuers · ₩
+              {(CB_SNAPSHOT.bothZeroAmountEok / 10_000).toFixed(2)}tn principal
+            </span>
+          </p>
+        </figure>
+
+        <figure className="hero-evidence__item hero-evidence__item--nlp">
+          <figcaption>
+            <span>Synthetic diagnostic · 5 folds</span>
+            <strong>
+              {HERO_EVALUATION.correct}/{HERO_EVALUATION.total} held-out correct
+            </strong>
+          </figcaption>
+          <div className="hero-evidence__dual">
+            <div>
+              <span>Accuracy</span>
+              <i
+                aria-hidden="true"
+                style={evidenceBarStyle(HERO_EVALUATION.correct, HERO_EVALUATION.total)}
+              >
+                <i />
+              </i>
+              <b>{oneDecimalPercent(HERO_EVALUATION.correct, HERO_EVALUATION.total)}</b>
+            </div>
+            <div className="is-weakest">
+              <span>Liquidity recall</span>
+              <i
+                aria-hidden="true"
+                style={evidenceBarStyle(
+                  LIQUIDITY_RECALL.correctCount,
+                  LIQUIDITY_RECALL.actualCount,
+                )}
+              >
+                <i />
+              </i>
+              <b>{LIQUIDITY_RECALL.correctCount}/{LIQUIDITY_RECALL.actualCount}</b>
+            </div>
+          </div>
+          <p>
+            <b>{oneDecimalPercent(LIQUIDITY_RECALL.correctCount, LIQUIDITY_RECALL.actualCount)}</b>
+            <span>weakest-label recall · 30 passages · 7 labels</span>
+          </p>
+        </figure>
+      </div>
     </section>
   )
 }

@@ -35,7 +35,7 @@ export function ProfileSection() {
 
           <div className="profile-card__story">
             <p className="eyebrow">Finance domain → AI questions</p>
-            <h2 id="profile-title">Korean capital-markets experience, translated into a testable NLP project.</h2>
+            <h2 id="profile-title">Finance experience, translated into a testable NLP project.</h2>
 
             <p className="profile-card__bio">
               Yoochan Kim (Lewis Kim) graduated from the School of Business at{' '}
@@ -58,24 +58,26 @@ export function ProfileSection() {
               while managing related funds.
             </p>
 
-            <a className="profile-card__link" href={PROFILE_URL} target="_blank" rel="noreferrer">
-              View Lewis Kim profile
-              <span aria-hidden="true">↗</span>
-            </a>
+            <div className="profile-card__actions">
+              <a className="profile-card__link" href={PROFILE_URL} target="_blank" rel="noreferrer">
+                View Lewis Kim profile
+                <span aria-hidden="true">↗</span>
+              </a>
 
-            <a
-              className="profile-card__evidence"
-              href={DART_MANAGER_FILING_URL}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span className="profile-card__evidence-mark" aria-hidden="true">✓</span>
-              <span>
-                <small>FSS DART filing · 26 Aug 2025</small>
-                <strong>Fund manager · Hanwha IPO Plus fund</strong>
-              </span>
-              <span aria-hidden="true">↗</span>
-            </a>
+              <a
+                className="profile-card__evidence"
+                href={DART_MANAGER_FILING_URL}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className="profile-card__evidence-mark" aria-hidden="true">✓</span>
+                <span>
+                  <small>FSS DART filing · 26 Aug 2025</small>
+                  <strong>Fund manager · Hanwha IPO Plus fund</strong>
+                </span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
           </div>
         </div>
 

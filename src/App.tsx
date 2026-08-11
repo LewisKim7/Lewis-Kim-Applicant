@@ -21,8 +21,8 @@ function App() {
       <main id="main-content">
         <ApplicantContext />
         <Hero />
-        <ProfileSection />
         <WorkflowBridgeSection />
+        <ProfileSection />
         <ProblemSection />
         <MethodologySection />
         <DemoDashboard />

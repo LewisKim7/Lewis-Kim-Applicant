@@ -33,8 +33,8 @@ export function MethodologySection() {
       <div className="page-shell section-pad">
         <SectionHeading
           eyebrow="03 / Methodology"
-          title="One workflow, from market screen to source-linked memo."
-          description="No generative model, hidden prompt, remote inference, or API key is required. Structured calculations, Korean text processing, both classifiers, retrieval, and memo generation are reproducible in the repository."
+          title="From market screen to source-linked memo."
+          description="Structured calculations, Korean text processing, both baselines, retrieval, and memo generation run locally without an API key."
           inverse
         />
 
