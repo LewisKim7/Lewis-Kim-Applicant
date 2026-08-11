@@ -14,6 +14,10 @@ describe('plain-language market visualizations', () => {
     expect(screen.getByRole('img', {
       name: /36 of 52: below IPO price; 16 of 52: at or above IPO price/,
     })).toBeTruthy()
+    expect(screen.getByTitle('IPO Market Report interactive viewer').getAttribute('src'))
+      .toBe('https://ipo-market-report.vercel.app/?embed=portfolio')
+    expect(screen.getByRole('link', { name: /Open full tool/ }).getAttribute('href'))
+      .toBe('https://ipo-market-report.vercel.app/')
   })
 
   it('keeps the CB term and shows the strict-zero screen as part of the full sample', () => {

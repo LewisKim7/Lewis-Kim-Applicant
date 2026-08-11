@@ -268,6 +268,9 @@ export function WorkflowBridgeSection() {
   const source = activeTool === 'ipo'
     ? FROZEN_MARKET_SNAPSHOT.ipo
     : FROZEN_MARKET_SNAPSHOT.cb
+  const embedSourceUrl = activeTool === 'ipo'
+    ? `${source.sourceUrl}?embed=portfolio`
+    : source.sourceUrl
 
   useEffect(() => {
     const syncHash = () => setActiveTool(selectedToolFromHash())
@@ -331,7 +334,7 @@ export function WorkflowBridgeSection() {
             </div>
             <iframe
               key={activeTool}
-              src={source.sourceUrl}
+              src={embedSourceUrl}
               title={activeTool === 'ipo' ? 'IPO Market Report interactive viewer' : 'CB Zero Finder interactive search tool'}
               loading="lazy"
               referrerPolicy="no-referrer"
