@@ -9,6 +9,7 @@ import {
   type AnalyzedPassage,
   type RiskMemo,
 } from '../lib'
+import { EnglishPassageSummary } from './EnglishPassageSummary'
 import { SectionHeading } from './SectionHeading'
 
 const QUERY_SUGGESTIONS = [
@@ -51,7 +52,7 @@ function EvidenceView({
             <th scope="col">Passage</th>
             <th scope="col">Baseline result</th>
             <th scope="col">Matched terms · English gloss</th>
-            <th scope="col">Why it matters</th>
+            <th scope="col">Transparent rule trace</th>
           </tr>
         </thead>
         <tbody>
@@ -64,7 +65,8 @@ function EvidenceView({
             >
               <td data-label="Passage">
                 <span className="passage-id">{passage.passageId}</span>
-                <p>{passage.text}</p>
+                <p lang="ko">{passage.text}</p>
+                <EnglishPassageSummary summary={passage.annotationRationale} />
               </td>
               <td data-label="Baseline result">
                 <span className={`risk-pill ${riskClass(classification.predictedLabel)}`}>
@@ -97,8 +99,7 @@ function EvidenceView({
                   )}
                 </div>
               </td>
-              <td data-label="Why it matters">
-                <p className="rationale">{passage.annotationRationale}</p>
+              <td data-label="Rule trace">
                 <details className="rule-trace">
                   <summary>Inspect rule trace</summary>
                   <p>{classification.explanation}</p>
@@ -355,7 +356,13 @@ export function DemoDashboard() {
                       <span className="retrieval-rank">{String(result.rank).padStart(2, '0')}</span>
                       <span>
                         <strong>{result.passage.passageId}</strong>
-                        <small>{result.passage.text}</small>
+                        <small className="retrieval-passage" lang="ko">
+                          {result.passage.text}
+                        </small>
+                        <EnglishPassageSummary
+                          summary={result.passage.annotationRationale}
+                          compact
+                        />
                       </span>
                       <span className="similarity-score">{percent(result.score)}</span>
                     </button>
@@ -385,7 +392,7 @@ export function DemoDashboard() {
               Generated memo
             </button>
           </div>
-          <span>Korean passages and AI-assisted reference rationales remain visible.</span>
+          <span>Every visible Korean passage includes a concise English summary.</span>
         </div>
 
         <div className="analysis-view" aria-live="polite">

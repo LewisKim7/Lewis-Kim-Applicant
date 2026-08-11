@@ -31,6 +31,15 @@ describe('bundled synthetic corpus', () => {
     }
   })
 
+  it('provides a concise English summary for every Korean passage', () => {
+    for (const passage of ALL_PASSAGES) {
+      expect(passage.text).toMatch(/[가-힣]/)
+      expect(passage.annotationRationale).toMatch(/[A-Za-z]/)
+      expect(passage.annotationRationale).not.toMatch(/[가-힣]/)
+      expect(passage.annotationRationale.length).toBeLessThanOrEqual(140)
+    }
+  })
+
   it('rejects a corpus that is not explicitly synthetic', () => {
     expect(() =>
       parseCorpus([

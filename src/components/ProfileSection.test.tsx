@@ -11,7 +11,7 @@ describe('applicant profile section', () => {
     const { container } = render(<ProfileSection />)
 
     expect(screen.getByRole('heading', {
-      name: 'Finance experience, translated into a testable NLP project.',
+      name: 'Yoochan Kim Lewis Kim',
     })).toBeTruthy()
     expect(
       screen.getByRole('link', { name: 'Hanyang University' }).getAttribute('href'),
@@ -23,10 +23,10 @@ describe('applicant profile section', () => {
       screen.getByRole('link', { name: 'Hanwha Asset Management' }).getAttribute('href'),
     ).toBe('https://www.hanwhafund.co.kr/en')
     expect(container.textContent).toContain(
-      'an influential early-stage venture capital firm in Korea',
+      'an influential Korean early-stage VC',
     )
     expect(container.textContent).toContain(
-      'ranked No. 5 among Korea’s large business groups by assets in 2026',
+      "Korea's No. 5 business group by assets in 2026",
     )
     expect(container.querySelector('[lang="ko"]')).toBeNull()
   })

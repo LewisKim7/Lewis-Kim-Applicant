@@ -10,6 +10,7 @@ import {
   evaluateRetrieval,
 } from '../lib'
 import { SectionHeading } from './SectionHeading'
+import { EnglishPassageSummary } from './EnglishPassageSummary'
 
 const RULE_EVALUATION = evaluateClassifier(ALL_PASSAGES, classifyPassage, {
   maxExamplesPerGroup: 8,
@@ -27,6 +28,14 @@ const RETRIEVAL_CASES = RETRIEVAL_EVALUATION.queries.filter(({ queryId }) =>
 const PROTOCOL_GAP = Math.abs(
   ML_EVALUATION.accuracy - RULE_EVALUATION.accuracy,
 )
+const PASSAGE_BY_ID = new Map(ALL_PASSAGES.map((passage) => [passage.passageId, passage]))
+
+function PassageSummaryById({ passageId }: { readonly passageId: string }) {
+  const passage = PASSAGE_BY_ID.get(passageId)
+  return passage ? (
+    <EnglishPassageSummary summary={passage.annotationRationale} compact />
+  ) : null
+}
 
 const SHORT_LABELS: Readonly<Record<RiskLabel, string>> = {
   'Dilution Risk': 'DIL',
@@ -302,7 +311,8 @@ export function EvaluationSection() {
                   <span>{example.passageId}</span>
                   <span>{percent(example.modelScore)} uncalibrated score</span>
                 </div>
-                <p>{example.text}</p>
+                <p lang="ko">{example.text}</p>
+                <PassageSummaryById passageId={example.passageId} />
                 {example.leadingFeatures.length ? (
                   <small>
                     Leading terms: {example.leadingFeatures.map((item) => item.term).join(', ')}
@@ -446,7 +456,8 @@ export function EvaluationSection() {
           {RULE_EVALUATION.errorExamples.map((example) => (
             <article key={example.passageId}>
               <span>{example.passageId}</span>
-              <p>{example.text}</p>
+              <p lang="ko">{example.text}</p>
+              <PassageSummaryById passageId={example.passageId} />
               <small>
                 {example.actualLabel} → {example.predictedLabel}
               </small>

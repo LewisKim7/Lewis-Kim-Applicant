@@ -26,7 +26,7 @@ Use this path only after personally rehearsing the controls and verifying that t
 
 | Time | Action | Point to explain |
 | --- | --- | --- |
-| 0:00–0:12 | Start at the hero, then open the IPO or CB production-tool tab. | The embedded source may update, but the portfolio summary is a dated, reproducible snapshot. |
+| 0:00–0:12 | Start at the applicant profile and five-document risk-signal overview, then open the IPO or CB production-tool tab. | The profile establishes the domain connection; the flag view is a fictional-corpus reading priority, not a company rating. The embedded source may update, but the portfolio summary is a dated, reproducible snapshot. |
 | 0:12–0:30 | Point out the real/synthetic boundary, then select `Serim Neurochip — DART-style CB Terms Amendment`. | Real issuer rows receive no risk label; only the fictional corpus enters the NLP workflow. |
 | 0:30–0:48 | Choose the suggested query `조기상환청구권 상환 재원`, open the top result, and inspect its rule trace. | Retrieval is lexical; the rule score exposes phrase contributions and is not probability. |
 | 0:48–1:02 | Open the generated memo and identify one cited passage ID. | The memo is deterministic and retains an evidence trail rather than generating external facts. |
@@ -45,13 +45,16 @@ Use this path only after personally rehearsing the controls and verifying that t
 | `src/lib/ipo-analytics.ts` | Computes offer-band and return summaries | How returns and aggregate measures are defined |
 | `src/lib/preprocessing.ts` | Normalizes and tokenizes Korean/English text | NFKC, stop words, limited particle stripping, and why this is not morphology |
 | `src/lib/classifier.ts` | Runs the transparent weighted-rule baseline | Phrase weights, tie order, informational fallback, and signal-score semantics |
+| `src/lib/review-priority.ts` | Converts non-informational rule predictions into a document-level reading priority | Why 4–6 of 6 flags is High, 2–3 is Watch, 0–1 is Low, and why none is a probability or investment rating |
 | `src/lib/retrieval.ts` | Ranks corpus passages using TF-IDF cosine similarity | Why this is lexical retrieval rather than semantic understanding |
 | `src/data/retrieval-judgments.ts` | Stores 12 AI-assisted graded Korean query judgments | Why closed-corpus relevance judgments are not an independent benchmark |
 | `src/lib/retrieval-evaluation.ts` | Computes Precision@k, Recall@k, MRR, and nDCG | Metric denominators, graded relevance, and the Q12 no-match case |
 | `src/lib/ml-classifier.ts` | Fits TF-IDF multinomial logistic regression by document fold | Training-only vocabulary/IDF, L2 normalization, and uncalibrated softmax |
 | `src/lib/evaluation.ts` | Produces metrics, confusion matrices, and error records | Accuracy versus recall and why protocols must remain separate |
 | `src/lib/memo.ts` | Builds a deterministic evidence-linked memo | Templates, passage citations, and absence of generated external facts |
-| `src/components/ProfileSection.tsx` | Presents the applicant biography, official organization links, and dated DART evidence | Why a dated public filing supports only the role shown on that filing and does not imply employer endorsement |
+| `src/components/ProfileSection.tsx` | Presents the compact hero biography, organization links, and dated DART evidence | Why a dated public filing supports only the role shown on that filing and does not imply employer endorsement |
+| `src/components/EnglishPassageSummary.tsx` | Places the existing English rationale below every displayed Korean passage | Why the text is a concise AI-assisted orientation, not a literal or independently verified translation |
+| `src/components/RiskOverview.tsx` | Visualizes flagged-passage counts for all five fictional documents | How direct counts, filled versus open blocks, and plain-language labels support a general reader without overstating severity |
 | `src/config/application-profile.ts` | Centralizes school-level copy, links, and badge colors | How the same research artifact stays degree-neutral for UT Austin and can be retagged without changing project claims |
 | `src/components/*` | Presents the English project interface | How UI traces connect back to Korean data and deterministic modules |
 
