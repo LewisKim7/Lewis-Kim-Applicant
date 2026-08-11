@@ -128,7 +128,7 @@ function RecallComparisonChart() {
           <span className="demo-label">Per-label diagnostic</span>
           <h3>Recall by risk label</h3>
         </div>
-        <p>Solid · document-held-out ML &nbsp; Outline · closed-corpus rules</p>
+        <p>Solid · learned model tested on an unseen document &nbsp; Outline · fixed phrase rules</p>
       </figcaption>
 
       <ul>
@@ -170,7 +170,7 @@ export function EvaluationSection() {
       <SectionHeading
         eyebrow="06 / Evaluation"
         title="The split matters more than the score."
-        description="A trained Korean TF-IDF logistic-regression baseline is tested with one entire synthetic document held out at a time. The rules remain a closed-corpus sanity check. Because the protocols differ, their percentages are not a head-to-head model ranking."
+        description="One complete fictional document is kept out of training at a time so mistakes remain visible. The phrase rules use the same small development set, so the two percentages are diagnostics—not a contest or a real-world accuracy claim."
       />
 
       <div className="evaluation-banner">
@@ -209,13 +209,13 @@ export function EvaluationSection() {
             <span>Primary diagnostic</span>
             <strong>{percent(ML_EVALUATION.accuracy)}</strong>
             <h3>TF-IDF + logistic regression</h3>
-            <p>5 document folds · 24 train / 6 test · train-only vocabulary and IDF</p>
+            <p><strong>Learned text baseline.</strong> 5 unseen-document tests · 24 train / 6 test</p>
           </article>
           <article>
             <span>Sanity check</span>
             <strong>{percent(RULE_EVALUATION.accuracy)}</strong>
             <h3>Weighted phrase rules</h3>
-            <p>No split · fixed inspectable rules · same development corpus</p>
+            <p><strong>Transparent baseline.</strong> Fixed phrases · same 30-passage development corpus</p>
           </article>
           <p>
             The {percentagePoints(PROTOCOL_GAP)} gap is not evidence that either baseline is

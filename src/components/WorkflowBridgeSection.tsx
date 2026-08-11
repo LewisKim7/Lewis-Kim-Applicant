@@ -43,6 +43,52 @@ function cbAmountStyle(row: FrozenCbRow): CSSProperties {
   } as CSSProperties
 }
 
+interface EvidenceShareBarProps {
+  readonly title: string
+  readonly subtitle: string
+  readonly matched: number
+  readonly total: number
+  readonly matchedLabel: string
+  readonly remainderLabel: string
+}
+
+function EvidenceShareBar({
+  title,
+  subtitle,
+  matched,
+  total,
+  matchedLabel,
+  remainderLabel,
+}: EvidenceShareBarProps) {
+  const matchedShare = (matched / total) * 100
+  const remainder = total - matched
+  const style = { '--share-size': `${matchedShare}%` } as CSSProperties
+
+  return (
+    <figure className="evidence-share">
+      <figcaption>
+        <strong>{title}</strong>
+        <span>{subtitle}</span>
+      </figcaption>
+      <div
+        className="evidence-share__track"
+        role="img"
+        aria-label={`${matched} of ${total}: ${matchedLabel}; ${remainder} of ${total}: ${remainderLabel}`}
+        style={style}
+      >
+        <span aria-hidden="true" />
+      </div>
+      <div className="evidence-share__labels">
+        <span>
+          <i aria-hidden="true" />
+          <strong>{matched} ({matchedShare.toFixed(1)}%)</strong> {matchedLabel}
+        </span>
+        <span><i aria-hidden="true" /><strong>{remainder}</strong> {remainderLabel}</span>
+      </div>
+    </figure>
+  )
+}
+
 function IpoSnapshot() {
   const snapshot = FROZEN_MARKET_SNAPSHOT.ipo
 
@@ -52,9 +98,9 @@ function IpoSnapshot() {
         <span>Frozen evidence · source data 07 Aug 2026</span>
         <h3>IPO returns rarely end on listing day.</h3>
         <p>
-          The applicant&apos;s report turns a 52-company Korean IPO workbook into a
-          seven-page market diagnostic. The contrast between first-day enthusiasm and
-          subsequent performance motivates a more evidence-aware text workflow.
+          <strong>IPO (initial public offering):</strong> the first sale of a company&apos;s shares
+          to public investors. This report follows 52 Korean IPOs from their offer price to later
+          market prices.
         </p>
       </div>
 
@@ -65,22 +111,31 @@ function IpoSnapshot() {
         </div>
         <div>
           <dt>₩{snapshot.totalOfferMarketCapTrillionKrw.toFixed(1)}tn</dt>
-          <dd>offer market cap</dd>
+          <dd>offer market cap<small>value at IPO prices</small></dd>
         </div>
         <div>
           <dt>{signedPercent(snapshot.averageCurrentReturnPct)}</dt>
-          <dd>average current return</dd>
+          <dd>current return<small>average change since IPO</small></dd>
         </div>
         <div>
           <dt>{snapshot.belowOfferCount}/{snapshot.companyCount}</dt>
-          <dd>below offer</dd>
+          <dd>below offer<small>now below IPO price</small></dd>
         </div>
       </dl>
 
+      <EvidenceShareBar
+        title="Current position versus IPO price"
+        subtitle="52-company frozen snapshot"
+        matched={snapshot.belowOfferCount}
+        total={snapshot.companyCount}
+        matchedLabel="below IPO price"
+        remainderLabel="at or above IPO price"
+      />
+
       <figure className="frozen-chart frozen-chart--ipo">
         <figcaption>
-          <strong>Selected return extremes</strong>
-          <span>Current return vs offer · English display / Korean source name</span>
+          <strong>Selected current returns vs offer price</strong>
+          <span>0% = unchanged from the IPO price · right is above, left is below</span>
         </figcaption>
         <ol>
           {snapshot.featuredReturns.map((row) => (
@@ -103,9 +158,9 @@ function IpoSnapshot() {
       </figure>
 
       <p className="tool-insight">
-        <strong>Interpretation:</strong> average first-day return was +111.4%, yet the
-        snapshot&apos;s average current return was −5.1% and 69.2% traded below offer. Price
-        outcomes alone cannot explain which disclosure signals mattered.
+        <strong>Plain-English takeaway:</strong> shares rose sharply on the first day on average,
+        but 36 of 52 were later below their IPO price. Price data shows what happened; the filing
+        text may help explain what investors needed to examine.
       </p>
 
       <p className="tool-provenance">
@@ -126,35 +181,44 @@ function CbSnapshot() {
         <span>Frozen evidence · captured 11 Aug 2026</span>
         <h3>Zero stated interest is a screen—not a conclusion.</h3>
         <p>
-          The applicant&apos;s OpenDART finder screens rate and issue-size terms across recent
-          convertible-bond filings. Strict 0% / 0% rows become a compact entry
-          point for reviewing conversion, reset, put, call, and redemption language.
+          <strong>Convertible bond (CB):</strong> money a company borrows that may later turn into
+          shares. This finder locates filings that state 0% interest so an analyst can inspect
+          the conversion and repayment terms.
         </p>
       </div>
 
       <dl className="tool-kpis" aria-label="Frozen convertible-bond finder summary">
         <div>
           <dt>{snapshot.filingRowCount}</dt>
-          <dd>90-day filing rows</dd>
+          <dd>90-day filing rows<small>filings checked</small></dd>
         </div>
         <div>
           <dt>{snapshot.bothZeroRowCount}</dt>
-          <dd>0% / 0% rows</dd>
+          <dd>0% / 0% rows<small>both stated rates are zero</small></dd>
         </div>
         <div>
           <dt>{snapshot.bothZeroIssuerCount}</dt>
-          <dd>issuer names</dd>
+          <dd>issuer names<small>companies represented</small></dd>
         </div>
         <div>
           <dt>₩{(snapshot.bothZeroAmountEok / 10_000).toFixed(2)}tn</dt>
-          <dd>proposed principal</dd>
+          <dd>proposed principal<small>amount companies plan to raise</small></dd>
         </div>
       </dl>
 
+      <EvidenceShareBar
+        title="Strict 0% coupon / 0% maturity-yield screen"
+        subtitle="118 filing rows in the frozen 90-day snapshot"
+        matched={snapshot.bothZeroRowCount}
+        total={snapshot.filingRowCount}
+        matchedLabel="matched both rates"
+        remainderLabel="did not match both rates"
+      />
+
       <figure className="frozen-chart frozen-chart--cb">
         <figcaption>
-          <strong>Largest five explicit 0% / 0% filings</strong>
-          <span>Proposed principal · English display / Korean DART name</span>
+          <strong>Largest five filings that state 0% / 0%</strong>
+          <span>Bar length = amount the company proposed to raise</span>
         </figcaption>
         <ol>
           {snapshot.featuredRows.map((row) => (
@@ -185,10 +249,9 @@ function CbSnapshot() {
       </figure>
 
       <p className="tool-insight">
-        <strong>Interpretation:</strong> 41 filing rows from 40 issuer names met the explicit
-        0% / 0% condition. This does not establish zero economic cost, low dilution, or low
-        refinancing risk; the contractual text still has to be read. The frozen count uses
-        strict numeric zeros and excludes missing “−” placeholders.
+        <strong>Plain-English takeaway:</strong> 41 filing rows from 40 company names stated both
+        rates as 0%. That does not mean the financing is free or harmless: new shares may still
+        be created and repayment terms may still matter. Missing “−” values are excluded.
       </p>
 
       <p className="tool-provenance">
@@ -218,7 +281,7 @@ export function WorkflowBridgeSection() {
         <SectionHeading
           eyebrow="01 / Production tools"
           title="Two live tools. One NLP study."
-          description="Frozen Korean market evidence is translated and visualized separately from the synthetic NLP evaluation."
+          description="The professional market terms remain intact; concise annotations explain what each measure means before the reviewer reaches the Korean NLP evidence."
         />
 
         <div className="tool-tabs" role="tablist" aria-label="Applicant finance tools">
@@ -232,7 +295,7 @@ export function WorkflowBridgeSection() {
           >
             <span>01</span>
             IPO Return Report
-            <small>52-company market review</small>
+            <small>52 companies · price changes after listing</small>
           </button>
           <button
             id="cb-finder"
@@ -244,7 +307,7 @@ export function WorkflowBridgeSection() {
           >
             <span>02</span>
             CB Disclosure Finder
-            <small>OpenDART 0% / 0% screen</small>
+            <small>OpenDART · bonds stating 0% interest</small>
           </button>
         </div>
 
@@ -282,11 +345,11 @@ export function WorkflowBridgeSection() {
         </div>
 
         <div className="workflow-handoff" role="group" aria-label="Project learning bridge">
-          <span>Deterministic finance tools</span>
+          <span>Deterministic finance screens</span>
           <i aria-hidden="true">→</i>
-          <span>Unstructured Korean disclosures</span>
+          <span>Korean disclosure passages</span>
           <i aria-hidden="true">→</i>
-          <strong>Classification · retrieval · evaluation</strong>
+          <strong>Classification · retrieval · error analysis</strong>
         </div>
 
         <p className="workflow-disclosure">

@@ -237,7 +237,7 @@ export function DemoDashboard() {
       <SectionHeading
         eyebrow="04 / Interactive prototype"
         title="Search, classify, and trace every result."
-        description="Choose one of five synthetic Korean filing scenarios, search the 30-passage corpus, and inspect the deterministic rule path."
+        description="Choose a fictional Korean filing. The interface shows what matched, why the phrase matters, and where the evidence came from."
       />
 
       <div className="dataset-strip" role="group" aria-label="Synthetic document library">
@@ -302,7 +302,10 @@ export function DemoDashboard() {
               />
               <span aria-hidden="true">⌕</span>
             </div>
-            <p id="retrieval-note">Korean lexical cosine similarity across all 30 passages</p>
+            <p id="retrieval-note">
+              TF-IDF baseline · ranks passages that share words with the query; it does not
+              understand meaning like a person
+            </p>
           </div>
         </div>
 
