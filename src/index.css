@@ -8729,3 +8729,119 @@ a.frozen-chart__company:hover strong {
     transition: none !important;
   }
 }
+
+/* Risk-taxonomy alignment: one desktop baseline and a scrollbar-free mobile list. */
+@media (min-width: 901px) {
+  .taxonomy-section > .section-heading {
+    margin: 0 auto 38px;
+  }
+
+  .taxonomy-card {
+    grid-template-columns: 42px minmax(210px, 0.72fr) minmax(0, 1fr) 150px;
+    min-height: 98px;
+  }
+
+  .taxonomy-card header {
+    gap: 9px;
+    justify-content: flex-start;
+  }
+
+  .taxonomy-card__marker {
+    display: block;
+    width: 7px;
+    height: 7px;
+    background: var(--risk-color);
+  }
+}
+
+@media (max-width: 640px) {
+  .taxonomy-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    overflow: visible;
+    padding-bottom: 0;
+    border-top: 1px solid var(--line-strong);
+    scroll-snap-type: none;
+  }
+
+  .taxonomy-card,
+  .taxonomy-card--informational {
+    display: grid;
+    grid-column: auto;
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 0 12px;
+    min-width: 0;
+    min-height: 0;
+    padding: 16px 0;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    background: transparent;
+    scroll-snap-align: none;
+  }
+
+  .taxonomy-card header {
+    display: flex;
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: flex-start;
+    padding-top: 3px;
+    font-size: 10px;
+  }
+
+  .taxonomy-card__marker {
+    display: block;
+    width: 7px;
+    height: 7px;
+    background: var(--risk-color);
+  }
+
+  .taxonomy-card h3,
+  .taxonomy-card > p,
+  .taxonomy-card details {
+    grid-column: 2;
+    margin-top: 0;
+  }
+
+  .taxonomy-card h3 {
+    font-size: 1.05rem;
+    line-height: 1.25;
+  }
+
+  .taxonomy-card h3 span {
+    display: inline;
+    margin: 0 0 0 7px;
+    font-size: 11px;
+  }
+
+  .taxonomy-card > p {
+    margin-top: 9px;
+    font-size: 11.5px;
+    line-height: 1.48;
+  }
+
+  .taxonomy-card__plain strong {
+    margin-bottom: 3px;
+    font-size: 9.5px;
+  }
+
+  .taxonomy-card details {
+    margin-top: 7px;
+    font-size: 11px;
+  }
+
+  .taxonomy-card summary {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    font-size: 11.5px;
+  }
+
+  .taxonomy-card details p {
+    margin-top: 4px;
+  }
+}
