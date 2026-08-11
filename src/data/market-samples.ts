@@ -5,7 +5,7 @@ import type { IpoObservation } from '../lib/ipo-analytics'
 export const SYNTHETIC_CB_ROWS: readonly ConvertibleBondRow[] = [
   {
     receiptDate: '2026-06-24',
-    corpName: '미르오비탈링크',
+    corpName: 'Mir Orbital Link',
     stockCode: '900104',
     amountEok: 220,
     surfaceRate: '0.0',
@@ -16,7 +16,7 @@ export const SYNTHETIC_CB_ROWS: readonly ConvertibleBondRow[] = [
   },
   {
     receiptDate: '2026-05-20',
-    corpName: '다온그린셀',
+    corpName: 'Daon GreenCell',
     stockCode: '900103',
     amountEok: 90,
     surfaceRate: '0.0',
@@ -27,7 +27,7 @@ export const SYNTHETIC_CB_ROWS: readonly ConvertibleBondRow[] = [
   },
   {
     receiptDate: '2026-04-07',
-    corpName: '세림뉴로칩',
+    corpName: 'Serim Neurochip',
     stockCode: '900102',
     amountEok: 180,
     surfaceRate: '1.0',
@@ -38,7 +38,7 @@ export const SYNTHETIC_CB_ROWS: readonly ConvertibleBondRow[] = [
   },
   {
     receiptDate: '2026-03-18',
-    corpName: '한빛퀀텀모션',
+    corpName: 'Hanbit Quantum Motion',
     stockCode: '900101',
     amountEok: 300,
     surfaceRate: '0.0',
@@ -52,7 +52,7 @@ export const SYNTHETIC_CB_ROWS: readonly ConvertibleBondRow[] = [
 /** Fictional IPO prices used to exercise the prior report calculations. */
 export const SYNTHETIC_IPO_OBSERVATIONS: readonly IpoObservation[] = [
   {
-    companyName: '가온바이오컴퓨트',
+    companyName: 'Gaon BioCompute',
     market: 'KOSDAQ',
     listingDate: '2026-06-24',
     asOfDate: '2026-07-31',
@@ -64,7 +64,7 @@ export const SYNTHETIC_IPO_OBSERVATIONS: readonly IpoObservation[] = [
     currentPrice: 22_100,
   },
   {
-    companyName: '다온그린셀',
+    companyName: 'Daon GreenCell',
     market: 'KOSPI',
     listingDate: '2026-06-12',
     asOfDate: '2026-07-31',
@@ -76,7 +76,7 @@ export const SYNTHETIC_IPO_OBSERVATIONS: readonly IpoObservation[] = [
     currentPrice: 26_600,
   },
   {
-    companyName: '미르오비탈링크',
+    companyName: 'Mir Orbital Link',
     market: 'KOSDAQ',
     listingDate: '2026-07-09',
     asOfDate: '2026-07-31',
@@ -88,7 +88,7 @@ export const SYNTHETIC_IPO_OBSERVATIONS: readonly IpoObservation[] = [
     currentPrice: 10_900,
   },
   {
-    companyName: '한빛퀀텀모션',
+    companyName: 'Hanbit Quantum Motion',
     market: 'KOSDAQ',
     listingDate: '2026-04-15',
     asOfDate: '2026-07-31',
@@ -100,7 +100,7 @@ export const SYNTHETIC_IPO_OBSERVATIONS: readonly IpoObservation[] = [
     currentPrice: 12_100,
   },
   {
-    companyName: '세림뉴로칩',
+    companyName: 'Serim Neurochip',
     market: 'KOSDAQ',
     listingDate: '2026-04-17',
     asOfDate: '2026-07-31',
@@ -112,7 +112,7 @@ export const SYNTHETIC_IPO_OBSERVATIONS: readonly IpoObservation[] = [
     currentPrice: 14_500,
   },
   {
-    companyName: '누리정밀소재',
+    companyName: 'Nuri Precision Materials',
     market: 'KOSPI',
     listingDate: '2026-02-19',
     asOfDate: '2026-07-31',

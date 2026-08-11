@@ -41,7 +41,7 @@ describe('Korean CB screening calculations', () => {
     expect(
       screenConvertibleBonds(SYNTHETIC_CB_ROWS, { query: '900102' }).rows[0]
         ?.corpName,
-    ).toBe('세림뉴로칩')
+    ).toBe('Serim Neurochip')
   })
 
   it('keeps the CB visualization summary tied to the declared rate filter', () => {

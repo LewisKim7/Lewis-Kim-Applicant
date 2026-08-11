@@ -1,7 +1,7 @@
 [
   {
     "documentId": "DOC-KR-CB-ISSUE-001",
-    "companyName": "한빛퀀텀모션",
+    "companyName": "Hanbit Quantum Motion",
     "documentType": "DART-style CB Issuance Decision",
     "date": "2026-03-18",
     "synthetic": true,
@@ -18,17 +18,17 @@
       {
         "documentId": "DOC-KR-CB-ISSUE-001",
         "passageId": "DOC-KR-CB-ISSUE-001-P01",
-        "companyName": "한빛퀀텀모션",
+        "companyName": "Hanbit Quantum Motion",
         "documentType": "DART-style CB Issuance Decision",
         "date": "2026-03-18",
-        "text": "한빛퀀텀모션은 300억원 규모의 무기명식 무보증 사모 전환사채를 제3자배정으로 발행한다. 전환가액은 8,000원이며 전액 전환 시 최대 375만주의 신주 발행이 가능해 기존 발행주식총수 대비 약 22%의 희석이 발생할 수 있다.",
+        "text": "Hanbit Quantum Motion은 300억원 규모의 무기명식 무보증 사모 전환사채를 제3자배정으로 발행한다. 전환가액은 8,000원이며 전액 전환 시 최대 375만주의 신주 발행이 가능해 기존 발행주식총수 대비 약 22%의 희석이 발생할 수 있다.",
         "referenceLabel": "Dilution Risk",
         "annotationRationale": "The initial conversion terms imply a material increase in the share count and potential ownership dilution."
       },
       {
         "documentId": "DOC-KR-CB-ISSUE-001",
         "passageId": "DOC-KR-CB-ISSUE-001-P02",
-        "companyName": "한빛퀀텀모션",
+        "companyName": "Hanbit Quantum Motion",
         "documentType": "DART-style CB Issuance Decision",
         "date": "2026-03-18",
         "text": "조달금액 중 190억원은 4개월 안에 만기 도래하는 단기 차입금 상환에 사용된다. 사채 납입이 완료되지 않으면 해당 채무를 대환할 확정 약정이 없어 별도의 상환 재원을 마련해야 한다.",
@@ -38,7 +38,7 @@
       {
         "documentId": "DOC-KR-CB-ISSUE-001",
         "passageId": "DOC-KR-CB-ISSUE-001-P03",
-        "companyName": "한빛퀀텀모션",
+        "companyName": "Hanbit Quantum Motion",
         "documentType": "DART-style CB Issuance Decision",
         "date": "2026-03-18",
         "text": "분기 말 보유 현금은 50억원이고 최근 월평균 영업지출은 약 7억원이다. 추가 30억원은 분기 매출이 기준액을 넘는 경우에만 한도대출에서 인출할 수 있어 현재 지출 속도가 이어지면 가용 자금은 약 7개월분에 그친다.",
@@ -48,7 +48,7 @@
       {
         "documentId": "DOC-KR-CB-ISSUE-001",
         "passageId": "DOC-KR-CB-ISSUE-001-P04",
-        "companyName": "한빛퀀텀모션",
+        "companyName": "Hanbit Quantum Motion",
         "documentType": "DART-style CB Issuance Decision",
         "date": "2026-03-18",
         "text": "사채 인수자에는 대표이사의 형제가 운용하는 투자조합이 포함된다. 대표이사는 이사회 결의에서 기권했으나 거래 조건에 대한 독립된 외부 평가는 받지 않았다.",
@@ -58,7 +58,7 @@
       {
         "documentId": "DOC-KR-CB-ISSUE-001",
         "passageId": "DOC-KR-CB-ISSUE-001-P05",
-        "companyName": "한빛퀀텀모션",
+        "companyName": "Hanbit Quantum Motion",
         "documentType": "DART-style CB Issuance Decision",
         "date": "2026-03-18",
         "text": "잔여 자금 60억원은 정밀모터 생산설비 증설에 투입할 계획이다. 신규 라인의 양산은 장비 설치, 시스템 통합, 고객사 승인 순으로 진행되며 핵심 장비 공급사는 납기 일정을 보증하지 않았다.",
@@ -68,7 +68,7 @@
       {
         "documentId": "DOC-KR-CB-ISSUE-001",
         "passageId": "DOC-KR-CB-ISSUE-001-P06",
-        "companyName": "한빛퀀텀모션",
+        "companyName": "Hanbit Quantum Motion",
         "documentType": "DART-style CB Issuance Decision",
         "date": "2026-03-18",
         "text": "사채의 납입일은 2026년 4월 2일이며 만기일은 2029년 4월 2일이다. 전환청구기간과 이자 지급일은 발행조건 표에 기재된 일정에 따른다.",
@@ -79,7 +79,7 @@
   },
   {
     "documentId": "DOC-KR-CB-RESET-001",
-    "companyName": "세림뉴로칩",
+    "companyName": "Serim Neurochip",
     "documentType": "DART-style CB Terms Amendment",
     "date": "2026-04-07",
     "synthetic": true,
@@ -96,7 +96,7 @@
       {
         "documentId": "DOC-KR-CB-RESET-001",
         "passageId": "DOC-KR-CB-RESET-001-P01",
-        "companyName": "세림뉴로칩",
+        "companyName": "Serim Neurochip",
         "documentType": "DART-style CB Terms Amendment",
         "date": "2026-04-07",
         "text": "주가 하락을 반영한 전환가액 조정 조항에 따라 전환가액은 12,000원에서 8,400원으로 낮아질 수 있다. 리픽싱 하한까지 조정되면 전환가능 주식수는 최초 조건보다 약 42.9% 증가해 추가 희석이 발생한다.",
@@ -106,7 +106,7 @@
       {
         "documentId": "DOC-KR-CB-RESET-001",
         "passageId": "DOC-KR-CB-RESET-001-P02",
-        "companyName": "세림뉴로칩",
+        "companyName": "Serim Neurochip",
         "documentType": "DART-style CB Terms Amendment",
         "date": "2026-04-07",
         "text": "투자자는 발행 후 18개월부터 원금 전액에 대한 조기상환청구권을 행사할 수 있다. 첫 풋옵션 가능일의 예상 상환액은 185억원으로, 최근 공시된 현금성자산 72억원을 웃돈다.",
@@ -116,7 +116,7 @@
       {
         "documentId": "DOC-KR-CB-RESET-001",
         "passageId": "DOC-KR-CB-RESET-001-P03",
-        "companyName": "세림뉴로칩",
+        "companyName": "Serim Neurochip",
         "documentType": "DART-style CB Terms Amendment",
         "date": "2026-04-07",
         "text": "발행회사는 사채 원금의 30%에 대해 콜옵션을 행사할 수 있으며 그 권리를 최대주주 또는 최대주주가 지정하는 자에게 양도할 수 있다. 해당 배분은 향후 최대주주의 의결권에 영향을 줄 수 있다.",
@@ -126,7 +126,7 @@
       {
         "documentId": "DOC-KR-CB-RESET-001",
         "passageId": "DOC-KR-CB-RESET-001-P04",
-        "companyName": "세림뉴로칩",
+        "companyName": "Serim Neurochip",
         "documentType": "DART-style CB Terms Amendment",
         "date": "2026-04-07",
         "text": "조달자금은 신경계 진단칩의 임상시험과 시생산 설비 구축에 사용된다. 상업 생산은 임상 성능 확인, 품목허가, 고객사 승인 이후 가능하며 각 단계의 완료 시점은 확정되지 않았다.",
@@ -136,7 +136,7 @@
       {
         "documentId": "DOC-KR-CB-RESET-001",
         "passageId": "DOC-KR-CB-RESET-001-P05",
-        "companyName": "세림뉴로칩",
+        "companyName": "Serim Neurochip",
         "documentType": "DART-style CB Terms Amendment",
         "date": "2026-04-07",
         "text": "전환가액 조정 기준일 전 주가 변동성이 확대되면 리픽싱 가능성이 높아질 수 있다. 전환 주식이 상장된 뒤 투자자의 매도 물량이 집중되면 오버행과 추가적인 주가 변동성이 나타날 수 있다.",
@@ -146,7 +146,7 @@
       {
         "documentId": "DOC-KR-CB-RESET-001",
         "passageId": "DOC-KR-CB-RESET-001-P06",
-        "companyName": "세림뉴로칩",
+        "companyName": "Serim Neurochip",
         "documentType": "DART-style CB Terms Amendment",
         "date": "2026-04-07",
         "text": "전환청구는 지정 계좌관리기관을 통해 접수하며 처리 결과는 정기보고서에 반영한다. 이자 지급 방식과 만기일에는 변동 없음이 확인됐다.",
@@ -157,7 +157,7 @@
   },
   {
     "documentId": "DOC-KR-IPO-PROSPECTUS-001",
-    "companyName": "가온바이오컴퓨트",
+    "companyName": "Gaon BioCompute",
     "documentType": "KOSDAQ IPO Prospectus Excerpt",
     "date": "2026-05-11",
     "synthetic": true,
@@ -174,7 +174,7 @@
       {
         "documentId": "DOC-KR-IPO-PROSPECTUS-001",
         "passageId": "DOC-KR-IPO-PROSPECTUS-001-P01",
-        "companyName": "가온바이오컴퓨트",
+        "companyName": "Gaon BioCompute",
         "documentType": "KOSDAQ IPO Prospectus Excerpt",
         "date": "2026-05-11",
         "text": "공모주식 600만주 중 480만주는 신주모집이고 120만주는 기존 주주의 구주매출이다. 신주 발행과 주식매수선택권 행사 가능 수량을 합산하면 상장 직후 기존 주주의 지분 희석이 확대될 수 있다.",
@@ -184,7 +184,7 @@
       {
         "documentId": "DOC-KR-IPO-PROSPECTUS-001",
         "passageId": "DOC-KR-IPO-PROSPECTUS-001-P02",
-        "companyName": "가온바이오컴퓨트",
+        "companyName": "Gaon BioCompute",
         "documentType": "KOSDAQ IPO Prospectus Excerpt",
         "date": "2026-05-11",
         "text": "공모자금 중 700억원은 1년 안에 만기 도래하는 시설 차입금 상환에 배정한다. 확정공모가가 희망 범위 하단보다 낮거나 공모가 철회되면 부족한 상환 재원은 차환을 통해 조달해야 한다.",
@@ -194,7 +194,7 @@
       {
         "documentId": "DOC-KR-IPO-PROSPECTUS-001",
         "passageId": "DOC-KR-IPO-PROSPECTUS-001-P03",
-        "companyName": "가온바이오컴퓨트",
+        "companyName": "Gaon BioCompute",
         "documentType": "KOSDAQ IPO Prospectus Excerpt",
         "date": "2026-05-11",
         "text": "최근 사업연도 매출의 28%는 최대주주가 지분을 보유한 관계사와의 거래에서 발생했다. 감사위원회는 구성됐지만 사외이사 한 명의 임기가 상장 후 3개월 안에 종료돼 이사회 독립성에 공백이 생길 수 있다.",
@@ -204,7 +204,7 @@
       {
         "documentId": "DOC-KR-IPO-PROSPECTUS-001",
         "passageId": "DOC-KR-IPO-PROSPECTUS-001-P04",
-        "companyName": "가온바이오컴퓨트",
+        "companyName": "Gaon BioCompute",
         "documentType": "KOSDAQ IPO Prospectus Excerpt",
         "date": "2026-05-11",
         "text": "차세대 바이오 가속기의 매출 계획은 3개 고객사의 성능 검증과 고객사 승인에 기반한다. 현재 시험 생산 수율은 목표치보다 낮으며 양산 전환 일정이 지연되면 매출 인식 시점도 늦어질 수 있다.",
@@ -214,7 +214,7 @@
       {
         "documentId": "DOC-KR-IPO-PROSPECTUS-001",
         "passageId": "DOC-KR-IPO-PROSPECTUS-001-P05",
-        "companyName": "가온바이오컴퓨트",
+        "companyName": "Gaon BioCompute",
         "documentType": "KOSDAQ IPO Prospectus Excerpt",
         "date": "2026-05-11",
         "text": "글로벌 경쟁사는 기존 클라우드 계약에 유사 서비스를 묶어 제공하며 가격 경쟁을 강화하고 있다. 연구기관의 장비예산이 축소되거나 고객 수요가 둔화되면 신규 주문이 예상보다 감소할 수 있다.",
@@ -224,7 +224,7 @@
       {
         "documentId": "DOC-KR-IPO-PROSPECTUS-001",
         "passageId": "DOC-KR-IPO-PROSPECTUS-001-P06",
-        "companyName": "가온바이오컴퓨트",
+        "companyName": "Gaon BioCompute",
         "documentType": "KOSDAQ IPO Prospectus Excerpt",
         "date": "2026-05-11",
         "text": "기관 수요예측은 2026년 6월 3일부터 6월 9일까지 진행하고 일반 청약일은 6월 15일과 16일이다. 공모자금은 최대주주나 특수관계인에게 지급되지 않으며 납입일과 상장 예정일은 대표주관회사와 협의한 일정에 따른다.",
@@ -235,7 +235,7 @@
   },
   {
     "documentId": "DOC-KR-IPO-PROCEEDS-001",
-    "companyName": "다온그린셀",
+    "companyName": "Daon GreenCell",
     "documentType": "KOSPI IPO Use-of-Proceeds Excerpt",
     "date": "2026-06-02",
     "synthetic": true,
@@ -252,7 +252,7 @@
       {
         "documentId": "DOC-KR-IPO-PROCEEDS-001",
         "passageId": "DOC-KR-IPO-PROCEEDS-001-P01",
-        "companyName": "다온그린셀",
+        "companyName": "Daon GreenCell",
         "documentType": "KOSPI IPO Use-of-Proceeds Excerpt",
         "date": "2026-06-02",
         "text": "공모 물량의 75%는 신주 발행이며 상장주선인은 공모주식의 15% 범위에서 초과배정옵션을 행사할 수 있다. 최대 수량이 발행되면 기존 발행주식총수 대비 희석 비율은 약 16%로 추정된다.",
@@ -262,7 +262,7 @@
       {
         "documentId": "DOC-KR-IPO-PROCEEDS-001",
         "passageId": "DOC-KR-IPO-PROCEEDS-001-P02",
-        "companyName": "다온그린셀",
+        "companyName": "Daon GreenCell",
         "documentType": "KOSPI IPO Use-of-Proceeds Excerpt",
         "date": "2026-06-02",
         "text": "순유입 공모자금 중 800억원은 11개월 뒤 만기 도래하는 회전대출의 차입금 상환에 사용한다. 금융기관은 만기 연장을 약정하지 않았으며 차환 금리는 상환 시점의 재무비율에 따라 달라진다.",
@@ -272,7 +272,7 @@
       {
         "documentId": "DOC-KR-IPO-PROCEEDS-001",
         "passageId": "DOC-KR-IPO-PROCEEDS-001-P03",
-        "companyName": "다온그린셀",
+        "companyName": "Daon GreenCell",
         "documentType": "KOSPI IPO Use-of-Proceeds Excerpt",
         "date": "2026-06-02",
         "text": "장기납기 원재료는 조립 6개월 전에 계약금을 지급해야 하지만 고객 대금은 설비 검수 후 회수된다. 검수 지연이 겹치면 현금 회수기간이 길어지고 400억원의 운전자금도 예상보다 빠르게 소진될 수 있다.",
@@ -282,7 +282,7 @@
       {
         "documentId": "DOC-KR-IPO-PROCEEDS-001",
         "passageId": "DOC-KR-IPO-PROCEEDS-001-P04",
-        "companyName": "다온그린셀",
+        "companyName": "Daon GreenCell",
         "documentType": "KOSPI IPO Use-of-Proceeds Excerpt",
         "date": "2026-06-02",
         "text": "1,000억원은 수전해 스택 생산설비 증설에 집행할 예정이다. 신규 공장은 환경 인허가, 시공사 동원, 시험가동을 순차적으로 완료해야 하며 1개 분기를 초과하는 준공 지연은 예산에 반영하지 않았다.",
@@ -292,7 +292,7 @@
       {
         "documentId": "DOC-KR-IPO-PROCEEDS-001",
         "passageId": "DOC-KR-IPO-PROCEEDS-001-P05",
-        "companyName": "다온그린셀",
+        "companyName": "Daon GreenCell",
         "documentType": "KOSPI IPO Use-of-Proceeds Excerpt",
         "date": "2026-06-02",
         "text": "프로젝트 경제성은 산업용 전력요금과 핵심 원재료 가격에 민감하다. 전력요금 인상이나 원재료 가격 상승이 고객에게 전가되지 않으면 수주 마진과 고객 수요가 동시에 낮아질 수 있다.",
@@ -302,7 +302,7 @@
       {
         "documentId": "DOC-KR-IPO-PROCEEDS-001",
         "passageId": "DOC-KR-IPO-PROCEEDS-001-P06",
-        "companyName": "다온그린셀",
+        "companyName": "Daon GreenCell",
         "documentType": "KOSPI IPO Use-of-Proceeds Excerpt",
         "date": "2026-06-02",
         "text": "집행 전 미사용 공모자금은 원화 일반 예금 또는 단기 국공채에 보관한다. 분기별 실제 사용 내역과 계획 변경 사항은 정기보고서에 공시할 예정이다.",
@@ -313,7 +313,7 @@
   },
   {
     "documentId": "DOC-KR-IPO-RISK-001",
-    "companyName": "미르오비탈링크",
+    "companyName": "Mir Orbital Link",
     "documentType": "KOSDAQ IPO Risk-Factor Excerpt",
     "date": "2026-06-24",
     "synthetic": true,
@@ -330,7 +330,7 @@
       {
         "documentId": "DOC-KR-IPO-RISK-001",
         "passageId": "DOC-KR-IPO-RISK-001-P01",
-        "companyName": "미르오비탈링크",
+        "companyName": "Mir Orbital Link",
         "documentType": "KOSDAQ IPO Risk-Factor Excerpt",
         "date": "2026-06-24",
         "text": "상장 전 발행된 상환전환우선주가 보통주로 전환되면 상장 후 주식수의 약 14%가 추가 유통될 수 있다. 임직원 주식매수선택권까지 행사되면 희석과 오버행 규모가 더 커질 수 있다.",
@@ -340,7 +340,7 @@
       {
         "documentId": "DOC-KR-IPO-RISK-001",
         "passageId": "DOC-KR-IPO-RISK-001-P02",
-        "companyName": "미르오비탈링크",
+        "companyName": "Mir Orbital Link",
         "documentType": "KOSDAQ IPO Risk-Factor Excerpt",
         "date": "2026-06-24",
         "text": "220억원의 장기대출은 2027년 9월에 일시 상환되며 최소 부채상환비율을 준수해야 한다. 발사 일정 지연으로 계약 매출이 감소하면 만기 도래 전 차환이 어렵거나 금리가 상승할 수 있다.",
@@ -350,7 +350,7 @@
       {
         "documentId": "DOC-KR-IPO-RISK-001",
         "passageId": "DOC-KR-IPO-RISK-001-P03",
-        "companyName": "미르오비탈링크",
+        "companyName": "Mir Orbital Link",
         "documentType": "KOSDAQ IPO Risk-Factor Excerpt",
         "date": "2026-06-24",
         "text": "세 고객이 매출채권의 58%를 차지하고 대금은 서비스 개시 후 90일까지 지급할 수 있다. 반면 핵심 부품은 선급금이 필요해 회수가 늦어지면 운전자금 부족과 유동성 압력이 발생할 수 있다.",
@@ -360,7 +360,7 @@
       {
         "documentId": "DOC-KR-IPO-RISK-001",
         "passageId": "DOC-KR-IPO-RISK-001-P04",
-        "companyName": "미르오비탈링크",
+        "companyName": "Mir Orbital Link",
         "documentType": "KOSDAQ IPO Risk-Factor Excerpt",
         "date": "2026-06-24",
         "text": "창업자는 이사회 의장과 대표이사를 겸직하고 상장 후에도 의결권의 58%를 보유할 예정이다. 회사는 창업자가 지분을 가진 부품 관계사에서 안테나를 구매하므로 특수관계인 거래와 이해상충 가능성이 있다.",
@@ -370,7 +370,7 @@
       {
         "documentId": "DOC-KR-IPO-RISK-001",
         "passageId": "DOC-KR-IPO-RISK-001-P05",
-        "companyName": "미르오비탈링크",
+        "companyName": "Mir Orbital Link",
         "documentType": "KOSDAQ IPO Risk-Factor Excerpt",
         "date": "2026-06-24",
         "text": "차기 위성 두 기는 동일한 발사 일정에 배정돼 있다. 발사체 지연, 탑재체 시스템 통합 실패 또는 궤도 시험 실패가 발생하면 상용 서비스 개시가 6개월 이상 늦어질 수 있다.",
@@ -380,7 +380,7 @@
       {
         "documentId": "DOC-KR-IPO-RISK-001",
         "passageId": "DOC-KR-IPO-RISK-001-P06",
-        "companyName": "미르오비탈링크",
+        "companyName": "Mir Orbital Link",
         "documentType": "KOSDAQ IPO Risk-Factor Excerpt",
         "date": "2026-06-24",
         "text": "서비스 수요는 정부 연결성 예산과 주파수 정책에 일부 의존한다. 더 큰 경쟁사가 가격 경쟁을 확대하거나 우선 유통계약을 확보하면 고객 수요와 목표 시장이 축소될 수 있다.",

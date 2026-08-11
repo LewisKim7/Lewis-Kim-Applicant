@@ -23,13 +23,15 @@ Korea IPO & CB Risk Screener is an independent educational project created by Yo
 
 The interface is English so an international reviewer can follow the methodology. The disclosure-style source passages are Korean because Korean-language processing is the substantive problem being explored.
 
+The market overview uses a dated, read-only snapshot of real public results from the applicant's two deployed tools. The five-document NLP corpus remains wholly synthetic. Real issuers are never inserted into the corpus or assigned a risk label.
+
 > **AI-assisted development disclosure:** Yoochan Kim defined the domain problem, project objective, risk taxonomy, feature requirements, evaluation questions, and application purpose. Codex assisted with synthetic-data drafting, implementation, documentation, and automated verification. All reference labels and rationales were drafted within the same AI-assisted project and have not been independently annotated or adjudicated. The reported results are development diagnostics, not independently validated performance.
 
 ## Reviewer fast path
 
 | Time | Suggested path |
 | --- | --- |
-| 90 seconds | Open the [live demo](https://lewis-kim-applicant.vercel.app/), inspect the fictional CB/IPO market screen, select a document, run a Korean query, and compare the per-label recall traces in Evaluation. |
+| 90 seconds | Open the [live demo](https://lewis-kim-applicant.vercel.app/), inspect the frozen real-market overview, select a synthetic document, run a Korean query, and compare the per-label recall traces in Evaluation. |
 | 5 minutes | Read the research question, document-held-out protocol, exact ML errors, retrieval diagnostic, and limitations on this page. |
 | Reproduce | Run `npm ci && npm run verify`; no API key, backend, network model, or private dataset is required. |
 
@@ -49,8 +51,8 @@ Yoochan Kim contributed the Korean capital-markets framing, product objective, r
 | Retrieval | TF-IDF cosine lexical ranking |
 | Retrieval diagnostic | 12 AI-assisted Korean queries; graded relevance; Precision@3, Recall@3, MRR@3, nDCG@3 |
 | Memo | Deterministic template with passage-ID citations |
-| Visual diagnostics | CB proposed-principal ranking, IPO return-to-offer chart, and per-label baseline recall |
-| External services | No API key, remote model, or backend required |
+| Visual diagnostics | Frozen real-market CB/IPO snapshots and per-label baseline recall |
+| Runtime boundary | Core NLP needs no API key, remote model, or backend; source-tool embeds are optional |
 
 ## Research question
 
@@ -62,26 +64,27 @@ This project asks:
 
 The objective is not automated investment judgment. It is to make the problem formulation, data, rules, learned baseline, evidence trail, errors, and limitations visible.
 
-## Domain workflow lineage
+## Production-tool evidence layer
 
-The project was informed by two workflows already present in the applicant's portfolio:
+The compact market overview preserves selected public facts from two workflows already present in the applicant's portfolio:
 
-- [CB Zero Finder](https://cb-zero-finder.vercel.app/) — the new TypeScript module reproduces the same kind of rate-and-size screening behavior on four fictional CB rows.
-- [IPO Market Report](https://ipo-market-report.vercel.app/) — analogous IPO aggregation calculations were inspired by the report workflow and reimplemented over six fictional observations.
+- [CB Zero Finder](https://cb-zero-finder.vercel.app/) — a strict numeric `0.0%` coupon and `0.0%` maturity-yield screen captured on 11 Aug 2026.
+- [IPO Market Report](https://ipo-market-report.vercel.app/) — selected aggregate and return facts from its public PDF, using data through 7 Aug 2026 and generated on 8 Aug 2026.
 
-The relationship is conceptual only. Neither existing repository nor any production data was imported. This project also does **not** copy API responses, API keys, private workbooks, or generated reports from either tool.
+The linked applications are embedded as source-tool views and may update independently. The portfolio's summarized evidence is deliberately frozen, so admissions reviewers see a reproducible dated snapshot rather than a moving result. No private workbook, API key, full copyrighted filing, or private dataset was imported. The real structured facts are display evidence only: they are strictly separated from the synthetic NLP corpus and receive no model prediction, risk label, or investment recommendation.
 
-### Fictional structured demonstrations
+### Frozen public-market snapshot
 
-| Workflow | Bundled sample | Deterministic result |
+| Workflow | Source date | Frozen result |
 | --- | --- | --- |
-| CB principal view | All 4 fictional rows; 790억원 total proposed principal | 1 explicit coupon `0.0%` + maturity yield `0.0%` match: 220억원, or 27.8% of the sample |
-| CB filter check | Surface rate `0.0%`; minimum issue size 200억원 | 2 matches totaling 520억원 |
-| IPO snapshot | 6 fictional observations as of 2026-07-31 | Total offer market capitalization 42,000억원 |
-| IPO return view | Same 2026-07-31 snapshot; signed current return against a symmetric offer-price baseline | Median first-day return 12.5%; median current return 1.47% |
-| IPO downside count | Same 6 observations | 3 of 6, or 50%, below offer price as of 2026-07-31 |
+| IPO scope | Data through 7 Aug 2026; PDF generated 8 Aug 2026 | 52 firms; 19.5 trillion KRW total offer market capitalization |
+| IPO returns | Same public report snapshot | +111.4% average first-day return; −5.1% average current return; 36 of 52 below offer price |
+| CB scope | Captured 11 Aug 2026, covering 14 May–11 Aug 2026 | 118 filing rows |
+| Strict CB zero screen | Same capture | 41 rows across 40 issuers; 17,898.6억원 total principal |
 
-These values validate the local screening and aggregation functions. They are not market statistics.
+For the CB screen, only numeric zero in both rate fields qualifies; a `-` placeholder is treated as missing and excluded. The five largest qualifying rows are Hyundai Engineering & Construction (5,000억원), LigaChem Biosciences (1,700억원), Sungho Electronics (1,000억원), TSE (1,000억원), and Won Tech (750억원). Company names and values are source observations, not automatically refreshed portfolio data.
+
+The frozen source artifacts are integrity-pinned in `src/data/market-snapshot.ts` with the public IPO PDF and CB API-response SHA-256 values captured during the 11 Aug 2026 validation pass.
 
 ## Synthetic Korean corpus
 
@@ -89,11 +92,11 @@ The corpus contains two convertible-bond documents and three IPO documents. Ever
 
 | Document ID | Fictional issuer | Market | Document type | Passages |
 | --- | --- | --- | --- | ---: |
-| `DOC-KR-CB-ISSUE-001` | 한빛퀀텀모션 | KOSDAQ | DART-style CB Issuance Decision | 6 |
-| `DOC-KR-CB-RESET-001` | 세림뉴로칩 | KOSDAQ | DART-style CB Terms Amendment | 6 |
-| `DOC-KR-IPO-PROSPECTUS-001` | 가온바이오컴퓨트 | KOSDAQ | KOSDAQ IPO Prospectus Excerpt | 6 |
-| `DOC-KR-IPO-PROCEEDS-001` | 다온그린셀 | KOSPI | KOSPI IPO Use-of-Proceeds Excerpt | 6 |
-| `DOC-KR-IPO-RISK-001` | 미르오비탈링크 | KOSDAQ | KOSDAQ IPO Risk-Factor Excerpt | 6 |
+| `DOC-KR-CB-ISSUE-001` | Hanbit Quantum Motion | KOSDAQ | DART-style CB Issuance Decision | 6 |
+| `DOC-KR-CB-RESET-001` | Serim Neurochip | KOSDAQ | DART-style CB Terms Amendment | 6 |
+| `DOC-KR-IPO-PROSPECTUS-001` | Gaon BioCompute | KOSDAQ | KOSDAQ IPO Prospectus Excerpt | 6 |
+| `DOC-KR-IPO-PROCEEDS-001` | Daon GreenCell | KOSPI | KOSPI IPO Use-of-Proceeds Excerpt | 6 |
+| `DOC-KR-IPO-RISK-001` | Mir Orbital Link | KOSDAQ | KOSDAQ IPO Risk-Factor Excerpt | 6 |
 | **Total** | **5 fictional issuers** |  |  | **30** |
 
 The passages include Korean capital-markets signals such as `전환가액 조정`, `리픽싱`, `조기상환청구권`, `풋옵션`, `콜옵션`, `오버행`, `구주매출`, `보호예수`, `공모자금`, `수요예측`, `특수관계인`, and `계속기업`. They are newly written synthetic passages, not excerpts from copyrighted filings.
@@ -131,7 +134,7 @@ Single-label classification keeps the confusion matrices inspectable, but it com
 
 ### 1. Structured screening
 
-The CB functions normalize issue amounts and rates, filter by a declared rate condition, company or stock-code query, and minimum issue size, then aggregate matching issue value. The IPO functions calculate offer-band position, first-day and current returns, total offer market capitalization, medians, and below-offer frequency.
+The evidence layer stores dated, selected public outputs from the two production tools. It preserves source URLs, capture dates, aggregate counts, and selected rows for a reproducible review snapshot. The embedded tools remain separate applications and may update after the snapshot date.
 
 ### 2. Korean text preparation
 
@@ -189,8 +192,9 @@ The relevance set uses grades 1–2 and was drafted with AI assistance over the 
 The English interface includes:
 
 - one compact project header and a separate applicant/program ribbon;
-- a proposed-principal CB ranking across all four fictional rows, with the single explicit `0.0% / 0.0%` match directly labeled;
-- a signed current-return chart for the six fictional IPO observations;
+- a tabbed, lazy-loaded view of the two linked production tools;
+- a frozen IPO snapshot covering 52 firms and a strict CB `0.0% / 0.0%` snapshot covering 118 filing rows;
+- English labels for selected real issuer observations, kept separate from the synthetic evidence trail;
 - a five-document Korean source library;
 - document-level key facts and transaction metadata;
 - Korean TF-IDF evidence search;
@@ -215,7 +219,7 @@ npm ci
 npm run verify
 ```
 
-`npm run verify` runs the deterministic test suite, linting, TypeScript checks, and a production build. Tests freeze the five-document corpus, classification and retrieval diagnostics, matched-term glossary coverage, application-profile switching, the CB screen and visualization summary, and the IPO summary.
+`npm run verify` runs 56 deterministic tests, linting, TypeScript checks, and a production build. Tests freeze the five-document corpus, classification and retrieval diagnostics, matched-term glossary coverage, application-profile switching, frozen market-snapshot facts, source-tool tab behavior, and applicant-profile evidence links.
 
 ### Start the development server
 
@@ -243,7 +247,7 @@ The switch changes applicant-context copy, institution links, and non-affiliatio
 src/
   config/       Switchable graduate-application profile and official program links
   components/   English interface and evaluation views
-  data/         Korean corpus plus fictional CB and IPO rows
+  data/         Synthetic Korean corpus plus dated real-market snapshot metadata
   domain/       Document, passage, market, workflow, and taxonomy types
   lib/          Screening, preprocessing, rules, retrieval, ML, evaluation, and memo logic
 docs/
@@ -267,7 +271,8 @@ docs/
 - TF-IDF has limited Korean context and paraphrase understanding.
 - Logistic-regression hyperparameters were explored during development.
 - The 12-query retrieval relevance set is closed-corpus, AI-assisted, and not independently judged.
-- Structured CB and IPO rows are fictional demonstrations, not current market data.
+- The real-market layer is a frozen public snapshot and can become stale even while the linked tools continue to update.
+- Real structured facts are not NLP evaluation data and receive no risk labels.
 
 ## Responsible use and independence
 

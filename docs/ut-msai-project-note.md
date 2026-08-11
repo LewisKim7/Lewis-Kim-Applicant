@@ -20,7 +20,7 @@ That workflow creates a useful learning sequence:
 6. distinguish classification from retrieval; and
 7. analyze errors and responsible-use limits.
 
-The project page is only the demonstration layer. The substantive artifact is the checked-in corpus, structured samples, rules, trained baseline, evaluation protocols, error analysis, and documentation.
+The project page is only the demonstration layer. The substantive artifact is the checked-in synthetic corpus, frozen public-market snapshot, rules, trained baseline, evaluation protocols, error analysis, and documentation.
 
 ## Evidence of graduate-study preparation
 
@@ -63,14 +63,14 @@ Unicode tokenization and light particle stripping make the local implementation 
 
 Classification selects a configured primary risk label. TF-IDF retrieval ranks passages by lexical overlap with a query. The latter is not semantic understanding, and its closed-corpus ranking diagnostic is not independent validation. Neither output verifies the financial truth of a passage.
 
-## Conceptual lineage and independent implementation
+## Production-tool evidence and independent NLP evaluation
 
-The structured demonstrations were conceptually informed by two workflows already present in the applicant's portfolio:
+The market overview uses a dated snapshot from two workflows already present in the applicant's portfolio:
 
-- [CB Zero Finder](https://cb-zero-finder.vercel.app/), whose rate-and-size screening behavior is independently reimplemented in TypeScript on four fictional rows; and
-- [IPO Market Report](https://ipo-market-report.vercel.app/), which inspired analogous IPO calculations over six fictional observations using a common 2026-07-31 snapshot date.
+- [CB Zero Finder](https://cb-zero-finder.vercel.app/): captured 11 Aug 2026, 118 filing rows, with a strict numeric `0.0% / 0.0%` screen returning 41 rows across 40 issuers and 17,898.6억원; and
+- [IPO Market Report](https://ipo-market-report.vercel.app/): public PDF data through 7 Aug 2026, generated 8 Aug 2026, covering 52 firms, 19.5 trillion KRW in offer market capitalization, +111.4% average first-day return, −5.1% average current return, and 36 of 52 below offer.
 
-The relationship is conceptual only. Neither existing repository nor any production data was imported. No API response, API key, private workbook, or generated report was copied.
+The embedded source tools may update independently, but the portfolio snapshot remains fixed. Missing CB values shown as `-` are excluded rather than treated as zero. The real structured facts are display context only and never enter the synthetic five-document, 30-passage NLP corpus or receive a risk label. No private workbook, API key, full copyrighted filing, or private dataset was imported.
 
 ## Official UT Austin context
 
@@ -93,7 +93,7 @@ Before using the project in an application, the applicant should personally revi
 
 ## Independence and non-affiliation
 
-Korea IPO & CB Risk Screener is an independent personal project. The University and program names are used only to identify the intended application. The project uses an original `Evidence Signal` mark and no official UT Austin logo, wordmark, seal, supporting mark, or university visual identity. It is not affiliated with, sponsored by, reviewed by, or endorsed by The University of Texas at Austin, the MSAI program, the College of Natural Sciences, CDSO, DART, KRX, or any admissions office. It contains no university, admissions, or production market data.
+Korea IPO & CB Risk Screener is an independent personal project. The University and program names are used only to identify the intended application. The project uses an original `Evidence Signal` mark and no official UT Austin logo, wordmark, seal, supporting mark, or university visual identity. It is not affiliated with, sponsored by, reviewed by, or endorsed by The University of Texas at Austin, the MSAI program, the College of Natural Sciences, CDSO, DART, KRX, or any admissions office. It contains no university or admissions data; its dated public-market snapshot is independent supporting context.
 
 ## Appropriate application use
 

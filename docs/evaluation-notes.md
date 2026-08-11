@@ -156,22 +156,20 @@ The ML baseline's 86.67% is about 3.3 percentage points above the rule baseline'
 Both results are best treated as current development diagnostics, not as a frozen
 confirmatory evaluation.
 
-## Structured workflow checks
+## Frozen production-tool evidence checks
 
-Separate deterministic tests cover the fictional market samples:
+Separate deterministic tests freeze selected public facts from the two production tools:
 
-| Check | Frozen result |
-| --- | --- |
-| CB rows | 4 |
-| CB filter | Surface rate `0.0%`, minimum issue size 200억원 |
-| CB matches | 2 rows totaling 520억원 |
-| IPO observations | 6 |
-| Total offer market capitalization | 42,000억원 |
-| Median first-day return | 12.5% |
-| Median current return | 1.47% |
-| Below offer price | 3 of 6, or 50% |
+| Check | Source date | Frozen result |
+| --- | --- | --- |
+| IPO coverage | Data through 7 Aug 2026; PDF generated 8 Aug 2026 | 52 firms |
+| IPO offer market capitalization | Same | 19.5 trillion KRW |
+| IPO average returns | Same | +111.4% first day; −5.1% current |
+| IPO below offer | Same | 36 of 52, or 69.2% |
+| CB filing rows | Captured 11 Aug 2026 | 118 |
+| Strict CB zero screen | Same | 41 rows across 40 issuers; 17,898.6억원 |
 
-The IPO values use a common fictional snapshot date of **2026-07-31**. These checks validate local arithmetic and filtering only. They do not describe the current Korean market.
+The CB screen admits only numeric `0.0%` in both coupon and maturity-yield fields; a `-` placeholder is missing and excluded. The largest qualifying rows are Hyundai Engineering & Construction (5,000억원), LigaChem Biosciences (1,700억원), Sungho Electronics (1,000억원), TSE (1,000억원), and Won Tech (750억원). These dated facts are display context, not an NLP benchmark. The linked tools may update independently while the portfolio snapshot remains fixed, and no real issuer receives a model output or risk label.
 
 ## 3. Closed-corpus retrieval diagnostic
 
@@ -200,9 +198,9 @@ npm run verify
 npm run dev
 ```
 
-`npm run verify` runs linting, 50 deterministic tests, TypeScript checks, and a production build. The tests freeze the corpus dimensions, label coverage, rule metrics, ML fold structure, ML metrics, retrieval judgments and ranking metrics, CB screen, IPO summary, application-profile switch, and applicant-profile evidence links.
+`npm run verify` runs linting, 56 deterministic tests, TypeScript checks, and a production build. The tests freeze the corpus dimensions, label coverage, rule metrics, ML fold structure, ML metrics, retrieval judgments and ranking metrics, dated market-snapshot facts, source-tool tab behavior, application-profile switch, and applicant-profile evidence links.
 
-Changes to passages, labels, preprocessing, rules, optimization settings, fold construction, or structured rows can change the documented results.
+Changes to passages, labels, preprocessing, rules, optimization settings, fold construction, or snapshot metadata can change the documented results.
 
 ## What the evaluation supports
 
