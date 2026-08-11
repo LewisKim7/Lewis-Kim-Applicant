@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This independent project was created by Yoochan Kim (Lewis Kim · 김유찬) while preparing an application for graduate study in artificial intelligence. It connects his finance and deep-tech investment context with Korean-language preprocessing, classification, information retrieval, model evaluation, interpretation, and responsible-use boundaries.
+This independent project was created by Yoochan Kim (Lewis Kim · 김유찬) while preparing applications for graduate study in artificial intelligence and data science. It connects his finance and deep-tech investment context with Korean-language preprocessing, classification, information retrieval, model evaluation, interpretation, visualization, and responsible-use boundaries.
 
 Korea IPO & CB Risk Screener is an educational prototype, not a claim of professional machine-learning engineering mastery. The application is deliberately small and inspectable: five fictional Korean KOSPI/KOSDAQ documents, 30 Korean passages, seven primary labels, two classification baselines, lexical evidence retrieval, and deterministic memo generation. The interface is English so an international reviewer can follow the work; the source passages remain Korean because Korean text is the actual NLP subject.
 
@@ -76,14 +76,15 @@ The embedded source tools may update independently, but the portfolio snapshot r
 
 The following official sources informed the description of broad academic fit and current application context:
 
-1. [MSAI curriculum/program page](https://cdso.utexas.edu/msai)
-2. [Graduate Catalog, Artificial Intelligence](https://catalog.utexas.edu/graduate/areas-of-study/natural-sciences/artificial-intelligence/)
-3. [current linked MSAI Application Guide PDF](https://cdso.utexas.edu/sites/default/files/2025-01/MSAI_Application_Guide.pdf)
-4. [CDSO FAQ](https://cdso.utexas.edu/faq)
+1. [Master of Science in Artificial Intelligence program page](https://cdso.utexas.edu/msai)
+2. [Master of Science in Data Science program page](https://cdso.utexas.edu/msds)
+3. [Graduate Catalog, Artificial Intelligence](https://catalog.utexas.edu/graduate/areas-of-study/natural-sciences/artificial-intelligence/)
+4. [Graduate Catalog, Data Science](https://catalog.utexas.edu/graduate/areas-of-study/natural-sciences/data-science/)
+5. [CDSO FAQ](https://cdso.utexas.edu/faq)
 
-The project broadly relates to NLP, information retrieval, classification, evaluation, interpretation, transparency, and ethics. It does not claim alignment with a precise required-course distribution because current official pages can describe curricular structure differently.
+The project broadly relates to NLP, information retrieval, classification, data preparation, evaluation, visualization, interpretation, transparency, and ethics. These shared themes make the same evidence relevant to either intended application without presenting the project as an official artifact of either program. It does not claim alignment with a precise required-course distribution.
 
-The current linked application materials do not list a portfolio as a formal required item. This project is optional supporting evidence only. It cannot replace prerequisites, required application materials, or the applicant's responsibility to verify the latest instructions directly from UT Austin before submission.
+This project is optional supporting evidence only. It cannot replace prerequisites, required application materials, or the applicant's responsibility to verify the latest instructions for each program directly from UT Austin before submission.
 
 ## AI-assisted development disclosure
 
@@ -93,7 +94,7 @@ Before using the project in an application, the applicant should personally revi
 
 ## Independence and non-affiliation
 
-Korea IPO & CB Risk Screener is an independent personal project. The University and program names are used only to identify the intended application. The project uses an original `Evidence Signal` mark and no official UT Austin logo, wordmark, seal, supporting mark, or university visual identity. It is not affiliated with, sponsored by, reviewed by, or endorsed by The University of Texas at Austin, the MSAI program, the College of Natural Sciences, CDSO, DART, KRX, or any admissions office. It contains no university or admissions data; its dated public-market snapshot is independent supporting context.
+Korea IPO & CB Risk Screener is an independent personal project. The University and program names are used only to identify the intended applications. The project uses an original `Evidence Signal` mark and no official UT Austin logo, wordmark, seal, supporting mark, or university visual identity. It is not affiliated with, sponsored by, reviewed by, or endorsed by The University of Texas at Austin, either graduate program, CDSO, DART, KRX, or any admissions office. It contains no university or admissions data; its dated public-market snapshot is independent supporting context.
 
 ## Appropriate application use
 
