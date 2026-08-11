@@ -37,11 +37,11 @@ The interface uses color and spacing to separate information roles, but methodol
 
 | Figure | Bundled input and measure | Encoding | Interpretation boundary |
 | --- | --- | --- | --- |
-| CB principal by issuer | 4 fictional proposed issuances totaling 790억원 | Horizontal principal bars sorted by size; the only explicit coupon `0.0%` and maturity yield `0.0%` row is labeled in blue | The matching row is 220억원, or 27.8% of the sample; zero stated rates do not establish low effective financing cost or verified proceeds |
-| IPO current return vs offer | 6 fictional price observations as of 2026-07-31 | Signed bars around a symmetric `0%` offer-price baseline; positive values are solid and negative values are outlined | The values are fixture calculations, not Korean IPO market statistics or a live performance feed |
+| CB strict-zero principal | Public CB Zero Finder snapshot captured 11 Aug 2026: 41 qualifying filing rows, 40 issuers, and 17,898.6억원 | Horizontal bars for the five largest rows plus exact aggregate counts | Only numeric `0.0%` in both coupon and maturity-yield fields qualifies; `-` is missing and excluded; zero stated rates do not establish low effective financing cost or verified proceeds |
+| IPO current return vs offer | Public IPO Market Report PDF data through 7 Aug 2026, generated 8 Aug 2026: 52 firms | Signed bars around a symmetric `0%` offer-price baseline for selected positive and negative observations; summary metrics remain visible | The portfolio freezes the report values: 19.5 trillion KRW offer market cap, +111.4% average first day, −5.1% average current, and 36 of 52 below offer |
 | Recall by risk label | 30 synthetic passages across 7 labels | Solid bars for document-held-out TF-IDF logistic regression; outlined bars for closed-corpus weighted rules; exact percentages and label counts remain visible | Liquidity recall is 25% (1 of 4) for the held-out baseline; the protocols differ, so the chart is diagnostic rather than a model ranking |
 
-The CB figure deliberately distinguishes the all-row principal view from the separate filter check in which a `0.0%` surface rate and 200억원 minimum return two rows totaling 520억원. Neither result is presented as a real-market screen.
+The IPO and CB figures are dated public-tool evidence, not live feeds. The embedded source applications may update independently, while this portfolio snapshot remains fixed for reproducible admissions review. Real issuer rows are never joined to the five-document synthetic NLP corpus or assigned a risk label.
 
 ## Language architecture
 
@@ -58,7 +58,7 @@ The production default identifies only `Prepared for graduate applications to UT
 1. **Header and applicant ribbon** keep the project navigation thin, provide a persistent Profile action, and pair the applicant with the intended school context and non-affiliation boundary.
 2. **Hero and signal trace** state the narrow objective and show an inspectable Korean rule trace immediately.
 3. **Applicant profile** links Yoochan Kim's finance background to the research question, provides employer links, and anchors the dated DART manager-listing evidence without implying employer endorsement.
-4. **Market screen** visualizes the fictional CB principal and IPO return fixtures before handing a selected disclosure to the NLP workflow.
+4. **Production-tool bridge** uses compact tabs to pair a frozen real-market summary with one lazy-loaded source application at a time, then explicitly separates that evidence from the synthetic NLP workflow.
 5. **Problem and methodology** separate the research question from preprocessing, rules, trained classification, retrieval, and memo generation.
 6. **Dashboard and taxonomy** let the reviewer inspect Korean passages, rule traces, evidence ranking, memo citations, and label definitions.
 7. **Evaluation** leads with per-label recall, then preserves fold details, confusion matrices, errors, and retrieval diagnostics under their respective protocols.
@@ -79,5 +79,6 @@ The CSS is designed down to a 320-pixel viewport, but this note does not claim c
 - Keep synthetic-data, AI-assistance, and non-affiliation disclosures discoverable without opening the repository.
 - Do not describe lexical TF-IDF retrieval as semantic search.
 - Do not add real issuer logos, copied filing screenshots, or Apple-branded assets.
+- Do not attach a classifier output or risk label to any real issuer in the frozen market layer.
 
 The design succeeds only if the reviewer can distinguish what the artifact implements, what the evaluation supports, and what remains unverified.

@@ -11,9 +11,9 @@ export function SiteHeader() {
         </a>
 
         <nav className="header-nav" aria-label="Primary navigation">
-          <a href="#lineage">Market screen</a>
-          <a href="#problem">Problem</a>
-          <a href="#method">Method</a>
+          <a href="#ipo-report">IPO Report</a>
+          <a href="#cb-finder">CB Finder</a>
+          <a href="#prototype">NLP Demo</a>
           <a href="#evaluation">Evaluation</a>
         </nav>
 
@@ -25,8 +25,8 @@ export function SiteHeader() {
           <a className="header-source" href={SOURCE_URL} target="_blank" rel="noreferrer">
             GitHub <span aria-hidden="true">↗</span>
           </a>
-          <a className="header-explore" href="#prototype">
-            Explore
+          <a className="header-explore" href="#market-tools">
+            Tools
           </a>
         </div>
       </div>

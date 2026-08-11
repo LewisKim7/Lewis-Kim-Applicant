@@ -10,7 +10,7 @@
 
 ### 0:25–0:55 — Corpus and pipeline
 
-“The corpus contains five fictional documents, 30 Korean passages, and seven primary labels. The pipeline combines Korean preprocessing, an inspectable weighted-rule trace, unigram TF-IDF logistic regression, lexical cosine retrieval, and a deterministic memo with passage IDs. Separate modules reproduce CB and IPO calculations on fictional rows; neither existing repository nor production data was imported.”
+“The portfolio first shows a frozen public snapshot from my two production tools: an IPO report covering 52 firms and a strict 0% / 0% CB screen over 118 filing rows. That real structured evidence is never labeled by the model. The NLP experiment is a separate five-document, 30-passage synthetic corpus with seven primary labels, Korean preprocessing, weighted rules, TF-IDF logistic regression, lexical retrieval, and a deterministic memo.”
 
 ### 0:55–1:35 — Evaluation
 
@@ -26,8 +26,8 @@ Use this path only after personally rehearsing the controls and verifying that t
 
 | Time | Action | Point to explain |
 | --- | --- | --- |
-| 0:00–0:12 | Start at the hero and point to the synthetic-corpus counts and AI-assistance sentence. | This is a transparent educational prototype, not a production DART system. |
-| 0:12–0:30 | Select `세림뉴로칩 — DART-style CB Terms Amendment` in the interactive prototype. | The document metadata, Korean passages, and fictional transaction context remain attached. |
+| 0:00–0:12 | Start at the hero, then open the IPO or CB production-tool tab. | The embedded source may update, but the portfolio summary is a dated, reproducible snapshot. |
+| 0:12–0:30 | Point out the real/synthetic boundary, then select `Serim Neurochip — DART-style CB Terms Amendment`. | Real issuer rows receive no risk label; only the fictional corpus enters the NLP workflow. |
 | 0:30–0:48 | Choose the suggested query `조기상환청구권 상환 재원`, open the top result, and inspect its rule trace. | Retrieval is lexical; the rule score exposes phrase contributions and is not probability. |
 | 0:48–1:02 | Open the generated memo and identify one cited passage ID. | The memo is deterministic and retains an evidence trail rather than generating external facts. |
 | 1:02–1:20 | Jump to Evaluation, show the two protocol cards, then point to Q12 in retrieval. | Classification protocols are not a controlled ranking; Q12 exposes a lexical paraphrase failure. |
@@ -39,9 +39,10 @@ Use this path only after personally rehearsing the controls and verifying that t
 | --- | --- | --- |
 | `src/data/documents.json` | Stores five fictional Korean documents and 30 passages with AI-assisted reference labels | Synthetic provenance, document IDs, and one primary label per passage |
 | `src/data/corpus.ts` | Loads and validates corpus structure | Why corpus dimensions and label coverage are frozen |
-| `src/data/market-samples.ts` | Stores four fictional CB rows and six IPO observations | Why these rows are separate from the text corpus |
-| `src/lib/cb-analytics.ts` | Normalizes, filters, and aggregates CB rows | The `0.0%` surface-rate and 200억원 screen |
-| `src/lib/ipo-analytics.ts` | Computes offer-band and return summaries | How medians, total offer market cap, and below-offer share are calculated |
+| `src/data/market-snapshot.ts` | Stores dated selected facts from the public IPO and CB tools | Snapshot dates, provenance, and why real issuers never enter NLP evaluation |
+| `src/data/market-samples.ts` | Retains small fictional arithmetic fixtures for deterministic unit tests | Why test fixtures are not displayed as market evidence |
+| `src/lib/cb-analytics.ts` | Normalizes, filters, and aggregates CB rows | Why only numeric zero qualifies and `-` is excluded as missing |
+| `src/lib/ipo-analytics.ts` | Computes offer-band and return summaries | How returns and aggregate measures are defined |
 | `src/lib/preprocessing.ts` | Normalizes and tokenizes Korean/English text | NFKC, stop words, limited particle stripping, and why this is not morphology |
 | `src/lib/classifier.ts` | Runs the transparent weighted-rule baseline | Phrase weights, tie order, informational fallback, and signal-score semantics |
 | `src/lib/retrieval.ts` | Ranks corpus passages using TF-IDF cosine similarity | Why this is lexical retrieval rather than semantic understanding |
@@ -62,7 +63,7 @@ Suggested answer after confirming it is true: “I selected the domain, objectiv
 
 ### Why use synthetic data?
 
-The project avoids copying copyrighted full documents or presenting production data as a benchmark. Synthetic data makes the complete artifact shareable and inspectable. The cost is limited realism and no claim of performance on actual DART filings.
+The project avoids copying copyrighted full documents or presenting real issuers as model targets. Synthetic passages make the complete NLP artifact shareable and inspectable. The separate real-market snapshot demonstrates domain lineage, but it is not a benchmark and no risk label is attached to it. The cost is limited NLP realism and no claim of performance on actual DART filings.
 
 ### Why implement both rules and logistic regression?
 
@@ -94,7 +95,7 @@ No. It is unigram TF-IDF cosine lexical retrieval. A high score indicates relati
 
 ### What came from the existing CB and IPO tools?
 
-The CB module implements the same kind of screening behavior in new TypeScript on fictional rows. The IPO module performs analogous calculations inspired by the report workflow. Neither existing repository nor production data was imported, and no API response, key, private workbook, or generated report was copied.
+The portfolio freezes selected public outputs from both tools. The IPO layer uses public PDF data through 7 Aug 2026, generated 8 Aug: 52 firms, 19.5 trillion KRW offer market cap, +111.4% average first day, −5.1% average current, and 36 of 52 below offer. The CB layer was captured 11 Aug: 118 filing rows; strict numeric `0.0% / 0.0%` produced 41 rows, 40 issuers, and 17,898.6억원. A `-` value is missing, not zero. The embedded tools may update; the portfolio snapshot does not. No private workbook, API key, full copyrighted filing, or private dataset was imported.
 
 ### What would you do next?
 
@@ -133,8 +134,10 @@ Do not change an item to checked until the applicant has personally completed it
 - [ ] Reproduce both metric sets with `npm ci` and `npm run verify` on the submitted revision.
 - [ ] Explain Precision@3, Recall@3, MRR@3, nDCG@3, and why Q12 returns no lexical match.
 - [ ] Inspect the five rule errors and four ML errors in the application.
-- [ ] Verify the structured CB and IPO calculations by hand.
-- [ ] Confirm the CB/IPO lineage statement: neither existing repository nor production data, APIs, keys, workbooks, or reports were imported.
+- [ ] Verify the frozen CB and IPO snapshot metrics against the cited source dates.
+- [ ] Explain why strict numeric CB zeros exclude `-` missing values.
+- [ ] Confirm that real issuer facts stay separate from the synthetic NLP corpus and receive no risk label.
+- [ ] Confirm the import boundary: no source repository, private workbook, API key, full copyrighted filing, or private dataset was imported.
 - [ ] Review the repository history and understand every file linked in the module map.
 - [ ] Rewrite the CV entry and SOP paragraph in my own voice where needed.
 - [ ] Verify the current UT Austin instructions and AI-assistance disclosure policy before submission.

@@ -2,18 +2,18 @@
 
 ## System summary
 
-Korea IPO & CB Risk Screener is an independent React/TypeScript/Vite prototype created by Yoochan Kim (Lewis Kim · 김유찬) for Korean convertible-bond and IPO analysis. The interface is English, while the source passages are Korean. It combines two fictional structured-market workflows with passage classification, TF-IDF cosine lexical retrieval, and a deterministic evidence-linked memo.
+Korea IPO & CB Risk Screener is an independent React/TypeScript/Vite prototype created by Yoochan Kim (Lewis Kim · 김유찬) for Korean convertible-bond and IPO analysis. The interface is English, while the source passages are Korean. It combines a frozen public production-tool evidence layer with synthetic passage classification, TF-IDF cosine lexical retrieval, and a deterministic evidence-linked memo.
 
 | Field | Description |
 | --- | --- |
-| Domain | Fictional Korean KOSPI/KOSDAQ IPO and convertible-bond materials |
+| Domain | Frozen real-market IPO/CB context plus fictional Korean disclosure-style NLP materials |
 | Text corpus | 5 fictional documents; 30 Korean passages; 7 primary labels |
 | Rule baseline | Deterministic weighted Korean/English phrase rules |
 | Trained baseline | Unigram TF-IDF + multinomial logistic regression |
 | Retrieval | TF-IDF cosine lexical ranking over the bundled corpus |
 | Memo | Deterministic template with document and passage identifiers |
 | Runtime | Local TypeScript in a React/Vite application |
-| External service | None |
+| External service | Optional embedded views of the applicant's two public tools; core NLP runs locally |
 | API key | Not required |
 
 This card covers the complete analytical system and distinguishes its two classification baselines. Neither model is a production risk model.
@@ -40,7 +40,7 @@ The system should not be used for:
 
 - investment, trading, underwriting, financing, or portfolio decisions;
 - legal, accounting, regulatory, or compliance review;
-- automated screening of actual issuers or individuals;
+- automated NLP risk scoring or classification of actual issuers or individuals;
 - claims about performance on DART filings, KRX data, or unseen text;
 - probability, severity, materiality, or credit-risk estimates; or
 - replacing human analyst judgment.
@@ -77,14 +77,15 @@ The text includes terms such as `전환가액 조정`, `리픽싱`, `풋옵션`,
 
 The task assigns one primary label to each passage. This makes evaluation inspectable but suppresses secondary risks and creates legitimate category overlap.
 
-### Structured workflow samples
+### Frozen production-tool evidence
 
-The repository also contains fictional tabular demonstrations that are separate from the text-classification corpus:
+The repository contains selected real structured facts from the applicant's two public production tools. They are strictly separate from the text-classification corpus:
 
-- **CB screen:** 4 fictional rows; a `0.0%` surface-rate and minimum 200억원 filter returns 2 rows totaling 520억원.
-- **IPO snapshot:** 6 fictional observations as of 2026-07-31; total offer market capitalization is 42,000억원, median first-day return is 12.5%, median current return is 1.47%, and 3 of 6 observations, or 50%, are below offer price.
+- **IPO snapshot:** public PDF data through 7 Aug 2026, generated 8 Aug 2026; 52 firms, 19.5 trillion KRW total offer market capitalization, +111.4% average first-day return, −5.1% average current return, and 36 of 52 below offer price.
+- **CB snapshot:** captured 11 Aug 2026 for 14 May–11 Aug 2026; 118 filing rows. A strict numeric `0.0%` coupon and `0.0%` maturity-yield screen returns 41 rows across 40 issuers totaling 17,898.6억원. Missing `-` values do not qualify.
+- **Largest qualifying CB rows:** Hyundai Engineering & Construction (5,000억원), LigaChem Biosciences (1,700억원), Sungho Electronics (1,000억원), TSE (1,000억원), and Won Tech (750억원).
 
-These values verify local filtering and arithmetic. They are not Korean market statistics.
+The linked embedded tools may update independently; the portfolio snapshot does not. These facts provide dated workflow context only. No real issuer is placed in the synthetic corpus, scored by either classifier, retrieved as NLP evidence, or assigned a risk label.
 
 ## Preprocessing
 
@@ -147,16 +148,17 @@ A separate closed-corpus diagnostic uses 12 AI-assisted Korean queries with grad
 
 The memo generator deterministically organizes analyzed passages into an executive summary, key signals, evidence, implications, open questions, and limitations. It retains source document and passage IDs. It does not generate new facts, verify external information, or make an independent model prediction.
 
-## Conceptual workflow lineage
+## Production workflow lineage
 
-The new CB module implements the same kind of rate-and-size screening behavior as the applicant's existing [CB Zero Finder](https://cb-zero-finder.vercel.app/), but only on four fictional rows. The IPO module implements analogous calculations inspired by the [IPO Market Report](https://ipo-market-report.vercel.app/) workflow over six fictional observations. Neither existing repository nor any production data was imported. No API response, API key, private workbook, or generated report was copied.
+The market layer preserves selected public outputs from the applicant's [CB Zero Finder](https://cb-zero-finder.vercel.app/) and [IPO Market Report](https://ipo-market-report.vercel.app/). The source applications are linked and embedded for context, but the portfolio uses a fixed dated snapshot for reproducibility. No source repository, private workbook, API key, full copyrighted filing, or private dataset was imported.
 
 ## Limitations and risks
 
 ### Data and annotation
 
 - Thirty passages are too few for a stable performance estimate.
-- Every passage and structured row is synthetic.
+- Every NLP passage, label, and rationale is synthetic; the separate market snapshot contains dated real structured facts.
+- The public market snapshot can become stale and is not an evaluation set.
 - Annotations are AI-assisted and not independent.
 - The class distribution and wording were intentionally designed.
 - No inter-annotator agreement or adjudication result exists.
@@ -180,7 +182,7 @@ The new CB module implements the same kind of rate-and-size screening behavior a
 
 ## Transparency and reproducibility
 
-The corpus, structured samples, labels, rationales, taxonomy, phrase rules, preprocessing, retrieval, model implementation, fold construction, evaluation, and memo templates are checked into the repository. No API key or remote model is required at runtime.
+The synthetic corpus, frozen market-snapshot metadata, labels, rationales, taxonomy, phrase rules, preprocessing, retrieval, model implementation, fold construction, evaluation, and memo templates are checked into the repository. No API key or remote model is required for the core NLP runtime.
 
 ```bash
 npm ci
