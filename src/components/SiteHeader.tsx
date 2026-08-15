@@ -7,7 +7,7 @@ export function SiteHeader() {
         <a className="header-brand" href="#top" aria-label="Korea IPO and CB Risk Screener home">
           <img src="/favicon.svg" alt="" aria-hidden="true" />
           <span className="header-brand__long">Korea IPO &amp; CB Risk Screener</span>
-          <span className="header-brand__short">IPO &amp; CB NLP</span>
+          <span className="header-brand__short">KOR IPO · CB Risk</span>
         </a>
 
         <nav className="header-nav" aria-label="Primary navigation">
