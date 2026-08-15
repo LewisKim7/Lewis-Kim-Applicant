@@ -8,7 +8,7 @@ import { EnglishPassageSummary } from './EnglishPassageSummary'
 import { ProfileSection } from './ProfileSection'
 import { RiskOverview } from './RiskOverview'
 
-const SOURCE_URL = 'https://github.com/LewisKim7/lewis-kim-applicant'
+const SOURCE_URL = 'https://github.com/LewisKim7/Lewis-Kim-Applicant'
 const TRACE_PASSAGE = (() => {
   const passage = ALL_PASSAGES.find(
     (item) => item.passageId === 'DOC-KR-CB-RESET-001-P01',
