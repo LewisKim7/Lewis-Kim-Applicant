@@ -46,11 +46,6 @@ export function ProfileSection() {
             Fund manager · Hanwha IPO Plus fund <span aria-hidden="true">↗</span>
           </a>
         </div>
-
-        <small className="hero-profile__disclosure">
-          Applicant-led finance framing and evaluation · AI-assisted implementation · employers
-          did not sponsor or review this independent project.
-        </small>
       </div>
     </section>
   )

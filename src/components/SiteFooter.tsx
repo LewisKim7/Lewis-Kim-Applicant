@@ -19,11 +19,6 @@ export function SiteFooter() {
             Graduate programs ↗
           </a>
         </div>
-        <p className="site-footer__disclaimer">
-          Independent applicant portfolio. Not affiliated with, endorsed by, or an official
-          publication of {APPLICATION_CONTEXT.institutionName}. Fictional Korean-language
-          demonstration only; not investment, legal, or regulatory advice.
-        </p>
       </div>
     </footer>
   )

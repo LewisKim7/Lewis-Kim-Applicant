@@ -1,4 +1,3 @@
-import { APPLICATION_CONTEXT } from '../config/application-profile'
 import { SectionHeading } from './SectionHeading'
 
 const limitations = [
@@ -51,20 +50,6 @@ export function LimitationsSection() {
               ))}
             </ol>
           </div>
-        </div>
-
-        <div className="independent-note">
-          <strong>Independent project note</strong>
-          <p>
-            Directed by Yoochan Kim (Lewis Kim · 김유찬), with disclosed AI assistance, while
-            preparing for{' '}
-            {APPLICATION_CONTEXT.applicationDescription} at{' '}
-            {APPLICATION_CONTEXT.institutionName} and informed by prior Korean IPO and CB
-            workflow concepts. This independent applicant project is not affiliated with or
-            endorsed by {APPLICATION_CONTEXT.institutionShort}, DART, KRX, or any admissions
-            office. The NLP corpus and development fixtures are synthetic; the separately labeled
-            market snapshot contains dated public observations and receives no model risk label.
-          </p>
         </div>
       </div>
     </section>
