@@ -15,6 +15,7 @@ export function ApplicantContext() {
           href={APPLICATION_CONTEXT.overviewUrl}
           target="_blank"
           rel="noreferrer"
+          aria-label={`Open the official ${APPLICATION_CONTEXT.institutionShort} graduate-program page`}
         >
           <ApplicationBadge
             accent={APPLICATION_CONTEXT.badgeAccent}
@@ -33,7 +34,7 @@ export function ApplicantContext() {
         </a>
 
         <p className="applicant-card__disclaimer">
-          Independent applicant portfolio · not affiliated with or endorsed by{' '}
+          Not affiliated with or endorsed by{' '}
           {APPLICATION_CONTEXT.institutionShort}.
         </p>
       </div>

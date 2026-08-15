@@ -8845,3 +8845,27 @@ a.frozen-chart__company:hover strong {
     margin-top: 4px;
   }
 }
+
+/* Keep the desktop application context as concise as the mobile context. */
+@media (min-width: 641px) {
+  .applicant-card__program-label--long,
+  .applicant-card__program strong,
+  .applicant-card__program small {
+    display: none;
+  }
+
+  .applicant-card__program-label--compact {
+    display: block;
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 650;
+    letter-spacing: -0.018em;
+    line-height: 1.3;
+    text-transform: none;
+  }
+
+  .applicant-card__disclaimer {
+    font-size: 11px;
+    line-height: 1.35;
+  }
+}
