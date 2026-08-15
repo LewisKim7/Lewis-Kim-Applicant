@@ -29,14 +29,9 @@ export function ApplicantContext() {
               {APPLICATION_CONTEXT.compactLabel}
             </span>
             <strong>{APPLICATION_CONTEXT.portfolioLabel}</strong>
-            <small>View {APPLICATION_CONTEXT.institutionShort} graduate programs ↗</small>
+            <small>Official graduate programs ↗</small>
           </span>
         </a>
-
-        <p className="applicant-card__disclaimer">
-          Not affiliated with or endorsed by{' '}
-          {APPLICATION_CONTEXT.institutionShort}.
-        </p>
       </div>
     </section>
   )

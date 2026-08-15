@@ -8848,9 +8848,12 @@ a.frozen-chart__company:hover strong {
 
 /* Keep the desktop application context as concise as the mobile context. */
 @media (min-width: 641px) {
+  .applicant-card {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
+  }
+
   .applicant-card__program-label--long,
-  .applicant-card__program strong,
-  .applicant-card__program small {
+  .applicant-card__program strong {
     display: none;
   }
 
@@ -8864,7 +8867,10 @@ a.frozen-chart__company:hover strong {
     text-transform: none;
   }
 
-  .applicant-card__disclaimer {
+  .applicant-card__program small {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
     font-size: 11px;
     line-height: 1.35;
   }
