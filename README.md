@@ -3,7 +3,7 @@
 A transparent Korean-language NLP portfolio project for screening IPO and convertible-bond disclosures, retrieving passage-level evidence, and making model behavior inspectable.
 
 **Live demo:** https://lewis-kim-applicant.vercel.app/  
-**Canonical repository name:** `lewis-kim-applicant`
+**Canonical repository:** https://github.com/LewisKim7/Lewis-Kim-Applicant
 
 ![Korea IPO and CB Risk Screener interface](docs/assets/portfolio-preview.png)
 
@@ -228,7 +228,6 @@ src/
   data/         Synthetic Korean corpus and frozen market snapshot
   domain/       Types for documents, passages, taxonomy, and workflows
   lib/          Preprocessing, rules, TF-IDF, classification, retrieval, memo logic
-
 docs/
   annotation-guide.md
   application-language.md
