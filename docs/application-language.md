@@ -23,7 +23,7 @@ For MSAI, emphasize natural language processing, classification, retrieval, eval
 
 ## Concise CV entry
 
-**Korea IPO & CB Risk Screener** — [Live demo](https://lewis-kim-applicant.vercel.app/) · [GitHub](https://github.com/LewisKim7/lewis-kim-applicant)
+**Korea IPO & CB Risk Screener** — [Live demo](https://lewis-kim-applicant.vercel.app/) · [GitHub](https://github.com/LewisKim7/Lewis-Kim-Applicant)
 
 Directed development of an AI-assisted React/TypeScript NLP prototype for Korean IPO and convertible-bond analysis. Built around 5 fictional documents, 30 Korean passages, and 7 risk labels, the repository includes transparent weighted rules, a unigram TF-IDF multinomial logistic-regression baseline with leave-one-document-out evaluation, a 12-query closed-corpus retrieval diagnostic, deterministic source-linked memos, and documented error analysis. All labels, rationales, and retrieval judgments are synthetic, AI-assisted, and not independently reviewed.
 
