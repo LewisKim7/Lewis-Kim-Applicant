@@ -2,6 +2,8 @@
 
 Copyright (c) 2026 김유찬 (Yoochan Kim · Lewis). All rights reserved.
 
+Canonical repository: https://github.com/LewisKim7/lewis-kim-applicant
+
 This repository is shared as a reviewable educational portfolio artifact. No
 license is granted to copy, modify, redistribute, sublicense, or use the code,
 synthetic corpus, relevance judgments, writing, or visual design beyond ordinary
