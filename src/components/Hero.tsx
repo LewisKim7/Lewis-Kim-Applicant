@@ -7,6 +7,7 @@ import {
 import { EnglishPassageSummary } from './EnglishPassageSummary'
 import { ProfileSection } from './ProfileSection'
 import { RiskOverview } from './RiskOverview'
+import { WorkflowPrimer } from './WorkflowPrimer'
 
 const SOURCE_URL = 'https://github.com/LewisKim7/Lewis-Kim-Applicant'
 const TRACE_PASSAGE = (() => {
@@ -135,6 +136,7 @@ export function Hero() {
       </div>
 
       <ProfileSection />
+      <WorkflowPrimer />
       <RiskOverview />
     </section>
   )
