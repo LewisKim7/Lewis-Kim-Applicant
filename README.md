@@ -1,6 +1,6 @@
-# Korea IPO & CB Risk Screener
+# AI Disclosure Risk Screener · Graduate Application Portfolio
 
-A transparent Korean-language NLP portfolio project for screening IPO and convertible-bond disclosures, retrieving passage-level evidence, and making model behavior inspectable.
+A graduate-application portfolio project for demonstrating transparent Korean-language NLP, IPO and convertible-bond disclosure screening, passage-level evidence retrieval, and inspectable model behavior.
 
 **Live demo:** https://lewis-kim-applicant.vercel.app/  
 **Canonical repository:** https://github.com/LewisKim7/Lewis-Kim-Applicant
