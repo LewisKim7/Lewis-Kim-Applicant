@@ -53,4 +53,18 @@ describe('plain-language market visualizations', () => {
     expect(ipoTab.getAttribute('aria-selected')).toBe('true')
     expect(document.activeElement).toBe(ipoTab)
   })
+
+  it('renders the same prose counts as the frozen snapshot', () => {
+    const { container } = render(<WorkflowBridgeSection />)
+    const text = () => container.textContent?.replace(/\s+/g, ' ') ?? ''
+
+    expect(text()).toContain('This report follows 52 Korean IPOs from their offer price to later market prices.')
+    expect(text()).toContain('52-company frozen snapshot')
+    expect(text()).toContain('but 36 of 52 were later below their IPO price. Price data shows')
+    expect(text()).toContain('52 companies · price changes after listing')
+
+    fireEvent.click(screen.getByRole('tab', { name: /CB Disclosure Finder/ }))
+    expect(text()).toContain('118 filing rows in the frozen 90-day snapshot')
+    expect(text()).toContain('takeaway: 41 filing rows from 40 company names stated both rates as 0%.')
+  })
 })

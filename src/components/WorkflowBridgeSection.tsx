@@ -111,8 +111,8 @@ function IpoSnapshot() {
         <h3>IPO returns rarely end on listing day.</h3>
         <p>
           <strong>IPO (initial public offering):</strong> the first sale of a company&apos;s shares
-          to public investors. This report follows 52 Korean IPOs from their offer price to later
-          market prices.
+          to public investors. This report follows {snapshot.companyCount} Korean IPOs from their
+          offer price to later market prices.
         </p>
       </div>
 
@@ -137,7 +137,7 @@ function IpoSnapshot() {
 
       <EvidenceShareBar
         title="Current position versus IPO price"
-        subtitle="52-company frozen snapshot"
+        subtitle={`${snapshot.companyCount}-company frozen snapshot`}
         matched={snapshot.belowOfferCount}
         total={snapshot.companyCount}
         matchedLabel="below IPO price"
@@ -171,8 +171,9 @@ function IpoSnapshot() {
 
       <p className="tool-insight">
         <strong>Plain-English takeaway:</strong> shares rose sharply on the first day on average,
-        but 36 of 52 were later below their IPO price. Price data shows what happened; the filing
-        text may help explain what investors needed to examine.
+        but {snapshot.belowOfferCount} of {snapshot.companyCount} were later below their IPO price.
+        Price data shows what happened; the filing text may help explain what investors needed to
+        examine.
       </p>
 
       <p className="tool-provenance">
@@ -220,7 +221,7 @@ function CbSnapshot() {
 
       <EvidenceShareBar
         title="Strict 0% coupon / 0% maturity-yield screen"
-        subtitle="118 filing rows in the frozen 90-day snapshot"
+        subtitle={`${snapshot.filingRowCount} filing rows in the frozen 90-day snapshot`}
         matched={snapshot.bothZeroRowCount}
         total={snapshot.filingRowCount}
         matchedLabel="matched both rates"
@@ -261,7 +262,8 @@ function CbSnapshot() {
       </figure>
 
       <p className="tool-insight">
-        <strong>Plain-English takeaway:</strong> 41 filing rows from 40 company names stated both
+        <strong>Plain-English takeaway:</strong> {snapshot.bothZeroRowCount} filing rows from{' '}
+        {snapshot.bothZeroIssuerCount} company names stated both
         rates as 0%. That does not mean the financing is free or harmless: new shares may still
         be created and repayment terms may still matter. Missing “−” values are excluded.
       </p>
@@ -324,7 +326,9 @@ export function WorkflowBridgeSection() {
           >
             <span>01</span>
             IPO Return Report
-            <small>52 companies · price changes after listing</small>
+            <small>
+              {FROZEN_MARKET_SNAPSHOT.ipo.companyCount} companies · price changes after listing
+            </small>
           </button>
           <button
             id="cb-finder"
