@@ -85,10 +85,7 @@ function EvidenceView({
                     classification.matchedKeywords.slice(0, 4).map((keyword) => {
                       const englishGloss = matchedTermEnglishGloss(keyword)
                       return (
-                        <code
-                          aria-label={englishGloss ? `${keyword}: ${englishGloss}` : keyword}
-                          key={keyword}
-                        >
+                        <code key={keyword}>
                           <span lang="ko">{keyword}</span>
                           {englishGloss ? <small lang="en">{englishGloss}</small> : null}
                         </code>

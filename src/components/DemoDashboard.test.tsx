@@ -60,4 +60,15 @@ describe('interactive prototype', () => {
     fireEvent.click(firstSearchResult())
     expect(screen.getByRole('status').textContent).toMatch(/Highlighted passage \S+\.$/)
   })
+
+  it('exposes keyword chips as their visible text instead of a prohibited aria-label', () => {
+    const { container } = render(<DemoDashboard />)
+    const chips = container.querySelectorAll('.keyword-list code')
+
+    expect(chips.length).toBeGreaterThan(0)
+    for (const chip of chips) {
+      expect(chip.hasAttribute('aria-label')).toBe(false)
+      expect(chip.querySelector('[lang="ko"]')?.textContent).toBeTruthy()
+    }
+  })
 })
