@@ -112,13 +112,14 @@ export function Hero() {
             </strong>
             <p className="signal-console__match">
               <span className="signal-console__match-full">
-                Matched Korean phrases: {TRACE_RESULT.matchedKeywords.join(', ')}
+                Matched Korean phrases:{' '}
+                <span lang="ko">{TRACE_RESULT.matchedKeywords.join(', ')}</span>
               </span>
               <span className="signal-console__match-full">
                 Meaning in English: {TRACE_ENGLISH_GLOSSES.join(', ')}
               </span>
               <span className="signal-console__match-compact">
-                Korean phrases: {TRACE_MOBILE_KEYWORDS.join(', ')}
+                Korean phrases: <span lang="ko">{TRACE_MOBILE_KEYWORDS.join(', ')}</span>
               </span>
               <span className="signal-console__match-compact">
                 English meaning: {TRACE_MOBILE_ENGLISH_GLOSSES.join(', ')}
