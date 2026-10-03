@@ -5,7 +5,7 @@ export function SiteHeader() {
     <header className="site-header">
       <div className="page-shell site-header__bar">
         <a className="header-brand" href="#top" aria-label="Korea IPO and CB Risk Screener home">
-          <img src="/favicon.svg" alt="" aria-hidden="true" />
+          <img src="/favicon.svg" alt="" aria-hidden="true" width="28" height="28" />
           <span className="header-brand__long">Korea IPO &amp; CB Risk Screener</span>
           <span className="header-brand__short">KOR IPO · CB Risk</span>
         </a>
