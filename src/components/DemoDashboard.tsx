@@ -210,6 +210,13 @@ export function DemoDashboard() {
     [analyses],
   )
 
+  const viewStatus =
+    activeView === 'evidence'
+      ? `Showing evidence table for ${selectedDocument.companyName}, ${analyses.length} passages${
+          highlightedPassageId ? `. Highlighted passage ${highlightedPassageId}` : ''
+        }.`
+      : `Showing generated memo for ${selectedDocument.companyName}.`
+
   useEffect(() => {
     if (!highlightedPassageId || activeView !== 'evidence') return
 
@@ -401,7 +408,10 @@ export function DemoDashboard() {
           <span>Every visible Korean passage includes a concise English summary.</span>
         </div>
 
-        <div className="analysis-view" aria-live="polite">
+        <p className="visually-hidden" role="status">
+          {viewStatus}
+        </p>
+        <div className="analysis-view">
           {activeView === 'evidence' ? (
             <EvidenceView analyses={analyses} highlightedPassageId={highlightedPassageId} />
           ) : (

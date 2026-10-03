@@ -46,4 +46,18 @@ describe('interactive prototype', () => {
     fireEvent.click(result)
     expect(scrollIntoView).toHaveBeenCalledTimes(2)
   })
+
+  it('announces view changes through a concise status message, not the whole table', () => {
+    const { container } = render(<DemoDashboard />)
+
+    expect(container.querySelector('.analysis-view')?.hasAttribute('aria-live')).toBe(false)
+    expect(screen.getByRole('status').textContent).toMatch(/^Showing evidence table for .+, \d+ passages\.$/)
+
+    fireEvent.click(screen.getByRole('button', { name: 'Generated memo' }))
+    expect(screen.getByRole('status').textContent).toMatch(/^Showing generated memo for .+\.$/)
+
+    fireEvent.click(screen.getByRole('button', { name: 'Evidence table' }))
+    fireEvent.click(firstSearchResult())
+    expect(screen.getByRole('status').textContent).toMatch(/Highlighted passage \S+\.$/)
+  })
 })
