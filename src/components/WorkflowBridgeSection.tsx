@@ -1,4 +1,4 @@
-import { useEffect, useState, type CSSProperties } from 'react'
+import { useEffect, useState, type CSSProperties, type KeyboardEvent } from 'react'
 import {
   FROZEN_MARKET_SNAPSHOT,
   type FrozenCbRow,
@@ -7,6 +7,18 @@ import {
 import { SectionHeading } from './SectionHeading'
 
 type ToolKey = 'ipo' | 'cb'
+
+const TOOL_TAB_IDS: Readonly<Record<ToolKey, string>> = {
+  ipo: 'ipo-report',
+  cb: 'cb-finder',
+}
+const otherTool = (tool: ToolKey): ToolKey => (tool === 'ipo' ? 'cb' : 'ipo')
+const TAB_KEY_TARGETS: Readonly<Record<string, (tool: ToolKey) => ToolKey>> = {
+  ArrowLeft: otherTool,
+  ArrowRight: otherTool,
+  Home: () => 'ipo',
+  End: () => 'cb',
+}
 
 const DART_FILING_URL = 'https://dart.fss.or.kr/dsaf001/main.do?rcpNo='
 const IPO_MAX_RETURN = Math.max(
@@ -278,6 +290,14 @@ export function WorkflowBridgeSection() {
     return () => window.removeEventListener('hashchange', syncHash)
   }, [])
 
+  function handleTabKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    const nextTool = TAB_KEY_TARGETS[event.key]?.(activeTool)
+    if (!nextTool) return
+    event.preventDefault()
+    setActiveTool(nextTool)
+    document.getElementById(TOOL_TAB_IDS[nextTool])?.focus()
+  }
+
   return (
     <section className="workflow-section" id="market-tools">
       <div className="page-shell section-pad">
@@ -287,13 +307,19 @@ export function WorkflowBridgeSection() {
           description="The professional market terms remain intact; concise annotations explain what each measure means before the reviewer reaches the Korean NLP evidence."
         />
 
-        <div className="tool-tabs" role="tablist" aria-label="Applicant finance tools">
+        <div
+          className="tool-tabs"
+          role="tablist"
+          aria-label="Applicant finance tools"
+          onKeyDown={handleTabKeyDown}
+        >
           <button
             id="ipo-report"
             type="button"
             role="tab"
-            aria-controls="tool-panel-ipo"
+            aria-controls={activeTool === 'ipo' ? 'tool-panel-ipo' : undefined}
             aria-selected={activeTool === 'ipo'}
+            tabIndex={activeTool === 'ipo' ? 0 : -1}
             onClick={() => setActiveTool('ipo')}
           >
             <span>01</span>
@@ -304,8 +330,9 @@ export function WorkflowBridgeSection() {
             id="cb-finder"
             type="button"
             role="tab"
-            aria-controls="tool-panel-cb"
+            aria-controls={activeTool === 'cb' ? 'tool-panel-cb' : undefined}
             aria-selected={activeTool === 'cb'}
+            tabIndex={activeTool === 'cb' ? 0 : -1}
             onClick={() => setActiveTool('cb')}
           >
             <span>02</span>

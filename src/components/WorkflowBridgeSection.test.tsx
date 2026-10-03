@@ -29,4 +29,28 @@ describe('plain-language market visualizations', () => {
       name: /41 of 118: matched both rates; 77 of 118: did not match both rates/,
     })).toBeTruthy()
   })
+
+  it('supports arrow-key tab navigation with a roving tab stop', () => {
+    render(<WorkflowBridgeSection />)
+    const ipoTab = screen.getByRole('tab', { name: /IPO Return Report/ })
+    const cbTab = screen.getByRole('tab', { name: /CB Disclosure Finder/ })
+
+    expect(ipoTab.getAttribute('tabindex')).toBe('0')
+    expect(cbTab.getAttribute('tabindex')).toBe('-1')
+    expect(cbTab.hasAttribute('aria-controls')).toBe(false)
+
+    ipoTab.focus()
+    fireEvent.keyDown(ipoTab, { key: 'ArrowRight' })
+
+    expect(cbTab.getAttribute('aria-selected')).toBe('true')
+    expect(cbTab.getAttribute('tabindex')).toBe('0')
+    expect(document.activeElement).toBe(cbTab)
+    expect(document.getElementById(cbTab.getAttribute('aria-controls') ?? '')).toBe(
+      screen.getByRole('tabpanel'),
+    )
+
+    fireEvent.keyDown(cbTab, { key: 'Home' })
+    expect(ipoTab.getAttribute('aria-selected')).toBe('true')
+    expect(document.activeElement).toBe(ipoTab)
+  })
 })
