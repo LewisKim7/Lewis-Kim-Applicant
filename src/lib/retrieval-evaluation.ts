@@ -70,9 +70,19 @@ export function evaluateRetrieval(
   }
 
   const queries = judgments.map((judgment): RetrievalQueryEvaluation => {
+    if (judgment.relevantPassages.length === 0) {
+      throw new RangeError(
+        `Query ${judgment.queryId} must have at least one relevant passage`,
+      )
+    }
     const relevanceByPassage = new Map(
       judgment.relevantPassages.map(({ passageId, grade }) => [passageId, grade]),
     )
+    if (relevanceByPassage.size !== judgment.relevantPassages.length) {
+      throw new RangeError(
+        `Query ${judgment.queryId} has duplicate relevant passage IDs`,
+      )
+    }
     const results = index.search(judgment.query, { topK: k })
     const rankedPassages = results.map((result): RankedRetrievalJudgment => ({
       rank: result.rank,

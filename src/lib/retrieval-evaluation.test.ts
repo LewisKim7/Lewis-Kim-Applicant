@@ -144,4 +144,30 @@ describe('closed-corpus retrieval diagnostic', () => {
       meanNdcgAtK: 0,
     })
   })
+
+  it('rejects judgments that would produce NaN recall or inflated ideal gain', () => {
+    const base = {
+      queryId: 'QX',
+      query: '전환가액 리픽싱',
+      intent: 'Validation fixture',
+    }
+    expect(() =>
+      evaluateRetrieval(INDEX, [{ ...base, relevantPassages: [] }], { k: 3 }),
+    ).toThrow(/at least one relevant passage/)
+    expect(() =>
+      evaluateRetrieval(
+        INDEX,
+        [
+          {
+            ...base,
+            relevantPassages: [
+              { passageId: 'DOC-KR-CB-RESET-001-P01', grade: 2 },
+              { passageId: 'DOC-KR-CB-RESET-001-P01', grade: 1 },
+            ],
+          },
+        ],
+        { k: 3 },
+      ),
+    ).toThrow(/duplicate relevant passage IDs/)
+  })
 })
