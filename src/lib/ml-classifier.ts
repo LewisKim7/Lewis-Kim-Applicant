@@ -186,17 +186,20 @@ function logitsFor(
   weights: readonly Float64Array[],
   biases: Float64Array,
 ): number[] {
-  return RISK_LABELS.map((_, labelIndex) => {
+  const { indices, values } = vector
+  const logits = new Array<number>(RISK_LABELS.length)
+  for (let labelIndex = 0; labelIndex < RISK_LABELS.length; labelIndex += 1) {
     let logit = biases[labelIndex] ?? 0
     const labelWeights = weights[labelIndex]
-    if (!labelWeights) return logit
-
-    vector.indices.forEach((featureIndex, position) => {
-      logit +=
-        (labelWeights[featureIndex] ?? 0) * (vector.values[position] ?? 0)
-    })
-    return logit
-  })
+    if (labelWeights) {
+      for (let position = 0; position < indices.length; position += 1) {
+        logit +=
+          (labelWeights[indices[position] ?? 0] ?? 0) * (values[position] ?? 0)
+      }
+    }
+    logits[labelIndex] = logit
+  }
+  return logits
 }
 
 function softmax(logits: readonly number[]): number[] {
@@ -260,29 +263,37 @@ export function trainTfidfLogisticRegression(
     biases,
   )
 
-  for (let epoch = 0; epoch < resolvedOptions.epochs; epoch += 1) {
-    const weightGradients = RISK_LABELS.map(
-      () => new Float64Array(vectorizer.vocabulary.length),
-    )
-    const biasGradients = new Float64Array(RISK_LABELS.length)
+  // Gradient buffers are reused across epochs; the arithmetic order matches a
+  // fresh allocation, so results are bit-for-bit identical but avoid GC churn.
+  const weightGradients = RISK_LABELS.map(
+    () => new Float64Array(vectorizer.vocabulary.length),
+  )
+  const biasGradients = new Float64Array(RISK_LABELS.length)
 
-    vectors.forEach((vector, sampleIndex) => {
+  for (let epoch = 0; epoch < resolvedOptions.epochs; epoch += 1) {
+    for (const labelGradient of weightGradients) labelGradient.fill(0)
+    biasGradients.fill(0)
+
+    for (let sampleIndex = 0; sampleIndex < vectors.length; sampleIndex += 1) {
+      const vector = vectors[sampleIndex]
+      if (!vector) continue
+      const { indices, values } = vector
       const probabilities = softmax(logitsFor(vector, weights, biases))
       const actualLabelIndex = labelIndices[sampleIndex]
 
-      RISK_LABELS.forEach((_, labelIndex) => {
+      for (let labelIndex = 0; labelIndex < RISK_LABELS.length; labelIndex += 1) {
         const error =
           (probabilities[labelIndex] ?? 0) -
           (labelIndex === actualLabelIndex ? 1 : 0)
         biasGradients[labelIndex] += error
 
         const labelGradient = weightGradients[labelIndex]
-        if (!labelGradient) return
-        vector.indices.forEach((featureIndex, position) => {
-          labelGradient[featureIndex] += error * (vector.values[position] ?? 0)
-        })
-      })
-    })
+        if (!labelGradient) continue
+        for (let position = 0; position < indices.length; position += 1) {
+          labelGradient[indices[position] ?? 0] += error * (values[position] ?? 0)
+        }
+      }
+    }
 
     RISK_LABELS.forEach((_, labelIndex) => {
       biases[labelIndex] -=
