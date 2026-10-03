@@ -177,6 +177,8 @@ export function DemoDashboard() {
   const [query, setQuery] = useState('전환가액 리픽싱')
   const [activeView, setActiveView] = useState<'evidence' | 'memo'>('evidence')
   const [highlightedPassageId, setHighlightedPassageId] = useState<string | null>(null)
+  // Bumped on every result click so re-selecting the same passage still scrolls to it.
+  const [scrollRequest, setScrollRequest] = useState(0)
   const deferredQuery = useDeferredValue(query)
 
   const selectedDocument =
@@ -224,12 +226,13 @@ export function DemoDashboard() {
     })
 
     return () => cancelAnimationFrame(frameId)
-  }, [activeView, highlightedPassageId, selectedDocumentId])
+  }, [activeView, highlightedPassageId, scrollRequest, selectedDocumentId])
 
   function selectSearchResult(documentId: string, passageId: string) {
     setSelectedDocumentId(documentId)
     setHighlightedPassageId(passageId)
     setActiveView('evidence')
+    setScrollRequest((request) => request + 1)
   }
 
   return (
