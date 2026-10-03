@@ -79,6 +79,24 @@ describe('TF-IDF multinomial logistic regression', () => {
       trainTfidfLogisticRegression(trainingPassages, { l2Penalty: -1 }),
     ).toThrow(/l2Penalty/)
   })
+
+  it('rejects a reference label outside the taxonomy instead of training on index -1', () => {
+    const mislabeled = passage(
+      'P-BAD-01',
+      'conversion price reset',
+      'Not A Risk Label' as RiskLabel,
+    )
+
+    expect(() =>
+      trainTfidfLogisticRegression([...trainingPassages, mislabeled]),
+    ).toThrow(/Unknown referenceLabel "Not A Risk Label" on passage P-BAD-01/)
+    expect(() =>
+      evaluateDocumentHeldOutLogisticRegression([
+        ...trainingPassages,
+        { ...mislabeled, documentId: 'DOC-OTHER' },
+      ]),
+    ).toThrow(/Unknown referenceLabel/)
+  })
 })
 
 describe('leave-one-document-out evaluation', () => {

@@ -240,9 +240,15 @@ export function trainTfidfLogisticRegression(
   const resolvedOptions = validateOptions(options)
   const vectorizer = createVectorizer(passages.map((passage) => passage.text))
   const vectors = passages.map((passage) => vectorizer.transform(passage.text))
-  const labelIndices = passages.map((passage) =>
-    RISK_LABELS.indexOf(passage.referenceLabel),
-  )
+  const labelIndices = passages.map((passage) => {
+    const labelIndex = RISK_LABELS.indexOf(passage.referenceLabel)
+    if (labelIndex === -1) {
+      throw new RangeError(
+        `Unknown referenceLabel "${String(passage.referenceLabel)}" on passage ${passage.passageId}`,
+      )
+    }
+    return labelIndex
+  })
   const weights = RISK_LABELS.map(
     () => new Float64Array(vectorizer.vocabulary.length),
   )
